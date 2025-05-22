@@ -6,13 +6,20 @@ import { BankProfile } from "@/components/dashboard/bank-profile";
 import { MarketSnapshot } from "@/components/dashboard/market-snapshot";
 import { PortfolioSummary } from "@/components/dashboard/portfolio-summary";
 import { ComplianceNotification } from "@/components/dashboard/compliance-notification";
+import { ComplianceStatus } from "@/components/dashboard/compliance-status";
 import { InvestmentOverview } from "@/components/dashboard/investment-overview";
 import { MarketInsights } from "@/components/dashboard/market-insights";
 import { UpcomingPayments } from "@/components/dashboard/upcoming-payments";
+import { NotificationsCenter } from "@/components/dashboard/notifications-center";
+import { StatementGenerator } from "@/components/dashboard/statement-generator";
+import { LinkedAccounts } from "@/components/dashboard/linked-accounts";
+import { ScheduledPayments } from "@/components/dashboard/scheduled-payments";
+import { KnowledgeCenter } from "@/components/dashboard/knowledge-center";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, ArrowDownIcon, ArrowRightLeftIcon, SquareIcon, CalendarIcon, BellIcon, ShieldIcon } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useLocation } from "wouter";
+import { useToast } from "@/hooks/use-toast";
 
 // Mock data for accounts
 const accounts = [
@@ -304,6 +311,12 @@ export default function DashboardPage() {
           
           {/* Sidebar - 1/3 width on large screens */}
           <div className="space-y-8">
+            {/* Notifications Center */}
+            <NotificationsCenter />
+            
+            {/* Statement Generator */}
+            <StatementGenerator />
+            
             {/* Portfolio Summary Section */}
             <PortfolioSummary />
             
@@ -316,8 +329,11 @@ export default function DashboardPage() {
               <MarketSnapshot />
             </div>
             
-            {/* Compliance Notifications */}
-            <ComplianceNotification />
+            {/* Compliance Status */}
+            <ComplianceStatus />
+            
+            {/* Linked Accounts Section */}
+            <LinkedAccounts />
             
             {/* Bank Profile Section */}
             <BankProfile />
