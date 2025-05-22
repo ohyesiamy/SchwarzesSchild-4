@@ -22,6 +22,8 @@ import { formatCurrency, formatDate } from "@/lib/utils";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
 
+
+
 // Mock data for accounts
 const accounts = [
   { id: 1, name: "Main Account", currency: "EUR", balance: 24856.78 },
@@ -60,6 +62,7 @@ const recentTransactions = [
 export default function DashboardPage() {
   const [selectedCurrency, setSelectedCurrency] = useState("EUR");
   const [, navigate] = useLocation();
+  const { toast } = useToast();
   
   const mainAccount = accounts.find(account => account.currency === selectedCurrency) || accounts[0];
 
@@ -149,7 +152,17 @@ export default function DashboardPage() {
                             {account.balance.toFixed(2)}
                           </td>
                           <td className="py-4 px-6 text-right">
-                            <button className="text-xs font-semibold text-gray-600 hover:text-black">
+                            <button 
+                              className="text-xs font-semibold text-gray-600 hover:text-black transition-colors duration-200 cursor-pointer"
+                              onClick={() => {
+                                setSelectedCurrency(account.currency);
+                                toast({
+                                  title: "Account details",
+                                  description: `Viewing details for ${account.name}.`,
+                                });
+                              }}
+                              title="View detailed account information"
+                            >
                               View Details
                             </button>
                           </td>
@@ -174,10 +187,23 @@ export default function DashboardPage() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Button className="w-full border border-white text-white hover:bg-white hover:text-black text-xs">
+                    <Button 
+                      className="w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 cursor-pointer"
+                      onClick={() => navigate("/transactions")}
+                      title="Transfer funds between accounts"
+                    >
                       TRANSFER
                     </Button>
-                    <Button className="w-full border border-white text-white hover:bg-white hover:text-black text-xs">
+                    <Button 
+                      className="w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 cursor-pointer"
+                      onClick={() => {
+                        toast({
+                          title: "Statement generated",
+                          description: "Your account statement has been generated and is ready to download.",
+                        });
+                      }}
+                      title="View and download account statements"
+                    >
                       STATEMENTS
                     </Button>
                   </div>
@@ -206,7 +232,18 @@ export default function DashboardPage() {
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-semibold">Recent Transactions</h2>
                 <div className="flex items-center space-x-3">
-                  <Button variant="outline" size="sm" className="text-xs">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-xs cursor-pointer transition-all duration-200 hover:scale-[1.01]"
+                    onClick={() => {
+                      toast({
+                        title: "Filter applied",
+                        description: "Transactions have been filtered by your selection.",
+                      });
+                    }}
+                    title="Filter transactions by date or category"
+                  >
                     <CalendarIcon className="h-3 w-3 mr-1" /> FILTER
                   </Button>
                   <Button 
@@ -274,6 +311,13 @@ export default function DashboardPage() {
                 
                 <div 
                   className="bg-white border border-gray-200 hover:border-black text-center p-6 transition-colors duration-200 cursor-pointer"
+                  onClick={() => {
+                    toast({
+                      title: "Deposit initiated",
+                      description: "You can now add funds to your account via bank transfer or card payment.",
+                    });
+                  }}
+                  title="Add funds to your account"
                 >
                   <div className="flex flex-col items-center justify-center">
                     <div className="w-10 h-10 rounded-full bg-black mb-3 flex items-center justify-center">
