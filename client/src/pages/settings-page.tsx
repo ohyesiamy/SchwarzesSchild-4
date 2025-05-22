@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
+import { Footer } from "@/components/layout/footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
+import { LogoVariantDemo } from "@/components/showcase/logo-variant-demo";
 
 export default function SettingsPage() {
   const { toast } = useToast();
@@ -173,47 +175,54 @@ export default function SettingsPage() {
           </form>
         </div>
         
-        <div className="border-2 border-black p-6">
-          <h3 className="text-2xl font-playfair mb-4">Account Preferences</h3>
+        <div className="border border-gray-200 p-6 mb-8">
+          <h3 className="text-xl font-semibold mb-4">Account Preferences</h3>
           <div className="mb-4">
             <div className="flex justify-between items-center mb-4">
               <div>
-                <div className="font-bold">Push Notifications</div>
-                <div className="text-sm">Receive notifications for transactions and updates</div>
+                <div className="font-medium">Push Notifications</div>
+                <div className="text-sm text-gray-600">Receive notifications for transactions and updates</div>
               </div>
               <Switch
                 checked={pushNotificationsEnabled}
                 onCheckedChange={setPushNotificationsEnabled}
-                className="bg-white border-2 border-black data-[state=checked]:bg-black"
+                className="data-[state=checked]:bg-black"
               />
             </div>
             
             <div className="flex justify-between items-center mb-4">
               <div>
-                <div className="font-bold">Transaction Emails</div>
-                <div className="text-sm">Receive email confirmations for transactions</div>
+                <div className="font-medium">Transaction Emails</div>
+                <div className="text-sm text-gray-600">Receive email confirmations for transactions</div>
               </div>
               <Switch
                 checked={transactionEmailsEnabled}
                 onCheckedChange={setTransactionEmailsEnabled}
-                className="bg-white border-2 border-black data-[state=checked]:bg-black"
+                className="data-[state=checked]:bg-black"
               />
             </div>
             
             <div className="flex justify-between items-center">
               <div>
-                <div className="font-bold">Marketing Communications</div>
-                <div className="text-sm">Receive offers and updates from Schwarzes Schild</div>
+                <div className="font-medium">Marketing Communications</div>
+                <div className="text-sm text-gray-600">Receive offers and updates from Schwarzes Schild</div>
               </div>
               <Switch
                 checked={marketingEnabled}
                 onCheckedChange={setMarketingEnabled}
-                className="bg-white border-2 border-black data-[state=checked]:bg-black"
+                className="data-[state=checked]:bg-black"
               />
             </div>
           </div>
         </div>
+        
+        {/* Logo Variants Demo Section */}
+        <div className="mb-8">
+          <LogoVariantDemo />
+        </div>
       </main>
+      
+      <Footer />
     </div>
   );
 }

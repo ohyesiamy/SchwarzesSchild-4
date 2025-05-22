@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
 import { Footer } from "@/components/layout/footer";
+import { Logo } from "@/components/ui/logo";
 import { BankProfile } from "@/components/dashboard/bank-profile";
 import { MarketSnapshot } from "@/components/dashboard/market-snapshot";
 import { PortfolioSummary } from "@/components/dashboard/portfolio-summary";
@@ -71,9 +72,17 @@ export default function DashboardPage() {
         {/* Welcome Banner */}
         <div className="bg-black text-white p-8 mb-10 shadow-lg">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-            <div className="mb-4 md:mb-0">
-              <h1 className="text-2xl font-light mb-2 tracking-tight">Welcome back, Jonathan</h1>
-              <p className="text-sm text-gray-100">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
+            <div className="flex items-center mb-4 md:mb-0">
+              <Logo 
+                size="medium" 
+                variant="white" 
+                background="dark" 
+                className="mr-4 hidden md:block" 
+              />
+              <div>
+                <h1 className="text-2xl font-light mb-2 tracking-tight">Welcome back, Jonathan</h1>
+                <p className="text-sm text-gray-100">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
+              </div>
             </div>
             <div className="flex items-center space-x-4">
               <Button 
