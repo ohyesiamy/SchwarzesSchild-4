@@ -11,20 +11,7 @@ import SettingsPage from "@/pages/settings-page";
 import ProfilePage from "@/pages/profile-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/auth" component={AuthPage} />
-      <ProtectedRoute path="/" component={DashboardPage} />
-      <ProtectedRoute path="/transactions" component={TransactionsPage} />
-      <ProtectedRoute path="/cards" component={CardsPage} />
-      <ProtectedRoute path="/exchange" component={ExchangePage} />
-      <ProtectedRoute path="/settings" component={SettingsPage} />
-      <ProtectedRoute path="/profile" component={ProfilePage} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
+// Router function no longer needed as we're using Switch directly in App
 
 function App() {
   return (
