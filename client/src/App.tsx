@@ -10,6 +10,7 @@ import ExchangePage from "@/pages/exchange-page";
 import SettingsPage from "@/pages/settings-page";
 import ProfilePage from "@/pages/profile-page";
 import SecurityPage from "@/pages/security-page";
+import SupportPage from "@/pages/support-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
 // Router function no longer needed as we're using Switch directly in App
@@ -27,6 +28,7 @@ function App() {
         <ProtectedRoute path="/settings" component={SettingsPage} />
         <ProtectedRoute path="/profile" component={ProfilePage} />
         <ProtectedRoute path="/security" component={SecurityPage} />
+        <ProtectedRoute path="/support" component={SupportPage} />
         <Route component={NotFound} />
       </Switch>
     </TooltipProvider>
