@@ -26,6 +26,7 @@ function App() {
         <ProtectedRoute path="/exchange" component={ExchangePage} />
         <ProtectedRoute path="/settings" component={SettingsPage} />
         <ProtectedRoute path="/profile" component={ProfilePage} />
+        <ProtectedRoute path="/security" component={SecurityPage} />
         <Route component={NotFound} />
       </Switch>
     </TooltipProvider>

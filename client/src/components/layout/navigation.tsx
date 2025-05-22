@@ -4,7 +4,9 @@ import {
   ClipboardListIcon, 
   CreditCard, 
   RefreshCcw, 
-  Settings 
+  Settings,
+  ShieldIcon,
+  UserIcon
 } from "lucide-react";
 
 interface NavigationProps {
@@ -19,6 +21,8 @@ export function Navigation({ active }: NavigationProps) {
     { name: "transactions", label: "Transactions", path: "/transactions", icon: ClipboardListIcon },
     { name: "cards", label: "Cards", path: "/cards", icon: CreditCard },
     { name: "exchange", label: "Exchange", path: "/exchange", icon: RefreshCcw },
+    { name: "security", label: "Security", path: "/security", icon: ShieldIcon },
+    { name: "profile", label: "Profile", path: "/profile", icon: UserIcon },
     { name: "settings", label: "Settings", path: "/settings", icon: Settings },
   ];
   
