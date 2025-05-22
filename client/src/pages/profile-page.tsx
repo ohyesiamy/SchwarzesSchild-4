@@ -1,91 +1,127 @@
 import { Header } from "@/components/layout/header";
-import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { Navigation } from "@/components/layout/navigation";
+import { Footer } from "@/components/layout/footer";
+import { UserProfileCard } from "@/components/profile/user-profile-card";
+import { BankProfile } from "@/components/dashboard/bank-profile";
+import { MarketSnapshot } from "@/components/dashboard/market-snapshot";
+import { ShieldIcon } from "lucide-react";
 import { useLocation } from "wouter";
-import { useAuth } from "@/hooks/use-auth";
 
 export default function ProfilePage() {
   const [, navigate] = useLocation();
-  const { logoutMutation } = useAuth();
-  
-  const handleLogout = () => {
-    logoutMutation.mutate();
-  };
-  
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <Navigation active="profile" />
       
-      <main className="py-8 px-4 container mx-auto flex-grow">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-playfair">Profile</h2>
-          <Button 
-            onClick={handleLogout}
-            variant="outline" 
-            className="border-2 border-black px-4 py-2 font-playfair"
-          >
-            {logoutMutation.isPending ? "LOGGING OUT..." : "LOG OUT"}
-          </Button>
-        </div>
-        
-        <div className="border-2 border-black p-6 mb-8">
-          <div className="flex items-center mb-6">
-            <div className="w-16 h-16 flex items-center justify-center border-2 border-black mr-4">
-              <span className="font-playfair font-bold text-2xl">JS</span>
-            </div>
+      <main className="py-8 px-6 container mx-auto flex-grow">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Main profile content - 2/3 width on desktop */}
+          <div className="col-span-1 md:col-span-2 space-y-8">
             <div>
-              <div className="text-2xl font-playfair font-bold">John Smith</div>
-              <div>client@schwarzesschild.com</div>
+              <h1 className="text-2xl font-semibold mb-6">Account Profile</h1>
+              <UserProfileCard />
+            </div>
+            
+            {/* Security Center Quick Access */}
+            <div 
+              className="bg-black text-white p-6 flex items-center justify-between cursor-pointer"
+              onClick={() => navigate("/security")}
+            >
+              <div className="flex items-center">
+                <ShieldIcon className="h-6 w-6 mr-4" />
+                <div>
+                  <h2 className="text-lg font-medium">Security Center</h2>
+                  <p className="text-sm text-gray-300">Manage your security settings and monitor account activity</p>
+                </div>
+              </div>
+              <div>
+                <button className="text-xs uppercase tracking-wider font-medium border border-white py-2 px-3 hover:bg-white hover:text-black transition-colors">
+                  VIEW DETAILS
+                </button>
+              </div>
+            </div>
+            
+            {/* Available Services */}
+            <div>
+              <h2 className="text-xl font-semibold mb-6">Available Services</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <ServiceCard 
+                  title="Investment Advisory" 
+                  description="Personalized investment strategies tailored to your financial goals"
+                  status="Available"
+                />
+                
+                <ServiceCard 
+                  title="Wealth Management" 
+                  description="Comprehensive wealth planning and portfolio management"
+                  status="By Invitation"
+                />
+                
+                <ServiceCard 
+                  title="International Banking" 
+                  description="Access to global markets and multi-currency accounts"
+                  status="Available"
+                />
+                
+                <ServiceCard 
+                  title="Private Banking" 
+                  description="Exclusive banking services with dedicated relationship manager"
+                  status="Upgrade Required"
+                />
+              </div>
             </div>
           </div>
           
-          <div className="pt-4 border-t-2 border-black">
-            <div className="mb-2">
-              <div className="font-bold">Account Number</div>
-              <div>SS-2023-1084-9254</div>
-            </div>
+          {/* Sidebar - 1/3 width on desktop */}
+          <div className="col-span-1 space-y-8">
+            {/* Bank Profile section */}
+            <BankProfile />
+            
+            {/* Market snapshot */}
             <div>
-              <div className="font-bold">Member Since</div>
-              <div>October 2023</div>
+              <h2 className="text-xl font-semibold mb-4">Market Snapshot</h2>
+              <MarketSnapshot />
             </div>
           </div>
-        </div>
-        
-        <div>
-          <Button
-            onClick={() => navigate("/settings")}
-            variant="outline"
-            className="w-full border-2 border-black p-4 text-lg font-playfair mb-4 text-left flex justify-between items-center"
-          >
-            <span>Account Settings</span>
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-          
-          <Button
-            variant="outline"
-            className="w-full border-2 border-black p-4 text-lg font-playfair mb-4 text-left flex justify-between items-center"
-          >
-            <span>Support</span>
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-          
-          <Button
-            variant="outline"
-            className="w-full border-2 border-black p-4 text-lg font-playfair mb-4 text-left flex justify-between items-center"
-          >
-            <span>Privacy Policy</span>
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-          
-          <Button
-            variant="outline"
-            className="w-full border-2 border-black p-4 text-lg font-playfair text-left flex justify-between items-center"
-          >
-            <span>Terms of Service</span>
-            <ChevronRight className="h-5 w-5" />
-          </Button>
         </div>
       </main>
+      
+      <Footer />
+    </div>
+  );
+}
+
+// Simple service card component
+function ServiceCard({ 
+  title, 
+  description, 
+  status 
+}: { 
+  title: string; 
+  description: string; 
+  status: "Available" | "By Invitation" | "Upgrade Required" 
+}) {
+  return (
+    <div className="bg-white border border-gray-200 p-6">
+      <h3 className="font-medium mb-2">{title}</h3>
+      <p className="text-sm text-gray-600 mb-4">{description}</p>
+      <div className="flex items-center justify-between">
+        <div className={`text-xs py-1 px-2 ${
+          status === "Available" 
+            ? "bg-black text-white" 
+            : status === "By Invitation" 
+              ? "bg-gray-100 text-black" 
+              : "bg-gray-100 text-gray-500"
+        }`}>
+          {status}
+        </div>
+        
+        <button className="text-xs uppercase tracking-wider font-medium">
+          LEARN MORE
+        </button>
+      </div>
     </div>
   );
 }

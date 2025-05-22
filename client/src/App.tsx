@@ -9,6 +9,7 @@ import CardsPage from "@/pages/cards-page";
 import ExchangePage from "@/pages/exchange-page";
 import SettingsPage from "@/pages/settings-page";
 import ProfilePage from "@/pages/profile-page";
+import SecurityPage from "@/pages/security-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
 // Router function no longer needed as we're using Switch directly in App

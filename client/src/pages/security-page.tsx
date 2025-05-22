@@ -8,7 +8,7 @@ import {
   EyeIcon, 
   PhoneIcon,
   KeyIcon,
-  DevicesIcon,
+  MonitorIcon,
   ClockIcon
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -172,7 +172,7 @@ export default function SecurityPage() {
         {/* Connected Devices */}
         <div className="mb-12">
           <h2 className="text-xl font-semibold mb-6 flex items-center">
-            <DevicesIcon className="h-5 w-5 mr-2" />
+            <MonitorIcon className="h-5 w-5 mr-2" />
             Connected Devices
           </h2>
           
