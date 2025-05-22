@@ -5,28 +5,28 @@ import {
   AlertCircleIcon 
 } from "lucide-react";
 
-// 模拟投资数据
+// Mock investment data
 const investments = [
   {
-    name: "主动型基金",
+    name: "Active Managed Funds",
     value: 485600,
     change: 3.2,
     trend: "up"
   },
   {
-    name: "被动型ETF",
+    name: "Passive ETFs",
     value: 325450,
     change: 1.8,
     trend: "up"
   },
   {
-    name: "固定收益债券",
+    name: "Fixed Income Bonds",
     value: 156700,
     change: -0.5,
     trend: "down"
   },
   {
-    name: "私募股权投资",
+    name: "Private Equity",
     value: 98500,
     change: 4.7,
     trend: "up"
@@ -39,7 +39,7 @@ export function InvestmentOverview() {
   return (
     <div className="bg-white border border-gray-200">
       <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-        <h3 className="text-lg font-medium">投资概览</h3>
+        <h3 className="text-lg font-medium">Investment Overview</h3>
         <BarChart3Icon className="h-5 w-5 text-gray-500" />
       </div>
       
@@ -49,7 +49,7 @@ export function InvestmentOverview() {
             <div>
               <div className="font-medium">{investment.name}</div>
               <div className="text-sm text-gray-600">
-                €{investment.value.toLocaleString('zh-CN')}
+                €{investment.value.toLocaleString()}
               </div>
             </div>
             
@@ -72,13 +72,13 @@ export function InvestmentOverview() {
       <div className="p-6 border-t border-gray-200 bg-gray-50">
         <div className="flex justify-between items-center">
           <div>
-            <div className="text-sm text-gray-500">投资组合总值</div>
-            <div className="text-xl font-semibold mt-1">€{totalValue.toLocaleString('zh-CN')}</div>
+            <div className="text-sm text-gray-500">Total Portfolio Value</div>
+            <div className="text-xl font-semibold mt-1">€{totalValue.toLocaleString()}</div>
           </div>
           
-          <div className="flex items-center text-blue-700">
+          <div className="flex items-center text-blue-700 cursor-pointer hover:underline">
             <AlertCircleIcon className="h-4 w-4 mr-1" />
-            <span className="text-sm">获取专业建议</span>
+            <span className="text-sm">Get Professional Advice</span>
           </div>
         </div>
       </div>

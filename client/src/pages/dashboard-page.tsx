@@ -6,6 +6,9 @@ import { BankProfile } from "@/components/dashboard/bank-profile";
 import { MarketSnapshot } from "@/components/dashboard/market-snapshot";
 import { PortfolioSummary } from "@/components/dashboard/portfolio-summary";
 import { ComplianceNotification } from "@/components/dashboard/compliance-notification";
+import { InvestmentOverview } from "@/components/dashboard/investment-overview";
+import { MarketInsights } from "@/components/dashboard/market-insights";
+import { UpcomingPayments } from "@/components/dashboard/upcoming-payments";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, ArrowDownIcon, ArrowRightLeftIcon, SquareIcon, CalendarIcon, BellIcon, ShieldIcon } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
@@ -162,6 +165,22 @@ export default function DashboardPage() {
               </div>
             </section>
             
+            {/* Upcoming Payments Section */}
+            <section>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold">Upcoming Payments</h2>
+                <Button 
+                  variant="outline"
+                  size="sm"
+                  className="text-xs"
+                >
+                  SCHEDULE PAYMENT
+                </Button>
+              </div>
+              
+              <UpcomingPayments />
+            </section>
+            
             {/* Recent Transactions Section */}
             <section>
               <div className="flex justify-between items-center mb-6">
@@ -272,12 +291,24 @@ export default function DashboardPage() {
                 </div>
               </div>
             </section>
+            
+            {/* Market Insights Section */}
+            <section>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold">Market Insights</h2>
+              </div>
+              
+              <MarketInsights />
+            </section>
           </div>
           
           {/* Sidebar - 1/3 width on large screens */}
           <div className="space-y-8">
             {/* Portfolio Summary Section */}
             <PortfolioSummary />
+            
+            {/* Investment Overview Section */}
+            <InvestmentOverview />
             
             {/* Market Snapshot Section */}
             <div>
