@@ -69,19 +69,23 @@ export default function DashboardPage() {
       
       <main className="py-10 px-6 container mx-auto flex-grow">
         {/* Welcome Banner */}
-        <div className="bg-black text-white p-8 mb-10">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-light mb-2">Welcome back, Jonathan</h1>
-              <p className="text-sm text-gray-300">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
+        <div className="bg-black text-white p-8 mb-10 shadow-lg">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
+            <div className="mb-4 md:mb-0">
+              <h1 className="text-2xl font-light mb-2 tracking-tight">Welcome back, Jonathan</h1>
+              <p className="text-sm text-gray-100">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
             </div>
             <div className="flex items-center space-x-4">
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black text-xs">
+              <Button 
+                variant="outline" 
+                className="border-white text-white hover:bg-white hover:text-black text-xs transition-all duration-200 transform hover:scale-[1.01] focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                onClick={() => navigate("/security")}
+              >
                 <ShieldIcon className="h-4 w-4 mr-2" />
                 SECURITY CENTER
               </Button>
-              <div className="relative">
-                <BellIcon className="h-6 w-6 cursor-pointer" />
+              <div className="relative cursor-pointer transform hover:scale-105 transition-transform duration-200">
+                <BellIcon className="h-6 w-6 text-white" />
                 <span className="absolute -top-1 -right-1 h-3 w-3 bg-white rounded-full"></span>
               </div>
             </div>

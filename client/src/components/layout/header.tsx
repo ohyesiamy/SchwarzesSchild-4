@@ -24,7 +24,7 @@ export function Header() {
       {/* Main header */}
       <div className="container mx-auto flex justify-between items-center h-16 px-6">
         <div className="flex items-center">
-          <Logo size="small" className="mr-6" />
+          <Logo size="small" className="mr-6" variant="white" background="dark" />
           <h1 className="text-xl font-semibold tracking-wide">SCHWARZES SCHILD</h1>
         </div>
         

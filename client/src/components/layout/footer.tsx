@@ -1,4 +1,5 @@
 import { LockIcon, ShieldCheckIcon, GlobeIcon } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 
 export function Footer() {
   return (
@@ -22,13 +23,25 @@ export function Footer() {
           </div>
         </div>
         
+        {/* Logo and Brand Information */}
+        <div className="flex justify-center mb-8">
+          <div className="flex flex-col items-center">
+            <Logo size="medium" variant="black" background="light" className="mb-3" />
+            <div className="text-xs font-medium uppercase tracking-wider">
+              Where Trust Is Sovereign
+            </div>
+          </div>
+        </div>
+        
         {/* Copyright and Tagline */}
         <div className="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 pt-6">
           <div className="text-xs text-gray-500 mb-2 md:mb-0">
             © 2023-2025 SCHWARZES SCHILD BANK AG. All rights reserved.
           </div>
-          <div className="text-xs font-medium uppercase tracking-wider">
-            Where Trust Is Sovereign.
+          <div className="flex space-x-4">
+            <a href="#" className="text-xs text-gray-600 hover:text-black transition-colors">Privacy Policy</a>
+            <a href="#" className="text-xs text-gray-600 hover:text-black transition-colors">Terms of Service</a>
+            <a href="#" className="text-xs text-gray-600 hover:text-black transition-colors">Cookie Policy</a>
           </div>
         </div>
       </div>
