@@ -1,0 +1,112 @@
+Objective: Redesign the transactions.html page to match the clean, high-trust aesthetic of the dashboard. Add key banking features including domestic transfer, international transfer, self-to-self transfer, and scheduled internal transfers, all within a structured, user-centric layout.
+🎨 UI Redesign Guidelines (Match Dashboard Aesthetic)
+
+    Use the same grid structure, font hierarchy, and white-black color scheme as the dashboard.
+
+    Organize sections into modular cards with section headers like:
+
+        Transfer Options
+
+        Transaction History
+
+        Scheduled Transfers
+
+    Maintain spacing: 32px padding inside sections, 48px margin between blocks.
+
+    Add a sticky or collapsible sidebar (optional) for quick actions.
+
+💼 Functional Modules to Add
+1. Domestic Transfer
+
+    Title: Domestic Transfer
+
+    Fields:
+
+        Recipient Name
+
+        Recipient Account Number (domestic format)
+
+        Bank Name / Branch
+
+        Amount
+
+        Description (optional)
+
+    Button: Send Now
+
+2. International Wire Transfer
+
+    Title: International Transfer
+
+    Fields:
+
+        SWIFT/BIC Code
+
+        IBAN / International Account
+
+        Recipient Country (Dropdown)
+
+        Currency (Dropdown: USD, EUR, JPY, etc.)
+
+        Amount
+
+        Reason / Memo
+
+    Security Tip: Add tooltip: “Ensure beneficiary details are correct to avoid delays.”
+
+3. Self-Transfer (Between Own Accounts)
+
+    Title: Transfer Between My Accounts
+
+    Fields:
+
+        From Account (Dropdown)
+
+        To Account (Dropdown)
+
+        Amount
+
+        Date (for scheduling)
+
+    Add a label: “No fees applied to internal transfers.”
+
+4. Scheduled / Recurring Transfer
+
+    Title: Scheduled Transfers
+
+    Fields:
+
+        Transfer type: One-time / Recurring
+
+        Start Date / End Date
+
+        Frequency (Weekly, Monthly)
+
+    Table list showing:
+
+        Upcoming transfers
+
+        Edit / Cancel buttons
+
+📈 Transaction History Enhancement
+
+    Maintain table-style view, but improve visual styling:
+
+        Columns: Date, Type, Amount, Status, Details
+
+        Color code: green for incoming, red for outgoing
+
+        Status badge: Completed, Pending, Scheduled
+
+    Add filters: All, Incoming, Outgoing, Scheduled, Failed
+
+    Add search bar by recipient name or reference number
+
+🧠 UX/Trust Enhancements
+
+    All buttons should include tooltips (e.g., Transfer Now – securely process your request)
+
+    Use confirmation modals before executing high-value transfers
+
+    Display estimated processing times (e.g., “Domestic: Instant · International: 1–3 business days”)
+
