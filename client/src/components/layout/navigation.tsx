@@ -6,7 +6,8 @@ import {
   RefreshCcw, 
   Settings,
   ShieldIcon,
-  UserIcon
+  UserIcon,
+  HelpCircle
 } from "lucide-react";
 
 interface NavigationProps {
@@ -23,6 +24,7 @@ export function Navigation({ active }: NavigationProps) {
     { name: "exchange", label: "Exchange", path: "/exchange", icon: RefreshCcw },
     { name: "security", label: "Security", path: "/security", icon: ShieldIcon },
     { name: "profile", label: "Profile", path: "/profile", icon: UserIcon },
+    { name: "support", label: "Support", path: "/support", icon: HelpCircle },
     { name: "settings", label: "Settings", path: "/settings", icon: Settings },
   ];
   

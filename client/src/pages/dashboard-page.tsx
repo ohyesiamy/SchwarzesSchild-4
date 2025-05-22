@@ -19,6 +19,7 @@ import { KnowledgeCenter } from "@/components/dashboard/knowledge-center";
 import { TransferModal } from "@/components/modals/transfer-modal";
 import { StatementModal } from "@/components/modals/statement-modal";
 import { CardManagementModal } from "@/components/modals/card-management-modal";
+import { DepositModal } from "@/components/modals/deposit-modal";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, ArrowDownIcon, ArrowRightLeftIcon, SquareIcon, CalendarIcon, BellIcon, ShieldIcon } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
@@ -69,6 +70,7 @@ export default function DashboardPage() {
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
   const [isStatementModalOpen, setIsStatementModalOpen] = useState(false);
   const [isCardModalOpen, setIsCardModalOpen] = useState(false);
+  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
   
   const mainAccount = accounts.find(account => account.currency === selectedCurrency) || accounts[0];
 
@@ -312,12 +314,7 @@ export default function DashboardPage() {
                 
                 <div 
                   className="bg-white border border-gray-200 hover:border-black text-center p-6 transition-colors duration-200 cursor-pointer"
-                  onClick={() => {
-                    toast({
-                      title: "Deposit initiated",
-                      description: "You can now add funds to your account via bank transfer or card payment.",
-                    });
-                  }}
+                  onClick={() => setIsDepositModalOpen(true)}
                   title="Add funds to your account"
                 >
                   <div className="flex flex-col items-center justify-center">
@@ -419,6 +416,13 @@ export default function DashboardPage() {
       <CardManagementModal
         isOpen={isCardModalOpen}
         onClose={() => setIsCardModalOpen(false)}
+      />
+      
+      {/* Deposit Modal */}
+      <DepositModal
+        isOpen={isDepositModalOpen}
+        onClose={() => setIsDepositModalOpen(false)}
+        account={mainAccount}
       />
     </div>
   );
