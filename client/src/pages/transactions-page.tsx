@@ -20,7 +20,6 @@ import {
   ChevronDown,
   Globe,
   Landmark,
-  BadgeInfo,
   ArrowRightLeft
 } from "lucide-react";
 import { TIME_FILTERS, CURRENCY_SYMBOLS } from "@/lib/constants";
@@ -227,6 +226,9 @@ export default function TransactionsPage() {
   const [scheduledEndDate, setScheduledEndDate] = useState("");
   const [scheduledFrequency, setScheduledFrequency] = useState("monthly");
   const [scheduledDescription, setScheduledDescription] = useState("");
+  
+  // For fixing the BadgeInfo error
+  const BadgeInfo = Info;
   
   // Filter transactions based on selected filters and search query
   const filteredTransactions = allTransactions.filter(transaction => {
@@ -546,7 +548,7 @@ export default function TransactionsPage() {
             <TabsContent value="international">
               <div className="bg-white border border-gray-200 p-8">
                 <div className="mb-2 flex items-center text-sm text-gray-600">
-                  <BadgeInfo className="h-4 w-4 mr-2 text-gray-400" />
+                  <Info className="h-4 w-4 mr-2 text-gray-400" />
                   <span>International transfers typically take 1-3 business days to complete.</span>
                 </div>
                 
