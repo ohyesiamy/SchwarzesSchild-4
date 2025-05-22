@@ -97,8 +97,14 @@ export default function AuthPage() {
   };
 
   const onSignupSubmit = (data: z.infer<typeof signupSchema>) => {
-    const { confirmPassword, ...userData } = data;
-    registerMutation.mutate(userData);
+    try {
+      console.log("Signup form data:", data);
+      const { confirmPassword, ...userData } = data;
+      console.log("User data to submit:", userData);
+      registerMutation.mutate(userData);
+    } catch (error) {
+      console.error("Error in signup submission:", error);
+    }
   };
 
   const handleVerifyCode = (code: string) => {
@@ -186,7 +192,7 @@ export default function AuthPage() {
             <h1 className="text-4xl mb-8 text-center font-playfair font-bold">CREATE ACCOUNT</h1>
             
             <Form {...signupForm}>
-              <form onSubmit={signupForm.handleSubmit(onSignupSubmit)} className="mb-6">
+              <form onSubmit={signupForm.handleSubmit(onSignupSubmit)} className="mb-6" noValidate>
                 <FormField
                   control={signupForm.control}
                   name="fullname"
