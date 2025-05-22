@@ -1,53 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap');
+/* Import fonts - Using system fonts for better performance*/
+@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 0 0% 0%;
-  --card: 0 0% 100%;
-  --card-foreground: 0 0% 0%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 0%;
-  --primary: 0 0% 0%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 0 0% 100%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 0 0% 100%;
-  --muted-foreground: 0 0% 0%;
-  --accent: 0 0% 100%;
-  --accent-foreground: 0 0% 0%;
-  --destructive: 0 0% 0%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 0 0% 0%;
-  --input: 0 0% 0%;
-  --ring: 0 0% 0%;
-  --radius: 0rem;
+  /* Core colors */
+  --background: 0 0% 100%; /* #FFFFFF */
+  --foreground: 0 0% 20%; /* #333333 for body text */
+  --heading: 0 0% 0%; /* #000000 for headings */
+  
+  /* UI Elements */
+  --card: 0 0% 100%; /* #FFFFFF */
+  --card-foreground: 0 0% 20%; /* #333333 */
+  --popover: 0 0% 100%; /* #FFFFFF */
+  --popover-foreground: 0 0% 0%; /* #000000 */
+  --primary: 0 0% 0%; /* #000000 */
+  --primary-foreground: 0 0% 100%; /* #FFFFFF */
+  --secondary: 0 0% 96%; /* #F5F5F5 - very subtle gray for secondary elements */
+  --secondary-foreground: 0 0% 0%; /* #000000 */
+  --muted: 0 0% 96%; /* #F5F5F5 */
+  --muted-foreground: 0 0% 40%; /* #666666 */
+  --accent: 0 0% 0%; /* #000000 */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --destructive: 0 0% 0%; /* #000000 */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+  --border: 0 0% 0%; /* #000000 */
+  --input: 0 0% 0%; /* #000000 */
+  --ring: 0 0% 0%; /* #000000 */
+  --radius: 0px; /* Sharp edges for a corporate banking look */
+  
+  /* Spacing variables */
+  --section-spacing: 24px;
+  --card-padding: 24px;
+  --header-height: 64px;
 }
 
 .dark {
-  --background: 0 0% 0%;
-  --foreground: 0 0% 100%;
-  --card: 0 0% 0%;
-  --card-foreground: 0 0% 100%;
-  --popover: 0 0% 0%;
-  --popover-foreground: 0 0% 100%;
-  --primary: 0 0% 100%;
-  --primary-foreground: 0 0% 0%;
-  --secondary: 0 0% 0%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 0 0% 0%;
-  --muted-foreground: 0 0% 100%;
-  --accent: 0 0% 0%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 0% 100%;
-  --destructive-foreground: 0 0% 0%;
-  --border: 0 0% 100%;
-  --input: 0 0% 100%;
-  --ring: 0 0% 100%;
+  --background: 0 0% 0%; /* #000000 */
+  --foreground: 0 0% 100%; /* #FFFFFF */
+  --heading: 0 0% 100%; /* #FFFFFF */
+  --card: 0 0% 6%; /* #0F0F0F - very dark gray for cards */
+  --card-foreground: 0 0% 100%; /* #FFFFFF */
+  --popover: 0 0% 0%; /* #000000 */
+  --popover-foreground: 0 0% 100%; /* #FFFFFF */
+  --primary: 0 0% 100%; /* #FFFFFF */
+  --primary-foreground: 0 0% 0%; /* #000000 */
+  --secondary: 0 0% 10%; /* #1A1A1A - dark gray for secondary elements */
+  --secondary-foreground: 0 0% 100%; /* #FFFFFF */
+  --muted: 0 0% 10%; /* #1A1A1A */
+  --muted-foreground: 0 0% 70%; /* #B3B3B3 */
+  --accent: 0 0% 100%; /* #FFFFFF */
+  --accent-foreground: 0 0% 0%; /* #000000 */
+  --destructive: 0 0% 100%; /* #FFFFFF */
+  --destructive-foreground: 0 0% 0%; /* #000000 */
+  --border: 0 0% 100%; /* #FFFFFF */
+  --input: 0 0% 100%; /* #FFFFFF */
+  --ring: 0 0% 100%; /* #FFFFFF */
 }
 
 @layer base {
@@ -57,23 +68,117 @@
   
   body {
     @apply bg-background text-foreground;
-    font-family: 'Georgia', serif;
+    font-family: 'Helvetica Neue', 'Segoe UI', 'Noto Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6, .font-playfair {
-    font-family: 'Playfair Display', serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Helvetica Neue', 'Segoe UI', 'Noto Sans', sans-serif;
+    font-weight: 600;
+    color: hsl(var(--heading));
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  p {
+    margin-bottom: 16px;
+  }
+
+  a {
+    color: hsl(var(--primary));
+    text-decoration: none;
+  }
+
+  /* Setting button styles to be flat and rectangular */
+  button, .btn {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 0 !important;
+  }
+
+  /* Input styling with underlines */
+  input, select, textarea {
+    border-radius: 0 !important;
+    border-width: 0 0 1px 0 !important;
+    border-color: hsl(var(--border)) !important;
+    padding: 8px 0 !important;
+    transition: border-color 0.2s ease;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: hsl(var(--primary)) !important;
+    border-width: 0 0 2px 0 !important;
   }
 }
 
-/* Custom styles */
-.transition-sharp {
-  transition-timing-function: step-end;
+/* Custom styles for banking UI */
+.section-title {
+  position: relative;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 40px;
+  background-color: hsl(var(--primary));
+}
+
+.card {
+  padding: var(--card-padding);
+  margin-bottom: var(--section-spacing);
+  border: 1px solid hsl(var(--border));
+  background-color: hsl(var(--card));
+}
+
+.header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 0 24px;
 }
 
 .nav-link {
   @apply relative;
+  font-weight: 400;
+  padding: 8px 0;
+  margin: 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 14px;
 }
 
 .nav-link.active {
-  @apply font-bold border-b-2 border-black;
+  @apply font-semibold border-b border-black;
+  border-width: 1px;
+}
+
+/* Grid system for layout - 12 column grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
 }

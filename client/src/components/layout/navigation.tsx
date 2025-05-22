@@ -16,16 +16,14 @@ export function Navigation({ active }: NavigationProps) {
   ];
   
   return (
-    <nav className="bg-white border-b-2 border-black">
-      <div className="container mx-auto px-4">
-        <ul className="flex overflow-x-auto py-3">
-          {navItems.map((item, index) => (
-            <li key={item.name} className={index < navItems.length - 1 ? "mr-6" : ""}>
+    <nav className="bg-white border-b border-black">
+      <div className="container mx-auto">
+        <ul className="flex overflow-x-auto">
+          {navItems.map((item) => (
+            <li key={item.name}>
               <button
                 onClick={() => navigate(item.path)}
-                className={`font-playfair text-lg nav-link ${
-                  active === item.name ? "active" : ""
-                }`}
+                className={`nav-link ${active === item.name ? "active" : ""}`}
               >
                 {item.label}
               </button>
