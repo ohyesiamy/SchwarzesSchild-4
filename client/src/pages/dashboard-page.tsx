@@ -54,17 +54,17 @@ export default function DashboardPage() {
       <Navigation active="dashboard" />
       
       <main className="py-8 px-4 container mx-auto flex-grow">
-        <div className="mb-10">
-          <h2 className="text-3xl font-playfair mb-6">Account Balance</h2>
+        <div className="mb-12">
+          <h2 className="section-title text-2xl font-semibold">Account Balance</h2>
           
-          <div className="border-2 border-black p-6 mb-6">
-            <div className="flex justify-between items-center mb-4">
-              <span className="text-lg">{mainAccount.name}</span>
+          <div className="card border border-black p-6 mb-6">
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-sm uppercase tracking-wider">{mainAccount.name}</span>
               <div className="flex items-center">
-                <span className="mr-2 text-lg font-bold">{mainAccount.currency}</span>
+                <span className="mr-2 text-sm font-semibold">{mainAccount.currency}</span>
                 <div className="relative">
                   <select 
-                    className="appearance-none bg-white border-2 border-black py-1 pl-3 pr-8 focus:outline-none"
+                    className="appearance-none bg-white border-b border-black py-1 pl-3 pr-8 focus:outline-none text-sm"
                     value={selectedCurrency}
                     onChange={(e) => setSelectedCurrency(e.target.value)}
                   >
@@ -82,7 +82,7 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-            <div className="text-5xl font-playfair font-bold">
+            <div className="text-4xl font-semibold mt-4">
               {mainAccount.currency === "EUR" && "€"}
               {mainAccount.currency === "USD" && "$"}
               {mainAccount.currency === "GBP" && "£"}
@@ -90,56 +90,57 @@ export default function DashboardPage() {
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid-container">
             {accounts
               .filter(account => account.currency !== selectedCurrency)
               .map(account => (
-                <AccountCard 
-                  key={account.id}
-                  account={account}
-                  onClick={() => setSelectedCurrency(account.currency)}
-                />
+                <div key={account.id} className="col-span-12 md:col-span-6">
+                  <AccountCard 
+                    account={account}
+                    onClick={() => setSelectedCurrency(account.currency)}
+                  />
+                </div>
               ))}
           </div>
         </div>
         
         {/* Quick Actions */}
-        <div className="mb-10">
-          <h2 className="text-3xl font-playfair mb-6">Quick Actions</h2>
+        <div className="mb-12">
+          <h2 className="section-title text-2xl font-semibold">Quick Actions</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Button 
               onClick={() => navigate("/transactions")}
               variant="outline" 
-              className="border-2 border-black p-6 text-center h-auto flex flex-col items-center hover:bg-black hover:text-white transition-sharp"
+              className="border border-black p-6 text-center h-auto flex flex-col items-center hover:bg-black hover:text-white transition-colors"
             >
-              <PlusIcon className="h-8 w-8 mb-2" />
-              <span className="font-playfair">Send Money</span>
+              <PlusIcon className="h-6 w-6 mb-2" />
+              <span className="text-sm font-semibold uppercase tracking-wide">Send Money</span>
             </Button>
             
             <Button 
               variant="outline" 
-              className="border-2 border-black p-6 text-center h-auto flex flex-col items-center hover:bg-black hover:text-white transition-sharp"
+              className="border border-black p-6 text-center h-auto flex flex-col items-center hover:bg-black hover:text-white transition-colors"
             >
-              <ArrowDownIcon className="h-8 w-8 mb-2" />
-              <span className="font-playfair">Request</span>
+              <ArrowDownIcon className="h-6 w-6 mb-2" />
+              <span className="text-sm font-semibold uppercase tracking-wide">Request</span>
             </Button>
             
             <Button 
               onClick={() => navigate("/exchange")}
               variant="outline" 
-              className="border-2 border-black p-6 text-center h-auto flex flex-col items-center hover:bg-black hover:text-white transition-sharp"
+              className="border border-black p-6 text-center h-auto flex flex-col items-center hover:bg-black hover:text-white transition-colors"
             >
-              <ArrowRightLeftIcon className="h-8 w-8 mb-2" />
-              <span className="font-playfair">Exchange</span>
+              <ArrowRightLeftIcon className="h-6 w-6 mb-2" />
+              <span className="text-sm font-semibold uppercase tracking-wide">Exchange</span>
             </Button>
             
             <Button 
               onClick={() => navigate("/cards")}
               variant="outline" 
-              className="border-2 border-black p-6 text-center h-auto flex flex-col items-center hover:bg-black hover:text-white transition-sharp"
+              className="border border-black p-6 text-center h-auto flex flex-col items-center hover:bg-black hover:text-white transition-colors"
             >
-              <SquareIcon className="h-8 w-8 mb-2" />
-              <span className="font-playfair">Cards</span>
+              <SquareIcon className="h-6 w-6 mb-2" />
+              <span className="text-sm font-semibold uppercase tracking-wide">Cards</span>
             </Button>
           </div>
         </div>
@@ -147,22 +148,24 @@ export default function DashboardPage() {
         {/* Recent Transactions */}
         <div>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-playfair">Recent Transactions</h2>
+            <h2 className="section-title text-2xl font-semibold">Recent Transactions</h2>
             <button 
               onClick={() => navigate("/transactions")}
-              className="font-playfair underline"
+              className="text-sm uppercase tracking-wide hover:underline"
             >
               View All
             </button>
           </div>
           
-          {recentTransactions.map(transaction => (
-            <TransactionItem 
-              key={transaction.id}
-              transaction={transaction}
-              showCategory={false}
-            />
-          ))}
+          <div className="border border-black">
+            {recentTransactions.map(transaction => (
+              <TransactionItem 
+                key={transaction.id}
+                transaction={transaction}
+                showCategory={false}
+              />
+            ))}
+          </div>
         </div>
       </main>
     </div>

@@ -19,16 +19,16 @@ export function TransactionItem({
   showCategory = false 
 }: TransactionItemProps) {
   return (
-    <div className="border-2 border-black p-4 mb-4">
+    <div className="border-b border-black py-4 mb-0 hover:bg-secondary transition-colors">
       <div className="flex justify-between items-center">
         <div>
-          <div className="font-playfair font-bold">{transaction.name}</div>
-          <div className="text-sm">{formatDate(transaction.date)}</div>
+          <div className="font-semibold">{transaction.name}</div>
+          <div className="text-xs text-muted-foreground mt-1">{formatDate(transaction.date)}</div>
           {showCategory && (
-            <div className="text-sm">{transaction.category}</div>
+            <div className="text-xs uppercase tracking-wider mt-1">{transaction.category}</div>
           )}
         </div>
-        <div className="font-playfair font-bold">
+        <div className="font-semibold">
           {formatCurrency(transaction.amount, transaction.currency)}
         </div>
       </div>
