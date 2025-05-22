@@ -2,6 +2,9 @@ import { useAuth } from "@/hooks/use-auth";
 import { Loader2 } from "lucide-react";
 import { Redirect, Route } from "wouter";
 
+// TEMPORARY: Flag to bypass authentication for design preview purposes
+const BYPASS_AUTH = true;
+
 export function ProtectedRoute({
   path,
   component: Component,
@@ -9,6 +12,11 @@ export function ProtectedRoute({
   path: string;
   component: () => React.JSX.Element;
 }) {
+  // If we're bypassing auth, render the component directly
+  if (BYPASS_AUTH) {
+    return <Route path={path} component={Component} />;
+  }
+  
   try {
     const { user, isLoading } = useAuth();
     
