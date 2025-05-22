@@ -18,6 +18,7 @@ import { ScheduledPayments } from "@/components/dashboard/scheduled-payments";
 import { KnowledgeCenter } from "@/components/dashboard/knowledge-center";
 import { TransferModal } from "@/components/modals/transfer-modal";
 import { StatementModal } from "@/components/modals/statement-modal";
+import { CardManagementModal } from "@/components/modals/card-management-modal";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, ArrowDownIcon, ArrowRightLeftIcon, SquareIcon, CalendarIcon, BellIcon, ShieldIcon } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
@@ -67,6 +68,7 @@ export default function DashboardPage() {
   const { toast } = useToast();
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
   const [isStatementModalOpen, setIsStatementModalOpen] = useState(false);
+  const [isCardModalOpen, setIsCardModalOpen] = useState(false);
   
   const mainAccount = accounts.find(account => account.currency === selectedCurrency) || accounts[0];
 
@@ -200,12 +202,7 @@ export default function DashboardPage() {
                     </Button>
                     <Button 
                       className="w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 cursor-pointer"
-                      onClick={() => {
-                        toast({
-                          title: "Statement generated",
-                          description: "Your account statement has been generated and is ready to download.",
-                        });
-                      }}
+                      onClick={() => setIsStatementModalOpen(true)}
                       title="View and download account statements"
                     >
                       STATEMENTS
@@ -347,7 +344,7 @@ export default function DashboardPage() {
                 
                 <div 
                   className="bg-white border border-gray-200 hover:border-black text-center p-6 transition-colors duration-200 cursor-pointer"
-                  onClick={() => navigate("/cards")}
+                  onClick={() => setIsCardModalOpen(true)}
                 >
                   <div className="flex flex-col items-center justify-center">
                     <div className="w-10 h-10 rounded-full bg-black mb-3 flex items-center justify-center">
@@ -409,6 +406,13 @@ export default function DashboardPage() {
         isOpen={isTransferModalOpen}
         onClose={() => setIsTransferModalOpen(false)}
         fromAccount={mainAccount}
+      />
+      
+      {/* Statement Modal */}
+      <StatementModal
+        isOpen={isStatementModalOpen}
+        onClose={() => setIsStatementModalOpen(false)}
+        account={mainAccount}
       />
     </div>
   );
