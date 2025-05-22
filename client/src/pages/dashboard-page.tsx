@@ -16,6 +16,8 @@ import { StatementGenerator } from "@/components/dashboard/statement-generator";
 import { LinkedAccounts } from "@/components/dashboard/linked-accounts";
 import { ScheduledPayments } from "@/components/dashboard/scheduled-payments";
 import { KnowledgeCenter } from "@/components/dashboard/knowledge-center";
+import { TransferModal } from "@/components/modals/transfer-modal";
+import { StatementModal } from "@/components/modals/statement-modal";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, ArrowDownIcon, ArrowRightLeftIcon, SquareIcon, CalendarIcon, BellIcon, ShieldIcon } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
@@ -63,6 +65,8 @@ export default function DashboardPage() {
   const [selectedCurrency, setSelectedCurrency] = useState("EUR");
   const [, navigate] = useLocation();
   const { toast } = useToast();
+  const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
+  const [isStatementModalOpen, setIsStatementModalOpen] = useState(false);
   
   const mainAccount = accounts.find(account => account.currency === selectedCurrency) || accounts[0];
 
@@ -189,7 +193,7 @@ export default function DashboardPage() {
                   <div className="space-y-2">
                     <Button 
                       className="w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 cursor-pointer"
-                      onClick={() => navigate("/transactions")}
+                      onClick={() => setIsTransferModalOpen(true)}
                       title="Transfer funds between accounts"
                     >
                       TRANSFER
@@ -399,6 +403,13 @@ export default function DashboardPage() {
       </main>
       
       <Footer />
+
+      {/* Transfer Modal */}
+      <TransferModal 
+        isOpen={isTransferModalOpen}
+        onClose={() => setIsTransferModalOpen(false)}
+        fromAccount={mainAccount}
+      />
     </div>
   );
 }
