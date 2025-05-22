@@ -414,6 +414,12 @@ export default function DashboardPage() {
         onClose={() => setIsStatementModalOpen(false)}
         account={mainAccount}
       />
+      
+      {/* Card Management Modal */}
+      <CardManagementModal
+        isOpen={isCardModalOpen}
+        onClose={() => setIsCardModalOpen(false)}
+      />
     </div>
   );
 }
