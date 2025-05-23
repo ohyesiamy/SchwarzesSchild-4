@@ -75,6 +75,8 @@ export default function CardsPage() {
   const [newCardType, setNewCardType] = useState("debit");
   const [newCardDelivery, setNewCardDelivery] = useState("virtual");
   const [showConfirmLockModal, setShowConfirmLockModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<CardData | null>(null);
   const [currentCardLimitTab, setCurrentCardLimitTab] = useState("daily");
   const [spendingLimits, setSpendingLimits] = useState({
     daily: "1000",
@@ -309,7 +311,10 @@ export default function CardsPage() {
                         variant="outline"
                         size="sm"
                         className="flex-1 h-8 text-xs rounded-none"
-                        onClick={() => setShowDetailsModal(true)}
+                        onClick={() => {
+                          setSelectedCard(card);
+                          setShowDetailsModal(true);
+                        }}
                       >
                         <Eye className="h-3.5 w-3.5 mr-1" />
                         Details
@@ -319,7 +324,7 @@ export default function CardsPage() {
                         variant="outline"
                         size="sm"
                         className={`flex-1 h-8 text-xs rounded-none ${card.isFrozen ? "border-yellow-500 text-yellow-600" : ""}`}
-                        onClick={() => handleToggleCardFreeze(card.id)}
+                        onClick={() => handleToggleFreeze(card.id)}
                       >
                         {card.isFrozen ? (
                           <>
@@ -328,7 +333,7 @@ export default function CardsPage() {
                           </>
                         ) : (
                           <>
-                            <Snowflake className="h-3.5 w-3.5 mr-1" />
+                            <Lock className="h-3.5 w-3.5 mr-1" />
                             Freeze
                           </>
                         )}
@@ -799,6 +804,100 @@ export default function CardsPage() {
           </DialogContent>
         </Dialog>
       </main>
+      
+      {/* Card Details Modal for Mobile */}
+      <Dialog open={showDetailsModal} onOpenChange={setShowDetailsModal}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl">Card Details</DialogTitle>
+          </DialogHeader>
+          
+          {selectedCard && (
+            <div className="space-y-4">
+              <VirtualCard
+                cardNumber={selectedCard.cardNumber}
+                expiryDate={selectedCard.expiryDate}
+                cardType={selectedCard.cardType}
+                cardName={selectedCard.cardName}
+                isFrozen={selectedCard.isFrozen}
+                isBlocked={selectedCard.isBlocked}
+                className="w-full mb-4"
+              />
+              
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Card Information</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Card Number:</span>
+                      <span className="font-medium">{selectedCard.cardNumber}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Expiry Date:</span>
+                      <span className="font-medium">{selectedCard.expiryDate}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Card Network:</span>
+                      <span className="font-medium">{selectedCard.cardType}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Status:</span>
+                      <span className="font-medium">
+                        {selectedCard.isBlocked ? 'Blocked' : selectedCard.isFrozen ? 'Frozen' : 'Active'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Spending Limits</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Daily Limit:</span>
+                      <span className="font-medium">{selectedCard.spendingLimits.daily} {selectedCard.currency}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Monthly Limit:</span>
+                      <span className="font-medium">{selectedCard.spendingLimits.monthly} {selectedCard.currency}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Online Limit:</span>
+                      <span className="font-medium">{selectedCard.spendingLimits.online} {selectedCard.currency}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <DialogFooter className="flex flex-col space-y-2 sm:space-y-0">
+                <Button 
+                  variant="outline" 
+                  onClick={() => handleToggleFreeze(selectedCard.id)}
+                  className="w-full border-black hover:bg-gray-50"
+                >
+                  {selectedCard.isFrozen ? (
+                    <>
+                      <RefreshCw className="h-4 w-4 mr-2" />
+                      Unfreeze Card
+                    </>
+                  ) : (
+                    <>
+                      <Lock className="h-4 w-4 mr-2" />
+                      Freeze Card
+                    </>
+                  )}
+                </Button>
+                <Button 
+                  variant="outline"
+                  className="w-full border-black hover:bg-gray-50"
+                  onClick={() => setShowDetailsModal(false)}
+                >
+                  Close
+                </Button>
+              </DialogFooter>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
