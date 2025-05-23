@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { Footer } from "@/components/layout/footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -68,8 +69,9 @@ export default function SettingsPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <Navigation active="settings" />
+      <MobileNavigation active="settings" />
       
-      <main className="py-8 px-4 container mx-auto flex-grow">
+      <main className="py-8 px-4 container mx-auto flex-grow mb-20 md:mb-0">
         <h2 className="text-3xl font-playfair mb-6">Settings</h2>
         
         <div className="border-2 border-black p-6 mb-8">

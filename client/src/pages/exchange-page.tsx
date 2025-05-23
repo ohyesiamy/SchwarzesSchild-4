@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { 
@@ -292,8 +293,9 @@ export default function ExchangePage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <Navigation active="exchange" />
+      <MobileNavigation active="exchange" />
       
-      <main className="py-8 px-4 container mx-auto flex-grow">
+      <main className="py-8 px-4 container mx-auto flex-grow mb-20 md:mb-0">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <h1 className="text-3xl mb-2 sm:mb-0">Currency Exchange</h1>
         </div>
