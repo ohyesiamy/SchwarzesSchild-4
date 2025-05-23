@@ -822,13 +822,13 @@ export default function ExchangePage() {
           <DialogFooter>
             <Button 
               variant="outline" 
-              className="border-black"
+              className="rounded-none border-black text-[10px] uppercase tracking-wide h-7"
               onClick={() => setShowPinVerification(false)}
             >
               Cancel
             </Button>
             <Button 
-              className="bg-black text-white hover:bg-gray-800"
+              className="rounded-none bg-black text-white hover:bg-gray-800 text-[10px] uppercase tracking-wide font-medium h-7"
               onClick={handleVerifyPin}
             >
               Verify
@@ -839,10 +839,10 @@ export default function ExchangePage() {
       
       {/* Confirm Exchange Modal */}
       <Dialog open={showConfirmModal} onOpenChange={setShowConfirmModal}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle>Confirm Exchange</DialogTitle>
-            <DialogDescription>
+        <DialogContent className="max-w-md rounded-none border-black">
+          <DialogHeader className="border-b border-gray-200 pb-2">
+            <DialogTitle className="text-xs uppercase tracking-wide font-medium">Confirm Exchange</DialogTitle>
+            <DialogDescription className="text-[10px] uppercase tracking-wide text-gray-500 mt-1">
               Please review your exchange details before confirming.
             </DialogDescription>
           </DialogHeader>
@@ -877,19 +877,19 @@ export default function ExchangePage() {
           <DialogFooter>
             <Button 
               variant="outline" 
-              className="border-black"
+              className="rounded-none border-black text-[10px] uppercase tracking-wide h-7"
               onClick={() => setShowConfirmModal(false)}
             >
               Cancel
             </Button>
             <Button 
-              className="bg-black text-white hover:bg-gray-800"
+              className="rounded-none bg-black text-white hover:bg-gray-800 text-[10px] uppercase tracking-wide font-medium h-7"
               onClick={handleConfirmExchange}
               disabled={isProcessing}
             >
               {isProcessing ? (
                 <>
-                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                  <RefreshCw className="h-3 w-3 mr-1.5 animate-spin" />
                   Processing...
                 </>
               ) : (
