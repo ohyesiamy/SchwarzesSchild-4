@@ -22,7 +22,16 @@ import { StatementModal } from "@/components/modals/statement-modal";
 import { CardManagementModal } from "@/components/modals/card-management-modal";
 import { DepositModal } from "@/components/modals/deposit-modal";
 import { Button } from "@/components/ui/button";
-import { PlusIcon, ArrowDownIcon, ArrowRightLeftIcon, SquareIcon, CalendarIcon, BellIcon, ShieldIcon } from "lucide-react";
+import { 
+  PlusIcon, 
+  ArrowDownIcon, 
+  ArrowRightLeftIcon, 
+  SquareIcon, 
+  CalendarIcon, 
+  BellIcon, 
+  ShieldIcon,
+  CreditCardIcon
+} from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
@@ -81,50 +90,98 @@ export default function DashboardPage() {
       <Navigation active="dashboard" />
       <MobileNavigation active="dashboard" />
       
-      <main className="py-6 md:py-10 px-4 md:px-6 container mx-auto flex-grow mb-16 md:mb-0">
+      <main className="py-6 md:py-10 lg:py-12 px-4 md:px-6 lg:px-8 container mx-auto flex-grow mb-16 md:mb-0 max-w-screen-2xl">
         {/* Welcome Banner */}
-        <div className="bg-black text-white p-4 sm:p-6 md:p-8 mb-6 md:mb-10 shadow-lg rounded-lg md:rounded-none">
-          <div className="flex flex-col md:flex-row md:justify-between md:items-center">
-            <div className="flex items-center mb-4 md:mb-0">
-              <Logo 
-                size="medium" 
-                variant="white" 
-                background="dark" 
-                className="mr-4 hidden md:block" 
-              />
-              <div>
-                <h1 className="text-xl md:text-2xl font-light mb-2 tracking-tight">Welcome back, Jonathan</h1>
-                <p className="text-xs md:text-sm text-gray-100">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
+        <div className="bg-black text-white mb-8 md:mb-12 shadow-lg rounded-lg md:rounded-none relative overflow-hidden">
+          {/* Premium geometric pattern overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 right-0 w-96 h-96 border-l border-t border-white transform translate-x-16 -translate-y-16"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 border-r border-b border-white transform -translate-x-8 translate-y-8"></div>
+          </div>
+          
+          <div className="p-5 sm:p-6 md:p-8 lg:p-10 relative z-10">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
+              <div className="flex items-start lg:items-center mb-6 lg:mb-0">
+                <Logo 
+                  size="medium" 
+                  variant="white" 
+                  background="dark" 
+                  className="mr-4 hidden md:block" 
+                />
+                <div>
+                  <div className="flex items-center mb-1">
+                    <h1 className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight">Welcome back, Jonathan</h1>
+                    <div className="hidden md:block w-1.5 h-1.5 bg-white rounded-full mx-3"></div>
+                    <span className="hidden md:block text-xs uppercase tracking-wider text-gray-300">PREMIUM CLIENT</span>
+                  </div>
+                  <p className="text-xs md:text-sm text-gray-300">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
+                  <div className="hidden md:flex items-center mt-6 text-sm">
+                    <span className="flex items-center mr-8">
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></div>
+                      All accounts secure
+                    </span>
+                    <span className="flex items-center">
+                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
+                      Market status: Open
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col xs:flex-row lg:flex-col space-y-0 xs:space-y-0 lg:space-y-3 space-x-0 xs:space-x-4 lg:space-x-0">
+                <Button 
+                  variant="outline" 
+                  className="border-white text-white hover:bg-white hover:text-black text-xs transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-10 mb-3 xs:mb-0 lg:mb-0 w-full"
+                  onClick={() => navigate("/security")}
+                >
+                  <ShieldIcon className="h-4 w-4 mr-2" />
+                  <span className="whitespace-nowrap">SECURITY CENTER</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-black text-xs transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-10 w-full"
+                  onClick={() => navigate("/profile")}
+                >
+                  <span className="whitespace-nowrap">ACCOUNT SETTINGS</span>
+                </Button>
               </div>
             </div>
-            <div className="flex items-center space-x-4 mt-2 md:mt-0">
-              <Button 
-                variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-black text-xs transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-10"
-                onClick={() => navigate("/security")}
-              >
-                <ShieldIcon className="h-4 w-4 mr-2" />
-                <span className="whitespace-nowrap">SECURITY CENTER</span>
-              </Button>
-              <div className="relative cursor-pointer transform hover:scale-105 active:scale-95 transition-transform duration-200">
-                <BellIcon className="h-6 w-6 text-white" />
-                <span className="absolute -top-1 -right-1 h-3 w-3 bg-white rounded-full"></span>
+            
+            {/* Date and notifications row for desktop */}
+            <div className="hidden md:flex justify-between items-center mt-4 pt-4 border-t border-gray-800">
+              <div className="text-sm text-gray-300">
+                {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+              </div>
+              <div className="flex items-center space-x-6">
+                <div className="relative cursor-pointer transform hover:scale-105 active:scale-95 transition-transform duration-200">
+                  <BellIcon className="h-6 w-6 text-white" />
+                  <span className="absolute -top-1 -right-1 h-3 w-3 bg-white rounded-full"></span>
+                </div>
+                <span className="text-sm">3 new notifications</span>
               </div>
             </div>
           </div>
         </div>
         
-        {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-10">
-          {/* Main Content - 2/3 width on large screens */}
-          <div className="lg:col-span-2 space-y-8 md:space-y-10">
+        {/* Premium Dashboard Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mb-8 md:mb-10">
+          {/* Main Content - Wider on large screens */}
+          <div className="lg:col-span-2 xl:col-span-3 space-y-8 md:space-y-10">
             {/* Account Overview Section */}
-            <section>
-              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center mb-4 md:mb-6">
-                <h2 className="text-lg md:text-xl font-semibold mb-2 xs:mb-0">Account Overview</h2>
-                <Button variant="outline" size="sm" className="text-xs min-h-[36px] active:scale-95 transition-transform w-full xs:w-auto">
-                  <PlusIcon className="h-3 w-3 mr-1" /> NEW ACCOUNT
-                </Button>
+            <section className="bg-white border border-gray-200">
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
+                <div>
+                  <h2 className="text-lg md:text-xl font-semibold mb-1 xs:mb-0">Account Overview</h2>
+                  <p className="text-xs text-gray-500 hidden md:block">Manage all your accounts in one place</p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="hidden md:flex items-center">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span className="text-xs text-gray-600 mr-6">All accounts active</span>
+                  </div>
+                  <Button variant="outline" size="sm" className="text-xs min-h-[36px] active:scale-95 transition-transform w-full xs:w-auto">
+                    <PlusIcon className="h-3 w-3 mr-1" /> NEW ACCOUNT
+                  </Button>
+                </div>
               </div>
               
               {/* Mobile Account Cards */}
@@ -173,59 +230,104 @@ export default function DashboardPage() {
               </div>
               
               {/* Desktop Account Table */}
-              <div className="hidden md:block bg-white border border-gray-200 mb-6 rounded-lg overflow-hidden">
+              <div className="hidden md:flex flex-col border border-gray-200 shadow-sm">
                 <div className="overflow-x-auto">
-                  <table className="w-full">
+                  <table className="w-full table-fixed">
                     <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="py-4 px-6 text-left text-sm font-semibold text-gray-600">Account Name</th>
-                        <th className="py-4 px-6 text-left text-sm font-semibold text-gray-600">Account Number</th>
-                        <th className="py-4 px-6 text-left text-sm font-semibold text-gray-600">Currency</th>
-                        <th className="py-4 px-6 text-right text-sm font-semibold text-gray-600">Available Balance</th>
-                        <th className="py-4 px-6 text-right text-sm font-semibold text-gray-600"></th>
+                      <tr className="bg-gray-50 border-b border-gray-200">
+                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-1/4">Account Name</th>
+                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-1/4">Account Number</th>
+                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-1/6">Currency</th>
+                        <th className="py-3 px-6 text-right text-xs font-medium text-gray-600 uppercase tracking-wider w-1/6">Available Balance</th>
+                        <th className="py-3 px-6 text-center text-xs font-medium text-gray-600 uppercase tracking-wider w-1/6">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
                       {accounts.map((account, index) => (
                         <tr 
                           key={account.id} 
-                          className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} cursor-pointer hover:bg-gray-100`}
+                          className={`hover:bg-gray-50 cursor-pointer ${
+                            account.currency === selectedCurrency ? 'bg-gray-50 border-l-2 border-black' : 'border-l-2 border-transparent'
+                          } ${index !== accounts.length - 1 ? 'border-b border-gray-200' : ''}`}
                           onClick={() => setSelectedCurrency(account.currency)}
                         >
-                          <td className="py-4 px-6 font-medium">
-                            {account.name}
-                            {account.currency === selectedCurrency && (
-                              <span className="ml-2 inline-block px-2 py-0.5 text-xs bg-black text-white">Primary</span>
-                            )}
+                          <td className="py-4 px-6">
+                            <div className="flex items-center">
+                              <div className={`w-2 h-2 rounded-full mr-3 ${account.balance > 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                              <div>
+                                <div className="font-medium text-black">{account.name}</div>
+                                <div className="text-xs text-gray-500 mt-0.5">
+                                  {account.currency === selectedCurrency ? 'Primary Account' : 'Standard Account'}
+                                </div>
+                              </div>
+                            </div>
                           </td>
-                          <td className="py-4 px-6 text-gray-600">SS-{account.id}-2025-{Math.floor(1000 + Math.random() * 9000)}</td>
-                          <td className="py-4 px-6">{account.currency}</td>
+                          <td className="py-4 px-6">
+                            <span className="font-mono text-sm">
+                              SS-{account.id}-2025-{Math.floor(1000 + Math.random() * 9000)}
+                            </span>
+                          </td>
+                          <td className="py-4 px-6">
+                            <div className="flex items-center">
+                              <div className="w-6 h-6 border border-gray-200 rounded-full flex items-center justify-center text-xs mr-2">
+                                {account.currency === "EUR" && "€"}
+                                {account.currency === "USD" && "$"}
+                                {account.currency === "GBP" && "£"}
+                              </div>
+                              <span>{account.currency}</span>
+                            </div>
+                          </td>
                           <td className="py-4 px-6 text-right font-semibold">
-                            {account.currency === "EUR" && "€"}
-                            {account.currency === "USD" && "$"}
-                            {account.currency === "GBP" && "£"}
-                            {account.balance.toFixed(2)}
+                            {formatCurrency(account.balance, account.currency)}
                           </td>
-                          <td className="py-4 px-6 text-right">
-                            <button 
-                              className="text-xs font-semibold text-gray-600 hover:text-black transition-colors duration-200 cursor-pointer"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedCurrency(account.currency);
-                                toast({
-                                  title: "Account details",
-                                  description: `Viewing details for ${account.name}.`,
-                                });
-                              }}
-                              title="View detailed account information"
-                            >
-                              View Details
-                            </button>
+                          <td className="py-4 px-6">
+                            <div className="flex items-center justify-center space-x-2">
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="h-8 px-3 active:scale-95 transition-transform"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setIsTransferModalOpen(true);
+                                }}
+                              >
+                                <ArrowRightLeftIcon className="h-3.5 w-3.5 mr-1" />
+                                <span className="text-xs">TRANSFER</span>
+                              </Button>
+                              <Button 
+                                variant="outline" 
+                                size="sm" 
+                                className="h-8 w-8 p-0 active:scale-95 transition-transform"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toast({
+                                    title: "Account details",
+                                    description: `Viewing details for ${account.name}.`,
+                                  });
+                                }}
+                              >
+                                <SquareIcon className="h-3.5 w-3.5" />
+                              </Button>
+                            </div>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
+                </div>
+                <div className="flex justify-between items-center px-6 py-3 border-t border-gray-200 bg-gray-50 text-xs text-gray-500">
+                  <div className="flex items-center">
+                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                    <span>Positive balance</span>
+                    <div className="w-2 h-2 bg-red-500 rounded-full ml-4 mr-2"></div>
+                    <span>Negative balance</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span>Last updated: {new Date().toLocaleTimeString()}</span>
+                    <Button variant="ghost" size="sm" className="ml-2 h-6 w-6 p-0">
+                      <ArrowDownIcon className="h-3 w-3" />
+                    </Button>
+                  </div>
                 </div>
               </div>
               
