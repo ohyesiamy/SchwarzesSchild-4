@@ -21,52 +21,62 @@ export default function SecurityPage() {
       <Navigation active="security" />
       <MobileNavigation active="settings" /> {/* Using "settings" because Security is in More section */}
       
-      <main className="py-8 px-6 container mx-auto flex-grow mb-20 md:mb-0">
-        <div className="mb-8">
-          <h1 className="text-2xl font-semibold mb-2">Security Center</h1>
-          <p className="text-gray-600">Protecting your financial assets is our highest priority.</p>
+      <main className="py-5 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
+        {/* Mobile optimized header - visible on mobile only */}
+        <div className="flex flex-col mb-4 md:hidden">
+          <h1 className="text-sm uppercase tracking-wide font-medium mb-1">Security Center</h1>
+          <div className="w-6 h-0.5 bg-black"></div>
+          <p className="text-[10px] uppercase tracking-wide text-gray-600 mt-2">Protecting your financial assets</p>
+        </div>
+
+        {/* Desktop header - hidden on mobile */}
+        <div className="hidden md:block mb-6">
+          <h1 className="text-base uppercase tracking-wide font-medium mb-1">Security Center</h1>
+          <div className="w-8 h-0.5 bg-black mb-2"></div>
+          <p className="text-xs text-gray-600">Protecting your financial assets is our highest priority.</p>
         </div>
         
         {/* Security Alert Banner */}
-        <div className="bg-black text-white p-6 mb-10 flex items-center">
-          <ShieldIcon className="h-8 w-8 mr-4" />
+        <div className="bg-black text-white p-3 md:p-4 mb-5 md:mb-6 flex items-center">
+          <ShieldIcon className="h-5 w-5 md:h-6 md:w-6 mr-3 md:mr-4" />
           <div>
-            <h2 className="text-lg font-medium mb-1">Your Account Security Status</h2>
-            <p className="text-sm text-gray-300">Your account is currently secured with multi-factor authentication. Last login: Today at 10:28 AM.</p>
+            <h2 className="text-xs md:text-sm uppercase tracking-wide font-medium mb-0.5 md:mb-1">Security Status</h2>
+            <p className="text-[10px] md:text-xs text-gray-300">Secured with multi-factor authentication. Last login: Today at 10:28 AM.</p>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Password Security */}
           <div className="bg-white border border-gray-200">
-            <div className="border-b border-gray-200 p-6">
-              <h3 className="text-lg font-medium flex items-center">
-                <KeyIcon className="h-5 w-5 mr-2" />
-                Password Policy
-              </h3>
+            <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+              <div>
+                <h3 className="text-xs uppercase tracking-wide font-medium">Password Policy</h3>
+                <p className="text-[10px] text-gray-500 mt-0.5">Security requirements for account access</p>
+              </div>
+              <KeyIcon className="h-4 w-4 text-gray-500" />
             </div>
-            <div className="p-6">
-              <ul className="space-y-3 text-sm">
+            <div className="p-3 md:p-4">
+              <ul className="space-y-2 md:space-y-3">
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-black text-white flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">✓</div>
-                  <span>Minimum 12 characters length</span>
+                  <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                  <span className="text-[11px] md:text-xs">Minimum 12 characters length</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-black text-white flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">✓</div>
-                  <span>Combination of uppercase, lowercase, numbers, and symbols</span>
+                  <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                  <span className="text-[11px] md:text-xs">Combination of uppercase, lowercase, numbers, and symbols</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-black text-white flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">✓</div>
-                  <span>Periodic password rotation required (every 90 days)</span>
+                  <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                  <span className="text-[11px] md:text-xs">Periodic password rotation required (every 90 days)</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-black text-white flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">✓</div>
-                  <span>No password reuse from the last 24 changes</span>
+                  <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                  <span className="text-[11px] md:text-xs">No password reuse from the last 24 changes</span>
                 </li>
               </ul>
-              <div className="mt-6">
-                <Button className="w-full bg-black text-white">
-                  UPDATE PASSWORD
+              <div className="mt-4 md:mt-5">
+                <Button className="w-full bg-black text-white rounded-none h-8 text-[10px] uppercase tracking-wide">
+                  Update Password
                 </Button>
               </div>
             </div>
@@ -74,34 +84,35 @@ export default function SecurityPage() {
           
           {/* Session Management */}
           <div className="bg-white border border-gray-200">
-            <div className="border-b border-gray-200 p-6">
-              <h3 className="text-lg font-medium flex items-center">
-                <ClockIcon className="h-5 w-5 mr-2" />
-                Session Management
-              </h3>
+            <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+              <div>
+                <h3 className="text-xs uppercase tracking-wide font-medium">Session Management</h3>
+                <p className="text-[10px] text-gray-500 mt-0.5">Active connection monitoring and control</p>
+              </div>
+              <ClockIcon className="h-4 w-4 text-gray-500" />
             </div>
-            <div className="p-6">
-              <ul className="space-y-3 text-sm">
+            <div className="p-3 md:p-4">
+              <ul className="space-y-2 md:space-y-3">
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-black text-white flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">✓</div>
-                  <span>Automatic logout after 15 minutes of inactivity</span>
+                  <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                  <span className="text-[11px] md:text-xs">Automatic logout after 15 minutes of inactivity</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-black text-white flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">✓</div>
-                  <span>Concurrent sessions are monitored and limited</span>
+                  <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                  <span className="text-[11px] md:text-xs">Concurrent sessions are monitored and limited</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-black text-white flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">✓</div>
-                  <span>IP address verification on login</span>
+                  <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                  <span className="text-[11px] md:text-xs">IP address verification on login</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-black text-white flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">✓</div>
-                  <span>Device fingerprinting for suspicious activity detection</span>
+                  <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                  <span className="text-[11px] md:text-xs">Device fingerprinting for suspicious activity detection</span>
                 </li>
               </ul>
-              <div className="mt-6">
-                <Button className="w-full bg-black text-white">
-                  TERMINATE ALL SESSIONS
+              <div className="mt-4 md:mt-5">
+                <Button className="w-full bg-black text-white rounded-none h-8 text-[10px] uppercase tracking-wide">
+                  Terminate All Sessions
                 </Button>
               </div>
             </div>
@@ -109,34 +120,35 @@ export default function SecurityPage() {
           
           {/* Suspicious Activity */}
           <div className="bg-white border border-gray-200">
-            <div className="border-b border-gray-200 p-6">
-              <h3 className="text-lg font-medium flex items-center">
-                <AlertTriangleIcon className="h-5 w-5 mr-2" />
-                Suspicious Activity Monitoring
-              </h3>
+            <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+              <div>
+                <h3 className="text-xs uppercase tracking-wide font-medium">Activity Monitoring</h3>
+                <p className="text-[10px] text-gray-500 mt-0.5">Continuous security surveillance system</p>
+              </div>
+              <AlertTriangleIcon className="h-4 w-4 text-gray-500" />
             </div>
-            <div className="p-6">
-              <p className="text-sm text-gray-600 mb-4">Our systems continuously monitor your account for unusual patterns that may indicate unauthorized access attempts.</p>
+            <div className="p-3 md:p-4">
+              <p className="text-[11px] md:text-xs text-gray-600 mb-3">Our systems continuously monitor your account for unusual patterns that may indicate unauthorized access attempts.</p>
               
-              <h4 className="font-medium mb-2">Warning Signs:</h4>
-              <ul className="space-y-3 text-sm mb-4">
+              <h4 className="text-[11px] md:text-xs uppercase tracking-wide font-medium mb-2">Warning Signs:</h4>
+              <ul className="space-y-2 md:space-y-2.5 mb-3 md:mb-4">
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">!</div>
-                  <span>Login attempts from unfamiliar locations</span>
+                  <div className="h-4 w-4 border border-black text-black flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">!</div>
+                  <span className="text-[11px] md:text-xs">Login attempts from unfamiliar locations</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">!</div>
-                  <span>Multiple failed login attempts</span>
+                  <div className="h-4 w-4 border border-black text-black flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">!</div>
+                  <span className="text-[11px] md:text-xs">Multiple failed login attempts</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="h-5 w-5 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center text-xs mr-2 flex-shrink-0 mt-0.5">!</div>
-                  <span>Unusual transaction patterns or amounts</span>
+                  <div className="h-4 w-4 border border-black text-black flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">!</div>
+                  <span className="text-[11px] md:text-xs">Unusual transaction patterns or amounts</span>
                 </li>
               </ul>
               
-              <div className="mt-2">
-                <Button className="w-full bg-black text-white">
-                  REVIEW SECURITY LOG
+              <div className="mt-3 md:mt-4">
+                <Button className="w-full bg-black text-white rounded-none h-8 text-[10px] uppercase tracking-wide">
+                  Review Security Log
                 </Button>
               </div>
             </div>
@@ -144,84 +156,102 @@ export default function SecurityPage() {
           
           {/* Account Protection */}
           <div className="bg-white border border-gray-200">
-            <div className="border-b border-gray-200 p-6">
-              <h3 className="text-lg font-medium flex items-center">
-                <LockIcon className="h-5 w-5 mr-2" />
-                Account Protection
-              </h3>
+            <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+              <div>
+                <h3 className="text-xs uppercase tracking-wide font-medium">Account Protection</h3>
+                <p className="text-[10px] text-gray-500 mt-0.5">Emergency measures for your financial security</p>
+              </div>
+              <LockIcon className="h-4 w-4 text-gray-500" />
             </div>
-            <div className="p-6">
-              <p className="text-sm text-gray-600 mb-4">If you suspect unauthorized access to your account, take immediate action to secure your finances.</p>
+            <div className="p-3 md:p-4">
+              <p className="text-[11px] md:text-xs text-gray-600 mb-3">If you suspect unauthorized access to your account, take immediate action to secure your finances.</p>
               
-              <div className="space-y-4 mb-4">
-                <Button className="w-full bg-white border border-black text-black hover:bg-gray-100">
-                  FREEZE MY ACCOUNT
+              <div className="space-y-3 mb-3">
+                <Button className="w-full bg-white border border-black text-black hover:bg-gray-100 rounded-none h-8 text-[10px] uppercase tracking-wide">
+                  Freeze My Account
                 </Button>
                 
-                <Button className="w-full bg-white border border-black text-black hover:bg-gray-100">
-                  CONTACT COMPLIANCE
+                <Button className="w-full bg-white border border-black text-black hover:bg-gray-100 rounded-none h-8 text-[10px] uppercase tracking-wide">
+                  Contact Compliance
                 </Button>
               </div>
               
-              <div className="flex items-center mt-6 pt-4 border-t border-gray-200">
-                <PhoneIcon className="h-5 w-5 mr-2 text-black" />
-                <span className="text-sm font-medium">24/7 Security Hotline: +41 800 555 0000</span>
+              <div className="flex items-center mt-4 pt-3 border-t border-gray-200">
+                <PhoneIcon className="h-3.5 w-3.5 mr-2 text-black" />
+                <span className="text-[10px] md:text-xs uppercase tracking-wide font-medium">24/7 Security Hotline: +41 800 555 0000</span>
               </div>
             </div>
           </div>
         </div>
         
         {/* Connected Devices */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold mb-6 flex items-center">
-            <MonitorIcon className="h-5 w-5 mr-2" />
-            Connected Devices
-          </h2>
+        <div className="mb-6 md:mb-8">
+          <div className="flex justify-between items-center mb-3 md:mb-4">
+            <div className="flex items-center">
+              <h2 className="text-xs uppercase tracking-wide font-medium">Connected Devices</h2>
+              <MonitorIcon className="h-3.5 w-3.5 ml-2 text-gray-500" />
+            </div>
+            <Button 
+              variant="link" 
+              size="sm" 
+              className="text-[10px] uppercase tracking-wide font-medium text-black h-auto p-0"
+            >
+              Manage All
+            </Button>
+          </div>
           
           <div className="bg-white border border-gray-200">
             <div className="divide-y divide-gray-200">
-              <div className="p-6 flex justify-between items-center">
+              <div className="p-3 md:p-4 flex justify-between items-center">
                 <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center mr-4">
-                    <LaptopIcon className="h-5 w-5" />
+                  <div className="w-8 h-8 bg-black text-white flex items-center justify-center mr-3">
+                    <LaptopIcon className="h-4 w-4" />
                   </div>
                   <div>
-                    <div className="font-medium">MacBook Pro</div>
-                    <div className="text-xs text-gray-500">Last active: Today, 15:42</div>
+                    <div className="text-xs font-medium uppercase tracking-wide">MacBook Pro</div>
+                    <div className="text-[9px] text-gray-500 uppercase tracking-wide">Last active: Today, 15:42</div>
                   </div>
                 </div>
-                <div className="text-xs bg-green-100 text-green-800 py-1 px-2 rounded-full">
-                  Current Device
+                <div className="text-[9px] bg-black text-white py-0.5 px-1.5">
+                  Current
                 </div>
               </div>
               
-              <div className="p-6 flex justify-between items-center">
+              <div className="p-3 md:p-4 flex justify-between items-center">
                 <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center mr-4">
-                    <SmartphoneIcon className="h-5 w-5" />
+                  <div className="w-8 h-8 bg-white border border-black text-black flex items-center justify-center mr-3">
+                    <SmartphoneIcon className="h-4 w-4" />
                   </div>
                   <div>
-                    <div className="font-medium">iPhone 15 Pro</div>
-                    <div className="text-xs text-gray-500">Last active: Today, 12:15</div>
+                    <div className="text-xs font-medium uppercase tracking-wide">iPhone 15 Pro</div>
+                    <div className="text-[9px] text-gray-500 uppercase tracking-wide">Last active: Today, 12:15</div>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" className="text-xs">
-                  REMOVE
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="text-[10px] uppercase tracking-wide rounded-none border-black h-6 px-2 py-0"
+                >
+                  Remove
                 </Button>
               </div>
               
-              <div className="p-6 flex justify-between items-center">
+              <div className="p-3 md:p-4 flex justify-between items-center">
                 <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center mr-4">
-                    <TabletIcon className="h-5 w-5" />
+                  <div className="w-8 h-8 bg-white border border-black text-black flex items-center justify-center mr-3">
+                    <TabletIcon className="h-4 w-4" />
                   </div>
                   <div>
-                    <div className="font-medium">iPad Air</div>
-                    <div className="text-xs text-gray-500">Last active: Yesterday, 19:22</div>
+                    <div className="text-xs font-medium uppercase tracking-wide">iPad Air</div>
+                    <div className="text-[9px] text-gray-500 uppercase tracking-wide">Last active: Yesterday, 19:22</div>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" className="text-xs">
-                  REMOVE
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="text-[10px] uppercase tracking-wide rounded-none border-black h-6 px-2 py-0"
+                >
+                  Remove
                 </Button>
               </div>
             </div>
