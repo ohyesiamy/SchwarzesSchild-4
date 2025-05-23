@@ -590,43 +590,44 @@ export default function ExchangePage() {
             </div>
           </div>
           
-          <div className="border border-black">
+          {/* Desktop View - Table */}
+          <div className="hidden md:block border border-black shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="bg-gray-100 border-b border-black">
-                    <th className="p-4 text-left font-medium">Date & Time</th>
-                    <th className="p-4 text-left font-medium">From → To</th>
-                    <th className="p-4 text-left font-medium">Amount Converted</th>
-                    <th className="p-4 text-left font-medium">Resulting Amount</th>
-                    <th className="p-4 text-left font-medium">Rate</th>
-                    <th className="p-4 text-left font-medium">Status</th>
+                    <th className="p-3 text-left font-medium text-sm">Date & Time</th>
+                    <th className="p-3 text-left font-medium text-sm">From → To</th>
+                    <th className="p-3 text-left font-medium text-sm">Amount Converted</th>
+                    <th className="p-3 text-left font-medium text-sm">Resulting Amount</th>
+                    <th className="p-3 text-left font-medium text-sm">Rate</th>
+                    <th className="p-3 text-left font-medium text-sm">Status</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredHistory.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="p-4 text-center text-gray-500">
+                      <td colSpan={6} className="p-3 text-center text-gray-500 text-sm">
                         No exchange history found with the selected filters.
                       </td>
                     </tr>
                   ) : (
                     filteredHistory.map(exchange => (
                       <tr key={exchange.id} className="border-b border-gray-200 last:border-0 hover:bg-gray-50">
-                        <td className="p-4">{formatDate(exchange.date)}</td>
-                        <td className="p-4 font-medium">
+                        <td className="p-3 text-sm">{formatDate(exchange.date)}</td>
+                        <td className="p-3 font-medium text-sm">
                           {exchange.fromCurrency} → {exchange.toCurrency}
                         </td>
-                        <td className="p-4 text-right">
+                        <td className="p-3 text-right text-sm">
                           {formatCurrency(exchange.fromAmount, exchange.fromCurrency)}
                         </td>
-                        <td className="p-4 text-right">
+                        <td className="p-3 text-right text-sm">
                           {formatCurrency(exchange.toAmount, exchange.toCurrency)}
                         </td>
-                        <td className="p-4">
+                        <td className="p-3 text-sm">
                           {exchange.rate.toFixed(4)}
                         </td>
-                        <td className="p-4">
+                        <td className="p-3 text-sm">
                           <Badge 
                             variant={exchange.status === "completed" ? "default" : "outline"}
                             className={exchange.status === "completed" 
@@ -643,6 +644,55 @@ export default function ExchangePage() {
                 </tbody>
               </table>
             </div>
+          </div>
+          
+          {/* Mobile View - Cards */}
+          <div className="md:hidden space-y-3">
+            {filteredHistory.length === 0 ? (
+              <div className="text-center p-4 text-gray-500 border border-gray-200 bg-gray-50 text-sm">
+                No exchange history found with the selected filters.
+              </div>
+            ) : (
+              filteredHistory.map(exchange => (
+                <div key={exchange.id} className="border border-black p-3 shadow-sm">
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="flex items-center">
+                      <span className="text-xs text-gray-600">{formatDate(exchange.date)}</span>
+                    </div>
+                    <Badge 
+                      variant={exchange.status === "completed" ? "default" : "outline"}
+                      className={`text-xs ${exchange.status === "completed" 
+                        ? "bg-green-600 hover:bg-green-700" 
+                        : "border-orange-500 text-orange-500"
+                      }`}
+                    >
+                      {exchange.status === "completed" ? "Completed" : "Pending"}
+                    </Badge>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="font-medium text-sm">
+                      {exchange.fromCurrency} → {exchange.toCurrency}
+                    </div>
+                    <div className="text-xs text-gray-600">
+                      Rate: {exchange.rate.toFixed(4)}
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between items-center pt-2 border-t border-gray-100">
+                    <div>
+                      <div className="text-xs text-gray-600">From</div>
+                      <div className="font-medium text-sm">{formatCurrency(exchange.fromAmount, exchange.fromCurrency)}</div>
+                    </div>
+                    <ArrowRight className="h-4 w-4 text-gray-400" />
+                    <div>
+                      <div className="text-xs text-gray-600">To</div>
+                      <div className="font-medium text-sm">{formatCurrency(exchange.toAmount, exchange.toCurrency)}</div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </main>
