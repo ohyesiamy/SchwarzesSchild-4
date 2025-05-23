@@ -8,7 +8,7 @@ import { Logo } from "@/components/ui/logo";
 import { MarketSnapshot } from "@/components/dashboard/market-snapshot";
 import { PortfolioSummary } from "@/components/dashboard/portfolio-summary";
 import { ComplianceNotification } from "@/components/dashboard/compliance-notification";
-import { ComplianceStatus } from "@/components/dashboard/compliance-status";
+
 import { InvestmentOverview } from "@/components/dashboard/investment-overview";
 import { MarketInsights } from "@/components/dashboard/market-insights";
 import { UpcomingPayments } from "@/components/dashboard/upcoming-payments";
@@ -176,10 +176,10 @@ export default function DashboardPage() {
           </div>
         </div>
         
-        {/* Premium Dashboard Layout - Balanced Columns */}
+        {/* Professional Dashboard Layout - Enhanced Structure */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-8 md:mb-10">
-          {/* Main Content - Left Column */}
-          <div className="lg:col-span-8 space-y-8 border-r border-gray-200 pr-8">
+          {/* Main Content - Primary Column */}
+          <div className="lg:col-span-8 space-y-6 lg:border-r border-gray-200 lg:pr-8">
             {/* Account Overview Section */}
             <section className="bg-white border border-gray-200">
               <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
@@ -641,31 +641,59 @@ export default function DashboardPage() {
               </div>
             </section>
             
-            {/* Market Insights Section */}
-            <section>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold">Market Insights</h2>
+            {/* Market Insights Section - Enhanced */}
+            <section className="bg-white border border-gray-200">
+              <div className="flex justify-between items-center p-5 border-b border-gray-200">
+                <h2 className="text-lg font-semibold">Market Insights</h2>
+                <div className="text-xs bg-gray-100 px-2 py-1">LIVE DATA</div>
               </div>
-              
-              <MarketInsights />
+              <div className="p-5">
+                <MarketInsights />
+              </div>
             </section>
             
-            {/* Banking Information Section - Moved from right column */}
-            <section className="bg-white border border-gray-200 p-5">
-              <h3 className="text-lg font-semibold mb-4 pb-3 border-b border-gray-100">Banking Information</h3>
-              <div className="space-y-6">
-                {/* Compliance Status */}
-                <ComplianceStatus />
-                
-                {/* Linked Accounts Section */}
+            {/* Quick Actions Panel - NEW */}
+            <section className="bg-white border border-gray-200">
+              <div className="p-5 border-b border-gray-200">
+                <h3 className="text-lg font-semibold">Quick Actions</h3>
+              </div>
+              <div className="p-5">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="flex flex-col items-center justify-center p-4 border border-gray-100 hover:border-black transition-colors cursor-pointer">
+                    <ArrowRightLeftIcon className="h-5 w-5 mb-2" />
+                    <span className="text-xs font-medium text-center">New Transfer</span>
+                  </div>
+                  
+                  <div className="flex flex-col items-center justify-center p-4 border border-gray-100 hover:border-black transition-colors cursor-pointer">
+                    <SquareIcon className="h-5 w-5 mb-2" />
+                    <span className="text-xs font-medium text-center">Pay Bill</span>
+                  </div>
+                  
+                  <div className="flex flex-col items-center justify-center p-4 border border-gray-100 hover:border-black transition-colors cursor-pointer">
+                    <CreditCardIcon className="h-5 w-5 mb-2" />
+                    <span className="text-xs font-medium text-center">Card Settings</span>
+                  </div>
+                  
+                  <div className="flex flex-col items-center justify-center p-4 border border-gray-100 hover:border-black transition-colors cursor-pointer">
+                    <CalendarIcon className="h-5 w-5 mb-2" />
+                    <span className="text-xs font-medium text-center">Scheduled</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            
+            {/* Linked Accounts Section */}
+            <section className="bg-white border border-gray-200">
+              <div className="p-5 border-b border-gray-200">
+                <h3 className="text-lg font-semibold">External Accounts</h3>
+              </div>
+              <div className="p-5">
                 <LinkedAccounts />
-                
-
               </div>
             </section>
           </div>
           
-          {/* Sidebar - Right Column */}
+          {/* Sidebar - Financial Insights Column */}
           <div className="lg:col-span-4 space-y-6 pl-0 lg:pl-6">
             {/* Account Activity Group */}
             <div className="bg-white border border-gray-200 p-5">
