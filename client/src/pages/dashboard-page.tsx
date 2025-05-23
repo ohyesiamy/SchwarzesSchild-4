@@ -121,7 +121,7 @@ export default function DashboardPage() {
                 />
                 <div>
                   <div className="flex flex-col md:flex-row md:items-center gap-2 mb-1">
-                    <h1 className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight">Welcome back, Jonathan</h1>
+                    <h1 className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight text-white">Welcome back, Jonathan</h1>
                     <div className="hidden md:flex items-center">
                       <div className="w-1.5 h-1.5 bg-white rounded-full mx-3"></div>
                       <span className="text-xs uppercase tracking-wider font-semibold text-white bg-gray-800 px-3 py-1">PREMIUM CLIENT</span>
@@ -149,18 +149,18 @@ export default function DashboardPage() {
               <div className="flex flex-col xs:flex-row lg:flex-col space-y-0 xs:space-y-0 lg:space-y-4 space-x-0 xs:space-x-4 lg:space-x-0">
                 <Button 
                   variant="outline" 
-                  className="border-2 border-white text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 mb-3 xs:mb-0 lg:mb-0 w-full shadow-sm"
+                  className="border-2 border-white bg-black bg-opacity-50 text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 mb-3 xs:mb-0 lg:mb-0 w-full shadow-sm"
                   onClick={() => navigate("/security")}
                 >
                   <ShieldIcon className="h-4 w-4 mr-2" />
-                  <span className="whitespace-nowrap">SECURITY CENTER</span>
+                  <span className="whitespace-nowrap font-semibold">SECURITY CENTER</span>
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-2 border-white text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 w-full shadow-sm"
+                  className="border-2 border-white bg-black bg-opacity-50 text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 w-full shadow-sm"
                   onClick={() => navigate("/profile")}
                 >
-                  <span className="whitespace-nowrap">ACCOUNT SETTINGS</span>
+                  <span className="whitespace-nowrap font-semibold">ACCOUNT SETTINGS</span>
                 </Button>
               </div>
             </div>
