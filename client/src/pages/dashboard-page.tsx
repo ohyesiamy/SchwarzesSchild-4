@@ -97,9 +97,10 @@ export default function DashboardPage() {
           <div className="w-12 h-1 bg-black"></div>
         </div>
         
-        <div className="mb-6 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+        {/* Mobile only welcome message - hidden on desktop */}
+        <div className="mb-6 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between md:hidden">
           <p className="text-sm text-gray-600">Welcome back, Jonathan</p>
-          <div className="text-xs text-gray-600 flex items-center md:hidden">
+          <div className="text-xs text-gray-600 flex items-center">
             <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
             <span>All accounts secure</span>
           </div>
