@@ -504,38 +504,43 @@ export default function ExchangePage() {
           
           {/* Market Rates Panel */}
           <div>
-            <div className="border border-black h-full">
-              <div className="bg-gray-100 p-4 border-b border-black flex items-center">
-                <BarChart3 className="h-5 w-5 mr-2" />
-                <h2 className="text-xl font-semibold">Market Rates</h2>
+            <div className="border border-black h-full shadow-sm">
+              <div className="bg-gray-100 p-3 border-b border-black flex items-center justify-between">
+                <div className="flex items-center">
+                  <BarChart3 className="h-4 w-4 mr-2" />
+                  <h2 className="text-lg font-semibold">Market Rates</h2>
+                </div>
+                <Button variant="ghost" size="sm" className="p-0 h-auto hover:bg-transparent">
+                  <RefreshCw className="h-3.5 w-3.5" />
+                </Button>
               </div>
               
-              <div className="p-4">
-                <div className="space-y-4">
+              <div className="p-3 sm:p-4">
+                <div className="overflow-x-hidden">
                   {marketRates.map((rate, index) => (
                     <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
                       <div className="flex items-center">
-                        <span className="font-medium">
-                          {rate.fromCurrency} ⇄ {rate.toCurrency}
+                        <span className="font-medium text-sm">
+                          {rate.fromCurrency} → {rate.toCurrency}
                         </span>
                       </div>
-                      <div className="flex items-center space-x-3">
-                        <span>{rate.rate.toFixed(4)}</span>
-                        {rate.trend === "up" ? (
-                          <TrendingUp className="h-4 w-4 text-green-600" />
-                        ) : (
-                          <TrendingDown className="h-4 w-4 text-red-600" />
-                        )}
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm font-mono">{rate.rate.toFixed(4)}</span>
+                        <div className={`flex items-center ${rate.trend === "up" ? "text-green-600" : "text-red-600"}`}>
+                          {rate.trend === "up" ? (
+                            <TrendingUp className="h-3.5 w-3.5" />
+                          ) : (
+                            <TrendingDown className="h-3.5 w-3.5" />
+                          )}
+                          <span className="text-xs ml-1">{rate.change}%</span>
+                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
                 
-                <div className="mt-4 pt-4 border-t border-gray-200 text-sm text-gray-600 flex justify-between items-center">
+                <div className="mt-3 pt-2 border-t border-gray-200 text-xs text-gray-600 flex justify-center items-center">
                   <span>Last updated: Today, 15:42</span>
-                  <Button variant="ghost" size="sm" className="p-0 h-auto hover:bg-transparent">
-                    <RefreshCw className="h-4 w-4" />
-                  </Button>
                 </div>
               </div>
             </div>
@@ -543,18 +548,18 @@ export default function ExchangePage() {
         </div>
         
         {/* Exchange History */}
-        <div className="mt-12">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
-            <h2 className="text-xl font-semibold mb-2 sm:mb-0">Exchange History</h2>
+        <div className="mt-10">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
+            <h2 className="text-lg font-semibold mb-3 sm:mb-0">Exchange History</h2>
             
-            <div className="flex space-x-2">
+            <div className="flex flex-wrap gap-2">
               <Select 
                 value={historyFilter} 
                 onValueChange={setHistoryFilter}
               >
-                <SelectTrigger className="w-32 border-black">
+                <SelectTrigger className="h-8 w-full sm:w-28 text-xs rounded-none border-black">
                   <div className="flex items-center">
-                    <Filter className="h-4 w-4 mr-2" />
+                    <Filter className="h-3.5 w-3.5 mr-1.5" />
                     <SelectValue placeholder="Filter" />
                   </div>
                 </SelectTrigger>
@@ -570,9 +575,9 @@ export default function ExchangePage() {
                 value={dateRange} 
                 onValueChange={setDateRange}
               >
-                <SelectTrigger className="w-32 border-black">
+                <SelectTrigger className="h-8 w-full sm:w-28 text-xs rounded-none border-black">
                   <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
+                    <Calendar className="h-3.5 w-3.5 mr-1.5" />
                     <SelectValue placeholder="Date" />
                   </div>
                 </SelectTrigger>
