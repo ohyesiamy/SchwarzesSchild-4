@@ -90,11 +90,11 @@ export default function DashboardPage() {
       <Navigation active="dashboard" />
       <MobileNavigation active="dashboard" />
       
-      <main className="py-6 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
+      <main className="py-5 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
         {/* Mobile optimized header */}
-        <div className="flex flex-col mb-6">
-          <h1 className="text-xl font-medium tracking-tight mb-2">Dashboard</h1>
-          <div className="w-10 h-0.5 bg-black"></div>
+        <div className="flex flex-col mb-5">
+          <h1 className="text-lg font-medium tracking-tight mb-1.5">Dashboard</h1>
+          <div className="w-8 h-0.5 bg-black"></div>
         </div>
         
         {/* Mobile only welcome message - hidden on desktop */}
@@ -192,15 +192,15 @@ export default function DashboardPage() {
         </div>
         
         {/* Professional Dashboard Layout - Enhanced Structure */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-8 md:mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 md:gap-6 mb-6 md:mb-8">
           {/* Main Content - Primary Column */}
-          <div className="lg:col-span-8 space-y-6 lg:border-r border-gray-200 lg:pr-8">
+          <div className="lg:col-span-8 space-y-5 lg:border-r border-gray-200 lg:pr-6">
             {/* Account Overview Section */}
-            <section className="bg-white border border-black shadow-sm mb-6">
-              <div className="flex items-center justify-between p-3 border-b border-black bg-gray-50">
-                <h2 className="text-base font-semibold">Account Overview</h2>
-                <Button variant="outline" size="sm" className="h-8 text-xs rounded-none border-black">
-                  <PlusIcon className="h-3.5 w-3.5 mr-1.5" /> New Account
+            <section className="bg-white border border-black shadow-sm mb-5">
+              <div className="flex items-center justify-between p-2.5 border-b border-black bg-gray-50">
+                <h2 className="text-xs uppercase tracking-wide font-medium">Account Overview</h2>
+                <Button variant="outline" size="sm" className="h-7 text-[10px] rounded-none border-black">
+                  <PlusIcon className="h-3 w-3 mr-1" /> NEW ACCOUNT
                 </Button>
               </div>
               
