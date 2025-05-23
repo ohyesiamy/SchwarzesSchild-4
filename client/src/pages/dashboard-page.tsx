@@ -861,10 +861,11 @@ export default function DashboardPage() {
             
             {/* Linked Accounts Section */}
             <section className="bg-white border border-gray-200">
-              <div className="p-5 border-b border-gray-200">
-                <h3 className="text-lg font-semibold">External Accounts</h3>
+              <div className="p-2.5 border-b border-gray-200">
+                <h3 className="text-xs uppercase tracking-wide font-medium">External Accounts</h3>
+                <p className="text-[10px] text-gray-500 mt-0.5">Manage your connected financial accounts</p>
               </div>
-              <div className="p-5">
+              <div className="p-4">
                 <LinkedAccounts />
               </div>
             </section>
@@ -874,10 +875,11 @@ export default function DashboardPage() {
           <div className="lg:col-span-4 space-y-6 pl-0 lg:pl-6">
             {/* Account Activity Group */}
             <div className="bg-white border border-gray-200">
-              <div className="p-5 border-b border-gray-200">
-                <h3 className="text-lg font-semibold">Account Activity</h3>
+              <div className="p-2.5 border-b border-gray-200">
+                <h3 className="text-xs uppercase tracking-wide font-medium">Account Activity</h3>
+                <p className="text-[10px] text-gray-500 mt-0.5">Recent notifications and statements</p>
               </div>
-              <div className="p-5 space-y-6">
+              <div className="p-4 space-y-5">
                 {/* Notifications Center */}
                 <NotificationsCenter />
                 
@@ -888,10 +890,11 @@ export default function DashboardPage() {
             
             {/* Investment Group */}
             <div className="bg-white border border-gray-200">
-              <div className="p-5 border-b border-gray-200">
-                <h3 className="text-lg font-semibold">Investment Overview</h3>
+              <div className="p-2.5 border-b border-gray-200">
+                <h3 className="text-xs uppercase tracking-wide font-medium">Investment Overview</h3>
+                <p className="text-[10px] text-gray-500 mt-0.5">Your portfolio performance and market insights</p>
               </div>
-              <div className="p-5 space-y-6">
+              <div className="p-4 space-y-5">
                 {/* Portfolio Summary Section */}
                 <PortfolioSummary />
                 
@@ -899,10 +902,10 @@ export default function DashboardPage() {
                 <InvestmentOverview />
                 
                 {/* Market Snapshot Section */}
-                <div className="pt-4 border-t border-gray-100 mt-4">
-                  <div className="flex justify-between items-center mb-3 pt-4">
-                    <h4 className="text-base font-medium">Market Snapshot</h4>
-                    <span className="text-xs bg-gray-100 px-2 py-1">REAL-TIME</span>
+                <div className="pt-3 border-t border-gray-100 mt-3">
+                  <div className="flex justify-between items-center mb-2 pt-2">
+                    <h4 className="text-xs uppercase tracking-wide font-medium">Market Snapshot</h4>
+                    <span className="text-[10px] bg-gray-100 px-1.5 py-0.5">REAL-TIME</span>
                   </div>
                   <MarketSnapshot />
                 </div>
