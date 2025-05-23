@@ -389,59 +389,63 @@ export default function TransactionsPage() {
       <Navigation active="transactions" />
       <MobileNavigation active="transactions" />
       
-      <main className="flex-1 container mx-auto px-4 py-8 mb-20 md:mb-0">
-        <h1 className="text-2xl font-bold mb-8">Transfer & Transaction Management</h1>
+      <main className="flex-1 container mx-auto px-4 py-6 mb-20 md:mb-0">
+        {/* Mobile optimized header */}
+        <div className="flex flex-col mb-6">
+          <h1 className="text-2xl font-semibold tracking-tight mb-2">Transfer & Transactions</h1>
+          <div className="w-12 h-1 bg-black"></div>
+        </div>
         
-        {/* Transfer Options Section */}
-        <div className="mb-12">
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold">Transfer Options</h2>
-            <p className="text-sm text-gray-600 mt-1">
-              Select a transfer type below to initiate a new transaction
+        {/* Transfer Options Section - Mobile Optimized */}
+        <div className="mb-10 bg-white border border-gray-200">
+          <div className="p-4 border-b border-gray-200">
+            <h2 className="text-base font-semibold">Transfer Options</h2>
+            <p className="text-xs text-gray-600 mt-1">
+              Select transfer type to initiate a new transaction
             </p>
           </div>
           
           <Tabs defaultValue="domestic" className="w-full">
-            <TabsList className="w-full grid grid-cols-1 md:grid-cols-4 bg-gray-100 p-0 h-auto">
+            <TabsList className="w-full grid grid-cols-2 sm:grid-cols-4 p-0 h-auto bg-gray-50 border-b border-gray-200">
               <TabsTrigger 
                 value="domestic" 
-                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-3 flex items-center justify-center"
+                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2.5 flex items-center justify-center text-xs sm:text-sm border-r border-gray-200"
               >
-                <Landmark className="h-4 w-4 mr-2" />
-                Domestic Transfer
+                <Landmark className="h-3.5 w-3.5 mr-1.5" />
+                <span className="hidden xs:inline">Domestic</span> Transfer
               </TabsTrigger>
               <TabsTrigger 
                 value="international" 
-                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-3 flex items-center justify-center"
+                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2.5 flex items-center justify-center text-xs sm:text-sm border-r border-gray-200"
               >
-                <Globe className="h-4 w-4 mr-2" />
-                International Wire
+                <Globe className="h-3.5 w-3.5 mr-1.5" />
+                <span className="hidden xs:inline">International</span> Wire
               </TabsTrigger>
               <TabsTrigger 
                 value="self" 
-                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-3 flex items-center justify-center"
+                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2.5 flex items-center justify-center text-xs sm:text-sm border-r border-gray-200"
               >
-                <ArrowRightLeft className="h-4 w-4 mr-2" />
+                <ArrowRightLeft className="h-3.5 w-3.5 mr-1.5" />
                 Self-Transfer
               </TabsTrigger>
               <TabsTrigger 
                 value="scheduled" 
-                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-3 flex items-center justify-center"
+                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2.5 flex items-center justify-center text-xs sm:text-sm"
               >
-                <Calendar className="h-4 w-4 mr-2" />
-                Scheduled Transfer
+                <Calendar className="h-3.5 w-3.5 mr-1.5" />
+                Scheduled
               </TabsTrigger>
             </TabsList>
             
-            {/* Domestic Transfer Tab */}
+            {/* Domestic Transfer Tab - Mobile Optimized */}
             <TabsContent value="domestic">
-              <div className="bg-white border border-gray-200 p-8">
-                <div className="mb-2 flex items-center text-sm text-gray-600">
-                  <Info className="h-4 w-4 mr-2 text-gray-400" />
-                  <span>Domestic transfers are typically processed within 24 hours on business days.</span>
+              <div className="bg-white p-4 md:p-6">
+                <div className="flex items-center px-3 py-2 bg-gray-50 border-l-2 border-black mb-4">
+                  <Info className="h-4 w-4 mr-2 text-gray-600" />
+                  <span className="text-xs text-gray-600">Domestic transfers are processed within 24 hours on business days.</span>
                 </div>
                 
-                <form className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div className="space-y-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-1">From Account</label>
