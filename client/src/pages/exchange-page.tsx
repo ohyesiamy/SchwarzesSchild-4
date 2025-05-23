@@ -296,8 +296,14 @@ export default function ExchangePage() {
       <MobileNavigation active="exchange" />
       
       <main className="py-6 px-4 container mx-auto flex-grow mb-20 md:mb-0">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-semibold">Currency Exchange</h1>
+        {/* Mobile optimized header */}
+        <div className="flex flex-col mb-6">
+          <h1 className="text-2xl font-semibold tracking-tight mb-2">Currency Exchange</h1>
+          <div className="w-12 h-1 bg-black"></div>
+        </div>
+        
+        <div className="mb-6 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-gray-600">Convert between currencies with competitive exchange rates</p>
         </div>
         
         <Separator className="mb-6" />
