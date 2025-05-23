@@ -12,7 +12,7 @@ interface MobileNavigationProps {
 }
 
 export function MobileNavigation({ active }: MobileNavigationProps) {
-  const [, navigate] = useLocation();
+  const [location, navigate] = useLocation();
   
   // Main navigation items for mobile (limited to 5 for bottom nav)
   const navItems = [
@@ -23,11 +23,29 @@ export function MobileNavigation({ active }: MobileNavigationProps) {
     { name: "settings", label: "More", path: "/settings", icon: Settings },
   ];
   
+  // Get current active item based on location path if not explicitly provided
+  const determineActive = () => {
+    if (active) return active;
+    
+    // Find matching nav item based on current path
+    const currentItem = navItems.find(item => {
+      // Exact match for root path
+      if (item.path === "/" && location === "/") return true;
+      // Subpath match for other paths
+      if (item.path !== "/" && location.startsWith(item.path)) return true;
+      return false;
+    });
+    
+    return currentItem?.name || "dashboard";
+  };
+  
+  const currentActive = determineActive();
+  
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 lg:hidden shadow-md">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 lg:hidden shadow-lg">
       <div className="grid grid-cols-5 h-16">
         {navItems.map((item) => {
-          const isActive = active === item.name;
+          const isActive = currentActive === item.name;
           const Icon = item.icon;
           
           return (
@@ -38,9 +56,11 @@ export function MobileNavigation({ active }: MobileNavigationProps) {
                 isActive ? "text-black" : "text-gray-500 hover:text-black"
               }`}
             >
-              <Icon className={`w-5 h-5 mb-1 ${isActive ? "text-black" : "text-gray-500"}`} />
-              <span>{item.label}</span>
-              {isActive && <div className="w-12 h-0.5 bg-black absolute bottom-0" />}
+              <div className={`flex items-center justify-center h-8 w-8 mb-1 ${isActive ? 'bg-black bg-opacity-5 rounded-sm' : ''}`}>
+                <Icon className={`w-5 h-5 ${isActive ? "text-black" : "text-gray-500"}`} />
+              </div>
+              <span className={`${isActive ? 'font-semibold' : ''}`}>{item.label}</span>
+              {isActive && <div className="w-10 h-0.5 bg-black absolute bottom-0" />}
             </button>
           );
         })}
