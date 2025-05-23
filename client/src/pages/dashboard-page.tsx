@@ -90,7 +90,7 @@ export default function DashboardPage() {
       <Navigation active="dashboard" />
       <MobileNavigation active="dashboard" />
       
-      <main className="py-6 md:py-10 lg:py-12 px-4 md:px-6 lg:px-8 container mx-auto flex-grow mb-16 md:mb-0 max-w-screen-2xl">
+      <main className="py-6 md:py-10 lg:py-12 px-4 md:px-6 lg:px-8 container mx-auto flex-grow mb-16 md:mb-0 max-w-[1440px]">
         {/* Welcome Banner */}
         <div className="bg-black text-white mb-8 md:mb-12 shadow-lg rounded-lg md:rounded-none relative overflow-hidden">
           {/* Premium geometric pattern overlay */}
@@ -162,10 +162,10 @@ export default function DashboardPage() {
           </div>
         </div>
         
-        {/* Premium Dashboard Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mb-8 md:mb-10">
-          {/* Main Content - Wider on large screens */}
-          <div className="lg:col-span-2 xl:col-span-3 space-y-8 md:space-y-10">
+        {/* Premium Dashboard Layout - Balanced Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-8 md:mb-10">
+          {/* Main Content - Left Column */}
+          <div className="lg:col-span-8 space-y-8 border-r border-gray-200 pr-8">
             {/* Account Overview Section */}
             <section className="bg-white border border-gray-200">
               <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
@@ -637,34 +637,52 @@ export default function DashboardPage() {
             </section>
           </div>
           
-          {/* Sidebar - 1/3 width on large screens */}
-          <div className="space-y-8">
-            {/* Notifications Center */}
-            <NotificationsCenter />
-            
-            {/* Statement Generator */}
-            <StatementGenerator />
-            
-            {/* Portfolio Summary Section */}
-            <PortfolioSummary />
-            
-            {/* Investment Overview Section */}
-            <InvestmentOverview />
-            
-            {/* Market Snapshot Section */}
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Market Snapshot</h2>
-              <MarketSnapshot />
+          {/* Sidebar - Right Column */}
+          <div className="lg:col-span-4 space-y-6 pl-0 lg:pl-6">
+            {/* Account Activity Group */}
+            <div className="bg-white border border-gray-200 p-5">
+              <h3 className="text-lg font-semibold mb-4 pb-3 border-b border-gray-100">Account Activity</h3>
+              <div className="space-y-6">
+                {/* Notifications Center */}
+                <NotificationsCenter />
+                
+                {/* Statement Generator */}
+                <StatementGenerator />
+              </div>
             </div>
             
-            {/* Compliance Status */}
-            <ComplianceStatus />
+            {/* Investment Group */}
+            <div className="bg-white border border-gray-200 p-5">
+              <h3 className="text-lg font-semibold mb-4 pb-3 border-b border-gray-100">Investment Overview</h3>
+              <div className="space-y-6">
+                {/* Portfolio Summary Section */}
+                <PortfolioSummary />
+                
+                {/* Investment Overview Section */}
+                <InvestmentOverview />
+                
+                {/* Market Snapshot Section */}
+                <div className="pt-4">
+                  <h4 className="text-base font-medium mb-3">Market Snapshot</h4>
+                  <MarketSnapshot />
+                </div>
+              </div>
+            </div>
             
-            {/* Linked Accounts Section */}
-            <LinkedAccounts />
-            
-            {/* Bank Profile Section */}
-            <BankProfile />
+            {/* Banking Information Group */}
+            <div className="bg-white border border-gray-200 p-5">
+              <h3 className="text-lg font-semibold mb-4 pb-3 border-b border-gray-100">Banking Information</h3>
+              <div className="space-y-6">
+                {/* Compliance Status */}
+                <ComplianceStatus />
+                
+                {/* Linked Accounts Section */}
+                <LinkedAccounts />
+                
+                {/* Bank Profile Section */}
+                <BankProfile />
+              </div>
+            </div>
           </div>
         </div>
       </main>
