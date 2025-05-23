@@ -262,12 +262,12 @@ export default function DashboardPage() {
             
             {/* Upcoming Payments Section */}
             <section>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold">Upcoming Payments</h2>
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center mb-4 md:mb-6">
+                <h2 className="text-lg md:text-xl font-semibold mb-2 xs:mb-0">Upcoming Payments</h2>
                 <Button 
                   variant="outline"
                   size="sm"
-                  className="text-xs"
+                  className="text-xs min-h-[36px] active:scale-95 transition-transform w-full xs:w-auto"
                 >
                   SCHEDULE PAYMENT
                 </Button>
@@ -278,13 +278,13 @@ export default function DashboardPage() {
             
             {/* Recent Transactions Section */}
             <section>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold">Recent Transactions</h2>
-                <div className="flex items-center space-x-3">
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center mb-4 md:mb-6">
+                <h2 className="text-lg md:text-xl font-semibold mb-2 xs:mb-0">Recent Transactions</h2>
+                <div className="flex items-center gap-2 w-full xs:w-auto">
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="text-xs cursor-pointer transition-all duration-200 hover:scale-[1.01]"
+                    className="text-xs min-h-[36px] flex-1 xs:flex-initial active:scale-95 transition-transform"
                     onClick={() => {
                       toast({
                         title: "Filter applied",
@@ -299,14 +299,38 @@ export default function DashboardPage() {
                     onClick={() => navigate("/transactions")}
                     variant="outline"
                     size="sm"
-                    className="text-xs"
+                    className="text-xs min-h-[36px] flex-1 xs:flex-initial active:scale-95 transition-transform"
                   >
                     VIEW ALL
                   </Button>
                 </div>
               </div>
               
-              <div className="bg-white border border-gray-200">
+              {/* Mobile Transaction List */}
+              <div className="space-y-3 md:hidden">
+                {recentTransactions.map((transaction) => (
+                  <div 
+                    key={transaction.id}
+                    className="border border-gray-200 p-4 rounded-lg bg-white active:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex justify-between mb-2">
+                      <div className="font-medium">{transaction.name}</div>
+                      <div className={`font-medium ${transaction.amount < 0 ? 'text-gray-700' : 'text-green-700'}`}>
+                        {formatCurrency(transaction.amount, transaction.currency)}
+                      </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-xs text-gray-600">{formatDate(transaction.date)}</span>
+                      <span className="inline-block py-1 px-2 text-xs bg-gray-100 text-gray-700 rounded">
+                        {transaction.category}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Desktop Transaction Table */}
+              <div className="hidden md:block bg-white border border-gray-200 rounded-lg overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
@@ -343,10 +367,10 @@ export default function DashboardPage() {
             
             {/* Banking Services Section */}
             <section>
-              <h2 className="text-xl font-semibold mb-6">Banking Services</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <h2 className="text-lg md:text-xl font-semibold mb-4 md:mb-6">Banking Services</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                 <div 
-                  className="bg-white border border-gray-200 hover:border-black text-center p-6 transition-colors duration-200 cursor-pointer"
+                  className="bg-white border border-gray-200 hover:border-black text-center p-4 md:p-6 rounded-lg md:rounded-none transition-colors duration-200 cursor-pointer active:bg-gray-50"
                   onClick={() => navigate("/transactions")}
                 >
                   <div className="flex flex-col items-center justify-center">
@@ -354,7 +378,7 @@ export default function DashboardPage() {
                       <PlusIcon className="h-5 w-5 text-white" />
                     </div>
                     <span className="font-medium text-sm mb-1">Transfers</span>
-                    <span className="text-xs text-gray-600">Send payments securely</span>
+                    <span className="text-xs text-gray-600">Send payments</span>
                   </div>
                 </div>
                 
