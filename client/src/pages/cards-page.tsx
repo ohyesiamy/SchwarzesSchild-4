@@ -232,67 +232,84 @@ export default function CardsPage() {
       <Navigation active="cards" />
       <MobileNavigation active="cards" />
       
-      <main className="py-6 px-4 container mx-auto flex-grow mb-20 md:mb-0">
-        {/* Mobile optimized header */}
-        <div className="flex flex-col mb-6">
-          <h1 className="text-2xl font-semibold tracking-tight mb-2">Card Management</h1>
-          <div className="w-12 h-1 bg-black"></div>
+      <main className="py-5 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
+        {/* Mobile optimized header - visible on mobile only */}
+        <div className="flex flex-col mb-4 md:hidden">
+          <h1 className="text-sm uppercase tracking-wide font-medium mb-1">Card Management</h1>
+          <div className="w-6 h-0.5 bg-black"></div>
+          <p className="text-[10px] uppercase tracking-wide text-gray-600 mt-2">Manage payment methods</p>
+        </div>
+
+        {/* Desktop header - hidden on mobile */}
+        <div className="hidden md:block mb-6">
+          <h1 className="text-base uppercase tracking-wide font-medium mb-1">Card Management</h1>
+          <div className="w-8 h-0.5 bg-black mb-2"></div>
+          <p className="text-xs text-gray-600">Manage and control your virtual payment cards with precision</p>
         </div>
         
-        <div className="mb-6 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-gray-600">Manage and control your virtual payment cards</p>
+        <div className="mb-5 flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center">
+            <CreditCard className="h-3.5 w-3.5 mr-2 text-gray-500" />
+            <p className="text-[10px] text-gray-600 uppercase tracking-wide">Virtual payment solutions</p>
+          </div>
           <Button 
             onClick={() => setShowNewCardModal(true)}
-            className="bg-black text-white hover:bg-gray-800 transition-colors duration-150 w-full sm:w-auto"
+            className="bg-black text-white hover:bg-gray-800 transition-colors duration-150 w-full sm:w-auto rounded-none h-8"
             size="sm"
           >
-            <PlusCircle className="h-4 w-4 mr-2" />
-            Add New Card
+            <Plus className="h-3 w-3 mr-1.5" />
+            <span className="text-[10px] uppercase tracking-wide">Add New Card</span>
           </Button>
         </div>
         
-        <Separator className="mb-6" />
+        <Separator className="mb-5" />
         
-        {/* Active Cards Section - Mobile Optimized */}
-        <section className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base font-semibold">Active Cards</h2>
-            <button className="text-xs text-gray-600 flex items-center">
-              <Filter className="h-3.5 w-3.5 mr-1" />
+        {/* Active Cards Section */}
+        <section className="mb-6">
+          <div className="flex justify-between items-center mb-3 md:mb-4">
+            <div className="flex items-center">
+              <h2 className="text-xs uppercase tracking-wide font-medium">Active Cards</h2>
+              <ChevronRight className="h-3.5 w-3.5 ml-2 text-gray-500" />
+            </div>
+            <button className="text-[10px] uppercase tracking-wide font-medium text-black flex items-center">
+              <Filter className="h-3 w-3 mr-1.5" />
               <span>Sort</span>
             </button>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-4">
             {cards.map(card => (
-              <div key={card.id} className="border border-gray-200 p-0 shadow-sm">
-                {/* Card Header - Mobile optimized */}
-                <div className="flex items-center justify-between bg-gray-50 p-3 border-b border-gray-200">
-                  <div className="flex items-center space-x-2">
-                    <div className="bg-black text-white p-1 rounded-sm">
-                      <CreditCard className="h-3.5 w-3.5" />
+              <div key={card.id} className="border border-gray-200 p-0">
+                {/* Card Header */}
+                <div className="flex items-center justify-between p-2.5 border-b border-gray-200">
+                  <div className="flex items-center">
+                    <div className="bg-black text-white p-1 mr-2">
+                      <CreditCard className="h-3 w-3" />
                     </div>
-                    <h3 className="font-medium text-sm">{card.cardName}</h3>
+                    <div>
+                      <h3 className="text-xs uppercase tracking-wide font-medium">{card.cardName}</h3>
+                      <p className="text-[9px] text-gray-500 uppercase tracking-wide mt-0.5">{card.cardType} • {card.currency}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-1.5">
+                  <div className="flex items-center gap-1.5">
                     <Badge variant={card.isFrozen ? "outline" : "default"} 
-                      className={`text-xs px-1.5 py-0.5 rounded-none ${
+                      className={`text-[9px] px-1.5 py-0.5 rounded-none uppercase tracking-wide font-medium ${
                         card.isFrozen 
-                          ? "border-gray-400 text-gray-500 bg-transparent" 
-                          : "bg-green-600 hover:bg-green-700 border-0"
+                          ? "border-black text-black bg-transparent" 
+                          : "bg-black hover:bg-black/90 border-0"
                       }`}>
                       {card.isFrozen ? "Frozen" : "Active"}
                     </Badge>
                     {card.isBlocked && (
-                      <Badge variant="destructive" className="text-xs px-1.5 py-0.5 rounded-none">
+                      <Badge variant="outline" className="text-[9px] px-1.5 py-0.5 rounded-none border-black text-black uppercase tracking-wide font-medium">
                         Blocked
                       </Badge>
                     )}
                   </div>
                 </div>
                 
-                {/* Card Content - Mobile Optimized */}
-                <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Card Content */}
+                <div className="p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {/* Card Display */}
                   <div>
                     <VirtualCard 
@@ -302,38 +319,38 @@ export default function CardsPage() {
                       cardName={card.cardName}
                       isFrozen={card.isFrozen}
                       isBlocked={card.isBlocked}
-                      className="w-full mb-3 shadow-sm"
+                      className="w-full"
                     />
                     
                     {/* Card Actions - Mobile Only */}
-                    <div className="md:hidden flex space-x-2 mt-3 mb-4">
+                    <div className="md:hidden flex gap-2 mt-3">
                       <Button
                         variant="outline"
                         size="sm"
-                        className="flex-1 h-8 text-xs rounded-none"
+                        className="flex-1 h-7 text-[10px] uppercase tracking-wide font-medium rounded-none border-black"
                         onClick={() => {
                           setSelectedCard(card);
                           setShowDetailsModal(true);
                         }}
                       >
-                        <Eye className="h-3.5 w-3.5 mr-1" />
+                        <Eye className="h-3 w-3 mr-1" />
                         Details
                       </Button>
                       
                       <Button
                         variant="outline"
                         size="sm"
-                        className={`flex-1 h-8 text-xs rounded-none ${card.isFrozen ? "border-yellow-500 text-yellow-600" : ""}`}
+                        className={`flex-1 h-7 text-[10px] uppercase tracking-wide font-medium rounded-none ${card.isFrozen ? "border-black text-black" : "border-black text-black"}`}
                         onClick={() => handleToggleFreeze(card.id)}
                       >
                         {card.isFrozen ? (
                           <>
-                            <RefreshCw className="h-3.5 w-3.5 mr-1" />
+                            <RefreshCw className="h-3 w-3 mr-1" />
                             Unfreeze
                           </>
                         ) : (
                           <>
-                            <Lock className="h-3.5 w-3.5 mr-1" />
+                            <Lock className="h-3 w-3 mr-1" />
                             Freeze
                           </>
                         )}
@@ -342,52 +359,52 @@ export default function CardsPage() {
                     
                     {/* Last Activity */}
                     {card.lastUsed && !card.isBlocked && (
-                      <div className="flex items-center text-xs text-gray-600 space-x-1">
-                        <MapPin className="h-3 w-3" />
+                      <div className="flex items-center text-[9px] uppercase tracking-wide text-gray-600 mt-2">
+                        <MapPin className="h-2.5 w-2.5 mr-1" />
                         <span>Last used: {card.lastUsed}</span>
                       </div>
                     )}
                   </div>
                   
                   {/* Card Details & Actions */}
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     <div>
-                      <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Card Information</h4>
-                      <div className="space-y-2 text-sm">
+                      <h4 className="text-[10px] uppercase tracking-wide font-medium text-black mb-2 border-b border-gray-200 pb-1">Card Information</h4>
+                      <div className="space-y-1.5">
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Card Number:</span>
-                          <span className="font-medium">{card.cardNumber}</span>
+                          <span className="text-[10px] uppercase tracking-wide text-gray-500">Card Number:</span>
+                          <span className="text-[10px] uppercase tracking-wide font-medium">{card.cardNumber}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Expiry Date:</span>
-                          <span className="font-medium">{card.expiryDate}</span>
+                          <span className="text-[10px] uppercase tracking-wide text-gray-500">Expiry Date:</span>
+                          <span className="text-[10px] uppercase tracking-wide font-medium">{card.expiryDate}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Card Network:</span>
-                          <span className="font-medium">{card.cardType}</span>
+                          <span className="text-[10px] uppercase tracking-wide text-gray-500">Card Network:</span>
+                          <span className="text-[10px] uppercase tracking-wide font-medium">{card.cardType}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span className="text-gray-600">Currency:</span>
-                          <span className="font-medium">{card.currency}</span>
+                          <span className="text-[10px] uppercase tracking-wide text-gray-500">Currency:</span>
+                          <span className="text-[10px] uppercase tracking-wide font-medium">{card.currency}</span>
                         </div>
                       </div>
                     </div>
                     
                     <div>
-                      <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Pin Code</h4>
+                      <h4 className="text-[10px] uppercase tracking-wide font-medium text-black mb-2 border-b border-gray-200 pb-1">Pin Code</h4>
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button 
                             variant="outline" 
-                            className="w-full flex items-center justify-center border-black hover:bg-gray-50 transition-colors duration-150 ease-in-out"
+                            className="w-full flex items-center justify-center border-black hover:bg-gray-50 transition-colors duration-150 ease-in-out h-7 rounded-none"
                             disabled={card.isBlocked}
                           >
                             {showPin ? (
-                              <EyeOff className="h-4 w-4 mr-2" />
+                              <EyeOff className="h-3 w-3 mr-1.5" />
                             ) : (
-                              <Eye className="h-4 w-4 mr-2" />
+                              <Eye className="h-3 w-3 mr-1.5" />
                             )}
-                            Reveal PIN
+                            <span className="text-[10px] uppercase tracking-wide font-medium">Reveal PIN</span>
                           </Button>
                         </DialogTrigger>
                         <DialogContent>
