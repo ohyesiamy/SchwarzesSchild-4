@@ -365,26 +365,67 @@ export default function DashboardPage() {
             </section>
             
             {/* Upcoming Payments Section */}
-            <section>
-              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center mb-4 md:mb-6">
-                <h2 className="text-lg md:text-xl font-semibold mb-2 xs:mb-0">Upcoming Payments</h2>
-                <Button 
-                  variant="outline"
-                  size="sm"
-                  className="text-xs min-h-[36px] active:scale-95 transition-transform w-full xs:w-auto"
-                >
-                  SCHEDULE PAYMENT
-                </Button>
+            <section className="bg-white border border-gray-200">
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
+                <div>
+                  <h2 className="text-lg md:text-xl font-semibold mb-1 xs:mb-0">Upcoming Payments</h2>
+                  <p className="text-xs text-gray-500 hidden md:block">Your scheduled payments for the next 30 days</p>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Button 
+                    variant="outline"
+                    size="sm"
+                    className="text-xs min-h-[36px] active:scale-95 transition-transform w-full xs:w-auto"
+                  >
+                    <CalendarIcon className="h-3.5 w-3.5 mr-1.5" />
+                    SCHEDULE PAYMENT
+                  </Button>
+                </div>
               </div>
               
-              <UpcomingPayments />
+              <div className="p-5">
+                <UpcomingPayments />
+              </div>
+              
+              <div className="flex justify-between items-center px-6 py-3 border-t border-gray-200 bg-gray-50 text-xs text-gray-500">
+                <span>All payments will be processed automatically</span>
+                <Button variant="link" size="sm" className="text-xs p-0 h-auto">
+                  View payment history
+                </Button>
+              </div>
             </section>
             
             {/* Recent Transactions Section */}
-            <section>
-              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center mb-4 md:mb-6">
-                <h2 className="text-lg md:text-xl font-semibold mb-2 xs:mb-0">Recent Transactions</h2>
+            <section className="bg-white border border-gray-200">
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
+                <div>
+                  <h2 className="text-lg md:text-xl font-semibold mb-1 xs:mb-0">Recent Transactions</h2>
+                  <p className="text-xs text-gray-500 hidden md:block">Latest financial activity across your accounts</p>
+                </div>
                 <div className="flex items-center gap-2 w-full xs:w-auto">
+                  <div className="hidden md:flex items-center mr-3">
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-7 p-0 pr-2 text-xs"
+                    >
+                      Today
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-7 p-0 px-2 text-xs"
+                    >
+                      Last 7 days
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="h-7 p-0 px-2 text-xs"
+                    >
+                      Last 30 days
+                    </Button>
+                  </div>
                   <Button 
                     variant="outline" 
                     size="sm" 
@@ -434,45 +475,103 @@ export default function DashboardPage() {
               </div>
               
               {/* Desktop Transaction Table */}
-              <div className="hidden md:block bg-white border border-gray-200 rounded-lg overflow-hidden">
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="py-4 px-6 text-left text-sm font-semibold text-gray-600">Description</th>
-                        <th className="py-4 px-6 text-left text-sm font-semibold text-gray-600">Date</th>
-                        <th className="py-4 px-6 text-left text-sm font-semibold text-gray-600">Category</th>
-                        <th className="py-4 px-6 text-right text-sm font-semibold text-gray-600">Amount</th>
+              <div className="hidden md:block">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-gray-100 text-left text-xs uppercase text-gray-500">
+                      <th className="px-5 py-3 font-medium">Transaction</th>
+                      <th className="px-5 py-3 font-medium">Date</th>
+                      <th className="px-5 py-3 font-medium">Category</th>
+                      <th className="px-5 py-3 font-medium text-right">Amount</th>
+                      <th className="px-5 py-3 font-medium w-24 text-center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {recentTransactions.map((transaction, index) => (
+                      <tr 
+                        key={transaction.id} 
+                        className={`border-b border-gray-100 hover:bg-gray-50 cursor-pointer`}
+                        onClick={() => {
+                          toast({
+                            title: "Transaction details",
+                            description: `Viewing details for ${transaction.name}.`,
+                          });
+                        }}
+                      >
+                        <td className="px-5 py-4">
+                          <div className="font-medium">{transaction.name}</div>
+                          <div className="text-xs text-gray-500">
+                            {transaction.amount < 0 ? 'Debit' : 'Credit'} • Ref: SS-{Math.floor(100000 + Math.random() * 900000)}
+                          </div>
+                        </td>
+                        <td className="px-5 py-4 text-sm">{formatDate(transaction.date)}</td>
+                        <td className="px-5 py-4">
+                          <span className="text-xs px-2 py-1 bg-gray-100 rounded">{transaction.category}</span>
+                        </td>
+                        <td className={`px-5 py-4 text-right font-semibold ${transaction.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                          {formatCurrency(transaction.amount, transaction.currency)}
+                        </td>
+                        <td className="px-5 py-4">
+                          <div className="flex justify-center space-x-2">
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="h-7 w-7 p-0"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toast({
+                                  title: "Download receipt",
+                                  description: `Downloading receipt for ${transaction.name}.`,
+                                });
+                              }}
+                            >
+                              <ArrowDownIcon className="h-3.5 w-3.5" />
+                            </Button>
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              className="h-7 w-7 p-0"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toast({
+                                  title: "Dispute transaction",
+                                  description: `Initiating dispute for ${transaction.name}.`,
+                                });
+                              }}
+                            >
+                              <ShieldIcon className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {recentTransactions.map((transaction, index) => (
-                        <tr 
-                          key={transaction.id} 
-                          className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-gray-100`}
-                        >
-                          <td className="py-4 px-6 font-medium">{transaction.name}</td>
-                          <td className="py-4 px-6 text-sm text-gray-600">{formatDate(transaction.date)}</td>
-                          <td className="py-4 px-6 text-sm">
-                            <span className="inline-block py-1 px-2 text-xs bg-gray-100 text-gray-700">
-                              {transaction.category}
-                            </span>
-                          </td>
-                          <td className={`py-4 px-6 text-right font-medium ${transaction.amount < 0 ? 'text-gray-700' : 'text-green-700'}`}>
-                            {formatCurrency(transaction.amount, transaction.currency)}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                    ))}
+                  </tbody>
+                </table>
+                
+                <div className="flex justify-between items-center px-6 py-3 border-t border-gray-200 bg-gray-50 text-xs text-gray-500">
+                  <span>Showing {recentTransactions.length} most recent transactions</span>
+                  <Button 
+                    variant="link" 
+                    size="sm" 
+                    className="text-xs p-0 h-auto"
+                    onClick={() => navigate("/transactions")}
+                  >
+                    View all transactions
+                  </Button>
                 </div>
               </div>
             </section>
             
             {/* Banking Services Section */}
-            <section>
-              <h2 className="text-lg md:text-xl font-semibold mb-4 md:mb-6">Banking Services</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <section className="bg-white border border-gray-200">
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
+                <div>
+                  <h2 className="text-lg md:text-xl font-semibold mb-1 xs:mb-0">Banking Services</h2>
+                  <p className="text-xs text-gray-500 hidden md:block">Quick access to essential financial services</p>
+                </div>
+              </div>
+              
+              <div className="p-5 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8">
                 <div 
                   className="bg-white border border-gray-200 hover:border-black text-center p-4 md:p-6 rounded-lg md:rounded-none transition-colors duration-200 cursor-pointer active:bg-gray-50"
                   onClick={() => navigate("/transactions")}
