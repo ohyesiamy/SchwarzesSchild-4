@@ -4,7 +4,7 @@ import { Navigation } from "@/components/layout/navigation";
 import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { Footer } from "@/components/layout/footer";
 import { Logo } from "@/components/ui/logo";
-import { BankProfile } from "@/components/dashboard/bank-profile";
+
 import { MarketSnapshot } from "@/components/dashboard/market-snapshot";
 import { PortfolioSummary } from "@/components/dashboard/portfolio-summary";
 import { ComplianceNotification } from "@/components/dashboard/compliance-notification";
@@ -660,8 +660,7 @@ export default function DashboardPage() {
                 {/* Linked Accounts Section */}
                 <LinkedAccounts />
                 
-                {/* Bank Profile Section */}
-                <BankProfile />
+
               </div>
             </section>
           </div>
