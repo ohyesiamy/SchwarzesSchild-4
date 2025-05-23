@@ -295,33 +295,48 @@ export default function ExchangePage() {
       <Navigation active="exchange" />
       <MobileNavigation active="exchange" />
       
-      <main className="py-8 px-4 container mx-auto flex-grow mb-20 md:mb-0">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
-          <h1 className="text-3xl mb-2 sm:mb-0">Currency Exchange</h1>
+      <main className="py-6 px-4 container mx-auto flex-grow mb-20 md:mb-0">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+          <div>
+            <p className="text-sm text-gray-600 uppercase tracking-wide mb-1">SCHWARZES SCHILD BANK</p>
+            <h1 className="text-2xl font-semibold mb-1">Currency Exchange</h1>
+          </div>
         </div>
         
-        <Separator className="mb-8" />
+        <Separator className="mb-6" />
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Currency Exchange Module */}
           <div className="lg:col-span-2">
-            <div className="border border-black mb-8">
-              <div className="bg-gray-100 p-4 border-b border-black flex items-center">
-                <ArrowUpDown className="h-5 w-5 mr-2" />
-                <h2 className="text-xl font-semibold">Convert Currencies</h2>
+            <div className="border border-black mb-6 shadow-sm">
+              <div className="bg-gray-100 p-3 border-b border-black flex items-center justify-between">
+                <div className="flex items-center">
+                  <ArrowUpDown className="h-4 w-4 mr-2" />
+                  <h2 className="text-lg font-semibold">Convert Currencies</h2>
+                </div>
+                <div className="flex items-center text-xs">
+                  <Shield className="h-3.5 w-3.5 mr-1" />
+                  <span className="hidden sm:inline">FINMA Regulated</span>
+                </div>
               </div>
               
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <form>
-                  <div className="mb-6">
-                    <label className="block mb-2 font-medium">From Currency</label>
-                    <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="mb-5">
+                    <div className="flex justify-between items-center mb-2">
+                      <label className="font-medium text-sm">From Currency</label>
+                      <div className="text-xs flex items-center text-gray-600">
+                        <Wallet className="h-3.5 w-3.5 mr-1" />
+                        <span>Available: {formatCurrency(availableBalance, fromCurrency)}</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-3">
                       <div className="relative w-full sm:w-1/3">
                         <Select 
                           value={fromCurrency} 
                           onValueChange={setFromCurrency}
                         >
-                          <SelectTrigger className="w-full appearance-none bg-white border border-black p-3 focus:ring-black">
+                          <SelectTrigger className="w-full appearance-none bg-white border border-black rounded-none p-2.5 focus:ring-black">
                             <SelectValue placeholder="Select currency" />
                           </SelectTrigger>
                           <SelectContent>
@@ -339,38 +354,34 @@ export default function ExchangePage() {
                         <Input
                           type="text"
                           placeholder="0.00"
-                          className="w-full border border-black p-3 pl-8 focus:ring-black"
+                          className="w-full border border-black rounded-none p-2.5 pl-8 focus:ring-black"
                           value={fromAmount}
                           onChange={handleFromAmountChange}
                         />
                       </div>
                     </div>
-                    <div className="mt-2 text-sm flex items-center">
-                      <Wallet className="h-4 w-4 mr-1 text-gray-600" />
-                      <span>Available: {formatCurrency(availableBalance, fromCurrency)}</span>
-                    </div>
                   </div>
                   
-                  <div className="flex justify-center mb-6">
+                  <div className="flex justify-center mb-4">
                     <Button
                       type="button"
                       onClick={handleSwapCurrencies}
                       variant="outline"
-                      className="border border-black p-2 w-10 h-10 flex items-center justify-center hover:bg-gray-100 transition-colors duration-150 ease-in-out"
+                      className="border border-black p-1.5 w-8 h-8 rounded-none flex items-center justify-center hover:bg-gray-100 transition-colors duration-150 ease-in-out"
                     >
-                      <ArrowUpDown className="h-5 w-5" />
+                      <ArrowUpDown className="h-4 w-4" />
                     </Button>
                   </div>
                   
-                  <div className="mb-6">
-                    <label className="block mb-2 font-medium">To Currency</label>
-                    <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="mb-5">
+                    <label className="block mb-2 font-medium text-sm">To Currency</label>
+                    <div className="flex flex-col sm:flex-row gap-3">
                       <div className="relative w-full sm:w-1/3">
                         <Select 
                           value={toCurrency} 
                           onValueChange={setToCurrency}
                         >
-                          <SelectTrigger className="w-full appearance-none bg-white border border-black p-3 focus:ring-black">
+                          <SelectTrigger className="w-full appearance-none bg-white border border-black rounded-none p-2.5 focus:ring-black">
                             <SelectValue placeholder="Select currency" />
                           </SelectTrigger>
                           <SelectContent>
@@ -388,7 +399,7 @@ export default function ExchangePage() {
                         <Input
                           type="text"
                           placeholder="0.00"
-                          className="w-full border border-black p-3 pl-8 focus:ring-black bg-gray-50"
+                          className="w-full border border-black rounded-none p-2.5 pl-8 focus:ring-black bg-gray-50"
                           value={toAmount}
                           readOnly
                         />
@@ -396,9 +407,9 @@ export default function ExchangePage() {
                     </div>
                   </div>
                   
-                  <div className="bg-gray-50 p-4 border border-gray-200 mb-6">
-                    <h3 className="font-medium mb-3">Exchange Details</h3>
-                    <div className="space-y-2 text-sm">
+                  <div className="bg-gray-50 p-3 border border-black border-opacity-20 mb-5 rounded-none">
+                    <h3 className="text-sm font-semibold mb-2">Exchange Details</h3>
+                    <div className="space-y-2 text-xs">
                       <div className="flex justify-between">
                         <span className="text-gray-600">Exchange Rate</span>
                         <span className="font-medium">
@@ -413,8 +424,8 @@ export default function ExchangePage() {
                         <span className="text-gray-600">Estimated Processing Time</span>
                         <span className="font-medium">Instant</span>
                       </div>
-                      <Separator className="my-2" />
-                      <div className="flex justify-between font-semibold">
+                      <Separator className="my-2 bg-black bg-opacity-10" />
+                      <div className="flex justify-between text-sm font-semibold">
                         <span>You'll Receive</span>
                         <span>
                           {toAmount ? formatCurrency(parseFloat(toAmount), toCurrency) : `0.00 ${toCurrency}`}
@@ -423,26 +434,26 @@ export default function ExchangePage() {
                     </div>
                   </div>
                   
-                  <div className="flex justify-between items-center mb-6">
+                  <div className="flex justify-between items-center mb-5">
                     <Button 
                       type="button"
                       variant="outline"
-                      className="text-sm border-black hover:bg-gray-50 transition-colors duration-150 ease-in-out"
+                      className="text-xs rounded-none border-black hover:bg-gray-50 transition-colors duration-150 ease-in-out h-8 px-3"
                       onClick={() => setShowAutoConvertModal(true)}
                     >
                       {autoConvertEnabled ? "Edit Auto-Convert" : "Set Up Auto-Convert"}
                     </Button>
                     
-                    <div className="text-sm text-gray-600 flex items-center">
-                      <Shield className="h-4 w-4 mr-1" />
-                      <span>FINMA Regulated Exchange</span>
+                    <div className="text-xs text-gray-600 hidden sm:flex items-center">
+                      <Lock className="h-3.5 w-3.5 mr-1" />
+                      <span>Secure Transaction</span>
                     </div>
                   </div>
                   
                   <Button
                     type="button"
                     disabled={!fromAmount || parseFloat(fromAmount) <= 0 || parseFloat(fromAmount) > availableBalance || isProcessing}
-                    className="w-full bg-black text-white hover:bg-gray-800 transition-colors duration-150 ease-in-out h-12"
+                    className="w-full bg-black text-white hover:bg-gray-800 transition-colors duration-150 ease-in-out h-10 rounded-none"
                     onClick={handleExchange}
                   >
                     {isProcessing ? (
