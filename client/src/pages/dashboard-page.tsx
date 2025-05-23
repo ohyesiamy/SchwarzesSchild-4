@@ -136,7 +136,7 @@ export default function DashboardPage() {
                           <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
                           <span className="text-sm font-medium">Two-factor authentication enabled</span>
                         </div>
-                        <span className="text-gray-500 mx-2">|</span>
+                        <span className="text-gray-500 mx-2">•</span>
                         <div className="flex items-center">
                           <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
                           <span className="text-sm font-medium">All accounts secure</span>
