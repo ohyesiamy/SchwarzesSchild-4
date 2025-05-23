@@ -91,23 +91,12 @@ export default function DashboardPage() {
       <MobileNavigation active="dashboard" />
       
       <main className="py-6 md:py-10 lg:py-12 px-4 md:px-6 lg:px-8 container mx-auto flex-grow mb-16 md:mb-0 max-w-[1440px]">
-        {/* Welcome Banner - Enhanced Premium Version */}
+        {/* Welcome Banner - Refined Premium Version */}
         <div className="bg-black text-white mb-8 md:mb-12 shadow-lg rounded-none relative overflow-hidden border-b border-gray-800">
-          {/* Premium geometric pattern overlay with enhanced visibility */}
-          <div className="absolute inset-0 opacity-8">
-            <div className="absolute top-0 right-0 w-96 h-96 border-l border-t border-white transform translate-x-16 -translate-y-16"></div>
-            <div className="absolute bottom-0 left-0 w-64 h-64 border-r border-b border-white transform -translate-x-8 translate-y-8"></div>
-            <div className="absolute top-1/2 left-1/4 w-32 h-32 border border-white rounded-full opacity-5"></div>
-            <div className="absolute bottom-1/4 right-1/3 w-48 h-48 border border-white rounded-full opacity-5"></div>
-          </div>
-          
-          {/* Security badge overlay */}
-          <div className="absolute top-6 right-8 w-24 h-24 opacity-10 hidden lg:block">
-            <div className="w-full h-full border-2 border-white rounded-full flex items-center justify-center">
-              <div className="w-16 h-16 border border-white rounded-full flex items-center justify-center">
-                <div className="w-8 h-8 border border-white rounded-full"></div>
-              </div>
-            </div>
+          {/* Minimal premium design overlay */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute bottom-0 right-0 w-full h-32 bg-gradient-to-t from-gray-800 to-transparent"></div>
+            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-900 to-transparent"></div>
           </div>
           
           <div className="p-6 sm:p-8 md:p-10 lg:px-12 lg:py-10 relative z-10">
@@ -129,20 +118,19 @@ export default function DashboardPage() {
                   </div>
                   <p className="text-xs md:text-sm text-gray-300 mb-2">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
                   
-                  <div className="hidden md:block mt-6 p-3 bg-gray-900 bg-opacity-50 border border-gray-800 rounded-sm">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <div className="flex items-center mr-8">
-                          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-                          <span className="text-sm font-medium">Two-factor authentication enabled</span>
-                        </div>
-                        <span className="text-gray-500 mx-2">•</span>
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-                          <span className="text-sm font-medium">All accounts secure</span>
-                        </div>
+                  <div className="hidden md:block mt-5 flex items-center">
+                    <div className="flex items-center">
+                      <div className="flex items-center mr-5">
+                        <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                        <span className="text-sm">Two-factor authentication enabled</span>
                       </div>
-                      <span className="text-xs uppercase text-gray-400">FINMA Protected</span>
+                      <span className="text-gray-600 mx-2">•</span>
+                      <div className="flex items-center mr-5">
+                        <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                        <span className="text-sm">All accounts secure</span>
+                      </div>
+                      <span className="text-gray-600 mx-2">•</span>
+                      <span className="text-xs font-semibold text-white bg-gray-800 px-2 py-1">FINMA PROTECTED</span>
                     </div>
                   </div>
                 </div>
@@ -166,25 +154,23 @@ export default function DashboardPage() {
               </div>
             </div>
             
-            {/* Date and notifications row for desktop - Enhanced */}
+            {/* Date and notifications row for desktop - Simplified */}
             <div className="hidden md:flex justify-between items-center mt-6 pt-4 border-t border-gray-800">
               <div className="flex items-center">
-                <div className="flex items-center mr-6 text-sm">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
-                  <span>Swiss Banking Day: {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                <div className="text-sm mr-4 text-gray-300">
+                  {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                 </div>
-                <span className="text-gray-500 mx-2">•</span>
-                <div className="text-xs px-2 py-1 bg-gray-800 text-white flex items-center ml-2">
-                  <span>Zürich Market: </span>
-                  <span className="text-green-400 ml-1 font-medium">OPEN</span>
+                <div className="flex items-center">
+                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
+                  <span className="text-xs uppercase tracking-wider text-white">Zürich Market Open</span>
                 </div>
               </div>
-              <div className="flex items-center space-x-6">
-                <div className="relative cursor-pointer transform hover:scale-105 active:scale-95 transition-transform duration-200">
-                  <BellIcon className="h-6 w-6 text-white" />
-                  <span className="absolute -top-1 -right-1 h-3 w-3 bg-white rounded-full"></span>
+              <div className="flex items-center">
+                <div className="relative cursor-pointer transform hover:scale-105 active:scale-95 transition-transform duration-200 mr-3">
+                  <BellIcon className="h-5 w-5 text-white" />
+                  <span className="absolute -top-1 -right-1 h-2 w-2 bg-green-500 rounded-full"></span>
                 </div>
-                <span className="text-sm">3 new notifications</span>
+                <span className="text-xs text-gray-300">3 notifications</span>
               </div>
             </div>
           </div>
