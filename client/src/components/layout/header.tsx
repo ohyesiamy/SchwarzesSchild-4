@@ -16,25 +16,44 @@ export function Header() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   
   return (
-    <header className="bg-black text-white">
-      {/* Top secondary navigation - hidden on mobile */}
-      <div className="border-b border-gray-800 hidden md:block">
-        <div className="container mx-auto flex justify-end items-center h-8 px-4 md:px-6">
-          <div className="flex space-x-4 text-xs">
-            <a href="#" className="text-gray-400 hover:text-white">Private Banking</a>
-            <a href="#" className="text-gray-400 hover:text-white">Business</a>
-            <a href="#" className="text-gray-400 hover:text-white">Investments</a>
-            <a href="#" className="text-gray-400 hover:text-white">Help & Support</a>
-            <a href="#" className="text-gray-400 hover:text-white">Location</a>
-          </div>
-        </div>
-      </div>
-      
-      {/* Main header */}
+    <header className="bg-black text-white">      
+      {/* Integrated header with main nav and secondary nav */}
       <div className="container mx-auto flex justify-between items-center h-16 px-4 md:px-6">
         <div className="flex items-center">
           <Logo size="small" className="mr-2 md:mr-6" variant="white" background="dark" />
           <h1 className="text-lg md:text-xl font-semibold tracking-wide hidden xs:block">SCHWARZES SCHILD</h1>
+        </div>
+        
+        {/* Desktop Navigation - Primary + Secondary Combined */}
+        <div className="hidden md:flex items-center">
+          {/* Secondary Navigation */}
+          <div className="flex mr-8">
+            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Private Banking</a>
+            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Business</a>
+            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Investments</a>
+            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Help & Support</a>
+            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Location</a>
+          </div>
+          
+          {/* Primary Navigation Icons */}
+          <div className="flex items-center space-x-4 border-l border-gray-800 pl-6">
+            <button className="text-gray-400 hover:text-white">
+              <SearchIcon className="w-5 h-5" />
+            </button>
+            <button className="text-gray-400 hover:text-white">
+              <HelpCircleIcon className="w-5 h-5" />
+            </button>
+            <button className="text-gray-400 hover:text-white">
+              <BellIcon className="w-5 h-5" />
+            </button>
+            <Button
+              onClick={() => navigate("/profile")}
+              variant="outline"
+              className="w-9 h-9 flex items-center justify-center border border-white rounded-full"
+            >
+              <UserIcon className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
         
         {/* Mobile menu button */}
@@ -48,26 +67,6 @@ export function Header() {
             <MenuIcon className="w-6 h-6" />
           )}
         </button>
-        
-        {/* Desktop navigation */}
-        <div className="hidden md:flex items-center space-x-6">
-          <button className="text-gray-400 hover:text-white">
-            <SearchIcon className="w-5 h-5" />
-          </button>
-          <button className="text-gray-400 hover:text-white">
-            <HelpCircleIcon className="w-5 h-5" />
-          </button>
-          <button className="text-gray-400 hover:text-white">
-            <BellIcon className="w-5 h-5" />
-          </button>
-          <Button
-            onClick={() => navigate("/profile")}
-            variant="outline"
-            className="w-10 h-10 flex items-center justify-center border border-white rounded-full"
-          >
-            <UserIcon className="w-5 h-5" />
-          </Button>
-        </div>
       </div>
       
       {/* Mobile Menu */}
@@ -106,6 +105,16 @@ export function Header() {
                 <HelpCircleIcon className="w-5 h-5 mr-3" />
                 <span>Help</span>
               </button>
+              
+              {/* Secondary Navigation in Mobile Menu */}
+              <div className="pt-2 border-t border-gray-800">
+                <h3 className="text-xs uppercase text-gray-500 py-2">Banking Services</h3>
+                <a href="#" className="block text-gray-400 hover:text-white py-2">Private Banking</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2">Business</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2">Investments</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2">Help & Support</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2">Location</a>
+              </div>
             </div>
           </div>
         </div>
