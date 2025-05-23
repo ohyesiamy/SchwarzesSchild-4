@@ -90,9 +90,23 @@ export default function DashboardPage() {
       <Navigation active="dashboard" />
       <MobileNavigation active="dashboard" />
       
-      <main className="py-6 md:py-10 lg:py-12 px-4 md:px-6 lg:px-8 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
-        {/* Welcome Banner - Refined Premium Version */}
-        <div className="bg-black text-white mb-8 md:mb-12 shadow-lg rounded-none relative overflow-hidden border-b border-gray-800">
+      <main className="py-6 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
+        {/* Mobile optimized header */}
+        <div className="flex flex-col mb-6">
+          <h1 className="text-2xl font-semibold tracking-tight mb-2">Dashboard</h1>
+          <div className="w-12 h-1 bg-black"></div>
+        </div>
+        
+        <div className="mb-6 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-gray-600">Welcome back, Jonathan</p>
+          <div className="text-xs text-gray-600 flex items-center md:hidden">
+            <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+            <span>All accounts secure</span>
+          </div>
+        </div>
+        
+        {/* Welcome Banner - Desktop only */}
+        <div className="hidden md:block bg-black text-white mb-8 md:mb-12 shadow-lg rounded-none relative overflow-hidden border-b border-gray-800">
           {/* Minimal premium design overlay */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute bottom-0 right-0 w-full h-32 bg-gradient-to-t from-gray-800 to-transparent"></div>
@@ -135,10 +149,10 @@ export default function DashboardPage() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col xs:flex-row lg:flex-col space-y-0 xs:space-y-0 lg:space-y-4 space-x-0 xs:space-x-4 lg:space-x-0">
+              <div className="flex flex-col space-y-4">
                 <Button 
                   variant="outline" 
-                  className="border-2 border-white bg-black bg-opacity-50 text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 mb-3 xs:mb-0 lg:mb-0 w-full shadow-sm"
+                  className="border-2 border-white bg-black bg-opacity-50 text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 w-full shadow-sm"
                   onClick={() => navigate("/security")}
                 >
                   <ShieldIcon className="h-4 w-4 mr-2" />
@@ -181,52 +195,46 @@ export default function DashboardPage() {
           {/* Main Content - Primary Column */}
           <div className="lg:col-span-8 space-y-6 lg:border-r border-gray-200 lg:pr-8">
             {/* Account Overview Section */}
-            <section className="bg-white border border-gray-200">
-              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
-                <div>
-                  <h2 className="text-lg md:text-xl font-semibold mb-1 xs:mb-0">Account Overview</h2>
-                  <p className="text-xs text-gray-500 hidden md:block">Manage all your accounts in one place</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="hidden md:flex items-center">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                    <span className="text-xs text-gray-600 mr-6">All accounts active</span>
-                  </div>
-                  <Button variant="outline" size="sm" className="text-xs min-h-[36px] active:scale-95 transition-transform w-full xs:w-auto">
-                    <PlusIcon className="h-3 w-3 mr-1" /> NEW ACCOUNT
-                  </Button>
-                </div>
+            <section className="bg-white border border-black shadow-sm mb-6">
+              <div className="flex items-center justify-between p-3 border-b border-black bg-gray-50">
+                <h2 className="text-base font-semibold">Account Overview</h2>
+                <Button variant="outline" size="sm" className="h-8 text-xs rounded-none border-black">
+                  <PlusIcon className="h-3.5 w-3.5 mr-1.5" /> New Account
+                </Button>
               </div>
               
               {/* Mobile Account Cards */}
-              <div className="space-y-3 md:hidden">
+              <div className="space-y-0 divide-y divide-gray-100 md:hidden">
                 {accounts.map((account) => (
                   <div 
                     key={account.id}
-                    className={`border ${account.currency === selectedCurrency ? 'border-black' : 'border-gray-200'} p-4 rounded-lg bg-white cursor-pointer active:bg-gray-50 transition-colors`}
+                    className={`p-4 bg-white cursor-pointer active:bg-gray-50 transition-colors ${account.currency === selectedCurrency ? 'border-l-2 border-black' : ''}`}
                     onClick={() => setSelectedCurrency(account.currency)}
                   >
                     <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <div className="flex items-center">
-                          <span className="font-medium">{account.name}</span>
-                          {account.currency === selectedCurrency && (
-                            <span className="ml-2 inline-block px-2 py-0.5 text-xs bg-black text-white">Primary</span>
-                          )}
+                      <div className="flex items-center space-x-2">
+                        <div className={`w-2 h-2 ${account.balance > 0 ? 'bg-green-500' : 'bg-red-500'} rounded-full`}></div>
+                        <div>
+                          <div className="flex items-center">
+                            <span className="font-medium text-sm">{account.name}</span>
+                            {account.currency === selectedCurrency && (
+                              <span className="ml-2 inline-block px-1 py-0.5 text-[10px] bg-black text-white">Primary</span>
+                            )}
+                          </div>
+                          <div className="text-xs text-gray-600 mt-0.5 font-mono">SS-{account.id}-2025-{Math.floor(1000 + Math.random() * 9000)}</div>
                         </div>
-                        <div className="text-xs text-gray-600 mt-1">SS-{account.id}-2025-{Math.floor(1000 + Math.random() * 9000)}</div>
                       </div>
-                      <div className="text-sm">{account.currency}</div>
+                      <div className="text-xs px-1.5 py-0.5 border border-gray-200 rounded-sm">{account.currency}</div>
                     </div>
                     <div className="flex justify-between items-end">
-                      <div className="text-lg font-semibold">
+                      <div className="text-base font-semibold">
                         {account.currency === "EUR" && "€"}
                         {account.currency === "USD" && "$"}
                         {account.currency === "GBP" && "£"}
                         {account.balance.toFixed(2)}
                       </div>
                       <button 
-                        className="text-xs font-semibold text-gray-600 hover:text-black transition-colors duration-200"
+                        className="text-xs font-medium text-gray-600 hover:text-black transition-colors duration-200 flex items-center"
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedCurrency(account.currency);
