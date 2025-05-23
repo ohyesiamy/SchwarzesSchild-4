@@ -24,7 +24,7 @@ export function MobileNavigation({ active }: MobileNavigationProps) {
   ];
   
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 lg:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 lg:hidden shadow-md">
       <div className="grid grid-cols-5 h-16">
         {navItems.map((item) => {
           const isActive = active === item.name;
@@ -35,12 +35,12 @@ export function MobileNavigation({ active }: MobileNavigationProps) {
               key={item.name}
               onClick={() => navigate(item.path)}
               className={`flex flex-col items-center justify-center py-2 text-xs font-medium transition-colors ${
-                isActive ? "text-black" : "text-gray-600 hover:text-black"
+                isActive ? "text-black" : "text-gray-500 hover:text-black"
               }`}
             >
-              <Icon className={`w-5 h-5 mb-1 ${isActive ? "text-black" : "text-gray-600"}`} />
+              <Icon className={`w-5 h-5 mb-1 ${isActive ? "text-black" : "text-gray-500"}`} />
               <span>{item.label}</span>
-              {isActive && <div className="w-1.5 h-1.5 bg-black rounded-full mt-1" />}
+              {isActive && <div className="w-12 h-0.5 bg-black absolute bottom-0" />}
             </button>
           );
         })}

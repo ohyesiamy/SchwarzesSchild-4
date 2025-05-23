@@ -90,7 +90,7 @@ export default function DashboardPage() {
       <Navigation active="dashboard" />
       <MobileNavigation active="dashboard" />
       
-      <main className="py-6 md:py-10 lg:py-12 px-4 md:px-6 lg:px-8 container mx-auto flex-grow mb-16 md:mb-0 max-w-[1440px]">
+      <main className="py-6 md:py-10 lg:py-12 px-4 md:px-6 lg:px-8 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
         {/* Welcome Banner - Refined Premium Version */}
         <div className="bg-black text-white mb-8 md:mb-12 shadow-lg rounded-none relative overflow-hidden border-b border-gray-800">
           {/* Minimal premium design overlay */}
@@ -696,9 +696,11 @@ export default function DashboardPage() {
           {/* Sidebar - Financial Insights Column */}
           <div className="lg:col-span-4 space-y-6 pl-0 lg:pl-6">
             {/* Account Activity Group */}
-            <div className="bg-white border border-gray-200 p-5">
-              <h3 className="text-lg font-semibold mb-4 pb-3 border-b border-gray-100">Account Activity</h3>
-              <div className="space-y-6">
+            <div className="bg-white border border-gray-200">
+              <div className="p-5 border-b border-gray-200">
+                <h3 className="text-lg font-semibold">Account Activity</h3>
+              </div>
+              <div className="p-5 space-y-6">
                 {/* Notifications Center */}
                 <NotificationsCenter />
                 
@@ -708,9 +710,11 @@ export default function DashboardPage() {
             </div>
             
             {/* Investment Group */}
-            <div className="bg-white border border-gray-200 p-5">
-              <h3 className="text-lg font-semibold mb-4 pb-3 border-b border-gray-100">Investment Overview</h3>
-              <div className="space-y-6">
+            <div className="bg-white border border-gray-200">
+              <div className="p-5 border-b border-gray-200">
+                <h3 className="text-lg font-semibold">Investment Overview</h3>
+              </div>
+              <div className="p-5 space-y-6">
                 {/* Portfolio Summary Section */}
                 <PortfolioSummary />
                 
@@ -718,8 +722,11 @@ export default function DashboardPage() {
                 <InvestmentOverview />
                 
                 {/* Market Snapshot Section */}
-                <div className="pt-4">
-                  <h4 className="text-base font-medium mb-3">Market Snapshot</h4>
+                <div className="pt-4 border-t border-gray-100 mt-4">
+                  <div className="flex justify-between items-center mb-3 pt-4">
+                    <h4 className="text-base font-medium">Market Snapshot</h4>
+                    <span className="text-xs bg-gray-100 px-2 py-1">REAL-TIME</span>
+                  </div>
                   <MarketSnapshot />
                 </div>
               </div>
