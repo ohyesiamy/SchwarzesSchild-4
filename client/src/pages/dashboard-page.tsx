@@ -123,7 +123,7 @@ export default function DashboardPage() {
                   <div className="flex flex-col md:flex-row md:items-center gap-2 mb-1">
                     <h1 className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight text-white">Welcome back, Jonathan</h1>
                     <div className="hidden md:flex items-center">
-                      <div className="w-1.5 h-1.5 bg-white rounded-full mx-3"></div>
+                      <div className="mx-3 text-gray-400">•</div>
                       <span className="text-xs uppercase tracking-wider font-semibold text-white bg-gray-800 px-3 py-1">PREMIUM CLIENT</span>
                     </div>
                   </div>
@@ -136,6 +136,7 @@ export default function DashboardPage() {
                           <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
                           <span className="text-sm font-medium">Two-factor authentication enabled</span>
                         </div>
+                        <span className="text-gray-500 mx-2">|</span>
                         <div className="flex items-center">
                           <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
                           <span className="text-sm font-medium">All accounts secure</span>
@@ -168,11 +169,12 @@ export default function DashboardPage() {
             {/* Date and notifications row for desktop - Enhanced */}
             <div className="hidden md:flex justify-between items-center mt-6 pt-4 border-t border-gray-800">
               <div className="flex items-center">
-                <div className="flex items-center mr-8 text-sm">
+                <div className="flex items-center mr-6 text-sm">
                   <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
                   <span>Swiss Banking Day: {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 </div>
-                <div className="text-xs px-2 py-1 bg-gray-800 text-white flex items-center">
+                <span className="text-gray-500 mx-2">•</span>
+                <div className="text-xs px-2 py-1 bg-gray-800 text-white flex items-center ml-2">
                   <span>Zürich Market: </span>
                   <span className="text-green-400 ml-1 font-medium">OPEN</span>
                 </div>
