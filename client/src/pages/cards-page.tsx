@@ -43,7 +43,8 @@ import {
   Plus,
   AlignLeft,
   ChevronsDown,
-  History
+  History,
+  Filter
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -288,8 +289,8 @@ export default function CardsPage() {
                   </div>
                 </div>
                 
-                {/* Card Content */}
-                <div className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* Card Content - Mobile Optimized */}
+                <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {/* Card Display */}
                   <div>
                     <VirtualCard 
@@ -299,13 +300,45 @@ export default function CardsPage() {
                       cardName={card.cardName}
                       isFrozen={card.isFrozen}
                       isBlocked={card.isBlocked}
-                      className="w-full mb-4 shadow-sm"
+                      className="w-full mb-3 shadow-sm"
                     />
+                    
+                    {/* Card Actions - Mobile Only */}
+                    <div className="md:hidden flex space-x-2 mt-3 mb-4">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 h-8 text-xs rounded-none"
+                        onClick={() => setShowDetailsModal(true)}
+                      >
+                        <Eye className="h-3.5 w-3.5 mr-1" />
+                        Details
+                      </Button>
+                      
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className={`flex-1 h-8 text-xs rounded-none ${card.isFrozen ? "border-yellow-500 text-yellow-600" : ""}`}
+                        onClick={() => handleToggleCardFreeze(card.id)}
+                      >
+                        {card.isFrozen ? (
+                          <>
+                            <RefreshCw className="h-3.5 w-3.5 mr-1" />
+                            Unfreeze
+                          </>
+                        ) : (
+                          <>
+                            <Snowflake className="h-3.5 w-3.5 mr-1" />
+                            Freeze
+                          </>
+                        )}
+                      </Button>
+                    </div>
                     
                     {/* Last Activity */}
                     {card.lastUsed && !card.isBlocked && (
-                      <div className="flex items-center text-sm text-gray-600 mt-2 space-x-1">
-                        <MapPin className="h-3.5 w-3.5" />
+                      <div className="flex items-center text-xs text-gray-600 space-x-1">
+                        <MapPin className="h-3 w-3" />
                         <span>Last used: {card.lastUsed}</span>
                       </div>
                     )}
