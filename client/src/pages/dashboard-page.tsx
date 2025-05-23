@@ -203,52 +203,90 @@ export default function DashboardPage() {
                 </Button>
               </div>
               
-              {/* Mobile Account Cards */}
-              <div className="space-y-0 divide-y divide-gray-100 md:hidden">
-                {accounts.map((account) => (
-                  <div 
-                    key={account.id}
-                    className={`p-4 bg-white cursor-pointer active:bg-gray-50 transition-colors ${account.currency === selectedCurrency ? 'border-l-2 border-black' : ''}`}
-                    onClick={() => setSelectedCurrency(account.currency)}
-                  >
-                    <div className="flex justify-between items-start mb-2">
-                      <div className="flex items-center space-x-2">
-                        <div className={`w-2 h-2 ${account.balance > 0 ? 'bg-green-500' : 'bg-red-500'} rounded-full`}></div>
-                        <div>
-                          <div className="flex items-center">
-                            <span className="font-medium text-sm">{account.name}</span>
-                            {account.currency === selectedCurrency && (
-                              <span className="ml-2 inline-block px-1 py-0.5 text-[10px] bg-black text-white">Primary</span>
-                            )}
-                          </div>
-                          <div className="text-xs text-gray-600 mt-0.5 font-mono">SS-{account.id}-2025-{Math.floor(1000 + Math.random() * 9000)}</div>
-                        </div>
-                      </div>
-                      <div className="text-xs px-1.5 py-0.5 border border-gray-200 rounded-sm">{account.currency}</div>
-                    </div>
-                    <div className="flex justify-between items-end">
-                      <div className="text-base font-semibold">
-                        {account.currency === "EUR" && "€"}
-                        {account.currency === "USD" && "$"}
-                        {account.currency === "GBP" && "£"}
-                        {account.balance.toFixed(2)}
-                      </div>
-                      <button 
-                        className="text-xs font-medium text-gray-600 hover:text-black transition-colors duration-200 flex items-center"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedCurrency(account.currency);
-                          toast({
-                            title: "Account details",
-                            description: `Viewing details for ${account.name}.`,
-                          });
-                        }}
-                      >
-                        View Details
-                      </button>
+              {/* Mobile Account Cards - Premium Bank Design */}
+              <div className="md:hidden">
+                <div className="p-4 bg-black text-white">
+                  <div className="mb-1 text-xs uppercase tracking-wider text-gray-400">Total Balance</div>
+                  <div className="text-2xl font-light mb-3">
+                    €{accounts.reduce((total, account) => total + account.balance, 0).toFixed(2)}
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="text-xs text-gray-400">Last updated: Today, 11:42 AM</div>
+                    <div className="text-xs text-gray-400 flex items-center">
+                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
+                      <span>All accounts secure</span>
                     </div>
                   </div>
-                ))}
+                </div>
+                
+                <div className="bg-white">
+                  {accounts.map((account, index) => (
+                    <div 
+                      key={account.id}
+                      className={`
+                        relative p-4 bg-white cursor-pointer active:bg-gray-50 transition-colors
+                        ${index !== accounts.length - 1 ? 'border-b border-gray-200' : ''}
+                        ${account.currency === selectedCurrency ? 'bg-gray-50' : ''}
+                      `}
+                      onClick={() => setSelectedCurrency(account.currency)}
+                    >
+                      {account.currency === selectedCurrency && (
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-black"></div>
+                      )}
+                      
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center">
+                          <div className="w-8 h-8 bg-gray-100 border border-gray-200 rounded-sm flex items-center justify-center mr-3 text-xs font-medium">
+                            {account.currency}
+                          </div>
+                          <div>
+                            <div className="font-medium text-sm">{account.name}</div>
+                            <div className="text-xs text-gray-500 mt-0.5 font-mono tracking-tight">••••{Math.floor(1000 + Math.random() * 9000)}</div>
+                          </div>
+                        </div>
+                        
+                        {account.currency === selectedCurrency && (
+                          <div className="w-2 h-2 bg-black rounded-full"></div>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-center justify-between mt-3">
+                        <div className="text-lg font-semibold">
+                          {account.currency === "EUR" && "€"}
+                          {account.currency === "USD" && "$"}
+                          {account.currency === "GBP" && "£"}
+                          {account.balance.toFixed(2)}
+                        </div>
+                        
+                        <div className="flex space-x-1">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="h-7 px-2 py-0 text-xs rounded-none border-black"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setIsTransferModalOpen(true);
+                            }}
+                          >
+                            Transfer
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="h-7 px-2 py-0 text-xs rounded-none border-black"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedCurrency(account.currency);
+                              navigate("/transactions");
+                            }}
+                          >
+                            History
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
               
               {/* Desktop Account Table */}
