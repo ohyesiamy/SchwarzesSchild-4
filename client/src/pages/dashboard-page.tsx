@@ -289,17 +289,78 @@ export default function DashboardPage() {
                 </div>
               </div>
               
-              {/* Desktop Account Table */}
-              <div className="hidden md:flex flex-col border border-gray-200 shadow-sm">
+              {/* Desktop Account Overview - Premium Bank Design */}
+              <div className="hidden md:block">
+                {/* Total Balance Header */}
+                <div className="flex bg-black text-white">
+                  <div className="w-1/2 p-5 border-r border-gray-800">
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <div className="text-xs uppercase tracking-wider text-gray-400">Total Balance</div>
+                        <div className="text-3xl font-light mt-1">
+                          €{accounts.reduce((total, account) => total + account.balance, 0).toFixed(2)}
+                        </div>
+                      </div>
+                      <div className="px-3 py-1 border border-gray-700 text-xs bg-black">
+                        <span className="font-medium">As of {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
+                      </div>
+                    </div>
+                    <div className="flex space-x-6 mt-3">
+                      <div className="flex items-center">
+                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
+                        <span className="text-xs text-gray-300">FDIC Insured</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
+                        <span className="text-xs text-gray-300">Accounts Secure</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-1.5"></div>
+                        <span className="text-xs text-gray-300">1 Pending Transaction</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="w-1/2 p-5 flex items-center">
+                    <div className="grid grid-cols-3 gap-4 w-full">
+                      <Button 
+                        variant="outline"
+                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-10 rounded-none" 
+                        onClick={() => setIsTransferModalOpen(true)}
+                      >
+                        <ArrowRightLeftIcon className="h-4 w-4 mr-2" />
+                        Transfer
+                      </Button>
+                      <Button 
+                        variant="outline"
+                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-10 rounded-none" 
+                        onClick={() => navigate("/cards")}
+                      >
+                        <CreditCardIcon className="h-4 w-4 mr-2" />
+                        Cards
+                      </Button>
+                      <Button 
+                        variant="outline"
+                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-10 rounded-none" 
+                        onClick={() => setIsStatementModalOpen(true)}
+                      >
+                        <SquareIcon className="h-4 w-4 mr-2" />
+                        Statements
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Accounts Table */}
                 <div className="overflow-x-auto">
-                  <table className="w-full table-fixed">
+                  <table className="w-full table-fixed border-collapse">
                     <thead>
-                      <tr className="bg-gray-50 border-b border-gray-200">
-                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-1/4">Account Name</th>
-                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-1/4">Account Number</th>
-                        <th className="py-3 px-6 text-left text-xs font-medium text-gray-600 uppercase tracking-wider w-1/6">Currency</th>
-                        <th className="py-3 px-6 text-right text-xs font-medium text-gray-600 uppercase tracking-wider w-1/6">Available Balance</th>
-                        <th className="py-3 px-6 text-center text-xs font-medium text-gray-600 uppercase tracking-wider w-1/6">Actions</th>
+                      <tr className="bg-gray-100 border-b border-black">
+                        <th className="py-4 px-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/4">Account</th>
+                        <th className="py-4 px-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/4">Account Number</th>
+                        <th className="py-4 px-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/6">Currency</th>
+                        <th className="py-4 px-6 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/6">Available Balance</th>
+                        <th className="py-4 px-6 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/6">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -307,66 +368,83 @@ export default function DashboardPage() {
                         <tr 
                           key={account.id} 
                           className={`hover:bg-gray-50 cursor-pointer ${
-                            account.currency === selectedCurrency ? 'bg-gray-50 border-l-2 border-black' : 'border-l-2 border-transparent'
-                          } ${index !== accounts.length - 1 ? 'border-b border-gray-200' : ''}`}
+                            index !== accounts.length - 1 ? 'border-b border-gray-200' : ''
+                          }`}
                           onClick={() => setSelectedCurrency(account.currency)}
                         >
-                          <td className="py-4 px-6">
-                            <div className="flex items-center">
-                              <div className={`w-2 h-2 rounded-full mr-3 ${account.balance > 0 ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                          <td className="py-5 px-6">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-10 h-10 bg-gray-100 border border-gray-200 flex items-center justify-center">
+                                <span className="text-sm font-medium">{account.currency}</span>
+                              </div>
                               <div>
-                                <div className="font-medium text-black">{account.name}</div>
-                                <div className="text-xs text-gray-500 mt-0.5">
-                                  {account.currency === selectedCurrency ? 'Primary Account' : 'Standard Account'}
+                                <div className="font-medium">{account.name}</div>
+                                <div className="flex items-center mt-1">
+                                  {account.currency === selectedCurrency && (
+                                    <span className="text-xs bg-black text-white px-2 py-0.5 mr-2">PRIMARY</span>
+                                  )}
+                                  <span className="text-xs text-gray-500">
+                                    {account.balance > 20000 ? 'Premium Account' : 'Standard Account'}
+                                  </span>
                                 </div>
                               </div>
                             </div>
                           </td>
-                          <td className="py-4 px-6">
-                            <span className="font-mono text-sm">
-                              SS-{account.id}-2025-{Math.floor(1000 + Math.random() * 9000)}
-                            </span>
-                          </td>
-                          <td className="py-4 px-6">
+                          <td className="py-5 px-6 font-mono text-sm">
                             <div className="flex items-center">
-                              <div className="w-6 h-6 border border-gray-200 rounded-full flex items-center justify-center text-xs mr-2">
-                                {account.currency === "EUR" && "€"}
-                                {account.currency === "USD" && "$"}
-                                {account.currency === "GBP" && "£"}
-                              </div>
-                              <span>{account.currency}</span>
+                              <span>••• {Math.floor(1000 + Math.random() * 9000)}</span>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 w-6 p-0 ml-2 text-gray-500 hover:text-black"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toast({
+                                    title: "Account details",
+                                    description: "Account number copied to clipboard.",
+                                  });
+                                }}
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                              </Button>
                             </div>
                           </td>
-                          <td className="py-4 px-6 text-right font-semibold">
-                            {formatCurrency(account.balance, account.currency)}
+                          <td className="py-5 px-6">
+                            <div className="inline-block px-3 py-1 border border-gray-200 text-sm">
+                              {account.currency}
+                            </div>
                           </td>
-                          <td className="py-4 px-6">
-                            <div className="flex items-center justify-center space-x-2">
+                          <td className="py-5 px-6 text-right">
+                            <div className="font-semibold text-lg">
+                              {formatCurrency(account.balance, account.currency)}
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1">
+                              Available immediately
+                            </div>
+                          </td>
+                          <td className="py-5 px-6 text-right">
+                            <div className="flex items-center justify-end space-x-1">
                               <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="h-8 px-3 active:scale-95 transition-transform"
+                                className="h-8 rounded-none border-black"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setIsTransferModalOpen(true);
                                 }}
                               >
-                                <ArrowRightLeftIcon className="h-3.5 w-3.5 mr-1" />
-                                <span className="text-xs">TRANSFER</span>
+                                Transfer
                               </Button>
                               <Button 
                                 variant="outline" 
                                 size="sm" 
-                                className="h-8 w-8 p-0 active:scale-95 transition-transform"
+                                className="h-8 rounded-none border-black"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  toast({
-                                    title: "Account details",
-                                    description: `Viewing details for ${account.name}.`,
-                                  });
+                                  navigate("/transactions");
                                 }}
                               >
-                                <SquareIcon className="h-3.5 w-3.5" />
+                                History
                               </Button>
                             </div>
                           </td>
@@ -374,20 +452,6 @@ export default function DashboardPage() {
                       ))}
                     </tbody>
                   </table>
-                </div>
-                <div className="flex justify-between items-center px-6 py-3 border-t border-gray-200 bg-gray-50 text-xs text-gray-500">
-                  <div className="flex items-center">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-                    <span>Positive balance</span>
-                    <div className="w-2 h-2 bg-red-500 rounded-full ml-4 mr-2"></div>
-                    <span>Negative balance</span>
-                  </div>
-                  <div className="flex items-center">
-                    <span>Last updated: {new Date().toLocaleTimeString()}</span>
-                    <Button variant="ghost" size="sm" className="ml-2 h-6 w-6 p-0">
-                      <ArrowDownIcon className="h-3 w-3" />
-                    </Button>
-                  </div>
                 </div>
               </div>
               
