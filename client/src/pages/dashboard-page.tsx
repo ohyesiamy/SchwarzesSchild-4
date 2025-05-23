@@ -630,25 +630,25 @@ export default function DashboardPage() {
                 {recentTransactions.map((transaction) => (
                   <div 
                     key={transaction.id}
-                    className="p-4 hover:bg-gray-50 active:bg-gray-50 transition-colors"
+                    className="p-3 hover:bg-gray-50 active:bg-gray-50 transition-colors"
                   >
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-3">
-                        <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full ${
-                          transaction.amount >= 0 ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
+                        <div className={`flex-shrink-0 w-6 h-6 flex items-center justify-center ${
+                          transaction.amount >= 0 ? 'bg-black text-white' : 'bg-white text-black border border-black'
                         }`}>
                           {transaction.amount >= 0 ? '+' : '-'}
                         </div>
                         <div>
-                          <div className="font-medium text-sm">{transaction.name}</div>
-                          <div className="text-xs text-gray-500 flex items-center mt-0.5">
+                          <div className="font-medium text-xs uppercase tracking-wide">{transaction.name}</div>
+                          <div className="text-[9px] text-gray-500 flex items-center mt-0.5 uppercase tracking-wide">
                             <span>{formatDate(transaction.date)}</span>
                             <span className="mx-1">•</span>
                             <span>{transaction.category}</span>
                           </div>
                         </div>
                       </div>
-                      <div className={`text-sm font-medium ${transaction.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                      <div className="text-xs font-medium text-black">
                         {formatCurrency(transaction.amount, transaction.currency)}
                       </div>
                     </div>
