@@ -322,38 +322,37 @@ export default function ExchangePage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Currency Exchange Module */}
           <div className="lg:col-span-2">
-            <div className="border border-black mb-6 shadow-sm">
-              <div className="bg-gray-100 p-3 border-b border-black flex items-center justify-between">
-                <div className="flex items-center">
-                  <ArrowUpDown className="h-4 w-4 mr-2" />
-                  <h2 className="text-lg font-semibold">Convert Currencies</h2>
+            <div className="border border-gray-200 mb-5">
+              <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+                <div>
+                  <h2 className="text-xs uppercase tracking-wide font-medium">Convert Currencies</h2>
+                  <p className="text-[10px] text-gray-500 mt-0.5">Secure institutional foreign exchange</p>
                 </div>
-                <div className="flex items-center text-xs">
-                  <Shield className="h-3.5 w-3.5 mr-1" />
-                  <span className="hidden sm:inline">FINMA Regulated</span>
+                <div className="flex items-center">
+                  <Shield className="h-3.5 w-3.5 text-gray-500" />
                 </div>
               </div>
               
-              <div className="p-4 sm:p-6">
+              <div className="p-3">
                 <form>
-                  <div className="mb-5">
-                    <div className="flex justify-between items-center mb-2">
-                      <label className="font-medium text-sm">From Currency</label>
-                      <div className="text-xs flex items-center text-gray-600">
-                        <Wallet className="h-3.5 w-3.5 mr-1" />
+                  <div className="mb-4">
+                    <div className="flex justify-between items-center mb-1.5">
+                      <label className="text-[10px] uppercase tracking-wide font-medium">From Currency</label>
+                      <div className="text-[9px] flex items-center text-gray-600 uppercase tracking-wide">
+                        <Wallet className="h-3 w-3 mr-1" />
                         <span>Available: {formatCurrency(availableBalance, fromCurrency)}</span>
                       </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <div className="relative w-full sm:w-1/3">
                         <Select 
                           value={fromCurrency} 
                           onValueChange={setFromCurrency}
                         >
-                          <SelectTrigger className="w-full appearance-none bg-white border border-black rounded-none p-2.5 focus:ring-black">
+                          <SelectTrigger className="w-full appearance-none bg-white border border-black rounded-none p-2 h-7 text-[10px] uppercase tracking-wide">
                             <SelectValue placeholder="Select currency" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="text-[10px] uppercase tracking-wide rounded-none">
                             <SelectItem value="EUR">EUR - Euro</SelectItem>
                             <SelectItem value="USD">USD - US Dollar</SelectItem>
                             <SelectItem value="GBP">GBP - British Pound</SelectItem>
@@ -362,13 +361,13 @@ export default function ExchangePage() {
                         </Select>
                       </div>
                       <div className="relative w-full sm:w-2/3">
-                        <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                          <span className="text-gray-500">{CURRENCY_SYMBOLS[fromCurrency] || fromCurrency}</span>
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-2">
+                          <span className="text-gray-500 text-[10px]">{CURRENCY_SYMBOLS[fromCurrency] || fromCurrency}</span>
                         </div>
                         <Input
                           type="text"
                           placeholder="0.00"
-                          className="w-full border border-black rounded-none p-2.5 pl-8 focus:ring-black"
+                          className="w-full border border-black rounded-none p-2 pl-6 h-7 text-[11px]"
                           value={fromAmount}
                           onChange={handleFromAmountChange}
                         />
@@ -376,29 +375,31 @@ export default function ExchangePage() {
                     </div>
                   </div>
                   
-                  <div className="flex justify-center mb-4">
+                  <div className="flex justify-center mb-3">
                     <Button
                       type="button"
                       onClick={handleSwapCurrencies}
                       variant="outline"
-                      className="border border-black p-1.5 w-8 h-8 rounded-none flex items-center justify-center hover:bg-gray-100 transition-colors duration-150 ease-in-out"
+                      className="border border-black p-1 w-6 h-6 rounded-none flex items-center justify-center hover:bg-gray-50 transition-colors duration-150 ease-in-out"
                     >
-                      <ArrowUpDown className="h-4 w-4" />
+                      <ArrowUpDown className="h-3 w-3" />
                     </Button>
                   </div>
                   
-                  <div className="mb-5">
-                    <label className="block mb-2 font-medium text-sm">To Currency</label>
-                    <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="mb-4">
+                    <div className="flex justify-between items-center mb-1.5">
+                      <label className="text-[10px] uppercase tracking-wide font-medium">To Currency</label>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <div className="relative w-full sm:w-1/3">
                         <Select 
                           value={toCurrency} 
                           onValueChange={setToCurrency}
                         >
-                          <SelectTrigger className="w-full appearance-none bg-white border border-black rounded-none p-2.5 focus:ring-black">
+                          <SelectTrigger className="w-full appearance-none bg-white border border-black rounded-none p-2 h-7 text-[10px] uppercase tracking-wide">
                             <SelectValue placeholder="Select currency" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="text-[10px] uppercase tracking-wide rounded-none">
                             <SelectItem value="USD">USD - US Dollar</SelectItem>
                             <SelectItem value="EUR">EUR - Euro</SelectItem>
                             <SelectItem value="GBP">GBP - British Pound</SelectItem>
@@ -407,13 +408,13 @@ export default function ExchangePage() {
                         </Select>
                       </div>
                       <div className="relative w-full sm:w-2/3">
-                        <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                          <span className="text-gray-500">{CURRENCY_SYMBOLS[toCurrency] || toCurrency}</span>
+                        <div className="absolute inset-y-0 left-0 flex items-center pl-2">
+                          <span className="text-gray-500 text-[10px]">{CURRENCY_SYMBOLS[toCurrency] || toCurrency}</span>
                         </div>
                         <Input
                           type="text"
                           placeholder="0.00"
-                          className="w-full border border-black rounded-none p-2.5 pl-8 focus:ring-black bg-gray-50"
+                          className="w-full border border-black rounded-none p-2 pl-6 h-7 text-[11px] bg-gray-50"
                           value={toAmount}
                           readOnly
                         />
@@ -421,45 +422,45 @@ export default function ExchangePage() {
                     </div>
                   </div>
                   
-                  <div className="bg-gray-50 p-3 border border-black border-opacity-20 mb-5 rounded-none">
-                    <h3 className="text-sm font-semibold mb-2">Exchange Details</h3>
-                    <div className="space-y-2 text-xs">
+                  <div className="bg-white p-3 border border-black mb-4">
+                    <h3 className="text-[10px] uppercase tracking-wide font-medium border-b border-gray-200 pb-1 mb-2">Exchange Details</h3>
+                    <div className="space-y-1.5">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Exchange Rate</span>
-                        <span className="font-medium">
+                        <span className="text-[10px] uppercase tracking-wide text-gray-500">Exchange Rate</span>
+                        <span className="text-[10px] uppercase tracking-wide font-medium">
                           1 {fromCurrency} = {rate.toFixed(4)} {toCurrency}
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Fee</span>
-                        <span className="font-medium">0.0%</span>
+                        <span className="text-[10px] uppercase tracking-wide text-gray-500">Fee</span>
+                        <span className="text-[10px] uppercase tracking-wide font-medium">0.0%</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Estimated Processing Time</span>
-                        <span className="font-medium">Instant</span>
+                        <span className="text-[10px] uppercase tracking-wide text-gray-500">Processing Time</span>
+                        <span className="text-[10px] uppercase tracking-wide font-medium">Instant</span>
                       </div>
                       <Separator className="my-2 bg-black bg-opacity-10" />
-                      <div className="flex justify-between text-sm font-semibold">
-                        <span>You'll Receive</span>
-                        <span>
+                      <div className="flex justify-between">
+                        <span className="text-[10px] uppercase tracking-wide font-medium">You'll Receive</span>
+                        <span className="text-[10px] uppercase tracking-wide font-medium">
                           {toAmount ? formatCurrency(parseFloat(toAmount), toCurrency) : `0.00 ${toCurrency}`}
                         </span>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="flex justify-between items-center mb-5">
+                  <div className="flex justify-between items-center mb-4">
                     <Button 
                       type="button"
                       variant="outline"
-                      className="text-xs rounded-none border-black hover:bg-gray-50 transition-colors duration-150 ease-in-out h-8 px-3"
+                      className="text-[10px] rounded-none border-black hover:bg-gray-50 transition-colors duration-150 ease-in-out h-7 px-2.5 uppercase tracking-wide"
                       onClick={() => setShowAutoConvertModal(true)}
                     >
                       {autoConvertEnabled ? "Edit Auto-Convert" : "Set Up Auto-Convert"}
                     </Button>
                     
-                    <div className="text-xs text-gray-600 hidden sm:flex items-center">
-                      <Lock className="h-3.5 w-3.5 mr-1" />
+                    <div className="text-[9px] text-gray-600 hidden sm:flex items-center uppercase tracking-wide">
+                      <Lock className="h-3 w-3 mr-1" />
                       <span>Secure Transaction</span>
                     </div>
                   </div>
@@ -467,16 +468,16 @@ export default function ExchangePage() {
                   <Button
                     type="button"
                     disabled={!fromAmount || parseFloat(fromAmount) <= 0 || parseFloat(fromAmount) > availableBalance || isProcessing}
-                    className="w-full bg-black text-white hover:bg-gray-800 transition-colors duration-150 ease-in-out h-10 rounded-none"
+                    className="w-full bg-black text-white hover:bg-gray-800 transition-colors duration-150 ease-in-out h-8 rounded-none text-[10px] uppercase tracking-wide font-medium"
                     onClick={handleExchange}
                   >
                     {isProcessing ? (
                       <>
-                        <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+                        <RefreshCw className="h-3 w-3 mr-1.5 animate-spin" />
                         Processing...
                       </>
                     ) : (
-                      'Convert Now'
+                      'Execute Transaction'
                     )}
                   </Button>
                 </form>
