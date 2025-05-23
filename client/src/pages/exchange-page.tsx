@@ -295,18 +295,29 @@ export default function ExchangePage() {
       <Navigation active="exchange" />
       <MobileNavigation active="exchange" />
       
-      <main className="py-6 px-4 container mx-auto flex-grow mb-20 md:mb-0">
-        {/* Mobile optimized header */}
-        <div className="flex flex-col mb-6">
-          <h1 className="text-2xl font-semibold tracking-tight mb-2">Currency Exchange</h1>
-          <div className="w-12 h-1 bg-black"></div>
+      <main className="py-5 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
+        {/* Mobile optimized header - visible on mobile only */}
+        <div className="flex flex-col mb-4 md:hidden">
+          <h1 className="text-sm uppercase tracking-wide font-medium mb-1">Currency Exchange</h1>
+          <div className="w-6 h-0.5 bg-black"></div>
+          <p className="text-[10px] uppercase tracking-wide text-gray-600 mt-2">Foreign exchange solutions</p>
+        </div>
+
+        {/* Desktop header - hidden on mobile */}
+        <div className="hidden md:block mb-6">
+          <h1 className="text-base uppercase tracking-wide font-medium mb-1">Currency Exchange</h1>
+          <div className="w-8 h-0.5 bg-black mb-2"></div>
+          <p className="text-xs text-gray-600">Convert between currencies with competitive exchange rates</p>
         </div>
         
-        <div className="mb-6 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-gray-600">Convert between currencies with competitive exchange rates</p>
+        <div className="mb-5 flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center">
+            <ArrowUpDown className="h-3.5 w-3.5 mr-2 text-gray-500" />
+            <p className="text-[10px] text-gray-600 uppercase tracking-wide">Institutional-grade rates for global transactions</p>
+          </div>
         </div>
         
-        <Separator className="mb-6" />
+        <Separator className="mb-5" />
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Currency Exchange Module */}

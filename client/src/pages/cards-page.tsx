@@ -636,53 +636,68 @@ export default function CardsPage() {
         </section>
         
         {/* Security Section */}
-        <section className="mb-10">
-          <div className="border border-black">
-            <div className="bg-gray-100 p-4 border-b border-black flex items-center">
-              <Shield className="h-5 w-5 mr-2" />
-              <h2 className="text-xl font-semibold">Card Security</h2>
+        <section className="mb-6">
+          <div className="flex justify-between items-center mb-3 md:mb-4">
+            <div className="flex items-center">
+              <h2 className="text-xs uppercase tracking-wide font-medium">Card Security</h2>
+              <Shield className="h-3.5 w-3.5 ml-2 text-gray-500" />
             </div>
-            <div className="p-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <Button 
+              variant="link" 
+              size="sm" 
+              className="text-[10px] uppercase tracking-wide font-medium text-black h-auto p-0"
+            >
+              Learn More
+            </Button>
+          </div>
+          
+          <div className="border border-gray-200">
+            <div className="p-2.5 border-b border-gray-200">
+              <h3 className="text-xs uppercase tracking-wide font-medium">Security Guidelines</h3>
+            </div>
+            <div className="p-3">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Security Tips</h3>
-                  <ul className="space-y-3">
+                  <h4 className="text-[10px] uppercase tracking-wide font-medium text-black mb-2 border-b border-gray-200 pb-1">Best Practices</h4>
+                  <ul className="space-y-2">
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">Never share your PIN or card details over phone, email, or SMS.</span>
+                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                      <span className="text-[11px]">Never share your PIN or card details over phone, email, or SMS.</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">Monitor your transactions regularly and report any suspicious activity immediately.</span>
+                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                      <span className="text-[11px]">Monitor your transactions regularly and report any suspicious activity immediately.</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">Freeze your card immediately if lost or stolen.</span>
+                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                      <span className="text-[11px]">Freeze your card immediately if lost or stolen.</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">Use biometric authentication for added security when available.</span>
+                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                      <span className="text-[11px]">Use biometric authentication for added security when available.</span>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mr-2 mt-0.5 flex-shrink-0" />
-                      <span className="text-sm">Set up transaction alerts to be notified of any purchase.</span>
+                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
+                      <span className="text-[11px]">Set up transaction alerts to be notified of any purchase.</span>
                     </li>
                   </ul>
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Recent Security Activities</h3>
-                  <div className="space-y-4">
+                  <h4 className="text-[10px] uppercase tracking-wide font-medium text-black mb-2 border-b border-gray-200 pb-1">Recent Activities</h4>
+                  <div className="space-y-2">
                     {securityActivities.map((activity, index) => (
-                      <div key={index} className="flex items-start pb-3 border-b border-gray-100">
-                        <History className="h-5 w-5 mr-3 text-gray-600 mt-0.5 flex-shrink-0" />
+                      <div key={index} className="flex items-start pb-2 border-b border-gray-100 last:border-0">
+                        <div className="h-4 w-4 border border-black flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">
+                          <History className="h-2 w-2" />
+                        </div>
                         <div>
-                          <div className="flex items-center mb-1">
-                            <span className="font-medium text-sm">{activity.action}</span>
-                            <span className="ml-2 text-xs text-gray-500">{activity.timestamp}</span>
+                          <div className="flex flex-col md:flex-row md:items-center mb-0.5">
+                            <span className="text-[11px] uppercase tracking-wide font-medium">{activity.action}</span>
+                            <span className="md:ml-2 text-[9px] text-gray-500 uppercase tracking-wide">{activity.timestamp}</span>
                           </div>
-                          <span className="text-xs text-gray-600 flex items-center">
-                            <MapPin className="h-3 w-3 mr-1" />
+                          <span className="text-[9px] text-gray-600 flex items-center uppercase tracking-wide">
+                            <MapPin className="h-2 w-2 mr-1" />
                             {activity.location}
                           </span>
                         </div>
