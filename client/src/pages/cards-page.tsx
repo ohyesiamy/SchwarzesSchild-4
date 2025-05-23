@@ -229,39 +229,61 @@ export default function CardsPage() {
       <Navigation active="cards" />
       <MobileNavigation active="cards" />
       
-      <main className="py-8 px-4 container mx-auto flex-grow mb-20 md:mb-0">
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="text-3xl mb-2 sm:mb-0">Card Management</h1>
+      <main className="py-6 px-4 container mx-auto flex-grow mb-20 md:mb-0">
+        {/* Mobile optimized header */}
+        <div className="flex flex-col mb-6">
+          <h1 className="text-2xl font-semibold tracking-tight mb-2">Card Management</h1>
+          <div className="w-12 h-1 bg-black"></div>
+        </div>
+        
+        <div className="mb-6 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-gray-600">Manage and control your virtual payment cards</p>
           <Button 
             onClick={() => setShowNewCardModal(true)}
-            className="bg-black text-white hover:bg-gray-800 transition-colors duration-150 ease-in-out flex items-center"
+            className="bg-black text-white hover:bg-gray-800 transition-colors duration-150 w-full sm:w-auto"
+            size="sm"
           >
             <PlusCircle className="h-4 w-4 mr-2" />
             Add New Card
           </Button>
         </div>
         
-        <Separator className="mb-8" />
+        <Separator className="mb-6" />
         
-        {/* Active Cards Section */}
-        <section className="mb-12">
-          <h2 className="text-xl font-semibold mb-6">Active Cards</h2>
+        {/* Active Cards Section - Mobile Optimized */}
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base font-semibold">Active Cards</h2>
+            <button className="text-xs text-gray-600 flex items-center">
+              <Filter className="h-3.5 w-3.5 mr-1" />
+              <span>Sort</span>
+            </button>
+          </div>
           
-          <div className="space-y-10">
+          <div className="space-y-6">
             {cards.map(card => (
-              <div key={card.id} className="border border-black p-0">
-                {/* Card Header */}
-                <div className="flex items-center justify-between bg-gray-100 p-4 border-b border-black">
-                  <div className="flex items-center space-x-3">
-                    <CreditCard className="h-5 w-5" />
-                    <h3 className="font-semibold">{card.cardName}</h3>
-                  </div>
+              <div key={card.id} className="border border-gray-200 p-0 shadow-sm">
+                {/* Card Header - Mobile optimized */}
+                <div className="flex items-center justify-between bg-gray-50 p-3 border-b border-gray-200">
                   <div className="flex items-center space-x-2">
-                    <Badge variant={card.isFrozen ? "outline" : "default"} className={card.isFrozen ? "border-gray-500 text-gray-500" : "bg-green-600 hover:bg-green-700"}>
+                    <div className="bg-black text-white p-1 rounded-sm">
+                      <CreditCard className="h-3.5 w-3.5" />
+                    </div>
+                    <h3 className="font-medium text-sm">{card.cardName}</h3>
+                  </div>
+                  <div className="flex items-center space-x-1.5">
+                    <Badge variant={card.isFrozen ? "outline" : "default"} 
+                      className={`text-xs px-1.5 py-0.5 rounded-none ${
+                        card.isFrozen 
+                          ? "border-gray-400 text-gray-500 bg-transparent" 
+                          : "bg-green-600 hover:bg-green-700 border-0"
+                      }`}>
                       {card.isFrozen ? "Frozen" : "Active"}
                     </Badge>
                     {card.isBlocked && (
-                      <Badge variant="destructive">Blocked</Badge>
+                      <Badge variant="destructive" className="text-xs px-1.5 py-0.5 rounded-none">
+                        Blocked
+                      </Badge>
                     )}
                   </div>
                 </div>
