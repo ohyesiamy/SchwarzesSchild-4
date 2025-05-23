@@ -635,6 +635,21 @@ export default function DashboardPage() {
               
               <MarketInsights />
             </section>
+            
+            {/* Banking Information Section - Moved from right column */}
+            <section className="bg-white border border-gray-200 p-5">
+              <h3 className="text-lg font-semibold mb-4 pb-3 border-b border-gray-100">Banking Information</h3>
+              <div className="space-y-6">
+                {/* Compliance Status */}
+                <ComplianceStatus />
+                
+                {/* Linked Accounts Section */}
+                <LinkedAccounts />
+                
+                {/* Bank Profile Section */}
+                <BankProfile />
+              </div>
+            </section>
           </div>
           
           {/* Sidebar - Right Column */}
@@ -669,20 +684,7 @@ export default function DashboardPage() {
               </div>
             </div>
             
-            {/* Banking Information Group */}
-            <div className="bg-white border border-gray-200 p-5">
-              <h3 className="text-lg font-semibold mb-4 pb-3 border-b border-gray-100">Banking Information</h3>
-              <div className="space-y-6">
-                {/* Compliance Status */}
-                <ComplianceStatus />
-                
-                {/* Linked Accounts Section */}
-                <LinkedAccounts />
-                
-                {/* Bank Profile Section */}
-                <BankProfile />
-              </div>
-            </div>
+
           </div>
         </div>
       </main>
