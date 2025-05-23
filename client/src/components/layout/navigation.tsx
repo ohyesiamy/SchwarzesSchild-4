@@ -29,8 +29,8 @@ export function Navigation({ active }: NavigationProps) {
   ];
   
   return (
-    <nav className="bg-white border-b border-gray-200">
-      <div className="container mx-auto px-6">
+    <nav className="bg-white border-b border-gray-200 hidden md:block">
+      <div className="container mx-auto px-4 md:px-6">
         <ul className="flex overflow-x-auto">
           {navItems.map((item) => {
             const isActive = active === item.name;
@@ -40,7 +40,7 @@ export function Navigation({ active }: NavigationProps) {
               <li key={item.name}>
                 <button
                   onClick={() => navigate(item.path)}
-                  className={`flex items-center py-4 px-6 text-sm font-medium tracking-wide ${
+                  className={`flex items-center py-4 px-3 md:px-6 text-sm font-medium tracking-wide whitespace-nowrap transition-colors ${
                     isActive 
                       ? "text-black border-b-2 border-black" 
                       : "text-gray-600 hover:text-black"

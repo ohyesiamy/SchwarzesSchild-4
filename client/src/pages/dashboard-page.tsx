@@ -79,9 +79,9 @@ export default function DashboardPage() {
       <Header />
       <Navigation active="dashboard" />
       
-      <main className="py-10 px-6 container mx-auto flex-grow">
+      <main className="py-6 md:py-10 px-4 md:px-6 container mx-auto flex-grow mb-16 md:mb-0">
         {/* Welcome Banner */}
-        <div className="bg-black text-white p-8 mb-10 shadow-lg">
+        <div className="bg-black text-white p-4 sm:p-6 md:p-8 mb-6 md:mb-10 shadow-lg rounded-lg md:rounded-none">
           <div className="flex flex-col md:flex-row md:justify-between md:items-center">
             <div className="flex items-center mb-4 md:mb-0">
               <Logo 
@@ -91,20 +91,20 @@ export default function DashboardPage() {
                 className="mr-4 hidden md:block" 
               />
               <div>
-                <h1 className="text-2xl font-light mb-2 tracking-tight">Welcome back, Jonathan</h1>
-                <p className="text-sm text-gray-100">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
+                <h1 className="text-xl md:text-2xl font-light mb-2 tracking-tight">Welcome back, Jonathan</h1>
+                <p className="text-xs md:text-sm text-gray-100">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 mt-2 md:mt-0">
               <Button 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-black text-xs transition-all duration-200 transform hover:scale-[1.01] focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                className="border-white text-white hover:bg-white hover:text-black text-xs transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-10"
                 onClick={() => navigate("/security")}
               >
                 <ShieldIcon className="h-4 w-4 mr-2" />
-                SECURITY CENTER
+                <span className="whitespace-nowrap">SECURITY CENTER</span>
               </Button>
-              <div className="relative cursor-pointer transform hover:scale-105 transition-transform duration-200">
+              <div className="relative cursor-pointer transform hover:scale-105 active:scale-95 transition-transform duration-200">
                 <BellIcon className="h-6 w-6 text-white" />
                 <span className="absolute -top-1 -right-1 h-3 w-3 bg-white rounded-full"></span>
               </div>
@@ -113,20 +113,65 @@ export default function DashboardPage() {
         </div>
         
         {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-10">
           {/* Main Content - 2/3 width on large screens */}
-          <div className="lg:col-span-2 space-y-10">
+          <div className="lg:col-span-2 space-y-8 md:space-y-10">
             {/* Account Overview Section */}
             <section>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold">Account Overview</h2>
-                <Button variant="outline" size="sm" className="text-xs">
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center mb-4 md:mb-6">
+                <h2 className="text-lg md:text-xl font-semibold mb-2 xs:mb-0">Account Overview</h2>
+                <Button variant="outline" size="sm" className="text-xs min-h-[36px] active:scale-95 transition-transform w-full xs:w-auto">
                   <PlusIcon className="h-3 w-3 mr-1" /> NEW ACCOUNT
                 </Button>
               </div>
               
-              {/* Premium full-width account overview card */}
-              <div className="bg-white border border-gray-200 mb-6">
+              {/* Mobile Account Cards */}
+              <div className="space-y-3 md:hidden">
+                {accounts.map((account) => (
+                  <div 
+                    key={account.id}
+                    className={`border ${account.currency === selectedCurrency ? 'border-black' : 'border-gray-200'} p-4 rounded-lg bg-white cursor-pointer active:bg-gray-50 transition-colors`}
+                    onClick={() => setSelectedCurrency(account.currency)}
+                  >
+                    <div className="flex justify-between items-start mb-2">
+                      <div>
+                        <div className="flex items-center">
+                          <span className="font-medium">{account.name}</span>
+                          {account.currency === selectedCurrency && (
+                            <span className="ml-2 inline-block px-2 py-0.5 text-xs bg-black text-white">Primary</span>
+                          )}
+                        </div>
+                        <div className="text-xs text-gray-600 mt-1">SS-{account.id}-2025-{Math.floor(1000 + Math.random() * 9000)}</div>
+                      </div>
+                      <div className="text-sm">{account.currency}</div>
+                    </div>
+                    <div className="flex justify-between items-end">
+                      <div className="text-lg font-semibold">
+                        {account.currency === "EUR" && "€"}
+                        {account.currency === "USD" && "$"}
+                        {account.currency === "GBP" && "£"}
+                        {account.balance.toFixed(2)}
+                      </div>
+                      <button 
+                        className="text-xs font-semibold text-gray-600 hover:text-black transition-colors duration-200"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCurrency(account.currency);
+                          toast({
+                            title: "Account details",
+                            description: `Viewing details for ${account.name}.`,
+                          });
+                        }}
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Desktop Account Table */}
+              <div className="hidden md:block bg-white border border-gray-200 mb-6 rounded-lg overflow-hidden">
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
@@ -162,7 +207,8 @@ export default function DashboardPage() {
                           <td className="py-4 px-6 text-right">
                             <button 
                               className="text-xs font-semibold text-gray-600 hover:text-black transition-colors duration-200 cursor-pointer"
-                              onClick={() => {
+                              onClick={(e) => {
+                                e.stopPropagation();
                                 setSelectedCurrency(account.currency);
                                 toast({
                                   title: "Account details",
@@ -182,28 +228,28 @@ export default function DashboardPage() {
               </div>
               
               {/* Primary Account Highlight */}
-              <div className="bg-black text-white p-8">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-sm font-light uppercase tracking-wider mb-1">Primary Account</h3>
-                    <div className="text-xl font-light mb-4">{mainAccount.name}</div>
-                    <div className="text-4xl font-light">
+              <div className="bg-black text-white p-5 sm:p-6 md:p-8 rounded-lg md:rounded-none">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
+                  <div className="mb-4 sm:mb-0">
+                    <h3 className="text-xs md:text-sm font-light uppercase tracking-wider mb-1">Primary Account</h3>
+                    <div className="text-lg md:text-xl font-light mb-2 md:mb-4">{mainAccount.name}</div>
+                    <div className="text-3xl md:text-4xl font-light">
                       {mainAccount.currency === "EUR" && "€"}
                       {mainAccount.currency === "USD" && "$"}
                       {mainAccount.currency === "GBP" && "£"}
                       {mainAccount.balance.toFixed(2)}
                     </div>
                   </div>
-                  <div className="space-y-2">
+                  <div className="flex sm:flex-col gap-2 sm:space-y-2">
                     <Button 
-                      className="w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 cursor-pointer"
+                      className="flex-1 sm:w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 active:scale-95"
                       onClick={() => setIsTransferModalOpen(true)}
                       title="Transfer funds between accounts"
                     >
                       TRANSFER
                     </Button>
                     <Button 
-                      className="w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 cursor-pointer"
+                      className="flex-1 sm:w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 active:scale-95"
                       onClick={() => setIsStatementModalOpen(true)}
                       title="View and download account statements"
                     >
