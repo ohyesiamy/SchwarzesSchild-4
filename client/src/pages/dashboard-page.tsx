@@ -572,14 +572,14 @@ export default function DashboardPage() {
             </section>
             
             {/* Recent Transactions Section */}
-            <section className="bg-white border border-black shadow-sm mb-6">
-              <div className="flex items-center justify-between p-3 border-b border-black bg-gray-50">
-                <h2 className="text-base font-semibold">Recent Transactions</h2>
+            <section className="bg-white border border-gray-200 shadow-sm mb-5">
+              <div className="flex items-center justify-between p-2.5 border-b border-gray-200 bg-gray-50">
+                <h2 className="text-xs uppercase tracking-wide font-medium">Recent Transactions</h2>
                 <div className="flex items-center space-x-2">
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="h-8 text-xs rounded-none border-black hidden sm:flex"
+                    className="h-7 text-[10px] uppercase tracking-wide rounded-none border-black hidden sm:flex"
                     onClick={() => {
                       toast({
                         title: "Filter applied",
@@ -587,13 +587,13 @@ export default function DashboardPage() {
                       });
                     }}
                   >
-                    <CalendarIcon className="h-3.5 w-3.5 mr-1.5" /> Filter
+                    <CalendarIcon className="h-3 w-3 mr-1" /> Filter
                   </Button>
                   <Button 
                     onClick={() => navigate("/transactions")}
                     variant="outline"
                     size="sm"
-                    className="h-8 text-xs rounded-none border-black"
+                    className="h-7 text-[10px] uppercase tracking-wide rounded-none border-black"
                   >
                     View All
                   </Button>
@@ -601,25 +601,25 @@ export default function DashboardPage() {
               </div>
               
               {/* Desktop filter options - hidden on mobile */}
-              <div className="hidden md:flex items-center p-3 border-b border-gray-200 bg-gray-50">
+              <div className="hidden md:flex items-center p-2 border-b border-gray-200 bg-gray-50">
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="h-7 p-0 pr-2 text-xs"
+                  className="h-6 p-0 pr-2 text-[10px] uppercase tracking-wide"
                 >
                   Today
                 </Button>
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="h-7 p-0 px-2 text-xs"
+                  className="h-6 p-0 px-2 text-[10px] uppercase tracking-wide"
                 >
                   Last 7 days
                 </Button>
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className="h-7 p-0 px-2 text-xs"
+                  className="h-6 p-0 px-2 text-[10px] uppercase tracking-wide"
                 >
                   Last 30 days
                 </Button>
@@ -660,12 +660,12 @@ export default function DashboardPage() {
               <div className="hidden md:block">
                 <table className="w-full">
                   <thead>
-                    <tr className="border-b border-gray-100 text-left text-xs uppercase text-gray-500">
-                      <th className="px-5 py-3 font-medium">Transaction</th>
-                      <th className="px-5 py-3 font-medium">Date</th>
-                      <th className="px-5 py-3 font-medium">Category</th>
-                      <th className="px-5 py-3 font-medium text-right">Amount</th>
-                      <th className="px-5 py-3 font-medium w-24 text-center">Actions</th>
+                    <tr className="border-b border-gray-100 text-left text-[10px] uppercase tracking-wide text-gray-500">
+                      <th className="px-4 py-2.5 font-medium">Transaction</th>
+                      <th className="px-4 py-2.5 font-medium">Date</th>
+                      <th className="px-4 py-2.5 font-medium">Category</th>
+                      <th className="px-4 py-2.5 font-medium text-right">Amount</th>
+                      <th className="px-4 py-2.5 font-medium w-24 text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
