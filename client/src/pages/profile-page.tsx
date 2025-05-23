@@ -15,8 +15,9 @@ export default function ProfilePage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <Navigation active="profile" />
+      <MobileNavigation active="settings" /> {/* Using "settings" because Profile is in More section */}
       
-      <main className="py-8 px-6 container mx-auto flex-grow">
+      <main className="py-8 px-6 container mx-auto flex-grow mb-20 md:mb-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Main profile content - 2/3 width on desktop */}
           <div className="col-span-1 md:col-span-2 space-y-8">

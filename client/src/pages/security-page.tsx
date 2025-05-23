@@ -1,5 +1,6 @@
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { Footer } from "@/components/layout/footer";
 import { 
   ShieldIcon, 
@@ -18,8 +19,9 @@ export default function SecurityPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <Navigation active="security" />
+      <MobileNavigation active="settings" /> {/* Using "settings" because Security is in More section */}
       
-      <main className="py-8 px-6 container mx-auto flex-grow">
+      <main className="py-8 px-6 container mx-auto flex-grow mb-20 md:mb-0">
         <div className="mb-8">
           <h1 className="text-2xl font-semibold mb-2">Security Center</h1>
           <p className="text-gray-600">Protecting your financial assets is our highest priority.</p>

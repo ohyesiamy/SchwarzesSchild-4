@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -51,8 +52,9 @@ export default function SupportPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <Navigation active="support" />
+      <MobileNavigation active="settings" /> {/* Using "settings" because Support is in More section */}
       
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 py-8 mb-20 md:mb-0">
         <h1 className="text-2xl font-semibold mb-8">Client Support</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
