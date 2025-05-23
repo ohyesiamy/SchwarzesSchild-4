@@ -65,11 +65,60 @@ const marketRates = [
     change: 0.15 
   },
   { 
-    fromCurrency: "EUR", 
-    toCurrency: "GBP", 
-    rate: 0.8580, 
+    fromCurrency: "USD", 
+    toCurrency: "JPY", 
+    rate: 153.25, 
     trend: "up", 
-    change: 0.05 
+    change: 0.42 
+  },
+  { 
+    fromCurrency: "USD", 
+    toCurrency: "CNY", 
+    rate: 7.2562, 
+    trend: "down", 
+    change: 0.18 
+  },
+  { 
+    fromCurrency: "USD", 
+    toCurrency: "CHF", 
+    rate: 0.9125, 
+    trend: "up", 
+    change: 0.09 
+  },
+  { 
+    fromCurrency: "USD", 
+    toCurrency: "CAD", 
+    rate: 1.3725, 
+    trend: "down", 
+    change: 0.27 
+  },
+  { 
+    fromCurrency: "USD", 
+    toCurrency: "AUD", 
+    rate: 1.5230, 
+    trend: "up", 
+    change: 0.35 
+  },
+  { 
+    fromCurrency: "USD", 
+    toCurrency: "HKD", 
+    rate: 7.8120, 
+    trend: "down", 
+    change: 0.08 
+  },
+  { 
+    fromCurrency: "USD", 
+    toCurrency: "SGD", 
+    rate: 1.3540, 
+    trend: "up", 
+    change: 0.16 
+  },
+  { 
+    fromCurrency: "USD", 
+    toCurrency: "BTC", 
+    rate: 0.000017, 
+    trend: "up", 
+    change: 2.75 
   },
   { 
     fromCurrency: "EUR", 
@@ -84,13 +133,6 @@ const marketRates = [
     rate: 1.2295, 
     trend: "up", 
     change: 0.31 
-  },
-  { 
-    fromCurrency: "GBP", 
-    toCurrency: "EUR", 
-    rate: 1.1654, 
-    trend: "up", 
-    change: 0.11 
   }
 ];
 
@@ -579,43 +621,54 @@ export default function ExchangePage() {
           
           {/* Market Rates Panel */}
           <div>
-            <div className="border border-gray-200 h-full">
-              <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+            <div className="border border-gray-200 h-full bg-black text-white">
+              <div className="p-2.5 border-b border-gray-800 flex justify-between items-center">
                 <div>
-                  <h2 className="text-xs uppercase tracking-wide font-medium">Market Rates</h2>
-                  <p className="text-[10px] text-gray-500 mt-0.5">Live foreign exchange</p>
+                  <h2 className="text-xs uppercase tracking-wide font-medium text-white">Market Rates</h2>
+                  <p className="text-[10px] text-gray-400 mt-0.5">Live foreign exchange</p>
                 </div>
                 <Button 
                   variant="outline" 
                   size="sm" 
-                  className="p-0 h-6 w-6 rounded-none border-black flex items-center justify-center"
+                  className="p-0 h-6 w-6 rounded-none border-white flex items-center justify-center bg-transparent hover:bg-gray-900"
                   onClick={() => fetchExchangeRate(fromCurrency, toCurrency)}
                   disabled={isLoadingRates}
                 >
-                  <RefreshCw className={`h-3 w-3 ${isLoadingRates ? 'animate-spin' : ''}`} />
+                  <RefreshCw className={`h-3 w-3 text-white ${isLoadingRates ? 'animate-spin' : ''}`} />
                 </Button>
               </div>
               
-              <div className="p-3">
+              <div className="p-3 max-h-[450px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-800 scrollbar-track-gray-900">
                 <div className="overflow-x-hidden">
                   {(realMarketRates.length > 0 ? realMarketRates : marketRates).map((rate, index) => (
-                    <div key={index} className="flex justify-between items-center py-1.5 border-b border-gray-100 last:border-0">
+                    <div key={index} className="flex justify-between items-center py-1.5 border-b border-gray-800 last:border-0">
                       <div className="flex items-center">
-                        <span className="text-[10px] uppercase tracking-wide font-medium">
+                        <span className="text-[10px] uppercase tracking-wide font-medium text-white">
                           {rate.fromCurrency} — {rate.toCurrency}
                         </span>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-[10px] font-mono">{rate.rate.toFixed(4)}</span>
+                      <div className="flex items-center space-x-3">
+                        <span className="text-[10px] font-mono text-white">{rate.rate.toFixed(rate.toCurrency === "BTC" ? 8 : 4)}</span>
                         <div className="flex items-center">
-                          <div className="h-3.5 w-3.5 border border-black flex items-center justify-center">
-                            {rate.trend === "up" ? (
-                              <TrendingUp className="h-2 w-2" />
-                            ) : (
-                              <TrendingDown className="h-2 w-2" />
-                            )}
-                          </div>
-                          <span className="text-[9px] uppercase tracking-wide ml-1">{rate.change}%</span>
+                          {rate.trend === "up" ? (
+                            <div className="flex items-center bg-green-900 px-1.5 py-0.5">
+                              <div className="mr-1 h-4 w-5">
+                                <svg viewBox="0 0 24 12" className="h-full w-full">
+                                  <path d="M1,11 L8,4 L12,8 L23,1" fill="none" stroke="#22c55e" strokeWidth="1.5" />
+                                </svg>
+                              </div>
+                              <span className="text-[9px] uppercase tracking-wide text-green-400">+{rate.change}%</span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center bg-red-900 px-1.5 py-0.5">
+                              <div className="mr-1 h-4 w-5">
+                                <svg viewBox="0 0 24 12" className="h-full w-full">
+                                  <path d="M1,1 L8,8 L12,4 L23,11" fill="none" stroke="#ef4444" strokeWidth="1.5" />
+                                </svg>
+                              </div>
+                              <span className="text-[9px] uppercase tracking-wide text-red-400">-{rate.change}%</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
