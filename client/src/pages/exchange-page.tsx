@@ -631,11 +631,14 @@ export default function ExchangePage() {
         </div>
         
         {/* Exchange History */}
-        <div className="mt-10">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
-            <h2 className="text-lg font-semibold mb-3 sm:mb-0">Exchange History</h2>
+        <div className="mt-8">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 border-b border-gray-200 pb-2">
+            <div>
+              <h2 className="text-xs uppercase tracking-wide font-medium mb-1">Exchange History</h2>
+              <p className="text-[10px] text-gray-500 uppercase tracking-wide">Previous foreign exchange transactions</p>
+            </div>
             
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mt-3 sm:mt-0">
               <Select 
                 value={historyFilter} 
                 onValueChange={setHistoryFilter}
@@ -674,17 +677,17 @@ export default function ExchangePage() {
           </div>
           
           {/* Desktop View - Table */}
-          <div className="hidden md:block border border-black shadow-sm">
+          <div className="hidden md:block border border-gray-200">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="bg-gray-100 border-b border-black">
-                    <th className="p-3 text-left font-medium text-sm">Date & Time</th>
-                    <th className="p-3 text-left font-medium text-sm">From → To</th>
-                    <th className="p-3 text-left font-medium text-sm">Amount Converted</th>
-                    <th className="p-3 text-left font-medium text-sm">Resulting Amount</th>
-                    <th className="p-3 text-left font-medium text-sm">Rate</th>
-                    <th className="p-3 text-left font-medium text-sm">Status</th>
+                  <tr className="border-b border-gray-200">
+                    <th className="p-2 text-left text-[10px] uppercase tracking-wide font-medium">Date & Time</th>
+                    <th className="p-2 text-left text-[10px] uppercase tracking-wide font-medium">From — To</th>
+                    <th className="p-2 text-right text-[10px] uppercase tracking-wide font-medium">Amount Converted</th>
+                    <th className="p-2 text-right text-[10px] uppercase tracking-wide font-medium">Resulting Amount</th>
+                    <th className="p-2 text-left text-[10px] uppercase tracking-wide font-medium">Rate</th>
+                    <th className="p-2 text-left text-[10px] uppercase tracking-wide font-medium">Status</th>
                   </tr>
                 </thead>
                 <tbody>
