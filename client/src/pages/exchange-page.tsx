@@ -146,6 +146,7 @@ export default function ExchangePage() {
   const [toAmount, setToAmount] = useState("");
   const [rate, setRate] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isLoadingRates, setIsLoadingRates] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showPinVerification, setShowPinVerification] = useState(false);
   const [pinCode, setPinCode] = useState("");
@@ -154,36 +155,95 @@ export default function ExchangePage() {
   const [showAutoConvertModal, setShowAutoConvertModal] = useState(false);
   const [autoConvertThreshold, setAutoConvertThreshold] = useState("");
   const [autoConvertEnabled, setAutoConvertEnabled] = useState(false);
+  const [realMarketRates, setRealMarketRates] = useState<typeof marketRates>([]);
+  
+  // Fetch real exchange rates from API
+  const fetchExchangeRate = async (from: string, to: string) => {
+    setIsLoadingRates(true);
+    try {
+      const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch exchange rates');
+      }
+      
+      const data = await response.json();
+      const newRate = data.rates[to] || 0;
+      setRate(newRate);
+      
+      // Update realMarketRates with actual data
+      const updatedRates = [];
+      for (const curr in data.rates) {
+        if (['USD', 'EUR', 'GBP', 'CHF'].includes(curr) && curr !== from) {
+          const prevRate = marketRates.find(
+            r => r.fromCurrency === from && r.toCurrency === curr
+          )?.rate || 0;
+          
+          const trend = data.rates[curr] > prevRate ? "up" : 
+                        data.rates[curr] < prevRate ? "down" : "up";
+          const change = Math.abs(((data.rates[curr] - prevRate) / prevRate) * 100).toFixed(2);
+          
+          updatedRates.push({
+            fromCurrency: from,
+            toCurrency: curr,
+            rate: data.rates[curr],
+            trend,
+            change: parseFloat(change)
+          });
+        }
+      }
+      
+      if (updatedRates.length > 0) {
+        setRealMarketRates(updatedRates);
+      }
+      
+      // Update amount if needed
+      if (fromAmount && to) {
+        const calculated = newRate * parseFloat(fromAmount);
+        setToAmount(calculated.toFixed(2));
+      }
+    } catch (error) {
+      console.error('Error fetching exchange rates:', error);
+      // Fallback to mock data if API fails
+      const fallbackRate = MOCK_EXCHANGE_RATES[from]?.[to] || 0;
+      setRate(fallbackRate);
+      
+      if (fromAmount) {
+        const calculated = fallbackRate * parseFloat(fromAmount);
+        setToAmount(calculated.toFixed(2));
+      }
+      
+      toast({
+        title: "Unable to fetch live rates",
+        description: "Using latest cached rates. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoadingRates(false);
+    }
+  };
   
   // Update exchange rate when currencies change
   useEffect(() => {
     if (fromCurrency && toCurrency) {
-      const newRate = MOCK_EXCHANGE_RATES[fromCurrency]?.[toCurrency] || 0;
-      setRate(newRate);
-      
-      // Update to amount if from amount exists
-      if (fromAmount) {
-        const calculated = calculateExchange(
-          parseFloat(fromAmount),
-          fromCurrency,
-          toCurrency
-        );
-        setToAmount(calculated.toFixed(2));
-      }
+      fetchExchangeRate(fromCurrency, toCurrency);
     }
-  }, [fromCurrency, toCurrency, fromAmount]);
+  }, [fromCurrency, toCurrency]);
   
   const handleFromAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setFromAmount(value);
     
     if (value && !isNaN(parseFloat(value))) {
-      const calculated = calculateExchange(
-        parseFloat(value),
-        fromCurrency,
-        toCurrency
-      );
-      setToAmount(calculated.toFixed(2));
+      // Use the live rate directly instead of the utility function
+      if (rate > 0) {
+        const calculated = parseFloat(value) * rate;
+        setToAmount(calculated.toFixed(2));
+      } else {
+        // If we don't have a rate yet, fetch it
+        if (fromCurrency && toCurrency) {
+          fetchExchangeRate(fromCurrency, toCurrency);
+        }
+      }
     } else {
       setToAmount("");
     }
@@ -519,43 +579,51 @@ export default function ExchangePage() {
           
           {/* Market Rates Panel */}
           <div>
-            <div className="border border-black h-full shadow-sm">
-              <div className="bg-gray-100 p-3 border-b border-black flex items-center justify-between">
-                <div className="flex items-center">
-                  <BarChart3 className="h-4 w-4 mr-2" />
-                  <h2 className="text-lg font-semibold">Market Rates</h2>
+            <div className="border border-gray-200 h-full">
+              <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+                <div>
+                  <h2 className="text-xs uppercase tracking-wide font-medium">Market Rates</h2>
+                  <p className="text-[10px] text-gray-500 mt-0.5">Live foreign exchange</p>
                 </div>
-                <Button variant="ghost" size="sm" className="p-0 h-auto hover:bg-transparent">
-                  <RefreshCw className="h-3.5 w-3.5" />
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="p-0 h-6 w-6 rounded-none border-black flex items-center justify-center"
+                  onClick={() => fetchExchangeRate(fromCurrency, toCurrency)}
+                  disabled={isLoadingRates}
+                >
+                  <RefreshCw className={`h-3 w-3 ${isLoadingRates ? 'animate-spin' : ''}`} />
                 </Button>
               </div>
               
-              <div className="p-3 sm:p-4">
+              <div className="p-3">
                 <div className="overflow-x-hidden">
-                  {marketRates.map((rate, index) => (
-                    <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
+                  {(realMarketRates.length > 0 ? realMarketRates : marketRates).map((rate, index) => (
+                    <div key={index} className="flex justify-between items-center py-1.5 border-b border-gray-100 last:border-0">
                       <div className="flex items-center">
-                        <span className="font-medium text-sm">
-                          {rate.fromCurrency} → {rate.toCurrency}
+                        <span className="text-[10px] uppercase tracking-wide font-medium">
+                          {rate.fromCurrency} — {rate.toCurrency}
                         </span>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm font-mono">{rate.rate.toFixed(4)}</span>
-                        <div className={`flex items-center ${rate.trend === "up" ? "text-green-600" : "text-red-600"}`}>
-                          {rate.trend === "up" ? (
-                            <TrendingUp className="h-3.5 w-3.5" />
-                          ) : (
-                            <TrendingDown className="h-3.5 w-3.5" />
-                          )}
-                          <span className="text-xs ml-1">{rate.change}%</span>
+                        <span className="text-[10px] font-mono">{rate.rate.toFixed(4)}</span>
+                        <div className="flex items-center">
+                          <div className="h-3.5 w-3.5 border border-black flex items-center justify-center">
+                            {rate.trend === "up" ? (
+                              <TrendingUp className="h-2 w-2" />
+                            ) : (
+                              <TrendingDown className="h-2 w-2" />
+                            )}
+                          </div>
+                          <span className="text-[9px] uppercase tracking-wide ml-1">{rate.change}%</span>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
                 
-                <div className="mt-3 pt-2 border-t border-gray-200 text-xs text-gray-600 flex justify-center items-center">
-                  <span>Last updated: Today, 15:42</span>
+                <div className="mt-3 pt-2 border-t border-gray-200 flex justify-center items-center">
+                  <span className="text-[9px] uppercase tracking-wide text-gray-500">{isLoadingRates ? "Updating..." : `Last updated: ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`}</span>
                 </div>
               </div>
             </div>
