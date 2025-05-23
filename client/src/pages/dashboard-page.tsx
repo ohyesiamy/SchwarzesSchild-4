@@ -418,79 +418,85 @@ export default function DashboardPage() {
             </section>
             
             {/* Recent Transactions Section */}
-            <section className="bg-white border border-gray-200">
-              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
-                <div>
-                  <h2 className="text-lg md:text-xl font-semibold mb-1 xs:mb-0">Recent Transactions</h2>
-                  <p className="text-xs text-gray-500 hidden md:block">Latest financial activity across your accounts</p>
-                </div>
-                <div className="flex items-center gap-2 w-full xs:w-auto">
-                  <div className="hidden md:flex items-center mr-3">
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="h-7 p-0 pr-2 text-xs"
-                    >
-                      Today
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="h-7 p-0 px-2 text-xs"
-                    >
-                      Last 7 days
-                    </Button>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className="h-7 p-0 px-2 text-xs"
-                    >
-                      Last 30 days
-                    </Button>
-                  </div>
+            <section className="bg-white border border-black shadow-sm mb-6">
+              <div className="flex items-center justify-between p-3 border-b border-black bg-gray-50">
+                <h2 className="text-base font-semibold">Recent Transactions</h2>
+                <div className="flex items-center space-x-2">
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="text-xs min-h-[36px] flex-1 xs:flex-initial active:scale-95 transition-transform"
+                    className="h-8 text-xs rounded-none border-black hidden sm:flex"
                     onClick={() => {
                       toast({
                         title: "Filter applied",
                         description: "Transactions have been filtered by your selection.",
                       });
                     }}
-                    title="Filter transactions by date or category"
                   >
-                    <CalendarIcon className="h-3 w-3 mr-1" /> FILTER
+                    <CalendarIcon className="h-3.5 w-3.5 mr-1.5" /> Filter
                   </Button>
                   <Button 
                     onClick={() => navigate("/transactions")}
                     variant="outline"
                     size="sm"
-                    className="text-xs min-h-[36px] flex-1 xs:flex-initial active:scale-95 transition-transform"
+                    className="h-8 text-xs rounded-none border-black"
                   >
-                    VIEW ALL
+                    View All
                   </Button>
                 </div>
               </div>
               
+              {/* Desktop filter options - hidden on mobile */}
+              <div className="hidden md:flex items-center p-3 border-b border-gray-200 bg-gray-50">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-7 p-0 pr-2 text-xs"
+                >
+                  Today
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-7 p-0 px-2 text-xs"
+                >
+                  Last 7 days
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-7 p-0 px-2 text-xs"
+                >
+                  Last 30 days
+                </Button>
+              </div>
+              
               {/* Mobile Transaction List */}
-              <div className="space-y-3 md:hidden">
+              <div className="divide-y divide-gray-100 md:hidden">
                 {recentTransactions.map((transaction) => (
                   <div 
                     key={transaction.id}
-                    className="border border-gray-200 p-4 rounded-lg bg-white active:bg-gray-50 transition-colors"
+                    className="p-4 hover:bg-gray-50 active:bg-gray-50 transition-colors"
                   >
-                    <div className="flex justify-between mb-2">
-                      <div className="font-medium">{transaction.name}</div>
-                      <div className={`font-medium ${transaction.amount < 0 ? 'text-gray-700' : 'text-green-700'}`}>
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center space-x-3">
+                        <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full ${
+                          transaction.amount >= 0 ? 'bg-green-50 text-green-600' : 'bg-red-50 text-red-600'
+                        }`}>
+                          {transaction.amount >= 0 ? '+' : '-'}
+                        </div>
+                        <div>
+                          <div className="font-medium text-sm">{transaction.name}</div>
+                          <div className="text-xs text-gray-500 flex items-center mt-0.5">
+                            <span>{formatDate(transaction.date)}</span>
+                            <span className="mx-1">•</span>
+                            <span>{transaction.category}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className={`text-sm font-medium ${transaction.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>
                         {formatCurrency(transaction.amount, transaction.currency)}
                       </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs text-gray-600">{formatDate(transaction.date)}</span>
-                      <span className="inline-block py-1 px-2 text-xs bg-gray-100 text-gray-700 rounded">
-                        {transaction.category}
-                      </span>
                     </div>
                   </div>
                 ))}
