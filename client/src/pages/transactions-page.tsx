@@ -1199,33 +1199,33 @@ export default function TransactionsPage() {
               )}
             </div>
             
-            <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
-              <div className="flex items-center justify-between">
-                <p className="text-sm text-gray-500">
+            <div className="px-4 py-3 border-t border-gray-200 bg-white">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                <p className="text-[10px] uppercase tracking-wide text-gray-600 order-2 md:order-1">
                   Showing {filteredTransactions.length} of {allTransactions.length} transactions
                 </p>
-                <div className="flex items-center space-x-1 text-sm">
+                <div className="flex items-center gap-2 order-1 md:order-2">
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-8 px-3"
+                    className="h-7 px-3 rounded-none border-black text-[10px] uppercase tracking-wide font-medium"
                     onClick={() => {
                       toast({
-                        title: "Export transactions",
+                        title: "Export initiated",
                         description: "Your transactions will be exported as a CSV file."
                       });
                     }}
                   >
-                    Export
+                    Export CSV
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="h-8 px-3"
+                    className="h-7 px-3 rounded-none border-black text-[10px] uppercase tracking-wide font-medium"
                     onClick={() => {
                       toast({
-                        title: "Print transactions",
-                        description: "Preparing your transactions for printing."
+                        title: "Print initiated",
+                        description: "Preparing your transaction statement for printing."
                       });
                     }}
                   >
