@@ -1108,45 +1108,49 @@ export default function TransactionsPage() {
             <div className="hidden md:block overflow-x-auto">
               <table className="min-w-full">
                 <thead>
-                  <tr className="bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    <th className="px-6 py-3">Date</th>
-                    <th className="px-6 py-3">Description</th>
-                    <th className="px-6 py-3">Reference</th>
-                    <th className="px-6 py-3">Category</th>
-                    <th className="px-6 py-3">Status</th>
-                    <th className="px-6 py-3 text-right">Amount</th>
+                  <tr className="border-b border-gray-200 text-left text-[10px] font-medium text-black uppercase tracking-wider">
+                    <th className="px-4 py-2">Date</th>
+                    <th className="px-4 py-2">Description</th>
+                    <th className="px-4 py-2">Reference</th>
+                    <th className="px-4 py-2">Category</th>
+                    <th className="px-4 py-2">Status</th>
+                    <th className="px-4 py-2 text-right">Amount</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {filteredTransactions.length > 0 ? (
                     filteredTransactions.map(transaction => (
                       <tr key={transaction.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                        <td className="px-4 py-3 whitespace-nowrap text-[11px] text-gray-600">
                           {formatDate(transaction.date)}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{transaction.name}</div>
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <div className="text-[11px] font-medium text-black">{transaction.name}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td className="px-4 py-3 whitespace-nowrap text-[10px] text-gray-500 uppercase tracking-wide">
                           {transaction.reference}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {transaction.category}
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <span className="px-1.5 py-0.5 text-[9px] border border-black text-black uppercase tracking-wide">
+                            {transaction.category}
+                          </span>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          {getStatusBadge(transaction.status)}
+                        <td className="px-4 py-3 whitespace-nowrap">
+                          <span className="inline-block px-1.5 py-0.5 text-[9px] uppercase tracking-wide font-medium border border-black">
+                            {transaction.status}
+                          </span>
                         </td>
-                        <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium text-right ${
-                          transaction.amount < 0 ? 'text-red-600' : 'text-green-600'
-                        }`}>
-                          {formatCurrency(transaction.amount, transaction.currency)}
+                        <td className="px-4 py-3 whitespace-nowrap text-[11px] font-medium text-right">
+                          <span className={transaction.amount < 0 ? 'text-black' : 'text-black'}>
+                            {formatCurrency(transaction.amount, transaction.currency)}
+                          </span>
                         </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan={6} className="px-6 py-10 text-center text-gray-500">
-                        No transactions found matching your search criteria
+                      <td colSpan={6} className="px-4 py-8 text-center">
+                        <p className="text-[10px] uppercase tracking-wide font-medium text-black">No transactions found matching your criteria</p>
                       </td>
                     </tr>
                   )}
@@ -1159,35 +1163,37 @@ export default function TransactionsPage() {
               {filteredTransactions.length > 0 ? (
                 <div className="divide-y divide-gray-200">
                   {filteredTransactions.map(transaction => (
-                    <div key={transaction.id} className="p-4 hover:bg-gray-50">
-                      <div className="flex justify-between items-start mb-2">
-                        <div className="font-medium text-sm">{transaction.name}</div>
-                        <div className={`font-medium text-sm ${
-                          transaction.amount < 0 ? 'text-red-600' : 'text-green-600'
-                        }`}>
+                    <div key={transaction.id} className="p-3 hover:bg-gray-50">
+                      <div className="flex justify-between items-start mb-1.5">
+                        <div className="font-medium text-xs uppercase tracking-wide">{transaction.name}</div>
+                        <div className="font-medium text-xs text-black">
                           {formatCurrency(transaction.amount, transaction.currency)}
                         </div>
                       </div>
-                      <div className="flex justify-between items-center">
-                        <div className="text-xs text-gray-500">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <div className="text-[9px] text-gray-500 uppercase tracking-wide">
                           {formatDate(transaction.date)} • {transaction.reference}
                         </div>
                         <div>
-                          {getStatusBadge(transaction.status)}
+                          <span className="inline-block px-1.5 py-0.5 text-[8px] uppercase tracking-wide font-medium border border-black">
+                            {transaction.status}
+                          </span>
                         </div>
                       </div>
-                      <div className="mt-2">
-                        <span className="text-xs bg-gray-100 px-2 py-0.5 text-gray-600">{transaction.category}</span>
+                      <div className="mt-1.5">
+                        <span className="text-[8px] border border-black px-1.5 py-0.5 text-black uppercase tracking-wide">{transaction.category}</span>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <div className="py-10 text-center text-gray-500">
+                <div className="py-6 text-center">
                   <div className="flex flex-col items-center">
-                    <BadgeInfo className="w-10 h-10 text-gray-300 mb-2" />
-                    <p className="text-base font-medium">No transactions found</p>
-                    <p className="text-xs">Try adjusting your filters</p>
+                    <div className="w-6 h-6 border border-black flex items-center justify-center mb-2">
+                      <BadgeInfo className="w-3 h-3 text-black" />
+                    </div>
+                    <p className="text-[10px] uppercase tracking-wide font-medium text-black">No transactions found</p>
+                    <p className="text-[9px] uppercase tracking-wide mt-1 text-gray-600">Try adjusting your filters</p>
                   </div>
                 </div>
               )}
