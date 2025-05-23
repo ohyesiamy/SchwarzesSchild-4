@@ -693,36 +693,36 @@ export default function ExchangePage() {
                 <tbody>
                   {filteredHistory.length === 0 ? (
                     <tr>
-                      <td colSpan={6} className="p-3 text-center text-gray-500 text-sm">
+                      <td colSpan={6} className="p-2 text-center text-[10px] uppercase tracking-wide text-gray-500">
                         No exchange history found with the selected filters.
                       </td>
                     </tr>
                   ) : (
                     filteredHistory.map(exchange => (
-                      <tr key={exchange.id} className="border-b border-gray-200 last:border-0 hover:bg-gray-50">
-                        <td className="p-3 text-sm">{formatDate(exchange.date)}</td>
-                        <td className="p-3 font-medium text-sm">
-                          {exchange.fromCurrency} → {exchange.toCurrency}
+                      <tr key={exchange.id} className="border-b border-gray-100 last:border-0 hover:bg-gray-50">
+                        <td className="p-2 text-[10px] uppercase tracking-wide">{formatDate(exchange.date)}</td>
+                        <td className="p-2 text-[10px] uppercase tracking-wide font-medium">
+                          {exchange.fromCurrency} — {exchange.toCurrency}
                         </td>
-                        <td className="p-3 text-right text-sm">
+                        <td className="p-2 text-right text-[10px] uppercase tracking-wide">
                           {formatCurrency(exchange.fromAmount, exchange.fromCurrency)}
                         </td>
-                        <td className="p-3 text-right text-sm">
+                        <td className="p-2 text-right text-[10px] uppercase tracking-wide">
                           {formatCurrency(exchange.toAmount, exchange.toCurrency)}
                         </td>
-                        <td className="p-3 text-sm">
+                        <td className="p-2 text-[10px] uppercase tracking-wide font-mono">
                           {exchange.rate.toFixed(4)}
                         </td>
-                        <td className="p-3 text-sm">
-                          <Badge 
-                            variant={exchange.status === "completed" ? "default" : "outline"}
-                            className={exchange.status === "completed" 
-                              ? "bg-green-600 hover:bg-green-700" 
-                              : "border-orange-500 text-orange-500"
-                            }
-                          >
-                            {exchange.status === "completed" ? "Completed" : "Pending"}
-                          </Badge>
+                        <td className="p-2">
+                          {exchange.status === "completed" ? (
+                            <div className="inline-flex items-center border border-black px-1.5 py-0.5">
+                              <span className="text-[9px] uppercase tracking-wide">Completed</span>
+                            </div>
+                          ) : (
+                            <div className="inline-flex items-center border border-black px-1.5 py-0.5">
+                              <span className="text-[9px] uppercase tracking-wide">Pending</span>
+                            </div>
+                          )}
                         </td>
                       </tr>
                     ))
@@ -735,45 +735,47 @@ export default function ExchangePage() {
           {/* Mobile View - Cards */}
           <div className="md:hidden space-y-3">
             {filteredHistory.length === 0 ? (
-              <div className="text-center p-4 text-gray-500 border border-gray-200 bg-gray-50 text-sm">
+              <div className="text-center p-3 text-[10px] uppercase tracking-wide text-gray-500 border border-gray-200">
                 No exchange history found with the selected filters.
               </div>
             ) : (
               filteredHistory.map(exchange => (
-                <div key={exchange.id} className="border border-black p-3 shadow-sm">
+                <div key={exchange.id} className="border border-gray-200 p-3">
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center">
-                      <span className="text-xs text-gray-600">{formatDate(exchange.date)}</span>
+                      <span className="text-[9px] uppercase tracking-wide text-gray-500">{formatDate(exchange.date)}</span>
                     </div>
-                    <Badge 
-                      variant={exchange.status === "completed" ? "default" : "outline"}
-                      className={`text-xs ${exchange.status === "completed" 
-                        ? "bg-green-600 hover:bg-green-700" 
-                        : "border-orange-500 text-orange-500"
-                      }`}
-                    >
-                      {exchange.status === "completed" ? "Completed" : "Pending"}
-                    </Badge>
+                    {exchange.status === "completed" ? (
+                      <div className="inline-flex items-center border border-black px-1.5 py-0.5">
+                        <span className="text-[9px] uppercase tracking-wide">Completed</span>
+                      </div>
+                    ) : (
+                      <div className="inline-flex items-center border border-black px-1.5 py-0.5">
+                        <span className="text-[9px] uppercase tracking-wide">Pending</span>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="flex items-center justify-between mb-2">
-                    <div className="font-medium text-sm">
-                      {exchange.fromCurrency} → {exchange.toCurrency}
+                    <div className="text-[10px] uppercase tracking-wide font-medium">
+                      {exchange.fromCurrency} — {exchange.toCurrency}
                     </div>
-                    <div className="text-xs text-gray-600">
-                      Rate: {exchange.rate.toFixed(4)}
+                    <div className="text-[9px] uppercase tracking-wide text-gray-500">
+                      Rate: <span className="font-mono">{exchange.rate.toFixed(4)}</span>
                     </div>
                   </div>
                   
                   <div className="flex justify-between items-center pt-2 border-t border-gray-100">
                     <div>
-                      <div className="text-xs text-gray-600">From</div>
-                      <div className="font-medium text-sm">{formatCurrency(exchange.fromAmount, exchange.fromCurrency)}</div>
+                      <div className="text-[9px] uppercase tracking-wide text-gray-500">From</div>
+                      <div className="text-[10px] uppercase tracking-wide">{formatCurrency(exchange.fromAmount, exchange.fromCurrency)}</div>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-gray-400" />
+                    <div className="h-3 w-3 border border-black flex items-center justify-center">
+                      <ArrowRight className="h-1.5 w-1.5" />
+                    </div>
                     <div>
-                      <div className="text-xs text-gray-600">To</div>
-                      <div className="font-medium text-sm">{formatCurrency(exchange.toAmount, exchange.toCurrency)}</div>
+                      <div className="text-[9px] uppercase tracking-wide text-gray-500">To</div>
+                      <div className="text-[10px] uppercase tracking-wide">{formatCurrency(exchange.toAmount, exchange.toCurrency)}</div>
                     </div>
                   </div>
                 </div>
@@ -785,33 +787,35 @@ export default function ExchangePage() {
       
       {/* PIN Verification Modal */}
       <Dialog open={showPinVerification} onOpenChange={setShowPinVerification}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
+        <DialogContent className="max-w-md rounded-none border-black">
+          <DialogHeader className="border-b border-gray-200 pb-2">
             <DialogTitle className="flex items-center">
-              <Shield className="h-5 w-5 mr-2" />
-              Security Verification
+              <div className="h-4 w-4 border border-black flex items-center justify-center mr-2">
+                <Shield className="h-2 w-2" />
+              </div>
+              <span className="text-xs uppercase tracking-wide font-medium">Security Verification</span>
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-[10px] uppercase tracking-wide text-gray-500 mt-1">
               For security reasons, large transactions require PIN verification.
             </DialogDescription>
           </DialogHeader>
           
-          <div className="py-4">
-            <p className="mb-4 text-sm">Please enter your 6-digit security PIN to authorize this exchange.</p>
-            <div className="mb-6">
+          <div className="py-3">
+            <p className="mb-3 text-[10px] uppercase tracking-wide">Please enter your 6-digit security PIN to authorize this exchange.</p>
+            <div className="mb-4">
               <Input
                 type="password"
                 maxLength={6}
                 placeholder="Enter 6-digit PIN"
-                className="text-center tracking-widest"
+                className="text-center tracking-widest rounded-none border-black h-8 text-sm"
                 value={pinCode}
                 onChange={e => setPinCode(e.target.value.replace(/\D/g, ''))}
               />
             </div>
             
-            <div className="bg-gray-50 p-3 border border-gray-200 mb-4 text-sm">
-              <p className="font-medium mb-1">Transaction Summary:</p>
-              <p>Converting {formatCurrency(parseFloat(fromAmount), fromCurrency)} to approximately {formatCurrency(parseFloat(toAmount), toCurrency)}.</p>
+            <div className="border border-black p-3 mb-3">
+              <p className="text-[10px] uppercase tracking-wide font-medium border-b border-gray-200 pb-1 mb-2">Transaction Summary:</p>
+              <p className="text-[10px] uppercase tracking-wide">Converting {formatCurrency(parseFloat(fromAmount), fromCurrency)} to approximately {formatCurrency(parseFloat(toAmount), toCurrency)}.</p>
             </div>
           </div>
           
