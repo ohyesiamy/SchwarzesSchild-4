@@ -455,10 +455,17 @@ export default function ExchangePage() {
                             <SelectValue placeholder="Select currency" />
                           </SelectTrigger>
                           <SelectContent className="text-[10px] uppercase tracking-wide rounded-none">
-                            <SelectItem value="EUR">EUR - Euro</SelectItem>
                             <SelectItem value="USD">USD - US Dollar</SelectItem>
+                            <SelectItem value="EUR">EUR - Euro</SelectItem>
                             <SelectItem value="GBP">GBP - British Pound</SelectItem>
+                            <SelectItem value="JPY">JPY - Japanese Yen</SelectItem>
+                            <SelectItem value="CNY">CNY - Chinese Yuan</SelectItem>
                             <SelectItem value="CHF">CHF - Swiss Franc</SelectItem>
+                            <SelectItem value="CAD">CAD - Canadian Dollar</SelectItem>
+                            <SelectItem value="AUD">AUD - Australian Dollar</SelectItem>
+                            <SelectItem value="HKD">HKD - Hong Kong Dollar</SelectItem>
+                            <SelectItem value="SGD">SGD - Singapore Dollar</SelectItem>
+                            <SelectItem value="BTC">BTC - Bitcoin</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -505,7 +512,14 @@ export default function ExchangePage() {
                             <SelectItem value="USD">USD - US Dollar</SelectItem>
                             <SelectItem value="EUR">EUR - Euro</SelectItem>
                             <SelectItem value="GBP">GBP - British Pound</SelectItem>
+                            <SelectItem value="JPY">JPY - Japanese Yen</SelectItem>
+                            <SelectItem value="CNY">CNY - Chinese Yuan</SelectItem>
                             <SelectItem value="CHF">CHF - Swiss Franc</SelectItem>
+                            <SelectItem value="CAD">CAD - Canadian Dollar</SelectItem>
+                            <SelectItem value="AUD">AUD - Australian Dollar</SelectItem>
+                            <SelectItem value="HKD">HKD - Hong Kong Dollar</SelectItem>
+                            <SelectItem value="SGD">SGD - Singapore Dollar</SelectItem>
+                            <SelectItem value="BTC">BTC - Bitcoin</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -675,8 +689,8 @@ export default function ExchangePage() {
                   ))}
                 </div>
                 
-                <div className="mt-3 pt-2 border-t border-gray-200 flex justify-center items-center">
-                  <span className="text-[9px] uppercase tracking-wide text-gray-500">{isLoadingRates ? "Updating..." : `Last updated: ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`}</span>
+                <div className="mt-3 pt-2 border-t border-gray-800 flex justify-center items-center">
+                  <span className="text-[9px] uppercase tracking-wide text-gray-400">{isLoadingRates ? "Updating live rates..." : `Last updated: ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`}</span>
                 </div>
               </div>
             </div>
@@ -999,6 +1013,14 @@ export default function ExchangePage() {
                   <SelectItem value="USD">USD - US Dollar</SelectItem>
                   <SelectItem value="EUR">EUR - Euro</SelectItem>
                   <SelectItem value="GBP">GBP - British Pound</SelectItem>
+                  <SelectItem value="JPY">JPY - Japanese Yen</SelectItem>
+                  <SelectItem value="CNY">CNY - Chinese Yuan</SelectItem>
+                  <SelectItem value="CHF">CHF - Swiss Franc</SelectItem>
+                  <SelectItem value="CAD">CAD - Canadian Dollar</SelectItem>
+                  <SelectItem value="AUD">AUD - Australian Dollar</SelectItem>
+                  <SelectItem value="HKD">HKD - Hong Kong Dollar</SelectItem>
+                  <SelectItem value="SGD">SGD - Singapore Dollar</SelectItem>
+                  <SelectItem value="BTC">BTC - Bitcoin</SelectItem>
                 </SelectContent>
               </Select>
             </div>
