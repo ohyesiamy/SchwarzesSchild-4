@@ -33,23 +33,23 @@ export function MarketSnapshot() {
     <div className="bg-white border border-gray-200">
       <div className="divide-y divide-gray-200">
         {marketData.map((item, index) => (
-          <div key={index} className="p-4 flex justify-between items-center">
+          <div key={index} className="p-2.5 flex justify-between items-center">
             <div>
-              <div className="font-medium">{item.pair}</div>
-              <div className="text-sm text-gray-600">
+              <div className="text-xs font-medium">{item.pair}</div>
+              <div className="text-[10px] text-gray-600">
                 {item.rate.toFixed(4)}
               </div>
             </div>
             
             <div className={`flex items-center ${
-              item.status === "up" ? "text-green-700" : "text-red-700"
+              item.status === "up" ? "text-black" : "text-black"
             }`}>
               {item.status === "up" ? (
-                <TrendingUpIcon className="h-4 w-4 mr-1" />
+                <TrendingUpIcon className="h-3 w-3 mr-0.5" />
               ) : (
-                <TrendingDownIcon className="h-4 w-4 mr-1" />
+                <TrendingDownIcon className="h-3 w-3 mr-0.5" />
               )}
-              <span className="text-sm">
+              <span className="text-[10px]">
                 {item.status === "up" ? "+" : ""}{item.change.toFixed(2)}%
               </span>
             </div>
@@ -57,8 +57,8 @@ export function MarketSnapshot() {
         ))}
       </div>
       
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <div className="text-xs text-gray-500">
+      <div className="p-2 border-t border-gray-200 bg-gray-50">
+        <div className="text-[9px] text-gray-500">
           Market data as of {new Date().toLocaleString()}
         </div>
       </div>

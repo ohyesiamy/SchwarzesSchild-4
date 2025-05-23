@@ -37,24 +37,24 @@ export function ComplianceStatus() {
     switch (complianceStatus.kycStatus) {
       case 'completed':
         return (
-          <div className="flex items-center text-green-600">
-            <CheckIcon className="h-4 w-4 mr-2" />
-            <span className="font-medium">Verified</span>
+          <div className="flex items-center text-black">
+            <CheckIcon className="h-3 w-3 mr-1.5" />
+            <span className="text-xs uppercase tracking-wide">Verified</span>
           </div>
         );
       case 'pending':
         return (
-          <div className="flex items-center text-amber-600">
-            <ClockIcon className="h-4 w-4 mr-2" />
-            <span className="font-medium">Pending Review</span>
+          <div className="flex items-center text-black">
+            <ClockIcon className="h-3 w-3 mr-1.5" />
+            <span className="text-xs uppercase tracking-wide">Pending Review</span>
           </div>
         );
       case 'required':
       case 'expired':
         return (
-          <div className="flex items-center text-red-600">
-            <AlertCircleIcon className="h-4 w-4 mr-2" />
-            <span className="font-medium">
+          <div className="flex items-center text-black">
+            <AlertCircleIcon className="h-3 w-3 mr-1.5" />
+            <span className="text-xs uppercase tracking-wide">
               {complianceStatus.kycStatus === 'required' ? 'Verification Required' : 'Verification Expired'}
             </span>
           </div>
@@ -66,17 +66,20 @@ export function ComplianceStatus() {
   
   return (
     <div className="bg-white border border-gray-200">
-      <div className="p-6 border-b border-gray-200 flex items-center">
-        <ShieldCheckIcon className="h-5 w-5 mr-3 text-gray-700" />
-        <h3 className="text-lg font-medium">Your Compliance Status</h3>
+      <div className="p-2.5 border-b border-gray-200 flex items-center justify-between">
+        <div>
+          <h3 className="text-xs uppercase tracking-wide font-medium">Compliance Status</h3>
+          <p className="text-[10px] text-gray-500 mt-0.5">Your account verification and KYC status</p>
+        </div>
+        <ShieldCheckIcon className="h-4 w-4 text-gray-700" />
       </div>
       
-      <div className="p-6">
-        <div className="mb-6 flex justify-between items-start">
+      <div className="p-3">
+        <div className="mb-4 flex justify-between items-start">
           <div>
-            <div className="text-sm font-medium mb-1">KYC Status</div>
+            <div className="text-[11px] uppercase tracking-wide font-medium mb-1">KYC Status</div>
             {getStatusIndicator()}
-            <div className="text-xs text-gray-500 mt-1">
+            <div className="text-[9px] text-gray-500 mt-0.5">
               {complianceStatus.kycStatus === 'completed' && 
                 `Last verified: ${formatDate(complianceStatus.kycLastVerified)}`}
               {complianceStatus.kycStatus === 'completed' && 
@@ -84,22 +87,22 @@ export function ComplianceStatus() {
             </div>
           </div>
           
-          <div className="bg-gray-900 text-white px-3 py-1.5 text-sm font-medium rounded-sm">
+          <div className="bg-black text-white px-2 py-1 text-[10px] font-medium">
             {complianceStatus.tierLevel}
           </div>
         </div>
         
-        <div className="p-4 bg-gray-50 border border-gray-200 mb-6">
-          <div className="text-sm font-medium mb-1">Current Verification Tier</div>
-          <div className="text-sm text-gray-600">{complianceStatus.tierDescription}</div>
+        <div className="p-2.5 bg-gray-50 border border-gray-200 mb-4">
+          <div className="text-[11px] uppercase tracking-wide font-medium mb-0.5">Current Tier</div>
+          <div className="text-[10px] text-gray-600">{complianceStatus.tierDescription}</div>
         </div>
         
-        <div className="mb-6">
-          <div className="text-sm font-medium mb-2">Verified Documents</div>
-          <ul className="space-y-1.5">
+        <div className="mb-4">
+          <div className="text-[11px] uppercase tracking-wide font-medium mb-1.5">Verified Documents</div>
+          <ul className="space-y-1">
             {complianceStatus.documentsVerified.map((doc, index) => (
-              <li key={index} className="flex items-center text-sm">
-                <CheckIcon className="h-4 w-4 text-green-600 mr-2" />
+              <li key={index} className="flex items-center text-[11px]">
+                <CheckIcon className="h-3 w-3 text-black mr-1.5" />
                 <span>{doc}</span>
               </li>
             ))}
@@ -107,12 +110,12 @@ export function ComplianceStatus() {
         </div>
         
         {complianceStatus.documentsRequired.length > 0 && (
-          <div className="mb-6">
-            <div className="text-sm font-medium mb-2 text-red-600">Required Documents</div>
-            <ul className="space-y-1.5">
+          <div className="mb-4">
+            <div className="text-[11px] uppercase tracking-wide font-medium mb-1.5">Required Documents</div>
+            <ul className="space-y-1">
               {complianceStatus.documentsRequired.map((doc, index) => (
-                <li key={index} className="flex items-center text-sm text-red-600">
-                  <AlertCircleIcon className="h-4 w-4 text-red-600 mr-2" />
+                <li key={index} className="flex items-center text-[11px] text-black">
+                  <AlertCircleIcon className="h-3 w-3 text-black mr-1.5" />
                   <span>{doc}</span>
                 </li>
               ))}
@@ -120,24 +123,24 @@ export function ComplianceStatus() {
           </div>
         )}
         
-        <div className="flex space-x-3">
-          <Button variant="outline" size="sm" className="text-xs">
-            <UploadIcon className="h-3 w-3 mr-2" />
+        <div className="flex space-x-2">
+          <Button variant="outline" size="sm" className="text-[10px] h-7 rounded-none border-black uppercase tracking-wide">
+            <UploadIcon className="h-2.5 w-2.5 mr-1.5" />
             Upload Verification
           </Button>
           
-          <Button variant="outline" size="sm" className="text-xs">
-            <FileDownIcon className="h-3 w-3 mr-2" />
-            Download Verification Summary
+          <Button variant="outline" size="sm" className="text-[10px] h-7 rounded-none border-black uppercase tracking-wide">
+            <FileDownIcon className="h-2.5 w-2.5 mr-1.5" />
+            Download Summary
           </Button>
         </div>
       </div>
       
-      <div className="p-4 border-t border-gray-200 bg-gray-50 text-xs text-gray-500">
+      <div className="p-2.5 border-t border-gray-200 bg-gray-50">
         <div className="flex justify-between items-center">
-          <span>Next compliance review: {formatDate(complianceStatus.nextReviewDate)}</span>
-          <Button variant="link" size="sm" className="text-xs text-black p-0">
-            Learn more about verification tiers
+          <span className="text-[9px] text-gray-500">Next review: {formatDate(complianceStatus.nextReviewDate)}</span>
+          <Button variant="link" size="sm" className="text-[10px] text-black p-0 uppercase tracking-wide h-auto">
+            Learn More
           </Button>
         </div>
       </div>
