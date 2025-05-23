@@ -490,53 +490,83 @@ export default function DashboardPage() {
               </div>
               
               {/* Primary Account Highlight */}
-              <div className="bg-black text-white p-5 sm:p-6 md:p-8 rounded-lg md:rounded-none">
+              <div className="bg-black text-white p-4 sm:p-5 rounded-none">
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-                  <div className="mb-4 sm:mb-0">
-                    <h3 className="text-xs md:text-sm font-light uppercase tracking-wider mb-1">Primary Account</h3>
-                    <div className="text-lg md:text-xl font-light mb-2 md:mb-4">{mainAccount.name}</div>
-                    <div className="text-3xl md:text-4xl font-light">
+                  <div className="mb-3 sm:mb-0">
+                    <h3 className="text-[10px] font-medium uppercase tracking-wider mb-1 text-gray-400">Primary Account</h3>
+                    <div className="text-sm md:text-base font-light mb-1.5">{mainAccount.name}</div>
+                    <div className="text-2xl md:text-3xl font-light tracking-tight">
                       {mainAccount.currency === "EUR" && "€"}
                       {mainAccount.currency === "USD" && "$"}
                       {mainAccount.currency === "GBP" && "£"}
                       {mainAccount.balance.toFixed(2)}
                     </div>
+                    <div className="flex items-center mt-2">
+                      <div className="w-1 h-1 bg-green-400 rounded-full mr-1"></div>
+                      <span className="text-[10px] uppercase tracking-wide text-gray-400">Available immediately</span>
+                    </div>
                   </div>
                   <div className="flex sm:flex-col gap-2 sm:space-y-2">
                     <Button 
-                      className="flex-1 sm:w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 active:scale-95"
+                      size="sm"
+                      className="h-8 border border-gray-700 bg-transparent text-white hover:bg-white hover:text-black rounded-none text-[10px] uppercase tracking-wide transition-colors duration-200 active:scale-95"
                       onClick={() => setIsTransferModalOpen(true)}
                       title="Transfer funds between accounts"
                     >
-                      TRANSFER
+                      <ArrowRightLeftIcon className="h-3 w-3 mr-1.5" />
+                      Transfer
                     </Button>
                     <Button 
-                      className="flex-1 sm:w-full border border-white text-white hover:bg-white hover:text-black text-xs transition-colors duration-200 active:scale-95"
+                      size="sm"
+                      className="h-8 border border-gray-700 bg-transparent text-white hover:bg-white hover:text-black rounded-none text-[10px] uppercase tracking-wide transition-colors duration-200 active:scale-95"
                       onClick={() => setIsStatementModalOpen(true)}
                       title="View and download account statements"
                     >
-                      STATEMENTS
+                      <SquareIcon className="h-3 w-3 mr-1.5" />
+                      Statements
                     </Button>
                   </div>
+                </div>
+                
+                <div className="mt-3 border-t border-gray-800 pt-3 flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wide">Account No.</div>
+                      <div className="text-xs font-mono">••••{Math.floor(1000 + Math.random() * 9000)}</div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] text-gray-400 uppercase tracking-wide">SWIFT</div>
+                      <div className="text-xs font-mono">SSHILDES</div>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    variant="outline"
+                    size="sm"
+                    className="h-7 px-2 border border-gray-700 text-white hover:bg-white hover:text-black rounded-none text-[10px]"
+                    onClick={() => navigate("/transactions")}
+                  >
+                    View History
+                  </Button>
                 </div>
               </div>
             </section>
             
             {/* Upcoming Payments Section */}
             <section className="bg-white border border-gray-200">
-              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-5 border-b border-gray-200">
+              <div className="flex flex-col xs:flex-row justify-between items-start xs:items-center p-2.5 border-b border-gray-200">
                 <div>
-                  <h2 className="text-lg md:text-xl font-semibold mb-1 xs:mb-0">Upcoming Payments</h2>
-                  <p className="text-xs text-gray-500 hidden md:block">Your scheduled payments for the next 30 days</p>
+                  <h2 className="text-xs uppercase tracking-wide font-medium">Upcoming Payments</h2>
+                  <p className="text-[10px] text-gray-500 hidden md:block mt-0.5">Your scheduled payments for the next 30 days</p>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Button 
                     variant="outline"
                     size="sm"
-                    className="text-xs min-h-[36px] active:scale-95 transition-transform w-full xs:w-auto"
+                    className="text-[10px] uppercase tracking-wide h-7 active:scale-95 transition-transform w-full xs:w-auto rounded-none border-black"
                   >
-                    <CalendarIcon className="h-3.5 w-3.5 mr-1.5" />
-                    SCHEDULE PAYMENT
+                    <CalendarIcon className="h-3 w-3 mr-1.5" />
+                    Schedule Payment
                   </Button>
                 </div>
               </div>
