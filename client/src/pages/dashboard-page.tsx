@@ -91,46 +91,65 @@ export default function DashboardPage() {
       <MobileNavigation active="dashboard" />
       
       <main className="py-6 md:py-10 lg:py-12 px-4 md:px-6 lg:px-8 container mx-auto flex-grow mb-16 md:mb-0 max-w-[1440px]">
-        {/* Welcome Banner */}
-        <div className="bg-black text-white mb-8 md:mb-12 shadow-lg rounded-lg md:rounded-none relative overflow-hidden">
-          {/* Premium geometric pattern overlay */}
-          <div className="absolute inset-0 opacity-10">
+        {/* Welcome Banner - Enhanced Premium Version */}
+        <div className="bg-black text-white mb-8 md:mb-12 shadow-lg rounded-none relative overflow-hidden border-b border-gray-800">
+          {/* Premium geometric pattern overlay with enhanced visibility */}
+          <div className="absolute inset-0 opacity-8">
             <div className="absolute top-0 right-0 w-96 h-96 border-l border-t border-white transform translate-x-16 -translate-y-16"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 border-r border-b border-white transform -translate-x-8 translate-y-8"></div>
+            <div className="absolute top-1/2 left-1/4 w-32 h-32 border border-white rounded-full opacity-5"></div>
+            <div className="absolute bottom-1/4 right-1/3 w-48 h-48 border border-white rounded-full opacity-5"></div>
           </div>
           
-          <div className="p-5 sm:p-6 md:p-8 lg:p-10 relative z-10">
+          {/* Security badge overlay */}
+          <div className="absolute top-6 right-8 w-24 h-24 opacity-10 hidden lg:block">
+            <div className="w-full h-full border-2 border-white rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 border border-white rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 border border-white rounded-full"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="p-6 sm:p-8 md:p-10 lg:px-12 lg:py-10 relative z-10">
             <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
               <div className="flex items-start lg:items-center mb-6 lg:mb-0">
                 <Logo 
                   size="medium" 
                   variant="white" 
                   background="dark" 
-                  className="mr-4 hidden md:block" 
+                  className="mr-5 hidden md:block" 
                 />
                 <div>
-                  <div className="flex items-center mb-1">
+                  <div className="flex flex-col md:flex-row md:items-center gap-2 mb-1">
                     <h1 className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight">Welcome back, Jonathan</h1>
-                    <div className="hidden md:block w-1.5 h-1.5 bg-white rounded-full mx-3"></div>
-                    <span className="hidden md:block text-xs uppercase tracking-wider text-gray-300">PREMIUM CLIENT</span>
+                    <div className="hidden md:flex items-center">
+                      <div className="w-1.5 h-1.5 bg-white rounded-full mx-3"></div>
+                      <span className="text-xs uppercase tracking-wider font-semibold text-white bg-gray-800 px-3 py-1">PREMIUM CLIENT</span>
+                    </div>
                   </div>
-                  <p className="text-xs md:text-sm text-gray-300">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
-                  <div className="hidden md:flex items-center mt-6 text-sm">
-                    <span className="flex items-center mr-8">
-                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-2"></div>
-                      All accounts secure
-                    </span>
-                    <span className="flex items-center">
-                      <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2"></div>
-                      Market status: Open
-                    </span>
+                  <p className="text-xs md:text-sm text-gray-300 mb-2">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
+                  
+                  <div className="hidden md:block mt-6 p-3 bg-gray-900 bg-opacity-50 border border-gray-800 rounded-sm">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center">
+                        <div className="flex items-center mr-8">
+                          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                          <span className="text-sm font-medium">Two-factor authentication enabled</span>
+                        </div>
+                        <div className="flex items-center">
+                          <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                          <span className="text-sm font-medium">All accounts secure</span>
+                        </div>
+                      </div>
+                      <span className="text-xs uppercase text-gray-400">FINMA Protected</span>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col xs:flex-row lg:flex-col space-y-0 xs:space-y-0 lg:space-y-3 space-x-0 xs:space-x-4 lg:space-x-0">
+              <div className="flex flex-col xs:flex-row lg:flex-col space-y-0 xs:space-y-0 lg:space-y-4 space-x-0 xs:space-x-4 lg:space-x-0">
                 <Button 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-black text-xs transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-10 mb-3 xs:mb-0 lg:mb-0 w-full"
+                  className="border-2 border-white text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 mb-3 xs:mb-0 lg:mb-0 w-full shadow-sm"
                   onClick={() => navigate("/security")}
                 >
                   <ShieldIcon className="h-4 w-4 mr-2" />
@@ -138,7 +157,7 @@ export default function DashboardPage() {
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-black text-xs transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-10 w-full"
+                  className="border-2 border-white text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 w-full shadow-sm"
                   onClick={() => navigate("/profile")}
                 >
                   <span className="whitespace-nowrap">ACCOUNT SETTINGS</span>
@@ -146,10 +165,17 @@ export default function DashboardPage() {
               </div>
             </div>
             
-            {/* Date and notifications row for desktop */}
-            <div className="hidden md:flex justify-between items-center mt-4 pt-4 border-t border-gray-800">
-              <div className="text-sm text-gray-300">
-                {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+            {/* Date and notifications row for desktop - Enhanced */}
+            <div className="hidden md:flex justify-between items-center mt-6 pt-4 border-t border-gray-800">
+              <div className="flex items-center">
+                <div className="flex items-center mr-8 text-sm">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full mr-2"></div>
+                  <span>Swiss Banking Day: {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                </div>
+                <div className="text-xs px-2 py-1 bg-gray-800 text-white flex items-center">
+                  <span>Zürich Market: </span>
+                  <span className="text-green-400 ml-1 font-medium">OPEN</span>
+                </div>
               </div>
               <div className="flex items-center space-x-6">
                 <div className="relative cursor-pointer transform hover:scale-105 active:scale-95 transition-transform duration-200">
