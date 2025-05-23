@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { Footer } from "@/components/layout/footer";
 import { Logo } from "@/components/ui/logo";
 import { BankProfile } from "@/components/dashboard/bank-profile";
@@ -78,6 +79,7 @@ export default function DashboardPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <Navigation active="dashboard" />
+      <MobileNavigation active="dashboard" />
       
       <main className="py-6 md:py-10 px-4 md:px-6 container mx-auto flex-grow mb-16 md:mb-0">
         {/* Welcome Banner */}
