@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { Footer } from "@/components/layout/footer";
 import { TransactionItem } from "@/components/account/transaction-item";
 import { Button } from "@/components/ui/button";
@@ -386,8 +387,9 @@ export default function TransactionsPage() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <Navigation active="transactions" />
+      <MobileNavigation active="transactions" />
       
-      <main className="flex-1 container mx-auto px-4 py-8">
+      <main className="flex-1 container mx-auto px-4 py-8 mb-20 md:mb-0">
         <h1 className="text-2xl font-bold mb-8">Transfer & Transaction Management</h1>
         
         {/* Transfer Options Section */}

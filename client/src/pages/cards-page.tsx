@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { VirtualCard } from "@/components/account/virtual-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -226,8 +227,9 @@ export default function CardsPage() {
     <div className="min-h-screen flex flex-col">
       <Header />
       <Navigation active="cards" />
+      <MobileNavigation active="cards" />
       
-      <main className="py-8 px-4 container mx-auto flex-grow">
+      <main className="py-8 px-4 container mx-auto flex-grow mb-20 md:mb-0">
         <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <h1 className="text-3xl mb-2 sm:mb-0">Card Management</h1>
           <Button 
