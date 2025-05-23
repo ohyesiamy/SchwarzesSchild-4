@@ -902,28 +902,30 @@ export default function ExchangePage() {
       
       {/* Auto-Convert Setup Modal */}
       <Dialog open={showAutoConvertModal} onOpenChange={setShowAutoConvertModal}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
+        <DialogContent className="max-w-md rounded-none border-black">
+          <DialogHeader className="border-b border-gray-200 pb-2">
             <DialogTitle className="flex items-center">
-              <RefreshCw className="h-5 w-5 mr-2" />
-              Auto-Convert Setup
+              <div className="h-4 w-4 border border-black flex items-center justify-center mr-2">
+                <RefreshCw className="h-2 w-2" />
+              </div>
+              <span className="text-xs uppercase tracking-wide font-medium">Auto-Convert Setup</span>
             </DialogTitle>
-            <DialogDescription>
+            <DialogDescription className="text-[10px] uppercase tracking-wide text-gray-500 mt-1">
               Automatically convert funds when balance reaches threshold.
             </DialogDescription>
           </DialogHeader>
           
-          <div className="py-4 space-y-4">
+          <div className="py-3 space-y-3">
             <div>
-              <label className="block text-sm mb-1">From Currency</label>
+              <label className="block text-[10px] uppercase tracking-wide font-medium mb-1">From Currency</label>
               <Select 
                 value={fromCurrency} 
                 onValueChange={setFromCurrency}
               >
-                <SelectTrigger className="w-full border-black">
+                <SelectTrigger className="w-full rounded-none border-black h-7 text-[10px] uppercase tracking-wide">
                   <SelectValue placeholder="Select currency" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="text-[10px] uppercase tracking-wide rounded-none">
                   <SelectItem value="EUR">EUR - Euro</SelectItem>
                   <SelectItem value="USD">USD - US Dollar</SelectItem>
                   <SelectItem value="GBP">GBP - British Pound</SelectItem>
@@ -932,15 +934,15 @@ export default function ExchangePage() {
             </div>
             
             <div>
-              <label className="block text-sm mb-1">To Currency</label>
+              <label className="block text-[10px] uppercase tracking-wide font-medium mb-1">To Currency</label>
               <Select 
                 value={toCurrency} 
                 onValueChange={setToCurrency}
               >
-                <SelectTrigger className="w-full border-black">
+                <SelectTrigger className="w-full rounded-none border-black h-7 text-[10px] uppercase tracking-wide">
                   <SelectValue placeholder="Select currency" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="text-[10px] uppercase tracking-wide rounded-none">
                   <SelectItem value="USD">USD - US Dollar</SelectItem>
                   <SelectItem value="EUR">EUR - Euro</SelectItem>
                   <SelectItem value="GBP">GBP - British Pound</SelectItem>
@@ -949,28 +951,30 @@ export default function ExchangePage() {
             </div>
             
             <div>
-              <label className="block text-sm mb-1">Threshold Amount</label>
+              <label className="block text-[10px] uppercase tracking-wide font-medium mb-1">Threshold Amount</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <span className="text-gray-500">{CURRENCY_SYMBOLS[fromCurrency] || fromCurrency}</span>
+                <div className="absolute inset-y-0 left-0 flex items-center pl-2">
+                  <span className="text-gray-500 text-[10px]">{CURRENCY_SYMBOLS[fromCurrency] || fromCurrency}</span>
                 </div>
                 <Input
                   type="text"
                   placeholder="e.g., 10000"
-                  className="pl-8"
+                  className="pl-6 rounded-none border-black h-7 text-[10px] uppercase tracking-wide"
                   value={autoConvertThreshold}
                   onChange={(e) => setAutoConvertThreshold(e.target.value)}
                 />
               </div>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-[9px] uppercase tracking-wide text-gray-500 mt-1">
                 Auto-convert will trigger when your {fromCurrency} balance exceeds this amount.
               </p>
             </div>
             
-            <div className="bg-blue-50 p-3 border border-blue-100">
+            <div className="border border-black p-3">
               <div className="flex items-start">
-                <Info className="h-4 w-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
-                <p className="text-xs text-blue-700">
+                <div className="h-3 w-3 border border-black flex items-center justify-center mr-2 mt-0.5">
+                  <Info className="h-1.5 w-1.5" />
+                </div>
+                <p className="text-[9px] uppercase tracking-wide text-gray-600">
                   Automatic conversions use the current market rate at the time of conversion. You can disable auto-convert at any time.
                 </p>
               </div>
