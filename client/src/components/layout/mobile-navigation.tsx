@@ -42,8 +42,8 @@ export function MobileNavigation({ active }: MobileNavigationProps) {
   const currentActive = determineActive();
   
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 lg:hidden shadow-lg">
-      <div className="grid grid-cols-5 h-16">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 lg:hidden">
+      <div className="grid grid-cols-5 h-14">
         {navItems.map((item) => {
           const isActive = currentActive === item.name;
           const Icon = item.icon;
@@ -52,15 +52,15 @@ export function MobileNavigation({ active }: MobileNavigationProps) {
             <button
               key={item.name}
               onClick={() => navigate(item.path)}
-              className={`flex flex-col items-center justify-center py-2 text-xs font-medium transition-colors ${
+              className={`flex flex-col items-center justify-center py-1.5 text-[10px] uppercase tracking-wide transition-colors ${
                 isActive ? "text-black" : "text-gray-500 hover:text-black"
               }`}
             >
-              <div className={`flex items-center justify-center h-8 w-8 mb-1 ${isActive ? 'bg-black bg-opacity-5 rounded-sm' : ''}`}>
-                <Icon className={`w-5 h-5 ${isActive ? "text-black" : "text-gray-500"}`} />
+              <div className={`flex items-center justify-center h-6 w-6 mb-1 ${isActive ? 'bg-black bg-opacity-5' : ''}`}>
+                <Icon className={`w-4 h-4 ${isActive ? "text-black" : "text-gray-500"}`} />
               </div>
-              <span className={`${isActive ? 'font-semibold' : ''}`}>{item.label}</span>
-              {isActive && <div className="w-10 h-0.5 bg-black absolute bottom-0" />}
+              <span className={`${isActive ? 'font-medium' : ''}`}>{item.label}</span>
+              {isActive && <div className="w-8 h-0.5 bg-black absolute bottom-0" />}
             </button>
           );
         })}

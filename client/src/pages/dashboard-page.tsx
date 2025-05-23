@@ -93,17 +93,17 @@ export default function DashboardPage() {
       
       <main className="py-5 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
         {/* Mobile optimized header */}
-        <div className="flex flex-col mb-5">
-          <h1 className="text-lg font-medium tracking-tight mb-1.5">Dashboard</h1>
-          <div className="w-8 h-0.5 bg-black"></div>
+        <div className="flex flex-col mb-4">
+          <h1 className="text-sm uppercase tracking-wide font-medium mb-1">Dashboard</h1>
+          <div className="w-6 h-0.5 bg-black"></div>
         </div>
         
         {/* Mobile only welcome message - hidden on desktop */}
-        <div className="mb-6 flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between md:hidden">
-          <p className="text-sm text-gray-600">Welcome back, Jonathan</p>
-          <div className="text-xs text-gray-600 flex items-center">
-            <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
-            <span>All accounts secure</span>
+        <div className="mb-5 flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between md:hidden">
+          <p className="text-xs uppercase tracking-wide font-medium">Welcome back, Jonathan</p>
+          <div className="text-[10px] text-gray-600 flex items-center">
+            <div className="w-1.5 h-1.5 bg-black mr-1.5"></div>
+            <span className="uppercase tracking-wide">All accounts secure</span>
           </div>
         </div>
         
@@ -194,16 +194,16 @@ export default function DashboardPage() {
               
               {/* Mobile Account Cards - Premium Bank Design */}
               <div className="md:hidden">
-                <div className="p-4 bg-black text-white">
-                  <div className="mb-1 text-xs uppercase tracking-wider text-gray-400">Total Balance</div>
-                  <div className="text-2xl font-light mb-3">
+                <div className="p-3 bg-black text-white">
+                  <div className="mb-0.5 text-[10px] uppercase tracking-wider text-gray-400">Total Balance</div>
+                  <div className="text-xl font-light mb-2">
                     €{accounts.reduce((total, account) => total + account.balance, 0).toFixed(2)}
                   </div>
                   <div className="flex justify-between items-center">
-                    <div className="text-xs text-gray-400">Last updated: Today, 11:42 AM</div>
-                    <div className="text-xs text-gray-400 flex items-center">
-                      <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
-                      <span>All accounts secure</span>
+                    <div className="text-[9px] uppercase tracking-wide text-gray-400">Last updated: Today, 11:42</div>
+                    <div className="text-[9px] uppercase tracking-wide text-gray-400 flex items-center">
+                      <div className="w-1 h-1 bg-white mr-1"></div>
+                      <span>Secure</span>
                     </div>
                   </div>
                 </div>
@@ -213,26 +213,26 @@ export default function DashboardPage() {
                     <div 
                       key={account.id}
                       className={`
-                        relative px-4 py-5 bg-white cursor-pointer active:bg-gray-50 transition-colors
+                        relative px-3 py-3 bg-white cursor-pointer active:bg-gray-50 transition-colors
                         ${index !== accounts.length - 1 ? 'border-b border-gray-200' : ''}
                         ${account.currency === selectedCurrency ? 'bg-gray-50' : ''}
                       `}
                       onClick={() => setSelectedCurrency(account.currency)}
                     >
                       {account.currency === selectedCurrency && (
-                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-black"></div>
+                        <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black"></div>
                       )}
                       
                       <div className="flex items-start justify-between">
                         <div className="flex items-center">
-                          <div className="w-10 h-10 bg-gray-100 border border-gray-200 flex items-center justify-center mr-4 text-xs font-medium">
+                          <div className="w-8 h-8 bg-gray-100 border border-gray-200 flex items-center justify-center mr-3 text-[10px] font-medium">
                             {account.currency}
                           </div>
                           <div>
                             <div className="flex items-center">
-                              <div className="font-medium text-sm mr-2">{account.name}</div>
+                              <div className="font-medium text-xs uppercase tracking-wide mr-2">{account.name}</div>
                               {account.currency === selectedCurrency && (
-                                <div className="px-1.5 py-0.5 bg-black text-white text-[10px] font-medium">PRIMARY</div>
+                                <div className="px-1 py-0.5 bg-black text-white text-[8px] uppercase tracking-wide font-medium">PRIMARY</div>
                               )}
                             </div>
                             <div className="text-xs text-gray-500 mt-1 font-mono tracking-tight">••••{Math.floor(1000 + Math.random() * 9000)}</div>
@@ -240,28 +240,28 @@ export default function DashboardPage() {
                         </div>
                         
                         <div className="text-right">
-                          <div className="text-xl font-semibold leading-none">
+                          <div className="text-base font-medium leading-none">
                             {account.currency === "EUR" && "€"}
                             {account.currency === "USD" && "$"}
                             {account.currency === "GBP" && "£"}
                             {account.balance.toFixed(2)}
                           </div>
-                          <div className="text-xs text-gray-500 mt-1">Available immediately</div>
+                          <div className="text-[9px] uppercase tracking-wide text-gray-500 mt-0.5">Available</div>
                         </div>
                       </div>
                       
-                      <div className="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between">
+                      <div className="mt-3 pt-2 border-t border-gray-100 flex items-center justify-between">
                         <div className="flex space-x-3">
-                          <button className="flex items-center text-xs font-medium text-gray-600 hover:text-black"
+                          <button className="flex items-center text-[10px] uppercase tracking-wide font-medium text-gray-600 hover:text-black"
                             onClick={(e) => {
                               e.stopPropagation();
                               navigate("/transactions");
                             }}
                           >
-                            <CalendarIcon className="h-3.5 w-3.5 mr-1" />
-                            Transactions
+                            <CalendarIcon className="h-3 w-3 mr-1" />
+                            Trans
                           </button>
-                          <button className="flex items-center text-xs font-medium text-gray-600 hover:text-black"
+                          <button className="flex items-center text-[10px] uppercase tracking-wide font-medium text-gray-600 hover:text-black"
                             onClick={(e) => {
                               e.stopPropagation();
                               toast({
@@ -270,7 +270,7 @@ export default function DashboardPage() {
                               });
                             }}
                           >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
                             Details
                           </button>
                         </div>
@@ -278,13 +278,13 @@ export default function DashboardPage() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="h-7 px-3 py-0 text-xs rounded-none border-black"
+                          className="h-6 px-2 py-0 text-[10px] rounded-none border-black uppercase tracking-wide"
                           onClick={(e) => {
                             e.stopPropagation();
                             setIsTransferModalOpen(true);
                           }}
                         >
-                          <ArrowRightLeftIcon className="h-3.5 w-3.5 mr-1.5" />
+                          <ArrowRightLeftIcon className="h-2.5 w-2.5 mr-1" />
                           Transfer
                         </Button>
                       </div>
