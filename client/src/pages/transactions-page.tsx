@@ -404,43 +404,46 @@ export default function TransactionsPage() {
           <p className="text-xs text-gray-600">Manage and track your financial transactions with precision</p>
         </div>
         
-        {/* Transfer Options Section - Mobile Optimized */}
-        <div className="mb-10 bg-white border border-gray-200">
-          <div className="p-4 border-b border-gray-200">
-            <h2 className="text-base font-semibold">Transfer Options</h2>
-            <p className="text-xs text-gray-600 mt-1">
-              Select transfer type to initiate a new transaction
-            </p>
+        {/* Transfer Options Section */}
+        <div className="mb-6 bg-white border border-gray-200">
+          <div className="p-2.5 md:p-3 border-b border-gray-200 flex justify-between items-center">
+            <div>
+              <h2 className="text-xs uppercase tracking-wide font-medium">Transfer Options</h2>
+              <p className="text-[10px] text-gray-500 mt-0.5">
+                Select transaction type to initialize
+              </p>
+            </div>
+            <ArrowRight className="h-3.5 w-3.5 text-gray-500" />
           </div>
           
           <Tabs defaultValue="domestic" className="w-full">
-            <TabsList className="w-full grid grid-cols-2 sm:grid-cols-4 p-0 h-auto bg-gray-50 border-b border-gray-200">
+            <TabsList className="w-full grid grid-cols-2 sm:grid-cols-4 p-0 h-auto bg-white border-b border-gray-200">
               <TabsTrigger 
                 value="domestic" 
-                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2.5 flex items-center justify-center text-xs sm:text-sm border-r border-gray-200"
+                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2 flex items-center justify-center text-[10px] uppercase tracking-wide font-medium border-r border-gray-200"
               >
-                <Landmark className="h-3.5 w-3.5 mr-1.5" />
+                <Landmark className="h-3 w-3 mr-1" />
                 <span className="hidden xs:inline">Domestic</span> Transfer
               </TabsTrigger>
               <TabsTrigger 
                 value="international" 
-                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2.5 flex items-center justify-center text-xs sm:text-sm border-r border-gray-200"
+                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2 flex items-center justify-center text-[10px] uppercase tracking-wide font-medium border-r border-gray-200"
               >
-                <Globe className="h-3.5 w-3.5 mr-1.5" />
+                <Globe className="h-3 w-3 mr-1" />
                 <span className="hidden xs:inline">International</span> Wire
               </TabsTrigger>
               <TabsTrigger 
                 value="self" 
-                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2.5 flex items-center justify-center text-xs sm:text-sm border-r border-gray-200"
+                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2 flex items-center justify-center text-[10px] uppercase tracking-wide font-medium border-r border-gray-200"
               >
-                <ArrowRightLeft className="h-3.5 w-3.5 mr-1.5" />
+                <ArrowRightLeft className="h-3 w-3 mr-1" />
                 Self-Transfer
               </TabsTrigger>
               <TabsTrigger 
                 value="scheduled" 
-                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2.5 flex items-center justify-center text-xs sm:text-sm"
+                className="data-[state=active]:bg-black data-[state=active]:text-white rounded-none py-2 flex items-center justify-center text-[10px] uppercase tracking-wide font-medium"
               >
-                <Calendar className="h-3.5 w-3.5 mr-1.5" />
+                <Calendar className="h-3 w-3 mr-1" />
                 Scheduled
               </TabsTrigger>
             </TabsList>
@@ -1015,39 +1018,48 @@ export default function TransactionsPage() {
         </div>
         
         {/* Transaction History Section */}
-        <div className="mb-12">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-            <div>
-              <h2 className="text-xl font-semibold">Transaction History</h2>
-              <p className="text-sm text-gray-600 mt-1">View and search your recent transactions</p>
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-3 md:mb-4">
+            <div className="flex items-center">
+              <h2 className="text-xs uppercase tracking-wide font-medium">Transaction History</h2>
+              <ArrowRight className="h-3.5 w-3.5 ml-2 text-gray-500" />
             </div>
+            <Button 
+              variant="link" 
+              size="sm" 
+              className="text-[10px] uppercase tracking-wide font-medium text-black h-auto p-0"
+            >
+              Export Data
+            </Button>
+          </div>
             
-            <div className="flex flex-wrap items-center gap-3 mt-4 md:mt-0">
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Search className="h-4 w-4 text-gray-400" />
+          <div className="bg-white border border-gray-200 p-2.5 md:p-3 mb-3 md:mb-4">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-3">
+              <div className="relative w-full md:w-auto">
+                <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                  <Search className="h-3 w-3 text-gray-400" />
                 </div>
                 <Input
                   type="text"
                   placeholder="Search transactions..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-9 py-2 h-9 text-sm md:w-48 lg:w-64"
+                  className="pl-6 py-1.5 h-7 text-[10px] w-full md:w-48 lg:w-56 rounded-none border-black"
                 />
               </div>
               
-              <div className="flex items-center space-x-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <Select
                   value={transactionFilter}
                   onValueChange={setTransactionFilter}
                 >
-                  <SelectTrigger className="h-9 text-sm w-32 md:w-36">
+                  <SelectTrigger className="h-7 text-[10px] w-28 md:w-32 rounded-none border-black uppercase tracking-wide">
                     <div className="flex items-center">
-                      <Filter className="h-3.5 w-3.5 mr-2" />
+                      <Filter className="h-3 w-3 mr-1.5" />
                       <SelectValue placeholder="All" />
                     </div>
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="text-[10px] uppercase tracking-wide rounded-none">
                     <SelectItem value="all">All</SelectItem>
                     <SelectItem value="incoming">Incoming</SelectItem>
                     <SelectItem value="outgoing">Outgoing</SelectItem>
@@ -1060,10 +1072,10 @@ export default function TransactionsPage() {
                   value={selectedAccount}
                   onValueChange={setSelectedAccount}
                 >
-                  <SelectTrigger className="h-9 text-sm w-32 md:w-36">
+                  <SelectTrigger className="h-7 text-[10px] w-28 md:w-32 rounded-none border-black uppercase tracking-wide">
                     <SelectValue placeholder="All Accounts" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="text-[10px] uppercase tracking-wide rounded-none">
                     <SelectItem value="all">All Accounts</SelectItem>
                     <SelectItem value="EUR">EUR Account</SelectItem>
                     <SelectItem value="USD">USD Account</SelectItem>
@@ -1075,10 +1087,10 @@ export default function TransactionsPage() {
                   value={selectedTimeFilter}
                   onValueChange={setSelectedTimeFilter}
                 >
-                  <SelectTrigger className="h-9 text-sm w-32 md:w-36">
+                  <SelectTrigger className="h-7 text-[10px] w-28 md:w-32 rounded-none border-black uppercase tracking-wide">
                     <SelectValue placeholder="Time period" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="text-[10px] uppercase tracking-wide rounded-none">
                     {TIME_FILTERS.map(filter => (
                       <SelectItem key={filter.value} value={filter.value}>
                         {filter.label}
