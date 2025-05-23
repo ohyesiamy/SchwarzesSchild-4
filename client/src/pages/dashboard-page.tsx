@@ -224,7 +224,7 @@ export default function DashboardPage() {
                     <div 
                       key={account.id}
                       className={`
-                        relative p-4 bg-white cursor-pointer active:bg-gray-50 transition-colors
+                        relative px-4 py-5 bg-white cursor-pointer active:bg-gray-50 transition-colors
                         ${index !== accounts.length - 1 ? 'border-b border-gray-200' : ''}
                         ${account.currency === selectedCurrency ? 'bg-gray-50' : ''}
                       `}
@@ -234,55 +234,70 @@ export default function DashboardPage() {
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-black"></div>
                       )}
                       
-                      <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-start justify-between">
                         <div className="flex items-center">
-                          <div className="w-8 h-8 bg-gray-100 border border-gray-200 rounded-sm flex items-center justify-center mr-3 text-xs font-medium">
+                          <div className="w-10 h-10 bg-gray-100 border border-gray-200 flex items-center justify-center mr-4 text-xs font-medium">
                             {account.currency}
                           </div>
                           <div>
-                            <div className="font-medium text-sm">{account.name}</div>
-                            <div className="text-xs text-gray-500 mt-0.5 font-mono tracking-tight">••••{Math.floor(1000 + Math.random() * 9000)}</div>
+                            <div className="flex items-center">
+                              <div className="font-medium text-sm mr-2">{account.name}</div>
+                              {account.currency === selectedCurrency && (
+                                <div className="px-1.5 py-0.5 bg-black text-white text-[10px] font-medium">PRIMARY</div>
+                              )}
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1 font-mono tracking-tight">••••{Math.floor(1000 + Math.random() * 9000)}</div>
                           </div>
                         </div>
                         
-                        {account.currency === selectedCurrency && (
-                          <div className="w-2 h-2 bg-black rounded-full"></div>
-                        )}
+                        <div className="text-right">
+                          <div className="text-xl font-semibold leading-none">
+                            {account.currency === "EUR" && "€"}
+                            {account.currency === "USD" && "$"}
+                            {account.currency === "GBP" && "£"}
+                            {account.balance.toFixed(2)}
+                          </div>
+                          <div className="text-xs text-gray-500 mt-1">Available immediately</div>
+                        </div>
                       </div>
                       
-                      <div className="flex items-center justify-between mt-3">
-                        <div className="text-lg font-semibold">
-                          {account.currency === "EUR" && "€"}
-                          {account.currency === "USD" && "$"}
-                          {account.currency === "GBP" && "£"}
-                          {account.balance.toFixed(2)}
-                        </div>
-                        
-                        <div className="flex space-x-1">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="h-7 px-2 py-0 text-xs rounded-none border-black"
+                      <div className="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between">
+                        <div className="flex space-x-3">
+                          <button className="flex items-center text-xs font-medium text-gray-600 hover:text-black"
                             onClick={(e) => {
                               e.stopPropagation();
-                              setIsTransferModalOpen(true);
-                            }}
-                          >
-                            Transfer
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="h-7 px-2 py-0 text-xs rounded-none border-black"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedCurrency(account.currency);
                               navigate("/transactions");
                             }}
                           >
-                            History
-                          </Button>
+                            <CalendarIcon className="h-3.5 w-3.5 mr-1" />
+                            Transactions
+                          </button>
+                          <button className="flex items-center text-xs font-medium text-gray-600 hover:text-black"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toast({
+                                title: "Account Details",
+                                description: "Viewing complete account details",
+                              });
+                            }}
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                            Details
+                          </button>
                         </div>
+                        
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="h-7 px-3 py-0 text-xs rounded-none border-black"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setIsTransferModalOpen(true);
+                          }}
+                        >
+                          <ArrowRightLeftIcon className="h-3.5 w-3.5 mr-1.5" />
+                          Transfer
+                        </Button>
                       </div>
                     </div>
                   ))}
@@ -415,36 +430,54 @@ export default function DashboardPage() {
                             </div>
                           </td>
                           <td className="py-5 px-6 text-right">
-                            <div className="font-semibold text-lg">
+                            <div className="font-semibold text-xl">
                               {formatCurrency(account.balance, account.currency)}
                             </div>
                             <div className="text-xs text-gray-500 mt-1">
                               Available immediately
                             </div>
                           </td>
-                          <td className="py-5 px-6 text-right">
-                            <div className="flex items-center justify-end space-x-1">
-                              <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="h-8 rounded-none border-black"
+                          <td className="py-5 px-6">
+                            <div className="inline-flex">
+                              <div className="flex flex-col items-end space-y-1 border-r border-gray-200 pr-3 mr-3">
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm" 
+                                  className="h-7 px-2 rounded-none hover:bg-black hover:text-white"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsTransferModalOpen(true);
+                                  }}
+                                >
+                                  <ArrowRightLeftIcon className="h-3.5 w-3.5 mr-1.5" />
+                                  <span className="text-xs">Transfer</span>
+                                </Button>
+                                <Button 
+                                  variant="ghost" 
+                                  size="sm" 
+                                  className="h-7 px-2 rounded-none hover:bg-black hover:text-white"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate("/transactions");
+                                  }}
+                                >
+                                  <CalendarIcon className="h-3.5 w-3.5 mr-1.5" />
+                                  <span className="text-xs">History</span>
+                                </Button>
+                              </div>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="h-full w-10 rounded-none border-black"
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  setIsTransferModalOpen(true);
+                                  toast({
+                                    title: "Account options",
+                                    description: "More options for this account",
+                                  });
                                 }}
                               >
-                                Transfer
-                              </Button>
-                              <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="h-8 rounded-none border-black"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  navigate("/transactions");
-                                }}
-                              >
-                                History
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
                               </Button>
                             </div>
                           </td>
