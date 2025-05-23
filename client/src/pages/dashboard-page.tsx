@@ -93,8 +93,8 @@ export default function DashboardPage() {
       <main className="py-6 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
         {/* Mobile optimized header */}
         <div className="flex flex-col mb-6">
-          <h1 className="text-2xl font-semibold tracking-tight mb-2">Dashboard</h1>
-          <div className="w-12 h-1 bg-black"></div>
+          <h1 className="text-xl font-medium tracking-tight mb-2">Dashboard</h1>
+          <div className="w-10 h-0.5 bg-black"></div>
         </div>
         
         {/* Mobile only welcome message - hidden on desktop */}
@@ -312,56 +312,56 @@ export default function DashboardPage() {
                   <div className="w-1/2 p-5 border-r border-gray-800">
                     <div className="flex justify-between items-start mb-2">
                       <div>
-                        <div className="text-xs uppercase tracking-wider text-gray-400">Total Balance</div>
-                        <div className="text-3xl font-light mt-1">
+                        <div className="text-[10px] uppercase tracking-wider text-gray-400 font-medium letter-spacing-wide">Total Balance</div>
+                        <div className="text-2xl font-light mt-1">
                           €{accounts.reduce((total, account) => total + account.balance, 0).toFixed(2)}
                         </div>
                       </div>
-                      <div className="px-3 py-1 border border-gray-700 text-xs bg-black">
-                        <span className="font-medium">As of {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
+                      <div className="px-2 py-1 border border-gray-700 text-[10px] bg-black">
+                        <span className="uppercase tracking-wide">As of {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
                       </div>
                     </div>
                     <div className="flex space-x-6 mt-3">
                       <div className="flex items-center">
-                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
-                        <span className="text-xs text-gray-300">FDIC Insured</span>
+                        <div className="w-1 h-1 bg-green-400 rounded-full mr-1"></div>
+                        <span className="text-[10px] uppercase tracking-wide text-gray-300">FDIC Insured</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
-                        <span className="text-xs text-gray-300">Accounts Secure</span>
+                        <div className="w-1 h-1 bg-green-400 rounded-full mr-1"></div>
+                        <span className="text-[10px] uppercase tracking-wide text-gray-300">Accounts Secure</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mr-1.5"></div>
-                        <span className="text-xs text-gray-300">1 Pending Transaction</span>
+                        <div className="w-1 h-1 bg-yellow-400 rounded-full mr-1"></div>
+                        <span className="text-[10px] uppercase tracking-wide text-gray-300">1 Pending</span>
                       </div>
                     </div>
                   </div>
                   
                   <div className="w-1/2 p-5 flex items-center">
-                    <div className="grid grid-cols-3 gap-4 w-full">
+                    <div className="grid grid-cols-3 gap-3 w-full">
                       <Button 
                         variant="outline"
-                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-10 rounded-none" 
+                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-9 rounded-none" 
                         onClick={() => setIsTransferModalOpen(true)}
                       >
-                        <ArrowRightLeftIcon className="h-4 w-4 mr-2" />
-                        Transfer
+                        <ArrowRightLeftIcon className="h-3.5 w-3.5 mr-1.5" />
+                        <span className="text-xs uppercase tracking-wide">Transfer</span>
                       </Button>
                       <Button 
                         variant="outline"
-                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-10 rounded-none" 
+                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-9 rounded-none" 
                         onClick={() => navigate("/cards")}
                       >
-                        <CreditCardIcon className="h-4 w-4 mr-2" />
-                        Cards
+                        <CreditCardIcon className="h-3.5 w-3.5 mr-1.5" />
+                        <span className="text-xs uppercase tracking-wide">Cards</span>
                       </Button>
                       <Button 
                         variant="outline"
-                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-10 rounded-none" 
+                        className="border border-gray-700 bg-black hover:bg-gray-900 text-white h-9 rounded-none" 
                         onClick={() => setIsStatementModalOpen(true)}
                       >
-                        <SquareIcon className="h-4 w-4 mr-2" />
-                        Statements
+                        <SquareIcon className="h-3.5 w-3.5 mr-1.5" />
+                        <span className="text-xs uppercase tracking-wide">Statements</span>
                       </Button>
                     </div>
                   </div>
@@ -372,11 +372,11 @@ export default function DashboardPage() {
                   <table className="w-full table-fixed border-collapse">
                     <thead>
                       <tr className="bg-gray-100 border-b border-black">
-                        <th className="py-4 px-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/4">Account</th>
-                        <th className="py-4 px-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/4">Account Number</th>
-                        <th className="py-4 px-6 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/6">Currency</th>
-                        <th className="py-4 px-6 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/6">Available Balance</th>
-                        <th className="py-4 px-6 text-right text-xs font-semibold text-gray-700 uppercase tracking-wider w-1/6">Actions</th>
+                        <th className="py-3 px-6 text-left text-[10px] font-medium text-gray-700 uppercase tracking-wider w-1/4">Account</th>
+                        <th className="py-3 px-6 text-left text-[10px] font-medium text-gray-700 uppercase tracking-wider w-1/4">Account Number</th>
+                        <th className="py-3 px-6 text-left text-[10px] font-medium text-gray-700 uppercase tracking-wider w-1/6">Currency</th>
+                        <th className="py-3 px-6 text-right text-[10px] font-medium text-gray-700 uppercase tracking-wider w-1/6">Available Balance</th>
+                        <th className="py-3 px-6 text-right text-[10px] font-medium text-gray-700 uppercase tracking-wider w-1/6">Actions</th>
                       </tr>
                     </thead>
                     <tbody>

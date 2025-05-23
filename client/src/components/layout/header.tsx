@@ -28,11 +28,11 @@ export function Header() {
         <div className="hidden md:flex items-center">
           {/* Secondary Navigation */}
           <div className="flex mr-8">
-            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Private Banking</a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Business</a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Investments</a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Help & Support</a>
-            <a href="#" className="text-gray-400 hover:text-white text-sm mx-3">Location</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Private Banking</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Business</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Investments</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Help & Support</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Location</a>
           </div>
           
           {/* Primary Navigation Icons */}

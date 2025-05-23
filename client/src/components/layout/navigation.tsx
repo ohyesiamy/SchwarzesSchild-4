@@ -40,14 +40,14 @@ export function Navigation({ active }: NavigationProps) {
               <li key={item.name}>
                 <button
                   onClick={() => navigate(item.path)}
-                  className={`flex items-center py-4 px-3 md:px-6 text-sm font-medium tracking-wide whitespace-nowrap transition-colors ${
+                  className={`flex items-center py-3 px-3 md:px-5 text-xs font-medium tracking-wide whitespace-nowrap transition-colors ${
                     isActive 
                       ? "text-black border-b-2 border-black" 
                       : "text-gray-600 hover:text-black"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 mr-2 ${isActive ? "text-black" : "text-gray-600"}`} />
-                  {item.label}
+                  <Icon className={`w-3.5 h-3.5 mr-1.5 ${isActive ? "text-black" : "text-gray-600"}`} />
+                  <span className="uppercase tracking-wide">{item.label}</span>
                 </button>
               </li>
             );
