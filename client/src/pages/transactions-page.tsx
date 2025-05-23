@@ -1084,7 +1084,8 @@ export default function TransactionsPage() {
           
           {/* Transactions Table */}
           <div className="bg-white border border-gray-200">
-            <div className="overflow-x-auto">
+            {/* Desktop Table - Hidden on mobile */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="min-w-full">
                 <thead>
                   <tr className="bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -1131,6 +1132,45 @@ export default function TransactionsPage() {
                   )}
                 </tbody>
               </table>
+            </div>
+            
+            {/* Mobile Card View */}
+            <div className="md:hidden">
+              {filteredTransactions.length > 0 ? (
+                <div className="divide-y divide-gray-200">
+                  {filteredTransactions.map(transaction => (
+                    <div key={transaction.id} className="p-4 hover:bg-gray-50">
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="font-medium text-sm">{transaction.name}</div>
+                        <div className={`font-medium text-sm ${
+                          transaction.amount < 0 ? 'text-red-600' : 'text-green-600'
+                        }`}>
+                          {formatCurrency(transaction.amount, transaction.currency)}
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center">
+                        <div className="text-xs text-gray-500">
+                          {formatDate(transaction.date)} • {transaction.reference}
+                        </div>
+                        <div>
+                          {getStatusBadge(transaction.status)}
+                        </div>
+                      </div>
+                      <div className="mt-2">
+                        <span className="text-xs bg-gray-100 px-2 py-0.5 text-gray-600">{transaction.category}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="py-10 text-center text-gray-500">
+                  <div className="flex flex-col items-center">
+                    <BadgeInfo className="w-10 h-10 text-gray-300 mb-2" />
+                    <p className="text-base font-medium">No transactions found</p>
+                    <p className="text-xs">Try adjusting your filters</p>
+                  </div>
+                </div>
+              )}
             </div>
             
             <div className="px-6 py-4 border-t border-gray-200 bg-gray-50">
