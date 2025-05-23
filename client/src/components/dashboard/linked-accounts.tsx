@@ -43,71 +43,71 @@ export function LinkedAccounts() {
   const getAccountIcon = (type: string) => {
     switch (type) {
       case 'bank':
-        return <BuildingIcon className="h-5 w-5 text-blue-600" />;
+        return <BuildingIcon className="h-4 w-4 text-black" />;
       case 'investment':
-        return <BarChart2Icon className="h-5 w-5 text-green-600" />;
+        return <BarChart2Icon className="h-4 w-4 text-black" />;
       case 'crypto':
-        return <CoinsIcon className="h-5 w-5 text-amber-600" />;
+        return <CoinsIcon className="h-4 w-4 text-black" />;
       default:
-        return <BuildingIcon className="h-5 w-5 text-blue-600" />;
+        return <BuildingIcon className="h-4 w-4 text-black" />;
     }
   };
   
   return (
     <div className="bg-white border border-gray-200">
-      <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-        <div className="flex items-center">
-          <LinkIcon className="h-5 w-5 mr-3 text-gray-700" />
-          <h3 className="text-lg font-medium">External Accounts</h3>
+      <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+        <div>
+          <h3 className="text-xs uppercase tracking-wide font-medium">External Accounts</h3>
+          <p className="text-[10px] text-gray-500 mt-0.5">View accounts linked to your profile</p>
         </div>
-        <Button variant="outline" size="sm" className="text-xs">
-          <PlusCircleIcon className="h-3 w-3 mr-2" />
-          Link New Account
+        <Button variant="outline" size="sm" className="text-[10px] h-7 rounded-none border-black uppercase tracking-wide">
+          <PlusCircleIcon className="h-2.5 w-2.5 mr-1.5" />
+          Link Account
         </Button>
       </div>
       
       <div className="divide-y divide-gray-100">
         {linkedAccountsData.map((account) => (
-          <div key={account.id} className="p-6">
+          <div key={account.id} className="p-3">
             <div className="flex items-start">
-              <div className="mr-4 mt-1">{getAccountIcon(account.type)}</div>
+              <div className="mr-3 mt-0.5">{getAccountIcon(account.type)}</div>
               <div className="flex-1">
                 <div className="flex justify-between items-start mb-1">
-                  <h4 className="font-medium">{account.name}</h4>
+                  <h4 className="text-xs font-medium">{account.name}</h4>
                   <div className="flex items-center">
                     {account.status === "connected" ? (
-                      <span className="flex items-center text-xs text-green-600">
-                        <CheckCircleIcon className="h-3 w-3 mr-1" />
+                      <span className="flex items-center text-[9px] text-black">
+                        <CheckCircleIcon className="h-2.5 w-2.5 mr-0.5" />
                         Connected
                       </span>
                     ) : (
-                      <span className="flex items-center text-xs text-amber-600">
-                        <ClockIcon className="h-3 w-3 mr-1" />
+                      <span className="flex items-center text-[9px] text-gray-700">
+                        <ClockIcon className="h-2.5 w-2.5 mr-0.5" />
                         Pending
                       </span>
                     )}
                   </div>
                 </div>
                 
-                <div className="text-sm text-gray-600 mb-3">
-                  <div className="mb-1">{account.accountNumber}</div>
-                  <div className="text-xs text-gray-500">Last synced: {account.lastSync}</div>
+                <div className="text-[11px] text-gray-600 mb-2">
+                  <div className="mb-0.5">{account.accountNumber}</div>
+                  <div className="text-[9px] text-gray-500">Last synced: {account.lastSync}</div>
                 </div>
                 
                 <div className="flex space-x-3">
-                  <Button variant="link" size="sm" className="text-xs p-0 h-auto text-black font-medium">
+                  <Button variant="link" size="sm" className="text-[10px] p-0 h-auto text-black font-medium uppercase tracking-wide">
                     View Details
-                    <ExternalLinkIcon className="h-3 w-3 ml-1" />
+                    <ExternalLinkIcon className="h-2.5 w-2.5 ml-1" />
                   </Button>
                   
                   {account.status === "connected" && (
-                    <Button variant="link" size="sm" className="text-xs p-0 h-auto text-gray-600 font-medium">
-                      Refresh Data
+                    <Button variant="link" size="sm" className="text-[10px] p-0 h-auto text-gray-600 font-medium uppercase tracking-wide">
+                      Refresh
                     </Button>
                   )}
                   
                   {account.status === "pending" && (
-                    <Button variant="link" size="sm" className="text-xs p-0 h-auto text-gray-600 font-medium">
+                    <Button variant="link" size="sm" className="text-[10px] p-0 h-auto text-gray-600 font-medium uppercase tracking-wide">
                       Check Status
                     </Button>
                   )}
@@ -118,10 +118,10 @@ export function LinkedAccounts() {
         ))}
       </div>
       
-      <div className="p-4 border-t border-gray-200 bg-gray-50 flex justify-between items-center">
-        <span className="text-xs text-gray-500">Link external accounts to view balances and transactions in one place</span>
-        <Button variant="link" size="sm" className="text-xs text-black p-0">
-          Manage Connections
+      <div className="p-2.5 border-t border-gray-200 bg-gray-50 flex justify-between items-center">
+        <span className="text-[9px] text-gray-500">Link external accounts to view balances and transactions in one place</span>
+        <Button variant="link" size="sm" className="text-[10px] p-0 h-auto text-black uppercase tracking-wide">
+          Manage
         </Button>
       </div>
     </div>
