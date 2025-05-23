@@ -30,7 +30,8 @@ import {
   CalendarIcon, 
   BellIcon, 
   ShieldIcon,
-  CreditCardIcon
+  CreditCardIcon,
+  UserIcon
 } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { useLocation } from "wouter";
@@ -107,85 +108,72 @@ export default function DashboardPage() {
         </div>
         
         {/* Welcome Banner - Desktop only */}
-        <div className="hidden md:block bg-black text-white mb-8 md:mb-12 shadow-lg rounded-none relative overflow-hidden border-b border-gray-800">
-          {/* Minimal premium design overlay */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute bottom-0 right-0 w-full h-32 bg-gradient-to-t from-gray-800 to-transparent"></div>
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-900 to-transparent"></div>
-          </div>
-          
-          <div className="p-6 sm:p-8 md:p-10 lg:px-12 lg:py-10 relative z-10">
-            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
-              <div className="flex items-start lg:items-center mb-6 lg:mb-0">
-                <Logo 
-                  size="medium" 
-                  variant="white" 
-                  background="dark" 
-                  className="mr-5 hidden md:block" 
-                />
-                <div>
-                  <div className="flex flex-col md:flex-row md:items-center gap-2 mb-1">
-                    <h1 className="text-xl md:text-2xl lg:text-3xl font-light tracking-tight text-white">Welcome back, Jonathan</h1>
-                    <div className="hidden md:flex items-center">
-                      <div className="mx-3 text-gray-400">•</div>
-                      <span className="text-xs uppercase tracking-wider font-semibold text-white bg-gray-800 px-3 py-1">PREMIUM CLIENT</span>
-                    </div>
-                  </div>
-                  <p className="text-xs md:text-sm text-gray-300 mb-2">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
-                  
-                  <div className="hidden md:block mt-5 flex items-center">
-                    <div className="flex items-center">
-                      <div className="flex items-center mr-5">
-                        <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-                        <span className="text-sm">Two-factor authentication enabled</span>
-                      </div>
-                      <span className="text-gray-600 mx-2">•</span>
-                      <div className="flex items-center mr-5">
-                        <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-                        <span className="text-sm">All accounts secure</span>
-                      </div>
-                      <span className="text-gray-600 mx-2">•</span>
-                      <span className="text-xs font-semibold text-white bg-gray-800 px-2 py-1">FINMA PROTECTED</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col space-y-4">
-                <Button 
-                  variant="outline" 
-                  className="border-2 border-white bg-black bg-opacity-50 text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 w-full shadow-sm"
-                  onClick={() => navigate("/security")}
-                >
-                  <ShieldIcon className="h-4 w-4 mr-2" />
-                  <span className="whitespace-nowrap font-semibold">SECURITY CENTER</span>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-2 border-white bg-black bg-opacity-50 text-white hover:bg-white hover:text-black text-xs font-medium transition-all duration-200 transform active:scale-95 focus:ring-2 focus:ring-white focus:ring-opacity-50 h-11 w-full shadow-sm"
-                  onClick={() => navigate("/profile")}
-                >
-                  <span className="whitespace-nowrap font-semibold">ACCOUNT SETTINGS</span>
-                </Button>
-              </div>
-            </div>
-            
-            {/* Date and notifications row for desktop - Simplified */}
-            <div className="hidden md:flex justify-between items-center mt-6 pt-4 border-t border-gray-800">
-              <div className="flex items-center">
-                <div className="text-sm mr-4 text-gray-300">
-                  {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </div>
+        <div className="hidden md:block bg-black text-white mb-5 shadow-sm rounded-none relative overflow-hidden border-b border-gray-800">
+          <div className="relative">
+            <div className="p-4 md:p-5">
+              <div className="flex justify-between items-center">
                 <div className="flex items-center">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2"></div>
-                  <span className="text-xs uppercase tracking-wider text-white">Zürich Market Open</span>
+                  <Logo 
+                    size="small" 
+                    variant="white" 
+                    background="dark" 
+                    className="mr-4 hidden md:block" 
+                  />
+                  <div>
+                    <div className="flex items-center">
+                      <h1 className="text-base font-light tracking-tight text-white">Welcome back, Jonathan</h1>
+                      <div className="mx-3 text-gray-600">|</div>
+                      <span className="text-[10px] uppercase tracking-wider font-medium text-white bg-gray-800 px-2 py-0.5">Premium Client</span>
+                    </div>
+                    <p className="text-[10px] text-gray-400 mt-1">Last login: Today at 10:28 AM from Zürich, Switzerland</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center space-x-3">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="h-7 border border-gray-700 bg-transparent text-white hover:bg-white hover:text-black rounded-none text-[10px] uppercase tracking-wide"
+                    onClick={() => navigate("/security")}
+                  >
+                    <ShieldIcon className="h-3 w-3 mr-1.5" />
+                    Security
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm" 
+                    className="h-7 border border-gray-700 bg-transparent text-white hover:bg-white hover:text-black rounded-none text-[10px] uppercase tracking-wide"
+                    onClick={() => navigate("/profile")}
+                  >
+                    <UserIcon className="h-3 w-3 mr-1.5" />
+                    Settings
+                  </Button>
                 </div>
               </div>
-              <div className="flex items-center">
-                <div className="relative cursor-pointer transform hover:scale-105 active:scale-95 transition-transform duration-200 mr-3">
-                  <BellIcon className="h-5 w-5 text-white" />
-                  <span className="absolute -top-1 -right-1 h-2 w-2 bg-green-500 rounded-full"></span>
+              
+              {/* Security indicators */}
+              <div className="flex items-center mt-3 pt-3 border-t border-gray-800">
+                <div className="flex items-center space-x-5">
+                  <div className="flex items-center">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
+                    <span className="text-[10px] uppercase tracking-wide text-gray-400">2FA Enabled</span>
+                  </div>
+                  <div className="flex items-center">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full mr-1.5"></div>
+                    <span className="text-[10px] uppercase tracking-wide text-gray-400">All Accounts Secure</span>
+                  </div>
+                  <div className="flex items-center">
+                    <span className="text-[10px] uppercase tracking-wide text-gray-400">FINMA Protected</span>
+                  </div>
                 </div>
-                <span className="text-xs text-gray-300">3 notifications</span>
+                
+                <div className="ml-auto flex items-center">
+                  <div className="relative mr-2">
+                    <BellIcon className="h-3.5 w-3.5 text-gray-400" />
+                    <span className="absolute -top-1 -right-1 h-1.5 w-1.5 bg-green-500 rounded-full"></span>
+                  </div>
+                  <span className="text-[10px] text-gray-400">3 notifications</span>
+                </div>
               </div>
             </div>
           </div>
