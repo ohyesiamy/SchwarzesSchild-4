@@ -389,11 +389,19 @@ export default function TransactionsPage() {
       <Navigation active="transactions" />
       <MobileNavigation active="transactions" />
       
-      <main className="flex-1 container mx-auto px-4 py-6 mb-20 md:mb-0">
-        {/* Mobile optimized header */}
-        <div className="flex flex-col mb-6">
-          <h1 className="text-2xl font-semibold tracking-tight mb-2">Transfer & Transactions</h1>
-          <div className="w-12 h-1 bg-black"></div>
+      <main className="flex-1 container mx-auto px-4 py-5 mb-20 md:mb-0 max-w-[1440px]">
+        {/* Mobile optimized header - visible on mobile only */}
+        <div className="flex flex-col mb-4 md:hidden">
+          <h1 className="text-sm uppercase tracking-wide font-medium mb-1">Transfer & Transactions</h1>
+          <div className="w-6 h-0.5 bg-black"></div>
+          <p className="text-[10px] uppercase tracking-wide text-gray-600 mt-2">Manage your financial transactions</p>
+        </div>
+
+        {/* Desktop header - hidden on mobile */}
+        <div className="hidden md:block mb-6">
+          <h1 className="text-base uppercase tracking-wide font-medium mb-1">Transfer & Transactions</h1>
+          <div className="w-8 h-0.5 bg-black mb-2"></div>
+          <p className="text-xs text-gray-600">Manage and track your financial transactions with precision</p>
         </div>
         
         {/* Transfer Options Section - Mobile Optimized */}
