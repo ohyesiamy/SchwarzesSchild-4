@@ -96,24 +96,27 @@ export function NotificationsCenter() {
   const getIconByType = (type: string) => {
     switch (type) {
       case 'security':
-        return <LockIcon className="h-5 w-5 text-red-600" />;
+        return <LockIcon className="h-4 w-4 text-black" />;
       case 'document':
-        return <FileTextIcon className="h-5 w-5 text-blue-600" />;
+        return <FileTextIcon className="h-4 w-4 text-black" />;
       case 'financial':
-        return <ArrowLeftRightIcon className="h-5 w-5 text-green-600" />;
+        return <ArrowLeftRightIcon className="h-4 w-4 text-black" />;
       default:
-        return <AlertTriangleIcon className="h-5 w-5 text-amber-600" />;
+        return <AlertTriangleIcon className="h-4 w-4 text-black" />;
     }
   };
   
   return (
     <div className="bg-white border border-gray-200">
-      <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-        <h3 className="text-lg font-medium">Secure Notifications</h3>
+      <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+        <div>
+          <h3 className="text-xs uppercase tracking-wide font-medium">Secure Notifications</h3>
+          <p className="text-[10px] text-gray-500 mt-0.5">Important account alerts and updates</p>
+        </div>
         <div className="relative cursor-pointer" onClick={() => setIsExpanded(!isExpanded)}>
-          <BellIcon className="h-6 w-6 text-gray-700" />
+          <BellIcon className="h-4 w-4 text-gray-700" />
           {unreadCount > 0 && (
-            <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-600 rounded-full flex items-center justify-center text-xs text-white font-semibold">
+            <span className="absolute -top-1 -right-1 h-3.5 w-3.5 bg-black rounded-none flex items-center justify-center text-[9px] text-white font-medium">
               {unreadCount}
             </span>
           )}
@@ -125,33 +128,33 @@ export function NotificationsCenter() {
           {notifications.slice(0, isExpanded ? notifications.length : 3).map((notification) => (
             <div 
               key={notification.id} 
-              className={`p-6 ${notification.read ? 'bg-white' : 'bg-gray-50'}`}
+              className={`p-3 ${notification.read ? 'bg-white' : 'bg-gray-50'}`}
               onClick={() => markAsRead(notification.id)}
             >
               <div className="flex items-start">
-                <div className="mr-3 mt-1">{getIconByType(notification.type)}</div>
+                <div className="mr-2 mt-0.5">{getIconByType(notification.type)}</div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start mb-1">
-                    <h4 className={`font-medium ${notification.read ? '' : 'text-black'}`}>
+                    <h4 className={`text-xs font-medium ${notification.read ? '' : 'text-black'}`}>
                       {notification.title}
                     </h4>
-                    <span className="text-xs text-gray-500 ml-2 whitespace-nowrap">
+                    <span className="text-[9px] text-gray-500 ml-2 whitespace-nowrap">
                       {formatTime(notification.timestamp)}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-3">{notification.message}</p>
+                  <p className="text-[11px] text-gray-600 mb-2 leading-tight">{notification.message}</p>
                   <div className="flex justify-between items-center">
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="text-xs"
+                      className="text-[10px] h-6 rounded-none border-black uppercase tracking-wide px-2 py-0"
                     >
                       {notification.actionLabel}
                     </Button>
                     
                     {!notification.read && (
-                      <div className="flex items-center text-gray-500 text-xs">
-                        <EyeIcon className="h-3 w-3 mr-1" />
+                      <div className="flex items-center text-gray-500 text-[9px]">
+                        <EyeIcon className="h-2.5 w-2.5 mr-0.5" />
                         <span>Mark as read</span>
                       </div>
                     )}
@@ -163,11 +166,11 @@ export function NotificationsCenter() {
         </div>
       </div>
       
-      <div className="p-4 border-t border-gray-200 bg-gray-50 flex justify-between items-center">
+      <div className="p-2.5 border-t border-gray-200 bg-gray-50 flex justify-between items-center">
         <Button 
           variant="link" 
           size="sm" 
-          className="text-xs text-gray-700 font-medium"
+          className="text-[10px] text-gray-700 p-0 h-auto uppercase tracking-wide"
           onClick={markAllAsRead}
         >
           Mark all as read
@@ -176,10 +179,10 @@ export function NotificationsCenter() {
         <Button 
           variant="link" 
           size="sm" 
-          className="text-xs text-black font-medium"
+          className="text-[10px] text-black p-0 h-auto uppercase tracking-wide"
           onClick={() => setIsExpanded(!isExpanded)}
         >
-          {isExpanded ? "Show less" : "View all notifications"}
+          {isExpanded ? "Show Less" : "View All"}
         </Button>
       </div>
     </div>

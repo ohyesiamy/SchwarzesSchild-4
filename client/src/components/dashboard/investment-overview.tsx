@@ -38,30 +38,33 @@ export function InvestmentOverview() {
   
   return (
     <div className="bg-white border border-gray-200">
-      <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-        <h3 className="text-lg font-medium">Investment Overview</h3>
-        <BarChart3Icon className="h-5 w-5 text-gray-500" />
+      <div className="p-2.5 border-b border-gray-200 flex justify-between items-center">
+        <div>
+          <h3 className="text-xs uppercase tracking-wide font-medium">Investment Overview</h3>
+          <p className="text-[10px] text-gray-500 mt-0.5">Performance of investment categories</p>
+        </div>
+        <BarChart3Icon className="h-4 w-4 text-gray-500" />
       </div>
       
       <div className="divide-y divide-gray-100">
         {investments.map((investment, index) => (
-          <div key={index} className="p-6 flex justify-between items-center">
+          <div key={index} className="p-3 flex justify-between items-center">
             <div>
-              <div className="font-medium">{investment.name}</div>
-              <div className="text-sm text-gray-600">
+              <div className="text-xs font-medium">{investment.name}</div>
+              <div className="text-[10px] text-gray-600">
                 €{investment.value.toLocaleString()}
               </div>
             </div>
             
             <div className={`flex items-center ${
-              investment.trend === "up" ? "text-green-700" : "text-red-700"
+              investment.trend === "up" ? "text-black" : "text-black"
             }`}>
               {investment.trend === "up" ? (
-                <TrendingUpIcon className="h-4 w-4 mr-1" />
+                <TrendingUpIcon className="h-3 w-3 mr-0.5" />
               ) : (
-                <TrendingDownIcon className="h-4 w-4 mr-1" />
+                <TrendingDownIcon className="h-3 w-3 mr-0.5" />
               )}
-              <span className="text-sm">
+              <span className="text-[10px]">
                 {investment.trend === "up" ? "+" : ""}{investment.change.toFixed(1)}%
               </span>
             </div>
@@ -69,16 +72,16 @@ export function InvestmentOverview() {
         ))}
       </div>
       
-      <div className="p-6 border-t border-gray-200 bg-gray-50">
+      <div className="p-2.5 border-t border-gray-200 bg-gray-50">
         <div className="flex justify-between items-center">
           <div>
-            <div className="text-sm text-gray-500">Total Portfolio Value</div>
-            <div className="text-xl font-semibold mt-1">€{totalValue.toLocaleString()}</div>
+            <div className="text-[10px] uppercase tracking-wide text-gray-500">Total Value</div>
+            <div className="text-sm font-medium mt-0.5">€{totalValue.toLocaleString()}</div>
           </div>
           
-          <div className="flex items-center text-blue-700 cursor-pointer hover:underline">
-            <AlertCircleIcon className="h-4 w-4 mr-1" />
-            <span className="text-sm">Get Professional Advice</span>
+          <div className="flex items-center text-black cursor-pointer hover:underline">
+            <AlertCircleIcon className="h-3 w-3 mr-0.5" />
+            <span className="text-[10px] uppercase tracking-wide">Get Advice</span>
           </div>
         </div>
       </div>
