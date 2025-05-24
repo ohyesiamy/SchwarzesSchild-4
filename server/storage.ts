@@ -125,6 +125,20 @@ export class MemStorage implements IStorage {
     this.accounts.set(id, newAccount);
     return newAccount;
   }
+  
+  async updateAccountBalance(accountId: number, userId: number, balance: number): Promise<Account> {
+    const account = this.accounts.get(accountId);
+    if (!account) {
+      throw new Error("Account not found");
+    }
+    if (account.userId !== userId) {
+      throw new Error("Unauthorized access to account");
+    }
+    
+    const updatedAccount: Account = { ...account, balance };
+    this.accounts.set(accountId, updatedAccount);
+    return updatedAccount;
+  }
 
   // Transaction operations
   async getTransactionsByUserId(userId: number): Promise<Transaction[]> {

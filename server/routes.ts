@@ -54,10 +54,30 @@ export async function registerRoutes(app: Express): Promise<Server> {
     if (!req.isAuthenticated()) return res.sendStatus(401);
     
     try {
+      // First get the account to update its balance
+      const accountId = req.body.accountId;
+      const amount = req.body.amount;
+      
+      // Get the current account
+      const accounts = await storage.getAccountsByUserId(req.user.id);
+      const account = accounts.find(acc => acc.id === accountId);
+      
+      if (!account) {
+        return res.status(404).json({ error: "Account not found" });
+      }
+      
+      // Calculate new balance based on transaction
+      const newBalance = account.balance + amount;
+      
+      // Update the account balance
+      await storage.updateAccountBalance(accountId, req.user.id, newBalance);
+      
+      // Create the transaction record
       const transaction = await storage.createTransaction({
         ...req.body,
         userId: req.user.id,
       });
+      
       res.status(201).json(transaction);
     } catch (error) {
       next(error);
@@ -121,10 +141,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     if (!req.isAuthenticated()) return res.sendStatus(401);
     
     try {
+      const { fromCurrency, toCurrency, fromAmount, toAmount } = req.body;
+      
+      // Get all user accounts
+      const accounts = await storage.getAccountsByUserId(req.user.id);
+      
+      // Find the accounts for each currency
+      const fromAccount = accounts.find(acc => acc.currency === fromCurrency);
+      const toAccount = accounts.find(acc => acc.currency === toCurrency);
+      
+      if (!fromAccount) {
+        return res.status(404).json({ error: `Account with currency ${fromCurrency} not found` });
+      }
+      
+      if (!toAccount) {
+        return res.status(404).json({ error: `Account with currency ${toCurrency} not found` });
+      }
+      
+      // Check if there are sufficient funds
+      if (fromAccount.balance < fromAmount) {
+        return res.status(400).json({ error: "Insufficient funds for exchange" });
+      }
+      
+      // Update from account (decrease balance)
+      const newFromBalance = fromAccount.balance - fromAmount;
+      await storage.updateAccountBalance(fromAccount.id, req.user.id, newFromBalance);
+      
+      // Update to account (increase balance)
+      const newToBalance = toAccount.balance + toAmount;
+      await storage.updateAccountBalance(toAccount.id, req.user.id, newToBalance);
+      
+      // Create exchange record
       const exchange = await storage.createExchange({
         ...req.body,
         userId: req.user.id,
       });
+      
       res.status(201).json(exchange);
     } catch (error) {
       next(error);
