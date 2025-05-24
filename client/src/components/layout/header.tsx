@@ -28,11 +28,16 @@ export function Header() {
         <div className="hidden md:flex items-center">
           {/* Secondary Navigation */}
           <div className="flex mr-8">
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Private Banking</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Business</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Investments</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Help & Support</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-3">Location</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">About</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Accounts & Services</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Private Banking</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Business</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Wealth Management</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Commercial</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Education & Goals</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Loans & Credit</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Security & Fraud</a>
+            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Help & Support</a>
           </div>
           
           {/* Primary Navigation Icons */}
@@ -121,11 +126,16 @@ export function Header() {
               {/* Secondary Navigation in Mobile Menu */}
               <div className="pt-2 border-t border-gray-800">
                 <h3 className="text-xs uppercase text-gray-500 py-2">Banking Services</h3>
-                <a href="#" className="block text-gray-400 hover:text-white py-2">Private Banking</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2">Business</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2">Investments</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2">Help & Support</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2">Location</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">About</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Accounts & Services</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Private Banking</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Business</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Wealth Management</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Commercial</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Education & Goals</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Loans & Credit</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Security & Fraud</a>
+                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Help & Support</a>
               </div>
             </div>
           </div>
