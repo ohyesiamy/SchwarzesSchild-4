@@ -21,7 +21,7 @@ export function Header() {
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center h-auto md:h-16 px-4 md:px-6">
         {/* Logo only visible on desktop */}
         <div className="hidden md:flex items-center py-4 md:py-0">
-          <Logo size="small" className="mr-3 md:mr-5" variant="white" background="dark" />
+          <Logo size="medium" className="mr-3 md:mr-5" variant="white" background="dark" />
           <h1 className="text-lg md:text-xl font-semibold tracking-wide">
             <span className="font-bold tracking-tight">SCHWARZES</span> <span className="font-light tracking-widest">SCHILD</span>
           </h1>
