@@ -69,6 +69,30 @@ export class DatabaseStorage implements IStorage {
       .returning();
     return newAccount;
   }
+  
+  async updateAccountBalance(accountId: number, userId: number, balance: number): Promise<Account> {
+    // First check if the account belongs to the user
+    const [account] = await db
+      .select()
+      .from(accounts)
+      .where(and(
+        eq(accounts.id, accountId),
+        eq(accounts.userId, userId)
+      ));
+    
+    if (!account) {
+      throw new Error("Account not found or unauthorized");
+    }
+    
+    // Update the account balance
+    const [updatedAccount] = await db
+      .update(accounts)
+      .set({ balance })
+      .where(eq(accounts.id, accountId))
+      .returning();
+    
+    return updatedAccount;
+  }
 
   async getTransactionsByUserId(userId: number): Promise<Transaction[]> {
     return await db.select().from(transactions).where(eq(transactions.userId, userId));

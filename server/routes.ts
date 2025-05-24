@@ -18,6 +18,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
       next(error);
     }
   });
+  
+  app.patch("/api/accounts/:id", async (req, res, next) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    
+    try {
+      const accountId = parseInt(req.params.id);
+      const { balance } = req.body;
+      
+      const updatedAccount = await storage.updateAccountBalance(
+        accountId,
+        req.user.id,
+        balance
+      );
+      
+      res.json(updatedAccount);
+    } catch (error) {
+      next(error);
+    }
+  });
 
   // Transactions API
   app.get("/api/transactions", async (req, res, next) => {

@@ -22,6 +22,7 @@ export interface IStorage {
   // Account operations
   getAccountsByUserId(userId: number): Promise<Account[]>;
   createAccount(account: Omit<Account, "id">): Promise<Account>;
+  updateAccountBalance(accountId: number, userId: number, balance: number): Promise<Account>;
   
   // Transaction operations
   getTransactionsByUserId(userId: number): Promise<Transaction[]>;
