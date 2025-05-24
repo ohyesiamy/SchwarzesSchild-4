@@ -132,54 +132,82 @@ export function Header() {
       {/* Mobile Menu */}
       {showMobileMenu && (
         <div className="absolute top-16 left-0 right-0 bg-black z-50 border-t border-gray-800 md:hidden">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex flex-col space-y-3">
-              <button 
-                className="flex items-center text-gray-400 hover:text-white py-3 border-b border-gray-800"
-                onClick={() => {
-                  navigate("/profile");
-                  setShowMobileMenu(false);
-                }}
-              >
-                <UserIcon className="w-5 h-5 mr-3" />
-                <span>Profile</span>
-              </button>
-              <button 
-                className="flex items-center text-gray-400 hover:text-white py-3 border-b border-gray-800"
-                onClick={() => setShowMobileMenu(false)}
-              >
-                <SearchIcon className="w-5 h-5 mr-3" />
-                <span>Search</span>
-              </button>
-              <button 
-                className="flex items-center text-gray-400 hover:text-white py-3 border-b border-gray-800"
-                onClick={() => setShowMobileMenu(false)}
-              >
-                <BellIcon className="w-5 h-5 mr-3" />
-                <span>Notifications</span>
-              </button>
-              <button 
-                className="flex items-center text-gray-400 hover:text-white py-3 border-b border-gray-800"
-                onClick={() => setShowMobileMenu(false)}
-              >
-                <HelpCircleIcon className="w-5 h-5 mr-3" />
-                <span>Help</span>
-              </button>
-              
-              {/* Secondary Navigation in Mobile Menu */}
-              <div className="pt-2 border-t border-gray-800">
-                <h3 className="text-xs uppercase text-gray-500 py-2">Banking Services</h3>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">About</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Accounts & Services</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Private Banking</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Business</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Wealth Management</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Commercial</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Education & Goals</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Loans & Credit</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Security & Fraud</a>
-                <a href="#" className="block text-gray-400 hover:text-white py-2 text-sm font-medium hover:underline">Help & Support</a>
+          <div className="container mx-auto px-0">
+            <div className="grid grid-cols-2 gap-0">
+              {/* Financial Services Navigation */}
+              <div className="bg-black border-r border-gray-800 p-5">
+                <h3 className="text-[10px] tracking-wider uppercase text-gray-400 mb-4 font-light">Banking</h3>
+                <div className="space-y-4">
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    About
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Accounts
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Private
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Business
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Wealth
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Commercial
+                  </a>
+                </div>
               </div>
+              
+              {/* Services Navigation */}
+              <div className="bg-black p-5">
+                <h3 className="text-[10px] tracking-wider uppercase text-gray-400 mb-4 font-light">Services</h3>
+                <div className="space-y-4">
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Education
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Loan
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Security
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Support
+                  </a>
+                  <a href="#" onClick={() => setShowMobileMenu(false)} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    Contact
+                  </a>
+                  <a href="#" onClick={() => {
+                    navigate("/profile");
+                    setShowMobileMenu(false);
+                  }} 
+                     className="block text-[11px] tracking-wide text-white uppercase font-light">
+                    My Profile
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-3 border-t border-gray-800 flex justify-between items-center">
+              <div className="text-[9px] text-gray-500 uppercase tracking-wider">© 2025 Schwarzes Schild</div>
+              <button 
+                onClick={() => setShowMobileMenu(false)}
+                className="text-[10px] uppercase tracking-wider text-white hover:bg-gray-900 px-4 py-1.5"
+              >
+                Close Menu
+              </button>
             </div>
           </div>
         </div>
