@@ -56,17 +56,30 @@ export function Header() {
           </div>
         </div>
         
-        {/* Mobile menu button */}
-        <button 
-          className="md:hidden text-gray-400 hover:text-white"
-          onClick={() => setShowMobileMenu(!showMobileMenu)}
-        >
-          {showMobileMenu ? (
-            <CloseIcon className="w-6 h-6" />
-          ) : (
-            <MenuIcon className="w-6 h-6" />
-          )}
-        </button>
+        <div className="md:hidden flex items-center">
+          {/* Mobile profile icon */}
+          <button 
+            className="flex flex-col items-center justify-center mr-6 text-gray-400 hover:text-white"
+            onClick={() => navigate("/profile")}
+          >
+            <div className="w-7 h-7 flex items-center justify-center border border-white rounded-full mb-0.5">
+              <UserIcon className="w-3.5 h-3.5" />
+            </div>
+            <span className="text-[8px] uppercase tracking-wide">Profile</span>
+          </button>
+          
+          {/* Mobile menu button */}
+          <button 
+            className="text-gray-400 hover:text-white"
+            onClick={() => setShowMobileMenu(!showMobileMenu)}
+          >
+            {showMobileMenu ? (
+              <CloseIcon className="w-6 h-6" />
+            ) : (
+              <MenuIcon className="w-6 h-6" />
+            )}
+          </button>
+        </div>
       </div>
       
       {/* Mobile Menu */}
