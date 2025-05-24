@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
-import { LogoVariantDemo } from "@/components/showcase/logo-variant-demo";
 import { Separator } from "@/components/ui/separator";
 
 export default function SettingsPage() {
@@ -260,11 +259,7 @@ export default function SettingsPage() {
           </div>
         </div>
         
-        {/* Logo Variants Demo Section - Now responsive */}
-        <div className="mt-5 mb-8 border border-gray-200 p-4">
-          <h3 className="text-xs uppercase tracking-wide font-medium border-b border-gray-200 pb-2 mb-3">Brand Assets</h3>
-          <LogoVariantDemo />
-        </div>
+
       </main>
       
       <Footer />
