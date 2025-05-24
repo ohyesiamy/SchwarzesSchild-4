@@ -15,9 +15,9 @@ export function Logo({
   background = "light" // Not used with new logo
 }: LogoProps) {
   const sizeMap = {
-    small: "w-10 h-10",
-    medium: "w-16 h-16",
-    large: "w-24 h-24",
+    small: "w-14 h-14",
+    medium: "w-20 h-20",
+    large: "w-32 h-32",
   };
 
   return (
