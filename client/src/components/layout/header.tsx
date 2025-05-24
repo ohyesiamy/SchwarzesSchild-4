@@ -59,13 +59,12 @@ export function Header() {
         <div className="md:hidden flex items-center">
           {/* Mobile profile icon */}
           <button 
-            className="flex flex-col items-center justify-center mr-6 text-gray-400 hover:text-white"
+            className="flex items-center justify-center mr-6 text-gray-400 hover:text-white"
             onClick={() => navigate("/profile")}
           >
-            <div className="w-7 h-7 flex items-center justify-center border border-white rounded-full mb-0.5">
+            <div className="w-7 h-7 flex items-center justify-center border border-white">
               <UserIcon className="w-3.5 h-3.5" />
             </div>
-            <span className="text-[8px] uppercase tracking-wide">Profile</span>
           </button>
           
           {/* Mobile menu button */}
