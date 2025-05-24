@@ -19,9 +19,10 @@ export function Header() {
     <header className="bg-black text-white">      
       {/* Integrated header with main nav and secondary nav */}
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center h-auto md:h-16 px-4 md:px-6">
-        <div className="flex items-center py-4 md:py-0">
+        {/* Logo only visible on desktop */}
+        <div className="hidden md:flex items-center py-4 md:py-0">
           <Logo size="small" className="mr-3 md:mr-5" variant="white" background="dark" />
-          <h1 className="text-lg md:text-xl font-semibold tracking-wide hidden xs:block">
+          <h1 className="text-lg md:text-xl font-semibold tracking-wide">
             <span className="font-bold tracking-tight">SCHWARZES</span> <span className="font-light tracking-widest">SCHILD</span>
           </h1>
         </div>
@@ -104,28 +105,35 @@ export function Header() {
           </div>
         </div>
         
-        <div className="md:hidden flex items-center">
-          {/* Mobile profile icon */}
-          <button 
-            className="flex items-center justify-center mr-6 text-gray-400 hover:text-white"
-            onClick={() => navigate("/profile")}
-          >
-            <div className="w-7 h-7 flex items-center justify-center border border-white">
-              <UserIcon className="w-3.5 h-3.5" />
-            </div>
-          </button>
+        {/* Mobile header - minimal with just icons */}
+        <div className="md:hidden flex items-center justify-between w-full h-12">
+          {/* Left empty space for balance */}
+          <div></div>
           
-          {/* Mobile menu button */}
-          <button 
-            className="text-gray-400 hover:text-white"
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-          >
-            {showMobileMenu ? (
-              <CloseIcon className="w-6 h-6" />
-            ) : (
-              <MenuIcon className="w-6 h-6" />
-            )}
-          </button>
+          {/* Icon group at right */}
+          <div className="flex items-center">
+            {/* Mobile profile icon */}
+            <button 
+              className="flex items-center justify-center mr-6 text-gray-400 hover:text-white"
+              onClick={() => navigate("/profile")}
+            >
+              <div className="w-7 h-7 flex items-center justify-center border border-white">
+                <UserIcon className="w-3.5 h-3.5" />
+              </div>
+            </button>
+            
+            {/* Mobile menu button */}
+            <button 
+              className="text-gray-400 hover:text-white"
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+            >
+              {showMobileMenu ? (
+                <CloseIcon className="w-6 h-6" />
+              ) : (
+                <MenuIcon className="w-6 h-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
       
