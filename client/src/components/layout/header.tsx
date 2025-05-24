@@ -29,26 +29,41 @@ export function Header() {
         {/* Desktop Navigation - Primary + Secondary Combined */}
         <div className="hidden md:flex items-center">
           {/* Secondary Navigation */}
-          <div className="flex flex-wrap justify-center border-t border-gray-800 pt-0.5 w-full max-w-5xl">
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">ABOUT</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">ACCOUNTS & SERVICES</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">PRIVATE BANKING</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">BUSINESS</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">WEALTH MANAGEMENT</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">COMMERCIAL</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">EDUCATION & GOALS</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">LOANS & CREDIT</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">SECURITY & FRAUD</a>
-            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
-            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">HELP & SUPPORT</a>
+          <div className="flex items-center justify-center border-t border-b border-gray-800 py-1 w-full max-w-4xl mx-auto">
+            <a href="#" className="group relative px-5 py-2">
+              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">ABOUT</span>
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            <div className="h-4 w-px bg-gray-800"></div>
+            <a href="#" className="group relative px-5 py-2">
+              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">ACCOUNTS & SERVICES</span>
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            <div className="h-4 w-px bg-gray-800"></div>
+            <a href="#" className="group relative px-5 py-2">
+              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">PRIVATE BANKING</span>
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            <div className="h-4 w-px bg-gray-800"></div>
+            <a href="#" className="group relative px-5 py-2">
+              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">BUSINESS</span>
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            <div className="h-4 w-px bg-gray-800"></div>
+            <a href="#" className="group relative px-5 py-2">
+              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">WEALTH MANAGEMENT</span>
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            <div className="h-4 w-px bg-gray-800"></div>
+            <a href="#" className="group relative px-5 py-2">
+              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">COMMERCIAL</span>
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+            <div className="h-4 w-px bg-gray-800"></div>
+            <a href="#" className="group relative px-5 py-2">
+              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">EDUCATION & GOALS</span>
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
           </div>
           
           {/* Primary Navigation Icons */}
