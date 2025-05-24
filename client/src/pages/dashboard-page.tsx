@@ -92,8 +92,17 @@ export default function DashboardPage() {
       <MobileNavigation active="dashboard" />
       
       <main className="py-5 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
-        {/* Mobile optimized header */}
-        <div className="flex flex-col mb-4">
+        {/* Mobile optimized header with logo */}
+        <div className="flex flex-col mb-4 md:hidden">
+          <div className="flex items-center mb-3">
+            <Logo size="small" className="mr-3" variant="black" background="light" />
+          </div>
+          <h1 className="text-sm uppercase tracking-wide font-medium mb-1">Your Assets</h1>
+          <div className="w-6 h-0.5 bg-black"></div>
+        </div>
+        
+        {/* Desktop optimized header - hidden on mobile */}
+        <div className="hidden md:flex md:flex-col mb-4">
           <h1 className="text-sm uppercase tracking-wide font-medium mb-1">Your Assets</h1>
           <div className="w-6 h-0.5 bg-black"></div>
         </div>
