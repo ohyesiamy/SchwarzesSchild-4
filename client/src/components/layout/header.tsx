@@ -18,26 +18,37 @@ export function Header() {
   return (
     <header className="bg-black text-white">      
       {/* Integrated header with main nav and secondary nav */}
-      <div className="container mx-auto flex justify-between items-center h-16 px-4 md:px-6">
-        <div className="flex items-center">
-          <Logo size="small" className="mr-2 md:mr-6" variant="white" background="dark" />
-          <h1 className="text-lg md:text-xl font-semibold tracking-wide hidden xs:block">SCHWARZES SCHILD</h1>
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center h-auto md:h-16 px-4 md:px-6">
+        <div className="flex items-center py-4 md:py-0">
+          <Logo size="small" className="mr-3 md:mr-5" variant="white" background="dark" />
+          <h1 className="text-lg md:text-xl font-semibold tracking-wide hidden xs:block">
+            <span className="font-bold tracking-tight">SCHWARZES</span> <span className="font-light tracking-widest">SCHILD</span>
+          </h1>
         </div>
         
         {/* Desktop Navigation - Primary + Secondary Combined */}
         <div className="hidden md:flex items-center">
           {/* Secondary Navigation */}
-          <div className="flex mr-8">
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">About</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Accounts & Services</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Private Banking</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Business</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Wealth Management</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Commercial</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Education & Goals</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Loans & Credit</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Security & Fraud</a>
-            <a href="#" className="text-gray-400 hover:text-white text-xs uppercase tracking-wide mx-2">Help & Support</a>
+          <div className="flex flex-wrap justify-center border-t border-gray-800 pt-0.5 w-full max-w-5xl">
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">ABOUT</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">ACCOUNTS & SERVICES</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">PRIVATE BANKING</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">BUSINESS</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">WEALTH MANAGEMENT</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">COMMERCIAL</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">EDUCATION & GOALS</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">LOANS & CREDIT</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">SECURITY & FRAUD</a>
+            <span className="text-gray-700 mx-0.5 py-1.5">|</span>
+            <a href="#" className="text-gray-300 hover:text-white text-[11px] font-medium px-3 py-1.5 transition-colors duration-150 hover:bg-gray-900 tracking-wider">HELP & SUPPORT</a>
           </div>
           
           {/* Primary Navigation Icons */}
