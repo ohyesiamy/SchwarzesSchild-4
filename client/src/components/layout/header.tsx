@@ -133,70 +133,59 @@ export function Header() {
       {showMobileMenu && (
         <div className="absolute top-16 left-0 right-0 bg-black z-50 border-t border-gray-800 md:hidden">
           <div className="container mx-auto px-0">
-            <div className="grid grid-cols-2 gap-0">
-              {/* Financial Services Navigation */}
-              <div className="bg-black border-r border-gray-800 p-5">
-                <h3 className="text-[10px] tracking-wider uppercase text-gray-400 mb-4 font-light">Banking</h3>
-                <div className="space-y-4">
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    About
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Accounts
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Private
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Business
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Wealth
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Commercial
-                  </a>
-                </div>
-              </div>
-              
-              {/* Services Navigation */}
-              <div className="bg-black p-5">
-                <h3 className="text-[10px] tracking-wider uppercase text-gray-400 mb-4 font-light">Services</h3>
-                <div className="space-y-4">
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Education
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Loan
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Security
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Support
-                  </a>
-                  <a href="#" onClick={() => setShowMobileMenu(false)} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    Contact
-                  </a>
-                  <a href="#" onClick={() => {
-                    navigate("/profile");
-                    setShowMobileMenu(false);
-                  }} 
-                     className="block text-[11px] tracking-wide text-white uppercase font-light">
-                    My Profile
-                  </a>
-                </div>
+            <div className="bg-black p-5">
+              <div className="space-y-4">
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  About
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Accounts
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Private
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Business
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Wealth
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Commercial
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Education
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Loan
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Security
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Support
+                </a>
+                <a href="#" onClick={() => setShowMobileMenu(false)} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  Contact
+                </a>
+                <a href="#" onClick={() => {
+                  navigate("/profile");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                  My Profile
+                </a>
               </div>
             </div>
             
