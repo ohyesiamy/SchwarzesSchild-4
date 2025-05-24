@@ -1,19 +1,18 @@
 import React from "react";
-import logoWhite from "@/assets/logo-white.svg";
-import logoBlack from "@/assets/logo-black.svg";
+import newLogo from "@/assets/schwarzes-schild-logo.png";
 
 interface LogoProps {
   size?: "small" | "medium" | "large";
   className?: string;
-  variant?: "black" | "white" | "auto";
-  background?: "light" | "dark";
+  variant?: "black" | "white" | "auto"; // Maintained for API compatibility
+  background?: "light" | "dark"; // Maintained for API compatibility
 }
 
 export function Logo({ 
   size = "medium", 
   className = "", 
-  variant = "auto",
-  background = "light"
+  variant = "auto", // Not used with new logo
+  background = "light" // Not used with new logo
 }: LogoProps) {
   const sizeMap = {
     small: "w-10 h-10",
@@ -21,18 +20,9 @@ export function Logo({
     large: "w-24 h-24",
   };
 
-  // Determine which logo to use based on variant and background
-  const getLogo = () => {
-    if (variant === "black") return logoBlack;
-    if (variant === "white") return logoWhite;
-    
-    // Auto mode - choose based on background
-    return background === "light" ? logoBlack : logoWhite;
-  };
-
   return (
     <img 
-      src={getLogo()} 
+      src={newLogo} 
       alt="Schwarzes Schild" 
       className={`${sizeMap[size]} ${className} object-contain transition-all duration-300`}
     />
