@@ -34,40 +34,40 @@ export function Header() {
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
             
             {/* Navigation items */}
-            <div className="flex items-center justify-between w-full px-6">
-              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">ABOUT</span>
-                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+            <div className="grid grid-cols-7 w-full px-10">
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">About</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">ACCOUNTS & SERVICES</span>
-                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Accounts</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">PRIVATE BANKING</span>
-                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Private</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">BUSINESS</span>
-                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Business</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">WEALTH MANAGEMENT</span>
-                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Wealth</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">COMMERCIAL</span>
-                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Commercial</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">EDUCATION & GOALS</span>
-                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Education</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
             </div>
             
