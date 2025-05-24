@@ -27,43 +27,52 @@ export function Header() {
         </div>
         
         {/* Desktop Navigation - Primary + Secondary Combined */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center mt-1.5">
           {/* Secondary Navigation */}
-          <div className="flex items-center justify-center border-t border-b border-gray-800 py-1 w-full max-w-4xl mx-auto">
-            <a href="#" className="group relative px-5 py-2">
-              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">ABOUT</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
-            <div className="h-4 w-px bg-gray-800"></div>
-            <a href="#" className="group relative px-5 py-2">
-              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">ACCOUNTS & SERVICES</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
-            <div className="h-4 w-px bg-gray-800"></div>
-            <a href="#" className="group relative px-5 py-2">
-              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">PRIVATE BANKING</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
-            <div className="h-4 w-px bg-gray-800"></div>
-            <a href="#" className="group relative px-5 py-2">
-              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">BUSINESS</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
-            <div className="h-4 w-px bg-gray-800"></div>
-            <a href="#" className="group relative px-5 py-2">
-              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">WEALTH MANAGEMENT</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
-            <div className="h-4 w-px bg-gray-800"></div>
-            <a href="#" className="group relative px-5 py-2">
-              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">COMMERCIAL</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
-            <div className="h-4 w-px bg-gray-800"></div>
-            <a href="#" className="group relative px-5 py-2">
-              <span className="text-gray-300 group-hover:text-white text-[11px] font-medium tracking-widest relative z-10">EDUCATION & GOALS</span>
-              <div className="absolute inset-0 bg-gradient-to-b from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
+          <div className="relative flex items-center justify-center w-full max-w-4xl mx-auto py-2.5">
+            {/* Top line decoration */}
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
+            
+            {/* Navigation items */}
+            <div className="flex items-center justify-between w-full px-6">
+              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">ABOUT</span>
+                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">ACCOUNTS & SERVICES</span>
+                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">PRIVATE BANKING</span>
+                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">BUSINESS</span>
+                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">WEALTH MANAGEMENT</span>
+                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">COMMERCIAL</span>
+                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative px-3 py-1.5 flex flex-col items-center">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">EDUCATION & GOALS</span>
+                <div className="w-0 group-hover:w-full h-px bg-white mt-1 transition-all duration-300 ease-in-out"></div>
+              </a>
+            </div>
+            
+            {/* Bottom line decoration */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
           </div>
           
           {/* Primary Navigation Icons */}
