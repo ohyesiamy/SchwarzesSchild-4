@@ -34,39 +34,59 @@ export function Header() {
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
             
             {/* Navigation items */}
-            <div className="grid grid-cols-7 w-full px-10">
+            <div className="grid grid-cols-11 w-full px-10">
               <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">About</span>
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">About</span>
                 <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
               <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Accounts</span>
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Accounts</span>
                 <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
               <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Private</span>
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Private</span>
                 <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
               <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Business</span>
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Business</span>
                 <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
               <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Wealth</span>
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Wealth</span>
                 <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
               <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Commercial</span>
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Commercial</span>
                 <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
               <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300 uppercase">Education</span>
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Education</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Loan</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Security</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Support</span>
+                <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              </a>
+              
+              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
+                <span className="text-gray-400 group-hover:text-white text-[10px] font-light tracking-[0.2em] transition-colors duration-300">Contact</span>
                 <div className="absolute bottom-1 w-0 group-hover:w-1/2 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
             </div>
