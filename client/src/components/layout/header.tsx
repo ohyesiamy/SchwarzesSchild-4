@@ -29,65 +29,65 @@ export function Header() {
         {/* Desktop Navigation - Primary + Secondary Combined */}
         <div className="hidden md:flex items-center mt-1.5">
           {/* Secondary Navigation */}
-          <div className="relative flex items-center justify-center w-full max-w-4xl mx-auto py-2.5">
+          <div className="relative flex items-center justify-center w-full max-w-5xl mx-auto py-3">
             {/* Top line decoration */}
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent"></div>
             
             {/* Navigation items */}
-            <div className="grid grid-cols-11 w-full px-10">
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">ABOUT</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+            <div className="flex justify-between w-full px-4">
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">ABOUT</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">ACCOUNTS</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">ACCOUNTS</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">PRIVATE</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">PRIVATE</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">BUSINESS</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">BUSINESS</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">WEALTH</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">WEALTH</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">COMMERCIAL</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[70px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">COMMERCIAL</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">EDUCATION</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[70px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">EDUCATION</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">LOAN</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[50px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">LOAN</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">SECURITY</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">SECURITY</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">SUPPORT</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">SUPPORT</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
               
-              <a href="#" className="group relative flex flex-col items-center justify-center h-10">
-                <span className="text-white text-[10px] font-medium tracking-[0.25em] transition-colors duration-300">CONTACT</span>
-                <div className="absolute bottom-1 w-0 group-hover:w-3/4 h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
+              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-white text-[9px] font-medium tracking-wider whitespace-nowrap transition-colors duration-300">CONTACT</span>
+                <div className="absolute bottom-0 w-0 group-hover:w-full h-[1px] bg-white transition-all duration-300 ease-in-out"></div>
               </a>
             </div>
             
