@@ -206,6 +206,73 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Admin API Routes
+  app.get("/api/admin/stats", async (req, res, next) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    
+    // Check if user is admin (you may want to add admin role to user schema)
+    if (req.user.username !== "admin") {
+      return res.status(403).json({ error: "Admin access required" });
+    }
+    
+    try {
+      const stats = await storage.getAdminStats();
+      res.json(stats);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  app.get("/api/admin/users", async (req, res, next) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    
+    if (req.user.username !== "admin") {
+      return res.status(403).json({ error: "Admin access required" });
+    }
+    
+    try {
+      const users = await storage.getAllUsersForAdmin();
+      res.json(users);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  app.patch("/api/admin/users/:id/status", async (req, res, next) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    
+    if (req.user.username !== "admin") {
+      return res.status(403).json({ error: "Admin access required" });
+    }
+    
+    try {
+      const userId = parseInt(req.params.id);
+      const { action } = req.body;
+      
+      const updatedUser = await storage.updateUserStatus(userId, action);
+      res.json(updatedUser);
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  app.post("/api/admin/transfer", async (req, res, next) => {
+    if (!req.isAuthenticated()) return res.sendStatus(401);
+    
+    if (req.user.username !== "admin") {
+      return res.status(403).json({ error: "Admin access required" });
+    }
+    
+    try {
+      const { userId, amount, reason } = req.body;
+      
+      const transfer = await storage.processAdminTransfer(userId, amount, reason);
+      res.json(transfer);
+    } catch (error) {
+      next(error);
+    }
+  });
+
   // Create HTTP server
   const httpServer = createServer(app);
 

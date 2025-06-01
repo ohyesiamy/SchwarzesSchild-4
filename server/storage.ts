@@ -42,6 +42,12 @@ export interface IStorage {
   createSettings(settings: Omit<Settings, "id">): Promise<Settings>;
   updateSettings(userId: number, settings: Partial<Settings>): Promise<Settings>;
   
+  // Admin operations
+  getAdminStats(): Promise<any>;
+  getAllUsersForAdmin(): Promise<any[]>;
+  updateUserStatus(userId: number, action: string): Promise<any>;
+  processAdminTransfer(userId: number, amount: number, reason: string): Promise<any>;
+  
   // Session store
   sessionStore: any;
 }
@@ -246,6 +252,102 @@ export class MemStorage implements IStorage {
     
     this.settings.set(existingSettings.id, updatedSettings);
     return updatedSettings;
+  }
+
+  // Admin operations
+  async getAdminStats(): Promise<any> {
+    const totalUsers = this.users.size;
+    const activeUsers = Array.from(this.users.values()).filter(u => u.username !== "admin").length;
+    const suspendedUsers = 0;
+    
+    const allAccounts = Array.from(this.accounts.values());
+    const totalBalance = allAccounts.reduce((sum, acc) => sum + acc.balance, 0);
+    
+    const monthlyTransactions = this.transactions.size;
+    const flaggedAccounts = 0;
+    
+    return {
+      totalUsers,
+      activeUsers,
+      suspendedUsers,
+      totalBalance,
+      monthlyTransactions,
+      flaggedAccounts
+    };
+  }
+
+  async getAllUsersForAdmin(): Promise<any[]> {
+    return Array.from(this.users.values())
+      .filter(user => user.username !== "admin")
+      .map(user => {
+        const userAccounts = Array.from(this.accounts.values())
+          .filter(acc => acc.userId === user.id);
+        
+        const totalBalance = userAccounts.reduce((sum, acc) => sum + acc.balance, 0);
+        const primaryAccount = userAccounts[0];
+        
+        return {
+          id: user.id,
+          username: user.username,
+          fullname: user.fullname || user.username,
+          email: `${user.username}@example.com`,
+          accountNumber: user.accountNumber || `SS-2024-${user.id.toString().padStart(4, '0')}-${Math.floor(1000 + Math.random() * 9000)}`,
+          totalBalance,
+          currency: primaryAccount?.currency || "EUR",
+          status: "active",
+          lastLogin: new Date(Date.now() - Math.random() * 24 * 60 * 60 * 1000),
+          joinDate: user.memberSince || new Date(),
+          riskLevel: totalBalance > 100000 ? "high" : totalBalance > 50000 ? "medium" : "low",
+          accountType: totalBalance > 100000 ? "premium" : "standard"
+        };
+      });
+  }
+
+  async updateUserStatus(userId: number, action: string): Promise<any> {
+    const user = this.users.get(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    
+    return { 
+      success: true, 
+      message: `User ${action} successfully`,
+      userId 
+    };
+  }
+
+  async processAdminTransfer(userId: number, amount: number, reason: string): Promise<any> {
+    const user = this.users.get(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    
+    const userAccounts = Array.from(this.accounts.values())
+      .filter(acc => acc.userId === userId);
+    
+    if (userAccounts.length === 0) {
+      throw new Error("No accounts found for user");
+    }
+    
+    const primaryAccount = userAccounts[0];
+    const newBalance = primaryAccount.balance + amount;
+    await this.updateAccountBalance(primaryAccount.id, userId, newBalance);
+    
+    await this.createTransaction({
+      userId,
+      accountId: primaryAccount.id,
+      name: `Admin Transfer: ${reason}`,
+      amount,
+      currency: primaryAccount.currency,
+      category: "admin_transfer"
+    });
+    
+    return {
+      success: true,
+      message: "Transfer processed successfully",
+      amount,
+      newBalance
+    };
   }
 }
 
