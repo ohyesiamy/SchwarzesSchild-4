@@ -11,6 +11,7 @@ import {
   Lock, 
   Users, 
   Briefcase,
+  Building2,
   ChevronRight,
   CheckCircle,
   Star,
@@ -146,21 +147,54 @@ export default function LandingPage() {
             <p className="text-xl lg:text-2xl text-gray-200 mb-8 font-light leading-relaxed">
               Swiss-incorporated sovereign wealth management for institutional clients, family offices, and ultra-high-net-worth individuals seeking financial independence across global markets
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button 
                 size="lg"
-                className="bg-white text-black hover:bg-gray-100 font-medium tracking-wide uppercase px-8"
+                className="bg-white text-black hover:bg-gray-100 font-medium tracking-wide uppercase px-8 h-14"
+                onClick={() => navigate("/auth")}
               >
-                Open Corporate Account
+                Access Secure Portal
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black font-medium tracking-wide uppercase px-8"
+                className="border-white text-white hover:bg-white hover:text-black font-medium tracking-wide uppercase px-8 h-14"
               >
-                Discover Our Solutions
+                Schedule Consultation
               </Button>
+            </div>
+            
+            {/* Trust Indicators */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Shield className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-sm text-gray-200 font-medium">FINMA Licensed</div>
+                <div className="text-xs text-gray-300">Swiss Regulation</div>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Lock className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-sm text-gray-200 font-medium">$1B Insurance</div>
+                <div className="text-xs text-gray-300">Asset Protection</div>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <CheckCircle className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-sm text-gray-200 font-medium">ISO 27001</div>
+                <div className="text-xs text-gray-300">Security Certified</div>
+              </div>
+              <div className="text-center">
+                <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Globe className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-sm text-gray-200 font-medium">157 Countries</div>
+                <div className="text-xs text-gray-300">Global Reach</div>
+              </div>
             </div>
           </div>
         </div>
@@ -187,40 +221,64 @@ export default function LandingPage() {
                 <p className="text-gray-700 mb-6 leading-relaxed">
                   Unlike traditional banks, SchwarzesSchild operates as a sovereign wealth management institution, meaning we maintain complete independence from government influence while providing clients the tools to preserve and grow wealth across multiple jurisdictions and economic cycles.
                 </p>
-                <div className="flex items-center space-x-8">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-black">25+</div>
-                    <div className="text-sm text-gray-600 uppercase tracking-wide">Years Excellence</div>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <div className="text-2xl font-bold text-gray-900 mb-1">26+</div>
+                    <div className="text-xs text-gray-600 uppercase tracking-wide">Years Excellence</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-black">$50B+</div>
-                    <div className="text-sm text-gray-600 uppercase tracking-wide">Assets Under Management</div>
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <div className="text-2xl font-bold text-gray-900 mb-1">$52B+</div>
+                    <div className="text-xs text-gray-600 uppercase tracking-wide">Assets Under Management</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-black">150+</div>
-                    <div className="text-sm text-gray-600 uppercase tracking-wide">Countries Served</div>
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <div className="text-2xl font-bold text-gray-900 mb-1">157</div>
+                    <div className="text-xs text-gray-600 uppercase tracking-wide">Countries Served</div>
+                  </div>
+                  <div className="text-center p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+                    <div className="text-2xl font-bold text-gray-900 mb-1">99.99%</div>
+                    <div className="text-xs text-gray-600 uppercase tracking-wide">Uptime SLA</div>
                   </div>
                 </div>
               </div>
               <div className="lg:pl-12">
-                <div className="bg-white p-8 border border-gray-200 shadow-sm">
-                  <h4 className="text-xl font-medium mb-4">Our Commitment</h4>
-                  <ul className="space-y-3">
+                <div className="bg-gradient-to-br from-gray-50 to-white p-8 border border-gray-200 shadow-lg rounded-lg">
+                  <h4 className="text-xl font-semibold mb-6 text-gray-900">Our Unwavering Commitment</h4>
+                  <ul className="space-y-4">
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
-                      <span className="text-gray-600">Absolute client confidentiality and privacy protection</span>
+                      <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5 mr-4 flex-shrink-0">
+                        <CheckCircle className="h-4 w-4 text-green-600" />
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-900">Swiss Banking Confidentiality</span>
+                        <p className="text-sm text-gray-600 mt-1">Absolute client privacy protection under Swiss federal law with attorney-client privilege extension</p>
+                      </div>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
-                      <span className="text-gray-600">Institutional-grade security and risk management</span>
+                      <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5 mr-4 flex-shrink-0">
+                        <Shield className="h-4 w-4 text-blue-600" />
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-900">Institutional Security Standards</span>
+                        <p className="text-sm text-gray-600 mt-1">Bank-grade security infrastructure with ISO 27001 certification and quantum-resistant encryption</p>
+                      </div>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
-                      <span className="text-gray-600">Personalized wealth preservation strategies</span>
+                      <div className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mt-0.5 mr-4 flex-shrink-0">
+                        <TrendingUp className="h-4 w-4 text-purple-600" />
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-900">Bespoke Wealth Strategies</span>
+                        <p className="text-sm text-gray-600 mt-1">Personalized investment solutions tailored to individual risk profiles and legacy objectives</p>
+                      </div>
                     </li>
                     <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
-                      <span className="text-gray-600">Global market access and expertise</span>
+                      <div className="w-6 h-6 bg-orange-100 rounded-full flex items-center justify-center mt-0.5 mr-4 flex-shrink-0">
+                        <Globe className="h-4 w-4 text-orange-600" />
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-900">Global Market Access</span>
+                        <p className="text-sm text-gray-600 mt-1">Direct access to international markets, alternative investments, and exclusive opportunities</p>
+                      </div>
                     </li>
                   </ul>
                 </div>
@@ -331,23 +389,99 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Trusted Network Section */}
-      <section className="py-20 lg:py-32 bg-gray-50">
+      {/* Client Testimonials Section */}
+      <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4 lg:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6">Trusted Network</h2>
+            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6 text-gray-900">Client Excellence</h2>
             <div className="w-16 h-0.5 bg-black mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Strategic partnerships with leading financial institutions worldwide
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Trusted by institutional investors, family offices, and sovereign wealth funds across six continents
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-60">
-            {[1, 2, 3, 4, 5, 6].map((_, index) => (
-              <div key={index} className="bg-white p-6 border border-gray-200 h-20 flex items-center justify-center">
-                <div className="text-gray-400 font-medium">PARTNER {index + 1}</div>
+          <div className="grid lg:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white p-8 border border-gray-200 shadow-lg rounded-lg">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center mr-4">
+                  <Users className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">European Family Office</h4>
+                  <p className="text-sm text-gray-600">Multi-generational wealth preservation</p>
+                </div>
               </div>
-            ))}
+              <blockquote className="text-gray-700 leading-relaxed mb-4">
+                "SchwarzesSchild's sophisticated approach to wealth preservation has been instrumental in protecting our family's assets across multiple jurisdictions. Their discretion and expertise in navigating complex regulatory environments is unmatched."
+              </blockquote>
+              <div className="text-sm text-gray-600">
+                <p className="font-medium">Managing Director</p>
+                <p>€2.8B Assets Under Management</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 border border-gray-200 shadow-lg rounded-lg">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center mr-4">
+                  <Briefcase className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Multinational Corporation</h4>
+                  <p className="text-sm text-gray-600">Corporate treasury optimization</p>
+                </div>
+              </div>
+              <blockquote className="text-gray-700 leading-relaxed mb-4">
+                "The treasury management solutions provided by SchwarzesSchild have optimized our global cash flows and hedging strategies. Their 24/7 institutional support and deep understanding of international markets has been invaluable."
+              </blockquote>
+              <div className="text-sm text-gray-600">
+                <p className="font-medium">Chief Financial Officer</p>
+                <p>Fortune 500 Technology Company</p>
+              </div>
+            </div>
+
+            <div className="bg-white p-8 border border-gray-200 shadow-lg rounded-lg">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center mr-4">
+                  <Globe className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Sovereign Wealth Fund</h4>
+                  <p className="text-sm text-gray-600">Digital asset custody & management</p>
+                </div>
+              </div>
+              <blockquote className="text-gray-700 leading-relaxed mb-4">
+                "Their institutional-grade digital asset custody platform provides the security and compliance framework we require for sovereign-level cryptocurrency investments. The insurance coverage and regulatory compliance exceed industry standards."
+              </blockquote>
+              <div className="text-sm text-gray-600">
+                <p className="font-medium">Investment Committee Chair</p>
+                <p>Middle Eastern Sovereign Fund</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-black p-12 rounded-lg text-center">
+            <h3 className="text-2xl font-medium mb-4 text-white">Join Our Distinguished Clientele</h3>
+            <p className="text-gray-200 mb-8 max-w-2xl mx-auto">
+              Experience the same level of excellence that has earned the trust of the world's most sophisticated investors
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <div>
+                <div className="text-3xl font-bold text-white mb-2">98%</div>
+                <div className="text-sm text-gray-300">Client Retention Rate</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white mb-2">4.9/5</div>
+                <div className="text-sm text-gray-300">Client Satisfaction</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white mb-2">24/7</div>
+                <div className="text-sm text-gray-300">Dedicated Support</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white mb-2">AAA</div>
+                <div className="text-sm text-gray-300">Credit Rating</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -623,46 +757,59 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12">
+      <footer className="bg-black text-white py-16">
         <div className="container mx-auto px-4 lg:px-6">
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
-              <div className="flex items-center mb-4">
+              <div className="flex items-center mb-6">
                 <Logo size="small" className="mr-3" />
-                <span className="text-lg font-bold tracking-tight text-white">SCHWARZES SCHILD</span>
+                <div>
+                  <span className="text-xl font-bold tracking-tight text-white">SCHWARZES SCHILD</span>
+                  <p className="text-xs text-gray-300 uppercase tracking-wide">Swiss Private Banking</p>
+                </div>
               </div>
-              <p className="text-sm text-gray-400 leading-relaxed">
-                Swiss sovereign wealth management for institutional and private clients worldwide.
+              <p className="text-sm text-gray-200 leading-relaxed mb-4">
+                Established 1998. Licensed by FINMA. Swiss sovereign wealth management for institutional and ultra-high-net-worth clients worldwide.
               </p>
+              <div className="flex items-center text-xs text-gray-300">
+                <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
+                All systems operational
+              </div>
             </div>
             
             <div>
-              <h4 className="font-medium text-white mb-4 uppercase tracking-wide">Services</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Private Banking</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Corporate Treasury</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Asset Custody</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Investment Advisory</a></li>
+              <h4 className="font-semibold text-white mb-6 uppercase tracking-wide text-sm">Private Banking Services</h4>
+              <ul className="space-y-3 text-sm">
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Wealth Management</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Corporate Treasury</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Digital Asset Custody</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Investment Advisory</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Escrow Services</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">USUD Stablecoin</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-medium text-white mb-4 uppercase tracking-wide">Legal</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Compliance</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Regulatory Disclosures</a></li>
+              <h4 className="font-semibold text-white mb-6 uppercase tracking-wide text-sm">Compliance & Legal</h4>
+              <ul className="space-y-3 text-sm">
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">AML/KYC Compliance</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Regulatory Framework</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">FINMA Disclosures</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Risk Warnings</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-medium text-white mb-4 uppercase tracking-wide">Connect</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Media Center</a></li>
+              <h4 className="font-semibold text-white mb-6 uppercase tracking-wide text-sm">Client Resources</h4>
+              <ul className="space-y-3 text-sm">
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Secure Portal Login</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Research & Insights</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Market Intelligence</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Contact Support</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Careers</a></li>
+                <li><a href="#" className="text-gray-200 hover:text-white transition-colors">Media Center</a></li>
               </ul>
             </div>
           </div>
