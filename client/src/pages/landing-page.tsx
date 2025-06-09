@@ -562,6 +562,119 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Investment Performance Section */}
+      <section className="py-20 lg:py-32 bg-black text-white">
+        <div className="container mx-auto px-4 lg:px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6 text-white">Investment Excellence</h2>
+              <div className="w-16 h-0.5 bg-white mx-auto mb-8"></div>
+              <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+                Delivering consistent alpha through sophisticated investment strategies and global market access
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 mb-16">
+              <div>
+                <h3 className="text-2xl font-medium mb-8 text-white">Performance Track Record</h3>
+                <div className="space-y-6">
+                  <div className="bg-gray-900 p-6 border border-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-gray-200">5-Year Annualized Return</span>
+                      <span className="text-2xl font-bold text-green-400">+12.4%</span>
+                    </div>
+                    <div className="text-sm text-gray-300">Outperformed benchmark by 340 basis points</div>
+                  </div>
+                  
+                  <div className="bg-gray-900 p-6 border border-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-gray-200">Maximum Drawdown</span>
+                      <span className="text-2xl font-bold text-blue-400">-4.2%</span>
+                    </div>
+                    <div className="text-sm text-gray-300">Superior risk management during market volatility</div>
+                  </div>
+                  
+                  <div className="bg-gray-900 p-6 border border-gray-700 rounded-lg">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-gray-200">Sharpe Ratio</span>
+                      <span className="text-2xl font-bold text-purple-400">2.38</span>
+                    </div>
+                    <div className="text-sm text-gray-300">Exceptional risk-adjusted returns</div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-medium mb-8 text-white">Asset Allocation Strategy</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 bg-gray-800 border border-gray-600 rounded-lg">
+                    <div>
+                      <span className="text-white font-medium">Global Equities</span>
+                      <p className="text-sm text-gray-300">Developed & emerging markets</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-white">45%</div>
+                      <div className="w-20 h-2 bg-gray-600 rounded-full">
+                        <div className="h-2 bg-blue-500 rounded-full" style={{width: '45%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 bg-gray-800 border border-gray-600 rounded-lg">
+                    <div>
+                      <span className="text-white font-medium">Fixed Income</span>
+                      <p className="text-sm text-gray-300">Government & corporate bonds</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-white">25%</div>
+                      <div className="w-20 h-2 bg-gray-600 rounded-full">
+                        <div className="h-2 bg-green-500 rounded-full" style={{width: '25%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 bg-gray-800 border border-gray-600 rounded-lg">
+                    <div>
+                      <span className="text-white font-medium">Alternative Investments</span>
+                      <p className="text-sm text-gray-300">Private equity, hedge funds</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-white">20%</div>
+                      <div className="w-20 h-2 bg-gray-600 rounded-full">
+                        <div className="h-2 bg-purple-500 rounded-full" style={{width: '20%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between p-4 bg-gray-800 border border-gray-600 rounded-lg">
+                    <div>
+                      <span className="text-white font-medium">Digital Assets</span>
+                      <p className="text-sm text-gray-300">Cryptocurrency, DeFi protocols</p>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-lg font-bold text-white">10%</div>
+                      <div className="w-20 h-2 bg-gray-600 rounded-full">
+                        <div className="h-2 bg-orange-500 rounded-full" style={{width: '10%'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-8 border border-gray-700 rounded-lg text-center">
+              <h4 className="text-xl font-medium mb-4 text-white">Risk Disclosure</h4>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                Past performance does not guarantee future results. All investments carry risk of loss. 
+                Performance figures are net of fees and calculated in USD. Individual results may vary based on 
+                investment objectives, risk tolerance, and market conditions. Please consult with your relationship 
+                manager for personalized investment advice.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Client Onboarding Section */}
       <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-100 to-white">
         <div className="container mx-auto px-4 lg:px-6">
