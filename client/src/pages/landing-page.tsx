@@ -507,13 +507,36 @@ export default function LandingPage() {
           </div>
           
           <div className="border-t border-gray-700 mt-12 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-4">
               <p className="text-sm text-gray-400">
                 © 2024 SchwarzesSchild. All rights reserved. Licensed and regulated in Switzerland.
               </p>
               <p className="text-xs text-gray-500 mt-4 md:mt-0">
                 Risk Warning: Investments may go down as well as up. Past performance is not indicative of future results.
               </p>
+            </div>
+            
+            {/* Live Status Indicator */}
+            <div className="flex flex-col md:flex-row justify-between items-center pt-4 border-t border-gray-800">
+              <div className="flex items-center space-x-6 text-sm text-gray-400">
+                <div className="flex items-center">
+                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div>
+                  <span>All systems operational</span>
+                </div>
+                <div className="flex items-center">
+                  <Globe className="h-4 w-4 mr-2" />
+                  <span>Zurich, Switzerland</span>
+                </div>
+                <div className="hidden md:flex items-center">
+                  <Shield className="h-4 w-4 mr-2" />
+                  <span>99.99% uptime SLA</span>
+                </div>
+              </div>
+              <div className="text-xs text-gray-500 mt-4 md:mt-0">
+                <a href="#" className="hover:text-gray-300 mr-4">System Status</a>
+                <a href="#" className="hover:text-gray-300 mr-4">Help Center</a>
+                <a href="#" className="hover:text-gray-300">API Documentation</a>
+              </div>
             </div>
           </div>
         </div>
