@@ -3,7 +3,7 @@ import { Loader2 } from "lucide-react";
 import { Redirect, Route } from "wouter";
 
 // TEMPORARY: Flag to bypass authentication for design preview purposes
-const BYPASS_AUTH = true;
+const BYPASS_AUTH = false;
 
 // Mock user data for preview purposes
 const mockUser = {

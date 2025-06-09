@@ -1,7 +1,7 @@
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "@/hooks/use-auth";
+import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import NotFound from "@/pages/not-found";
 import AuthPage from "@/pages/auth-page";
 import DashboardPage from "@/pages/dashboard-page";
@@ -16,29 +16,51 @@ import AdminDashboard from "@/pages/admin/admin-dashboard";
 import LandingPage from "@/pages/landing-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
-// Router function no longer needed as we're using Switch directly in App
-
 function App() {
   return (
     <AuthProvider>
       <TooltipProvider>
         <Toaster />
-        <Switch>
-          <Route path="/" component={LandingPage} />
-          <Route path="/auth" component={AuthPage} />
-          <ProtectedRoute path="/dashboard" component={DashboardPage} />
-          <ProtectedRoute path="/transactions" component={TransactionsPage} />
-          <ProtectedRoute path="/cards" component={CardsPage} />
-          <ProtectedRoute path="/exchange" component={ExchangePage} />
-          <ProtectedRoute path="/settings" component={SettingsPage} />
-          <ProtectedRoute path="/profile" component={ProfilePage} />
-          <ProtectedRoute path="/security" component={SecurityPage} />
-          <ProtectedRoute path="/support" component={SupportPage} />
-          <ProtectedRoute path="/admin" component={AdminDashboard} />
-          <Route component={NotFound} />
-        </Switch>
+        <AppRouter />
       </TooltipProvider>
     </AuthProvider>
+  );
+}
+
+function AppRouter() {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      </div>
+    );
+  }
+
+  return (
+    <Switch>
+      {!user ? (
+        <>
+          <Route path="/" component={LandingPage} />
+          <Route path="/auth" component={AuthPage} />
+        </>
+      ) : (
+        <>
+          <Route path="/" component={DashboardPage} />
+          <Route path="/dashboard" component={DashboardPage} />
+          <Route path="/transactions" component={TransactionsPage} />
+          <Route path="/cards" component={CardsPage} />
+          <Route path="/exchange" component={ExchangePage} />
+          <Route path="/settings" component={SettingsPage} />
+          <Route path="/profile" component={ProfilePage} />
+          <Route path="/security" component={SecurityPage} />
+          <Route path="/support" component={SupportPage} />
+          <Route path="/admin" component={AdminDashboard} />
+        </>
+      )}
+      <Route component={NotFound} />
+    </Switch>
   );
 }
 
