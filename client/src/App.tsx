@@ -12,6 +12,7 @@ import ProfilePage from "@/pages/profile-page";
 import SecurityPage from "@/pages/security-page";
 import SupportPage from "@/pages/support-page";
 import AdminDashboard from "@/pages/admin/admin-dashboard";
+import LandingPage from "@/pages/landing-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
 // Router function no longer needed as we're using Switch directly in App
@@ -21,8 +22,9 @@ function App() {
     <TooltipProvider>
       <Toaster />
       <Switch>
+        <Route path="/" component={LandingPage} />
         <Route path="/auth" component={AuthPage} />
-        <ProtectedRoute path="/" component={DashboardPage} />
+        <ProtectedRoute path="/dashboard" component={DashboardPage} />
         <ProtectedRoute path="/transactions" component={TransactionsPage} />
         <ProtectedRoute path="/cards" component={CardsPage} />
         <ProtectedRoute path="/exchange" component={ExchangePage} />

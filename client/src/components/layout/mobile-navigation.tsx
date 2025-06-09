@@ -16,7 +16,7 @@ export function MobileNavigation({ active }: MobileNavigationProps) {
   
   // Main navigation items for mobile (limited to 5 for bottom nav)
   const navItems = [
-    { name: "dashboard", label: "Home", path: "/", icon: LayoutDashboard },
+    { name: "dashboard", label: "Home", path: "/dashboard", icon: LayoutDashboard },
     { name: "transactions", label: "Transactions", path: "/transactions", icon: ClipboardListIcon },
     { name: "cards", label: "Cards", path: "/cards", icon: CreditCard },
     { name: "exchange", label: "Exchange", path: "/exchange", icon: RefreshCcw },

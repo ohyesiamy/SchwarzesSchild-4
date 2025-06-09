@@ -1,0 +1,81 @@
+Design and implement a professional landing page for the SchwarzesSchild Banking System, consistent with the style of leading global banks like Deutsche Bank, HSBC, and Standard Chartered.
+🔹 1. GENERAL REQUIREMENTS
+
+    Landing Page (Homepage): Must be a standalone, highly professional, English-language page.
+
+    Navigation Bar (Top Right Corner): Place a “Login” button or link clearly in the upper-right corner of the landing page, leading to the secure login portal.
+
+    Design Language: Must align with the existing SchwarzesSchild brand styling — dark elegance, modern authority, and financial trust.
+
+    Responsiveness: Page must be fully responsive on desktop, tablet, and mobile.
+
+🔹 2. CONTENT SECTIONS (in order of appearance)
+
+    Hero Section
+
+        Large impactful banner or animation (can be static background with layered elements).
+
+        Tagline (example): “Empowering Global Sovereignty Through Private Capital.”
+
+        CTA Button: “Open Corporate Account” / “Discover Our Solutions”
+
+    About SchwarzesSchild
+
+        Brief institutional background.
+
+        Mention Swiss incorporation, sovereign wealth management philosophy, and elite clientele focus.
+
+    Our Services
+
+        Bullet points or icon cards for:
+
+            Private Banking
+
+            Corporate Treasury
+
+            Digital Asset Custody
+
+            Escrow & Trade Settlement
+
+            Investment Strategy Advisory
+
+            Stablecoin Issuance (USUD)
+
+    Global Compliance & Security
+
+        Mention of multi-jurisdictional licenses.
+
+        AML/KYC policy compliance.
+
+        Bank-grade encryption and asset segregation.
+
+    Trusted Network
+
+        Display logos or placeholders for strategic alliances (banks, payment partners, etc.).
+
+    News & Insights
+
+        Placeholder for press releases, regulatory updates, or whitepapers.
+
+    Contact & Footer
+
+        Secure inquiry form (name, email, company, message).
+
+        Footer with legal disclaimers, privacy policy, terms of service, and links to social media (LinkedIn preferred).
+
+🔹 3. DESIGN REFERENCES
+
+Use these sites as visual and structural inspiration:
+
+    https://www.db.com/ (Deutsche Bank)
+
+    https://www.hsbc.com/
+
+    https://www.sc.com/
+
+Focus on clean white-space layouts, trust-inducing typography, animated transitions, and financial industry UI patterns (such as tabs, cards, hover effects).
+🔹 4. TECHNICAL & UI NOTES
+
+    Language: English Only
+
+    Theme: High-trust, minimalistic, elite financial institution
