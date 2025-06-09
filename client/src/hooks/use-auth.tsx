@@ -73,14 +73,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.removeItem('pendingAuth');
       setShowTwoFactor(false);
       
-      // Invalidate and refetch user data to update the auth state
-      await queryClient.invalidateQueries({ queryKey: ["/api/user"] });
+      // Update the query cache with user data
+      queryClient.setQueryData(["/api/user"], userData);
       
       toast({
         title: "Login successful",
         description: "Welcome back to your secure banking portal",
         variant: "default",
       });
+      
+      // Force redirect to dashboard
+      window.location.href = "/dashboard";
       
       return userData;
     } catch (error) {
