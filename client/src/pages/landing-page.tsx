@@ -93,13 +93,13 @@ export default function LandingPage() {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#about" className="text-sm font-medium tracking-wide uppercase hover:text-gray-300 transition-colors">About</a>
-              <a href="#services" className="text-sm font-medium tracking-wide uppercase hover:text-gray-300 transition-colors">Services</a>
-              <a href="#compliance" className="text-sm font-medium tracking-wide uppercase hover:text-gray-300 transition-colors">Security</a>
-              <a href="#contact" className="text-sm font-medium tracking-wide uppercase hover:text-gray-300 transition-colors">Contact</a>
+              <a href="#about" className="text-sm font-medium tracking-wide uppercase text-white">About</a>
+              <a href="#services" className="text-sm font-medium tracking-wide uppercase text-white">Services</a>
+              <a href="#compliance" className="text-sm font-medium tracking-wide uppercase text-white">Security</a>
+              <a href="#contact" className="text-sm font-medium tracking-wide uppercase text-white">Contact</a>
               <Button 
                 onClick={() => navigate("/auth")}
-                className="bg-white text-black hover:bg-gray-100 font-medium tracking-wide uppercase text-sm px-6"
+                className="bg-white text-black font-medium tracking-wide uppercase text-sm px-6"
               >
                 Login
               </Button>
@@ -118,13 +118,13 @@ export default function LandingPage() {
           {mobileMenuOpen && (
             <div className="md:hidden py-4 border-t border-gray-800">
               <nav className="flex flex-col space-y-4">
-                <a href="#about" className="text-sm font-medium tracking-wide uppercase hover:text-gray-300 transition-colors">About</a>
-                <a href="#services" className="text-sm font-medium tracking-wide uppercase hover:text-gray-300 transition-colors">Services</a>
-                <a href="#compliance" className="text-sm font-medium tracking-wide uppercase hover:text-gray-300 transition-colors">Security</a>
-                <a href="#contact" className="text-sm font-medium tracking-wide uppercase hover:text-gray-300 transition-colors">Contact</a>
+                <a href="#about" className="text-sm font-medium tracking-wide uppercase text-white">About</a>
+                <a href="#services" className="text-sm font-medium tracking-wide uppercase text-white">Services</a>
+                <a href="#compliance" className="text-sm font-medium tracking-wide uppercase text-white">Security</a>
+                <a href="#contact" className="text-sm font-medium tracking-wide uppercase text-white">Contact</a>
                 <Button 
                   onClick={() => navigate("/auth")}
-                  className="bg-white text-black hover:bg-gray-100 font-medium tracking-wide uppercase text-sm w-full"
+                  className="bg-white text-black font-medium tracking-wide uppercase text-sm w-full"
                 >
                   Login
                 </Button>
