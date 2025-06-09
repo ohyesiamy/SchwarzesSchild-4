@@ -71,12 +71,12 @@ export default function LandingPage() {
   ];
 
   const complianceFeatures = [
-    "Multi-jurisdictional regulatory compliance",
-    "Advanced AML/KYC procedures",
-    "Bank-grade encryption protocols",
-    "Segregated asset protection",
-    "Real-time transaction monitoring",
-    "Swiss banking standards"
+    "Multi-jurisdictional regulatory compliance across 150+ countries",
+    "Advanced AML/KYC procedures with enhanced due diligence protocols",
+    "Bank-grade 256-bit AES encryption with quantum-resistant algorithms",
+    "Segregated asset protection with full insurance coverage up to $1B",
+    "Real-time transaction monitoring with AI-powered fraud detection",
+    "Swiss banking privacy standards with attorney-client privilege protection"
   ];
 
   return (
@@ -274,36 +274,55 @@ export default function LandingPage() {
 
             <div className="grid lg:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-2xl font-medium mb-8">Regulatory Excellence</h3>
+                <h3 className="text-2xl font-medium mb-8 text-white">Regulatory Excellence</h3>
                 <div className="space-y-4">
                   {complianceFeatures.map((feature, index) => (
                     <div key={index} className="flex items-center">
-                      <Shield className="h-5 w-5 text-white mr-3 flex-shrink-0" />
-                      <span className="text-gray-300">{feature}</span>
+                      <Shield className="h-5 w-5 text-green-400 mr-3 flex-shrink-0" />
+                      <span className="text-gray-200">{feature}</span>
                     </div>
                   ))}
                 </div>
+                <div className="mt-8 p-6 bg-gray-900 border border-gray-700 rounded-lg">
+                  <h4 className="text-lg font-medium text-white mb-4">Global Regulatory Compliance</h4>
+                  <div className="text-sm text-gray-300 space-y-2">
+                    <p>• Licensed in Switzerland under FINMA supervision</p>
+                    <p>• Compliant with EU GDPR and MiFID II regulations</p>
+                    <p>• Adherent to US BSA and PATRIOT Act requirements</p>
+                    <p>• Certified under ISO 27001 and SOC 2 Type II standards</p>
+                  </div>
+                </div>
               </div>
               <div className="lg:pl-8">
-                <h3 className="text-2xl font-medium mb-8">Security Infrastructure</h3>
-                <div className="bg-gray-900 p-8 border border-gray-800">
+                <h3 className="text-2xl font-medium mb-8 text-white">Security Infrastructure</h3>
+                <div className="bg-gray-900 p-8 border border-gray-700 rounded-lg">
                   <div className="grid grid-cols-2 gap-8">
                     <div className="text-center">
-                      <div className="text-3xl font-bold mb-2">256-bit</div>
-                      <div className="text-sm text-gray-400 uppercase tracking-wide">AES Encryption</div>
+                      <div className="text-3xl font-bold mb-2 text-white">256-bit</div>
+                      <div className="text-sm text-gray-300 uppercase tracking-wide">AES Encryption</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold mb-2">99.99%</div>
-                      <div className="text-sm text-gray-400 uppercase tracking-wide">Uptime SLA</div>
+                      <div className="text-3xl font-bold mb-2 text-white">99.99%</div>
+                      <div className="text-sm text-gray-300 uppercase tracking-wide">Uptime SLA</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold mb-2">24/7</div>
-                      <div className="text-sm text-gray-400 uppercase tracking-wide">Monitoring</div>
+                      <div className="text-3xl font-bold mb-2 text-white">24/7</div>
+                      <div className="text-sm text-gray-300 uppercase tracking-wide">Monitoring</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold mb-2">ISO 27001</div>
-                      <div className="text-sm text-gray-400 uppercase tracking-wide">Certified</div>
+                      <div className="text-3xl font-bold mb-2 text-white">ISO 27001</div>
+                      <div className="text-sm text-gray-300 uppercase tracking-wide">Certified</div>
                     </div>
+                  </div>
+                </div>
+                <div className="mt-6 p-6 bg-gray-800 border border-gray-600 rounded-lg">
+                  <h4 className="text-lg font-medium text-white mb-4">Advanced Security Measures</h4>
+                  <div className="text-sm text-gray-200 space-y-2">
+                    <p>• Hardware Security Modules (HSM) for key management</p>
+                    <p>• Multi-signature transaction authorization protocols</p>
+                    <p>• Biometric authentication and behavioral analysis</p>
+                    <p>• Cold storage with geographic distribution</p>
+                    <p>• Real-time fraud detection and prevention systems</p>
                   </div>
                 </div>
               </div>
@@ -337,40 +356,148 @@ export default function LandingPage() {
       <section className="py-20 lg:py-32">
         <div className="container mx-auto px-4 lg:px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6">News & Insights</h2>
+            <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6 text-gray-900">Market Intelligence & Insights</h2>
             <div className="w-16 h-0.5 bg-black mx-auto mb-8"></div>
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Stay informed with our exclusive market analysis, regulatory updates, and strategic insights from our global research team
+            </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Digital Asset Custody: The Future of Institutional Investment",
-                excerpt: "Exploring the growing demand for institutional-grade digital asset custody solutions and regulatory developments.",
-                date: "December 2024"
+                title: "Central Bank Digital Currencies: The New Sovereign Money Framework",
+                excerpt: "An in-depth analysis of how CBDCs are reshaping monetary policy and creating new opportunities for institutional treasury management. Our research covers implementation strategies across major economies including the Digital Euro, Digital Yuan, and Fed's exploration of a Digital Dollar.",
+                date: "January 2025",
+                category: "Digital Assets",
+                readTime: "8 min read"
               },
               {
-                title: "Swiss Banking Excellence in the Digital Age",
-                excerpt: "How traditional Swiss banking principles adapt to modern financial technology and global compliance requirements.",
-                date: "November 2024"
+                title: "Swiss Banking Evolution: Maintaining Excellence in the Digital Era",
+                excerpt: "How Switzerland's financial sector continues to lead global private banking through innovative digital solutions while preserving traditional values of discretion, stability, and client-centric service. Analysis includes regulatory frameworks and competitive positioning.",
+                date: "December 2024",
+                category: "Market Analysis",
+                readTime: "12 min read"
               },
               {
-                title: "Sovereign Wealth Management: Strategies for Economic Uncertainty",
-                excerpt: "Investment approaches for high-net-worth individuals navigating volatile global markets and regulatory changes.",
-                date: "October 2024"
+                title: "Geopolitical Risk Management for Ultra-High-Net-Worth Portfolios",
+                excerpt: "Strategic asset allocation and jurisdiction diversification strategies for navigating increasing global political uncertainty. Comprehensive guide covering tax optimization, regulatory arbitrage, and sovereign risk assessment methodologies.",
+                date: "November 2024",
+                category: "Wealth Strategy",
+                readTime: "15 min read"
               }
             ].map((article, index) => (
-              <article key={index} className="bg-white border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div className="h-48 bg-gray-100"></div>
+              <article key={index} className="bg-white border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300"></div>
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-black text-white px-3 py-1 text-xs font-medium uppercase tracking-wide">
+                      {article.category}
+                    </span>
+                  </div>
+                </div>
                 <div className="p-6">
-                  <div className="text-sm text-gray-600 mb-3 uppercase tracking-wide">{article.date}</div>
-                  <h3 className="text-xl font-medium mb-3 leading-tight text-gray-900">{article.title}</h3>
-                  <p className="text-gray-700 mb-4">{article.excerpt}</p>
-                  <span className="text-sm font-medium text-black uppercase tracking-wide cursor-pointer hover:text-gray-700">
-                    Read More <ChevronRight className="inline h-4 w-4 ml-1" />
-                  </span>
+                  <div className="flex justify-between items-center mb-3">
+                    <div className="text-sm text-gray-600 uppercase tracking-wide">{article.date}</div>
+                    <div className="text-xs text-gray-500">{article.readTime}</div>
+                  </div>
+                  <h3 className="text-xl font-medium mb-3 leading-tight text-gray-900 group-hover:text-black transition-colors">
+                    {article.title}
+                  </h3>
+                  <p className="text-gray-700 mb-4 leading-relaxed">{article.excerpt}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium text-black uppercase tracking-wide cursor-pointer hover:text-gray-700 transition-colors">
+                      Read Full Analysis <ChevronRight className="inline h-4 w-4 ml-1" />
+                    </span>
+                    <div className="flex items-center text-xs text-gray-500">
+                      <Star className="h-3 w-3 mr-1" />
+                      Premium Content
+                    </div>
+                  </div>
                 </div>
               </article>
             ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Button variant="outline" size="lg" className="border-black text-black hover:bg-black hover:text-white">
+              Access Research Portal
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Client Onboarding Section */}
+      <section className="py-20 lg:py-32 bg-gradient-to-br from-gray-100 to-white">
+        <div className="container mx-auto px-4 lg:px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6 text-gray-900">Premium Client Onboarding</h2>
+              <div className="w-16 h-0.5 bg-black mx-auto mb-8"></div>
+              <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+                Experience our white-glove onboarding process designed exclusively for sophisticated investors and institutional clients
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-8 mb-16">
+              <div className="text-center p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Users className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-medium mb-4 text-gray-900">Confidential Consultation</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Private consultation with our senior relationship managers to understand your unique financial objectives, risk tolerance, and jurisdiction requirements. All discussions protected by Swiss banking confidentiality.
+                </p>
+                <div className="mt-6 text-sm text-gray-600">
+                  <p className="font-medium">Timeline: 2-3 business days</p>
+                  <p>Location: Zurich or secure video conference</p>
+                </div>
+              </div>
+
+              <div className="text-center p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Shield className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-medium mb-4 text-gray-900">Enhanced Due Diligence</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Comprehensive KYC/AML verification process conducted by our compliance team. Enhanced due diligence protocols ensure full regulatory compliance across all relevant jurisdictions while maintaining client privacy.
+                </p>
+                <div className="mt-6 text-sm text-gray-600">
+                  <p className="font-medium">Timeline: 5-7 business days</p>
+                  <p>Secure document portal provided</p>
+                </div>
+              </div>
+
+              <div className="text-center p-8 bg-white border border-gray-200 rounded-lg shadow-sm">
+                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
+                  <CheckCircle className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-medium mb-4 text-gray-900">Account Activation</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  Upon approval, receive immediate access to our secure client portal with personalized investment strategies, dedicated relationship management, and 24/7 institutional support infrastructure.
+                </p>
+                <div className="mt-6 text-sm text-gray-600">
+                  <p className="font-medium">Timeline: 1-2 business days</p>
+                  <p>Immediate trading capabilities</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-black p-12 rounded-lg text-center">
+              <h3 className="text-2xl font-medium mb-6 text-white">Ready to Begin?</h3>
+              <p className="text-gray-200 mb-8 max-w-2xl mx-auto">
+                Join an exclusive network of institutional investors, family offices, and ultra-high-net-worth individuals who trust SchwarzesSchild with their most valuable assets.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="bg-white text-black hover:bg-gray-100 font-medium px-8">
+                  Schedule Private Consultation
+                </Button>
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black font-medium px-8">
+                  Download Information Package
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -389,72 +516,106 @@ export default function LandingPage() {
 
             <div className="grid lg:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-2xl font-medium mb-8">Get In Touch</h3>
+                <h3 className="text-2xl font-medium mb-8 text-white">Global Contact Network</h3>
                 <div className="space-y-6">
-                  <div>
-                    <h4 className="font-medium mb-2">Private Banking Inquiries</h4>
+                  <div className="p-4 bg-gray-900 border border-gray-700 rounded-lg">
+                    <h4 className="font-medium mb-2 text-white">Private Banking & Wealth Management</h4>
+                    <p className="text-gray-200 text-sm mb-2">For ultra-high-net-worth individuals and family offices</p>
                     <p className="text-gray-300">private@schwarzesschild.com</p>
+                    <p className="text-gray-400 text-xs">Minimum assets: $50M USD</p>
                   </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Corporate Services</h4>
+                  <div className="p-4 bg-gray-900 border border-gray-700 rounded-lg">
+                    <h4 className="font-medium mb-2 text-white">Corporate Treasury Services</h4>
+                    <p className="text-gray-200 text-sm mb-2">For multinational corporations and institutions</p>
                     <p className="text-gray-300">corporate@schwarzesschild.com</p>
+                    <p className="text-gray-400 text-xs">24/7 institutional support</p>
                   </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Compliance & Legal</h4>
-                    <p className="text-gray-300">compliance@schwarzesschild.com</p>
+                  <div className="p-4 bg-gray-900 border border-gray-700 rounded-lg">
+                    <h4 className="font-medium mb-2 text-white">Digital Asset Custody</h4>
+                    <p className="text-gray-200 text-sm mb-2">Institutional-grade cryptocurrency custody</p>
+                    <p className="text-gray-300">custody@schwarzesschild.com</p>
+                    <p className="text-gray-400 text-xs">Insurance up to $1B per client</p>
                   </div>
-                  <div>
-                    <h4 className="font-medium mb-2">Headquarters</h4>
-                    <p className="text-gray-300">Zurich, Switzerland</p>
+                  <div className="p-4 bg-gray-800 border border-gray-600 rounded-lg">
+                    <h4 className="font-medium mb-2 text-white">Global Headquarters</h4>
+                    <p className="text-gray-200 text-sm mb-2">Paradeplatz 8, 8001 Zurich, Switzerland</p>
+                    <p className="text-gray-300">+41 44 224 1000</p>
+                    <p className="text-gray-400 text-xs">Licensed by FINMA</p>
                   </div>
                 </div>
               </div>
               
               <div>
-                <form onSubmit={handleContactSubmit} className="space-y-6">
-                  <div>
-                    <Input
-                      placeholder="Full Name"
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                      className="bg-gray-900 border-gray-700 text-white placeholder-gray-400"
-                      required
-                    />
+                <h3 className="text-2xl font-medium mb-8 text-white">Secure Inquiry Form</h3>
+                <div className="bg-gray-900 p-8 border border-gray-700 rounded-lg">
+                  <form onSubmit={handleContactSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-200 mb-2">Full Name *</label>
+                        <Input
+                          placeholder="Enter your full name"
+                          value={contactForm.name}
+                          onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
+                          className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-white"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-200 mb-2">Email Address *</label>
+                        <Input
+                          type="email"
+                          placeholder="Enter your email"
+                          value={contactForm.email}
+                          onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
+                          className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-white"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-200 mb-2">Company / Institution</label>
+                      <Input
+                        placeholder="Your organization name"
+                        value={contactForm.company}
+                        onChange={(e) => setContactForm({...contactForm, company: e.target.value})}
+                        className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-200 mb-2">Inquiry Details *</label>
+                      <Textarea
+                        placeholder="Please describe your banking requirements, investment objectives, or specific services you're interested in..."
+                        value={contactForm.message}
+                        onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
+                        className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 min-h-32 focus:border-white"
+                        required
+                      />
+                    </div>
+                    <div className="flex items-center text-sm text-gray-300">
+                      <Lock className="h-4 w-4 mr-2" />
+                      All communications are encrypted and protected by Swiss banking confidentiality
+                    </div>
+                    <Button 
+                      type="submit"
+                      className="w-full bg-white text-black hover:bg-gray-100 font-medium tracking-wide uppercase h-12"
+                    >
+                      Send Secure Inquiry
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                  </form>
+                </div>
+                
+                <div className="mt-8 text-center">
+                  <p className="text-gray-300 text-sm mb-4">Prefer to speak directly with our team?</p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+                      Schedule Video Call
+                    </Button>
+                    <Button variant="outline" className="border-white text-white hover:bg-white hover:text-black">
+                      Request Callback
+                    </Button>
                   </div>
-                  <div>
-                    <Input
-                      type="email"
-                      placeholder="Email Address"
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                      className="bg-gray-900 border-gray-700 text-white placeholder-gray-400"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      placeholder="Company / Institution"
-                      value={contactForm.company}
-                      onChange={(e) => setContactForm({...contactForm, company: e.target.value})}
-                      className="bg-gray-900 border-gray-700 text-white placeholder-gray-400"
-                    />
-                  </div>
-                  <div>
-                    <Textarea
-                      placeholder="Message"
-                      value={contactForm.message}
-                      onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
-                      className="bg-gray-900 border-gray-700 text-white placeholder-gray-400 min-h-32"
-                      required
-                    />
-                  </div>
-                  <Button 
-                    type="submit"
-                    className="w-full bg-white text-black hover:bg-gray-100 font-medium tracking-wide uppercase"
-                  >
-                    Send Secure Inquiry
-                  </Button>
-                </form>
+                </div>
               </div>
             </div>
           </div>
