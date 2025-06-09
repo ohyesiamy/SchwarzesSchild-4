@@ -22,7 +22,7 @@ export function Header() {
         {/* Logo only visible on desktop */}
         <div className="hidden md:flex items-center py-4 md:py-0">
           <button 
-            onClick={() => navigate("/")}
+            onClick={() => window.location.href = "/"}
             className="flex items-center hover:opacity-80 transition-opacity"
           >
             <Logo size="medium" className="mr-3 md:mr-5" variant="white" background="dark" />

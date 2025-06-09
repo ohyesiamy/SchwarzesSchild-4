@@ -125,7 +125,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await apiRequest("POST", "/api/logout");
     },
     onSuccess: () => {
-      queryClient.setQueryData(["/api/user"], null);
+      // Clear all cached data
+      queryClient.clear();
+      // Force redirect to landing page
+      window.location.href = "/";
     },
     onError: (error: Error) => {
       toast({
