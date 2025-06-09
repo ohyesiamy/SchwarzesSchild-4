@@ -14,6 +14,7 @@ import SecurityPage from "@/pages/security-page";
 import SupportPage from "@/pages/support-page";
 import AdminDashboard from "@/pages/admin/admin-dashboard";
 import LandingPage from "@/pages/landing-page";
+import AboutPage from "@/pages/about-page";
 import { ProtectedRoute } from "./lib/protected-route";
 
 function App() {
@@ -56,6 +57,7 @@ function AppRouter() {
           <Route path="/profile" component={ProfilePage} />
           <Route path="/security" component={SecurityPage} />
           <Route path="/support" component={SupportPage} />
+          <Route path="/about" component={AboutPage} />
           <Route path="/admin" component={AdminDashboard} />
         </>
       )}

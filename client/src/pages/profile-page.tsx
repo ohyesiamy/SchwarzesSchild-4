@@ -12,6 +12,11 @@ import { useLocation } from "wouter";
 
 export default function ProfilePage() {
   const [, navigate] = useLocation();
+  const { logoutMutation } = useAuth();
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -59,6 +64,36 @@ export default function ProfilePage() {
                 <button className="text-[10px] uppercase tracking-wide font-medium border border-white py-1 px-3 hover:bg-white hover:text-black transition-colors">
                   Access
                 </button>
+              </div>
+            </div>
+
+            {/* Account Actions */}
+            <div className="border border-gray-200 p-4">
+              <h3 className="text-xs uppercase tracking-wide font-medium border-b border-gray-200 pb-2 mb-4">Account Actions</h3>
+              <div className="space-y-3">
+                <Button
+                  variant="outline"
+                  onClick={() => navigate("/settings")}
+                  className="w-full justify-start border-gray-200 hover:border-black text-[10px] uppercase tracking-wide h-9"
+                >
+                  Account Settings
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => navigate("/support")}
+                  className="w-full justify-start border-gray-200 hover:border-black text-[10px] uppercase tracking-wide h-9"
+                >
+                  Contact Support
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={handleLogout}
+                  disabled={logoutMutation.isPending}
+                  className="w-full justify-start border-red-200 text-red-600 hover:border-red-500 hover:bg-red-50 text-[10px] uppercase tracking-wide h-9"
+                >
+                  <LogOut className="h-3 w-3 mr-2" />
+                  {logoutMutation.isPending ? "Logging out..." : "Log Out"}
+                </Button>
               </div>
             </div>
             

@@ -41,7 +41,7 @@ export function Header() {
             
             {/* Navigation items */}
             <div className="flex justify-between w-full px-4">
-              <button onClick={() => navigate("/dashboard")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+              <button onClick={() => navigate("/about")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
                 <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">ABOUT</span>
               </button>
               
@@ -148,57 +148,90 @@ export function Header() {
           <div className="container mx-auto px-0">
             <div className="bg-black p-5">
               <div className="space-y-4">
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                <button onClick={() => {
+                  navigate("/about");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
                   About
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                </button>
+                <button onClick={() => {
+                  navigate("/dashboard");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
                   Accounts
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Private
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Business
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Wealth
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Commercial
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Education
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Loan
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Security
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Support
-                </a>
-                <a href="#" onClick={() => setShowMobileMenu(false)} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
-                  Contact
-                </a>
-                <a href="#" onClick={() => {
+                </button>
+                <button onClick={() => {
                   navigate("/profile");
                   setShowMobileMenu(false);
                 }} 
-                   className="block text-[11px] tracking-wide text-white uppercase font-light">
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Private
+                </button>
+                <button onClick={() => {
+                  navigate("/dashboard");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Business
+                </button>
+                <button onClick={() => {
+                  navigate("/dashboard");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Wealth
+                </button>
+                <button onClick={() => {
+                  navigate("/dashboard");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Commercial
+                </button>
+                <button onClick={() => {
+                  navigate("/dashboard");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Education
+                </button>
+                <button onClick={() => {
+                  navigate("/dashboard");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Loan
+                </button>
+                <button onClick={() => {
+                  navigate("/security");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Security
+                </button>
+                <button onClick={() => {
+                  navigate("/support");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Support
+                </button>
+                <button onClick={() => {
+                  navigate("/support");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
+                  Contact
+                </button>
+                <button onClick={() => {
+                  navigate("/profile");
+                  setShowMobileMenu(false);
+                }} 
+                   className="block text-[11px] tracking-wide text-white uppercase font-light w-full text-left">
                   My Profile
-                </a>
+                </button>
               </div>
             </div>
             
