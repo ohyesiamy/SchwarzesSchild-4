@@ -39,17 +39,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loginMutation = useMutation({
     mutationFn: async (credentials: LoginData) => {
-      // Show 2FA screen after login attempt instead of actual auth
+      const res = await apiRequest("POST", "/api/login", credentials);
+      if (!res.ok) {
+        const errorData = await res.text();
+        throw new Error(errorData || "Login failed");
+      }
+      const userData = await res.json();
+      // Show 2FA screen after successful backend login
       setShowTwoFactor(true);
-      // In a real app, we would make the actual API call here
-      // For now, simulate a successful login with a delay
-      return new Promise<SelectUser>((resolve, reject) => {
-        setTimeout(() => {
-          // Store credentials for later verification after 2FA
-          localStorage.setItem('pendingAuth', JSON.stringify(credentials));
-          resolve({} as SelectUser);
-        }, 500);
-      });
+      localStorage.setItem('pendingAuth', JSON.stringify(userData));
+      return userData;
     },
     onError: (error: Error) => {
       toast({
@@ -62,25 +61,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const verifyTwoFactor = async (code: string) => {
     try {
-      // MOCK authentication - directly grant access on VERIFY click
-      const mockUser: SelectUser = {
-        id: 1,
-        username: "valued.client@schwarzeschild.bank",
-        password: "mock",
-        fullname: "Valued Client",
-        phone: "+41 44 123 4567",
-        accountNumber: "CH93 0076 2011 6238 5295 7",
-        memberSince: new Date("2020-01-01")
-      };
+      // Get the user data from pending auth
+      const pendingAuthData = localStorage.getItem('pendingAuth');
+      if (!pendingAuthData) {
+        throw new Error("No pending authentication found");
+      }
+      
+      const userData = JSON.parse(pendingAuthData);
       
       // Clear pending auth data
       localStorage.removeItem('pendingAuth');
       setShowTwoFactor(false);
       
-      // Update user data to grant access
-      queryClient.setQueryData(["/api/user"], mockUser);
+      // Invalidate and refetch user data to update the auth state
+      await queryClient.invalidateQueries({ queryKey: ["/api/user"] });
       
-      return mockUser;
+      toast({
+        title: "Login successful",
+        description: "Welcome back to your secure banking portal",
+        variant: "default",
+      });
+      
+      return userData;
     } catch (error) {
       toast({
         title: "Verification failed",

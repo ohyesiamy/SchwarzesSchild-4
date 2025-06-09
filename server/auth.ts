@@ -112,8 +112,10 @@ export function setupAuth(app: Express) {
             return storage.createCard({
               userId: user.id,
               accountId: 1, // First account (EUR)
+              name: "Primary Card",
               cardNumber: "**** **** **** 4256",
               expiryDate: "12/25",
+              spendingLimit: 5000,
             });
           })
           .then(() => {
@@ -150,7 +152,10 @@ export function setupAuth(app: Express) {
   });
 
   app.get("/api/user", (req, res) => {
-    if (!req.isAuthenticated()) return res.sendStatus(401);
-    res.json(req.user);
+    if (req.isAuthenticated()) {
+      res.json(req.user);
+    } else {
+      res.status(401).json({ message: "Not authenticated" });
+    }
   });
 }
