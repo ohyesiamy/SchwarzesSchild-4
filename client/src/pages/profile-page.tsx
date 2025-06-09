@@ -3,9 +3,11 @@ import { Navigation } from "@/components/layout/navigation";
 import { MobileNavigation } from "@/components/layout/mobile-navigation";
 import { Footer } from "@/components/layout/footer";
 import { UserProfileCard } from "@/components/profile/user-profile-card";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/use-auth";
 
 import { MarketSnapshot } from "@/components/dashboard/market-snapshot";
-import { ShieldIcon } from "lucide-react";
+import { ShieldIcon, LogOut } from "lucide-react";
 import { useLocation } from "wouter";
 
 export default function ProfilePage() {

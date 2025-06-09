@@ -21,10 +21,15 @@ export function Header() {
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center h-auto md:h-16 px-4 md:px-6">
         {/* Logo only visible on desktop */}
         <div className="hidden md:flex items-center py-4 md:py-0">
-          <Logo size="medium" className="mr-3 md:mr-5" variant="white" background="dark" />
-          <h1 className="text-lg md:text-xl font-semibold tracking-wide">
-            <span className="font-bold tracking-tight">SCHWARZES</span> <span className="font-light tracking-widest">SCHILD</span>
-          </h1>
+          <button 
+            onClick={() => navigate("/")}
+            className="flex items-center hover:opacity-80 transition-opacity"
+          >
+            <Logo size="medium" className="mr-3 md:mr-5" variant="white" background="dark" />
+            <h1 className="text-lg md:text-xl font-semibold tracking-wide">
+              <span className="font-bold tracking-tight">SCHWARZES</span> <span className="font-light tracking-widest">SCHILD</span>
+            </h1>
+          </button>
         </div>
         
         {/* Desktop Navigation - Primary + Secondary Combined */}
@@ -36,49 +41,49 @@ export function Header() {
             
             {/* Navigation items */}
             <div className="flex justify-between w-full px-4">
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">ABOUT</span>
-              </a>
+              <button onClick={() => navigate("/dashboard")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">ABOUT</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">ACCOUNTS</span>
-              </a>
+              <button onClick={() => navigate("/dashboard")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">ACCOUNTS</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">PRIVATE</span>
-              </a>
+              <button onClick={() => navigate("/profile")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">PRIVATE</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">BUSINESS</span>
-              </a>
+              <button onClick={() => navigate("/dashboard")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">BUSINESS</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">WEALTH</span>
-              </a>
+              <button onClick={() => navigate("/dashboard")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">WEALTH</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[70px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">COMMERCIAL</span>
-              </a>
+              <button onClick={() => navigate("/dashboard")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[70px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">COMMERCIAL</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[70px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">EDUCATION</span>
-              </a>
+              <button onClick={() => navigate("/dashboard")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[70px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">EDUCATION</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[50px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">LOAN</span>
-              </a>
+              <button onClick={() => navigate("/dashboard")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[50px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">LOAN</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">SECURITY</span>
-              </a>
+              <button onClick={() => navigate("/security")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">SECURITY</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">SUPPORT</span>
-              </a>
+              <button onClick={() => navigate("/support")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">SUPPORT</span>
+              </button>
               
-              <a href="#" className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
-                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300">CONTACT</span>
-              </a>
+              <button onClick={() => navigate("/support")} className="group relative px-2 flex flex-col items-center justify-center h-10 min-w-[60px]">
+                <span className="text-gray-300 text-[9px] font-light tracking-wider whitespace-nowrap transition-colors duration-300 group-hover:text-white">CONTACT</span>
+              </button>
             </div>
             
             {/* Bottom line decoration */}
