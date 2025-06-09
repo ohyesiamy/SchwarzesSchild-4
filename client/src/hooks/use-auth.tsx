@@ -62,23 +62,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const verifyTwoFactor = async (code: string) => {
     try {
-      // In a real app, we would verify the 2FA code here
-      // For now, simulate verification and proceed with the stored credentials
-      const pendingAuth = localStorage.getItem('pendingAuth');
-      if (!pendingAuth) throw new Error("No pending authentication");
-      
-      const credentials = JSON.parse(pendingAuth);
-      const res = await apiRequest("POST", "/api/login", credentials);
-      const userData = await res.json();
+      // MOCK authentication - directly grant access on VERIFY click
+      const mockUser: SelectUser = {
+        id: 1,
+        username: "valued.client@schwarzeschild.bank",
+        password: "mock",
+        fullname: "Valued Client",
+        phone: "+41 44 123 4567",
+        accountNumber: "CH93 0076 2011 6238 5295 7",
+        memberSince: new Date("2020-01-01")
+      };
       
       // Clear pending auth data
       localStorage.removeItem('pendingAuth');
       setShowTwoFactor(false);
       
-      // Update user data
-      queryClient.setQueryData(["/api/user"], userData);
+      // Update user data to grant access
+      queryClient.setQueryData(["/api/user"], mockUser);
       
-      return userData;
+      return mockUser;
     } catch (error) {
       toast({
         title: "Verification failed",
