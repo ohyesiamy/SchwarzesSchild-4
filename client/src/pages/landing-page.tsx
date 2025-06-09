@@ -140,9 +140,9 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative container mx-auto px-4 lg:px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-light tracking-tight mb-6">
-              Empowering Global Sovereignty
-              <span className="block font-bold">Through Private Capital</span>
+            <h1 className="text-4xl lg:text-6xl font-light tracking-tight mb-6 text-white">
+              <span className="block mb-2">Empowering Global Sovereignty</span>
+              <span className="block font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-100 to-white">Through Private Capital</span>
             </h1>
             <p className="text-xl lg:text-2xl text-gray-200 mb-8 font-light leading-relaxed">
               Swiss-incorporated sovereign wealth management for institutional clients, family offices, and ultra-high-net-worth individuals seeking financial independence across global markets
