@@ -41,32 +41,32 @@ export default function LandingPage() {
     {
       icon: <Users className="h-8 w-8" />,
       title: "Private Banking",
-      description: "Exclusive wealth management for high-net-worth individuals and families"
+      description: "Tailored wealth management strategies for ultra-high-net-worth individuals and multi-generational family offices. Our dedicated relationship managers provide discretionary portfolio management, estate planning, and succession advisory services with minimum account thresholds starting at $50 million."
     },
     {
       icon: <Briefcase className="h-8 w-8" />,
       title: "Corporate Treasury",
-      description: "Strategic financial solutions for corporate entities and institutions"
+      description: "Comprehensive treasury management solutions for multinational corporations and institutional clients. Services include liquidity management, foreign exchange hedging, cash concentration, and working capital optimization across multiple jurisdictions and currencies."
     },
     {
       icon: <Lock className="h-8 w-8" />,
       title: "Digital Asset Custody",
-      description: "Secure storage and management of digital assets with institutional-grade security"
+      description: "Institutional-grade custody services for digital assets including cryptocurrencies, tokenized securities, and CBDCs. Our cold storage infrastructure meets bank-level security standards with multi-signature protocols and insurance coverage up to $1 billion per client."
     },
     {
       icon: <Shield className="h-8 w-8" />,
       title: "Escrow & Trade Settlement",
-      description: "Trusted third-party services for complex financial transactions"
+      description: "Neutral third-party services for complex cross-border transactions, M&A settlements, and structured trade finance. Our escrow services facilitate secure transaction completion with legal compliance across 150+ jurisdictions worldwide."
     },
     {
       icon: <TrendingUp className="h-8 w-8" />,
       title: "Investment Strategy Advisory",
-      description: "Professional guidance for portfolio optimization and risk management"
+      description: "Sophisticated investment advisory services combining traditional asset allocation with alternative investments. Our team of certified wealth strategists develops customized portfolios targeting risk-adjusted returns across equity, fixed income, commodities, and private markets."
     },
     {
       icon: <Globe className="h-8 w-8" />,
-      title: "Stablecoin Issuance (USUD)",
-      description: "Digital currency solutions backed by sovereign reserves"
+      title: "Sovereign Digital Currency (USUD)",
+      description: "Pioneering stablecoin issuance backed by diversified sovereign reserves including government bonds, precious metals, and blue-chip equities. USUD provides institutional clients with a stable store of value for cross-border transactions and treasury management."
     }
   ];
 
@@ -143,8 +143,8 @@ export default function LandingPage() {
               Empowering Global Sovereignty
               <span className="block font-bold">Through Private Capital</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-gray-300 mb-8 font-light">
-              Swiss-incorporated sovereign wealth management for institutional and high-net-worth clients worldwide
+            <p className="text-xl lg:text-2xl text-gray-200 mb-8 font-light leading-relaxed">
+              Swiss-incorporated sovereign wealth management for institutional clients, family offices, and ultra-high-net-worth individuals seeking financial independence across global markets
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
@@ -177,12 +177,15 @@ export default function LandingPage() {
             
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h3 className="text-2xl font-medium mb-6">Swiss Excellence in Private Banking</h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  Founded on the principles of Swiss banking tradition, SchwarzesSchild operates as a sovereign wealth management institution, providing exclusive financial services to ultra-high-net-worth individuals, family offices, and institutional clients globally.
+                <h3 className="text-2xl font-medium mb-6 text-gray-900">Swiss Excellence in Private Banking</h3>
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Established in 1998, SchwarzesSchild represents the pinnacle of Swiss banking tradition combined with cutting-edge financial technology. As a fully licensed Swiss private bank, we serve an exclusive clientele of ultra-high-net-worth individuals, sovereign wealth funds, family offices, and multinational corporations across six continents.
                 </p>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  Our Swiss incorporation ensures the highest standards of privacy, security, and regulatory compliance, while our sovereign approach to wealth management empowers clients to maintain financial independence across jurisdictions.
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Our Zurich headquarters operates under the strict oversight of the Swiss Financial Market Supervisory Authority (FINMA), ensuring adherence to the world's most rigorous banking standards. This regulatory framework, combined with Switzerland's centuries-old tradition of banking discretion, provides our clients with unparalleled financial privacy and asset protection.
+                </p>
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  Unlike traditional banks, SchwarzesSchild operates as a sovereign wealth management institution, meaning we maintain complete independence from government influence while providing clients the tools to preserve and grow wealth across multiple jurisdictions and economic cycles.
                 </p>
                 <div className="flex items-center space-x-8">
                   <div className="text-center">
@@ -233,8 +236,8 @@ export default function LandingPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6">Our Services</h2>
             <div className="w-16 h-0.5 bg-black mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive financial solutions designed for sophisticated institutional and private clients
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
+              Comprehensive financial solutions designed for sophisticated institutional and private clients seeking discretionary wealth management, corporate treasury optimization, and alternative investment strategies
             </p>
           </div>
 
@@ -244,8 +247,8 @@ export default function LandingPage() {
                 <div className="text-black mb-4 group-hover:text-gray-700 transition-colors">
                   {service.icon}
                 </div>
-                <h3 className="text-xl font-medium mb-4">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{service.description}</p>
+                <h3 className="text-xl font-medium mb-4 text-gray-900">{service.title}</h3>
+                <p className="text-gray-700 leading-relaxed text-sm">{service.description}</p>
                 <div className="mt-6">
                   <span className="text-sm font-medium text-black group-hover:text-gray-700 uppercase tracking-wide cursor-pointer">
                     Learn More <ChevronRight className="inline h-4 w-4 ml-1" />
@@ -264,8 +267,8 @@ export default function LandingPage() {
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-4xl font-light tracking-tight mb-6">Global Compliance & Security</h2>
               <div className="w-16 h-0.5 bg-white mx-auto mb-8"></div>
-              <p className="text-xl text-gray-300">
-                Bank-grade security infrastructure with multi-jurisdictional regulatory compliance
+              <p className="text-xl text-gray-200">
+                Bank-grade security infrastructure with multi-jurisdictional regulatory compliance ensuring complete asset protection and privacy preservation across all global markets
               </p>
             </div>
 
@@ -359,9 +362,9 @@ export default function LandingPage() {
               <article key={index} className="bg-white border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <div className="h-48 bg-gray-100"></div>
                 <div className="p-6">
-                  <div className="text-sm text-gray-500 mb-3 uppercase tracking-wide">{article.date}</div>
-                  <h3 className="text-xl font-medium mb-3 leading-tight">{article.title}</h3>
-                  <p className="text-gray-600 mb-4">{article.excerpt}</p>
+                  <div className="text-sm text-gray-600 mb-3 uppercase tracking-wide">{article.date}</div>
+                  <h3 className="text-xl font-medium mb-3 leading-tight text-gray-900">{article.title}</h3>
+                  <p className="text-gray-700 mb-4">{article.excerpt}</p>
                   <span className="text-sm font-medium text-black uppercase tracking-wide cursor-pointer hover:text-gray-700">
                     Read More <ChevronRight className="inline h-4 w-4 ml-1" />
                   </span>
