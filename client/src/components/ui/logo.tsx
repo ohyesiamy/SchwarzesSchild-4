@@ -1,5 +1,5 @@
 import React from "react";
-import newLogo from "@/assets/schwarzes-schild-logo.png";
+import newLogo from "../../../assets/schwarzes-schild-logo.png";
 
 interface LogoProps {
   size?: "small" | "medium" | "large";

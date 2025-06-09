@@ -11,7 +11,6 @@ import {
   Lock, 
   Users, 
   Briefcase,
-  Building2,
   ChevronRight,
   CheckCircle,
   Star,
