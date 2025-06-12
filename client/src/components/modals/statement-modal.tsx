@@ -4,8 +4,10 @@ import { useToast } from "@/hooks/use-toast";
 import { X, Download, Calendar, CheckCircle } from "lucide-react";
 
 interface StatementModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   account?: {
     id: number;
     name: string;
@@ -14,7 +16,9 @@ interface StatementModalProps {
   };
 }
 
-export function StatementModal({ isOpen, onClose, account }: StatementModalProps) {
+export function StatementModal({ isOpen, onClose, open, onOpenChange, account }: StatementModalProps) {
+  const effectiveIsOpen = open !== undefined ? open : isOpen || false;
+  const effectiveOnClose = onOpenChange ? () => onOpenChange(false) : onClose || (() => {});
   const { toast } = useToast();
   const [month, setMonth] = useState(new Date().getMonth());
   const [year, setYear] = useState(new Date().getFullYear());
@@ -53,11 +57,11 @@ export function StatementModal({ isOpen, onClose, account }: StatementModalProps
         description: `Your ${availableMonths[month].label} ${year} statement for ${account?.name || "Main Account"} has been generated.`,
       });
       
-      onClose();
+      effectiveOnClose();
     }, 1500);
   };
 
-  if (!isOpen) return null;
+  if (!effectiveIsOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -68,7 +72,7 @@ export function StatementModal({ isOpen, onClose, account }: StatementModalProps
             Download Statement
           </h2>
           <button 
-            onClick={onClose}
+            onClick={effectiveOnClose}
             className="text-gray-500 hover:text-black transition-colors"
           >
             <X className="h-5 w-5" />

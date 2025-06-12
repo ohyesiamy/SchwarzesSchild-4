@@ -3,6 +3,9 @@ interface VirtualCardProps {
   expiryDate: string;
   cardType?: "VISA" | "MASTERCARD";
   cardName?: string;
+  cardholderName?: string;
+  balance?: number;
+  currency?: string;
   isFrozen?: boolean;
   isBlocked?: boolean;
   className?: string;

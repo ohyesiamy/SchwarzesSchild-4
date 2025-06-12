@@ -1,3 +1,5 @@
+// UNUSED COMPONENT - Commented out for cleanup
+/*
 import { Logo } from "@/components/ui/logo";
 
 export function LogoVariantDemo() {
@@ -6,7 +8,6 @@ export function LogoVariantDemo() {
       <h2 className="text-xl font-semibold mb-6">Logo Variants</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Light Background Card */}
         <div className="bg-white border border-gray-200 p-8 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-md">
           <Logo size="large" variant="black" background="light" className="mb-4" />
           <div className="text-center">
@@ -15,7 +16,6 @@ export function LogoVariantDemo() {
           </div>
         </div>
         
-        {/* Dark Background Card */}
         <div className="bg-black border border-gray-800 p-8 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-md">
           <Logo size="large" variant="white" background="dark" className="mb-4" />
           <div className="text-center text-white">
@@ -24,7 +24,6 @@ export function LogoVariantDemo() {
           </div>
         </div>
         
-        {/* Automatic Selection Card - Light */}
         <div className="bg-white border border-gray-200 p-8 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-md">
           <Logo size="medium" variant="auto" background="light" className="mb-4" />
           <div className="text-center">
@@ -33,7 +32,6 @@ export function LogoVariantDemo() {
           </div>
         </div>
         
-        {/* Automatic Selection Card - Dark */}
         <div className="bg-black border border-gray-800 p-8 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-md">
           <Logo size="medium" variant="auto" background="dark" className="mb-4" />
           <div className="text-center text-white">
@@ -45,3 +43,4 @@ export function LogoVariantDemo() {
     </div>
   );
 }
+*/

@@ -3,78 +3,122 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { X, ArrowRight } from "lucide-react";
 import { TransferConfirmationModal } from "./transfer-confirmation-modal";
+import { useCreateTransaction } from "@/lib/api-hooks";
+import { Account } from "@shared/schema";
 
 interface TransferModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  fromAccount?: {
-    id: number;
-    name: string;
-    currency: string;
-    balance: number;
-  };
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  accounts: Account[];
 }
 
-export function TransferModal({ isOpen, onClose, fromAccount }: TransferModalProps) {
+export function TransferModal({ open, onOpenChange, accounts }: TransferModalProps) {
   const { toast } = useToast();
+  const createTransaction = useCreateTransaction();
+  const [selectedAccountId, setSelectedAccountId] = useState<number>(accounts[0]?.id || 0);
   const [amount, setAmount] = useState("");
   const [recipient, setRecipient] = useState("");
   const [reference, setReference] = useState("");
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  // Mock recipient accounts
-  const recipientAccounts = [
-    { id: "acc-1", name: "James Wilson", accountNumber: "SS-8742-2025-9012" },
-    { id: "acc-2", name: "Maria Garcia", accountNumber: "SS-5623-2025-4518" },
-    { id: "acc-3", name: "Personal Savings", accountNumber: "SS-3201-2025-7845" }
-  ];
+  const selectedAccount = accounts.find(acc => acc.id === selectedAccountId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!selectedAccount) {
+      toast({
+        title: "Error",
+        description: "Please select an account",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const transferAmount = parseFloat(amount);
+    if (isNaN(transferAmount) || transferAmount <= 0) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid amount",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (transferAmount > selectedAccount.balance) {
+      toast({
+        title: "Error",
+        description: "Insufficient funds",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setShowConfirmation(true);
   };
 
-  const handleConfirmTransfer = () => {
-    toast({
-      title: "Transfer successful",
-      description: `${fromAccount?.currency || '€'}${amount} has been sent to ${
-        recipientAccounts.find(acc => acc.id === recipient)?.name || recipient
-      }.`,
-    });
-    // Reset and close
-    setAmount("");
-    setRecipient("");
-    setReference("");
-    setShowConfirmation(false);
-    onClose();
+  const handleConfirmTransfer = async () => {
+    if (!selectedAccount || !selectedAccountId) return;
+    
+    setIsProcessing(true);
+    try {
+      // Create outgoing transaction
+      await createTransaction.mutateAsync({
+        accountId: selectedAccountId,
+        name: `Transfer to ${recipient}`,
+        amount: -parseFloat(amount),
+        currency: selectedAccount.currency,
+        category: "transfer",
+      });
+
+      toast({
+        title: "Transfer successful",
+        description: `${selectedAccount.currency} ${amount} has been sent to ${recipient}.`,
+      });
+
+      // Reset form
+      setAmount("");
+      setRecipient("");
+      setReference("");
+      setShowConfirmation(false);
+      onOpenChange(false);
+    } catch (error) {
+      toast({
+        title: "Transfer failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const getTransferData = () => {
-    const selectedRecipient = recipientAccounts.find(acc => acc.id === recipient);
     return {
       type: "domestic",
       amount: parseFloat(amount),
-      currency: fromAccount?.currency || "EUR",
-      fromAccount: fromAccount?.name || "Main Account",
-      toAccount: selectedRecipient?.accountNumber || "",
-      recipient: selectedRecipient?.name || "",
+      currency: selectedAccount?.currency || "EUR",
+      fromAccount: selectedAccount?.name || "Main Account",
+      toAccount: recipient,
+      recipient: recipient,
       reference: reference,
-      fees: 0, // No fees for domestic transfers
+      fees: 0,
       processingTime: "This transfer will be processed immediately."
     };
   };
 
-  if (!isOpen) return null;
+  if (!open) return null;
 
   return (
     <>
       <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white w-full max-w-md rounded-none shadow-lg">
+        <div className="bg-white w-full max-w-md rounded-lg shadow-lg">
           {/* Header */}
           <div className="flex justify-between items-center p-6 border-b border-gray-200">
             <h2 className="text-xl font-semibold">Transfer Funds</h2>
             <button 
-              onClick={onClose}
+              onClick={() => onOpenChange(false)}
               className="text-gray-500 hover:text-black transition-colors"
             >
               <X className="h-5 w-5" />
@@ -85,44 +129,48 @@ export function TransferModal({ isOpen, onClose, fromAccount }: TransferModalPro
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">From Account</label>
-                <div className="p-3 bg-gray-50 border border-gray-200">
-                  <div className="font-medium">{fromAccount?.name || "Main Account"}</div>
-                  <div className="text-sm text-gray-600 mt-1">
-                    Balance: {fromAccount?.currency || '€'}{fromAccount?.balance?.toFixed(2) || '24,856.78'}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Recipient</label>
                 <select
-                  value={recipient}
-                  onChange={(e) => setRecipient(e.target.value)}
+                  value={selectedAccountId}
+                  onChange={(e) => setSelectedAccountId(Number(e.target.value))}
+                  className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   required
-                  className="w-full p-3 border border-gray-300 focus:border-black focus:ring-1 focus:ring-black"
+                  disabled={accounts.length === 0}
                 >
-                  <option value="">Select recipient</option>
-                  {recipientAccounts.map(acc => (
-                    <option key={acc.id} value={acc.id}>{acc.name} - {acc.accountNumber}</option>
+                  {accounts.map((account) => (
+                    <option key={account.id} value={account.id}>
+                      {account.name} - {account.currency} {account.balance.toFixed(2)}
+                    </option>
                   ))}
                 </select>
               </div>
 
               <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Recipient Name</label>
+                <input
+                  type="text"
+                  value={recipient}
+                  onChange={(e) => setRecipient(e.target.value)}
+                  className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Enter recipient name"
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <span className="text-gray-500">{fromAccount?.currency || '€'}</span>
-                  </div>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                    {selectedAccount?.currency || '€'}
+                  </span>
                   <input
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
+                    className="w-full p-3 pl-12 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="0.00"
-                    min="0.01"
                     step="0.01"
+                    min="0.01"
                     required
-                    className="w-full p-3 pl-8 border border-gray-300 focus:border-black focus:ring-1 focus:ring-black"
                   />
                 </div>
               </div>
@@ -133,27 +181,31 @@ export function TransferModal({ isOpen, onClose, fromAccount }: TransferModalPro
                   type="text"
                   value={reference}
                   onChange={(e) => setReference(e.target.value)}
-                  placeholder="e.g., Rent payment"
-                  className="w-full p-3 border border-gray-300 focus:border-black focus:ring-1 focus:ring-black"
+                  className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  placeholder="Payment reference"
                 />
               </div>
 
               <Button 
-                type="submit"
-                className="w-full bg-black text-white hover:bg-gray-800"
+                type="submit" 
+                className="w-full"
+                disabled={!amount || !recipient || isProcessing || accounts.length === 0}
               >
-                Continue <ArrowRight className="ml-2 h-4 w-4" />
+                Continue
+                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </form>
           </div>
         </div>
       </div>
 
+      {/* Confirmation Modal */}
       <TransferConfirmationModal
         isOpen={showConfirmation}
         onClose={() => setShowConfirmation(false)}
         onConfirm={handleConfirmTransfer}
         transferData={getTransferData()}
+        isProcessing={isProcessing}
       />
     </>
   );

@@ -1,9 +1,13 @@
 import { LockIcon, ShieldCheckIcon, GlobeIcon } from "lucide-react";
 import { Logo } from "@/components/ui/logo";
 
-export function Footer() {
+interface FooterProps {
+  className?: string;
+}
+
+export function Footer({ className = "" }: FooterProps) {
   return (
-    <footer className="bg-white border-t border-gray-200 py-6">
+    <footer className={`bg-white border-t border-gray-200 py-6 ${className}`}>
       <div className="container mx-auto px-6">
         {/* Trust Information */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6">

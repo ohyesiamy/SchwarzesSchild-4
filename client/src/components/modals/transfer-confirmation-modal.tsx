@@ -23,6 +23,7 @@ interface TransferConfirmationModalProps {
     fees?: number;
     processingTime?: string;
   };
+  isProcessing?: boolean;
 }
 
 export function TransferConfirmationModal({ 

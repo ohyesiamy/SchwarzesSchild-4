@@ -12,6 +12,7 @@ import {
 
 interface NavigationProps {
   active?: string;
+  onOpen?: () => void;
 }
 
 export function Navigation({ active }: NavigationProps) {

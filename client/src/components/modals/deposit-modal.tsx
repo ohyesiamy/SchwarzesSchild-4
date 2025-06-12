@@ -5,19 +5,30 @@ import { X, CreditCard, Building, ArrowDownToLine, Info, AlertCircle, CheckCircl
 import { CURRENCY_SYMBOLS } from "@/lib/constants";
 
 interface DepositModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   account?: {
     id: number;
     name: string;
     currency: string;
     balance: number;
   };
+  accounts?: {
+    id: number;
+    name: string;
+    userId: number;
+    currency: string;
+    balance: number;
+  }[];
 }
 
 type DepositMethod = "card" | "bank" | "swift";
 
-export function DepositModal({ isOpen, onClose, account }: DepositModalProps) {
+export function DepositModal({ isOpen, onClose, open, onOpenChange, account, accounts }: DepositModalProps) {
+  const effectiveIsOpen = open !== undefined ? open : isOpen || false;
+  const effectiveOnClose = onOpenChange ? () => onOpenChange(false) : onClose || (() => {});
   const { toast } = useToast();
   const [amount, setAmount] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
@@ -74,10 +85,10 @@ export function DepositModal({ isOpen, onClose, account }: DepositModalProps) {
     setSelectedMethod("card");
     setDepositCompleted(false);
     setReferenceId("");
-    onClose();
+    effectiveOnClose();
   };
 
-  if (!isOpen) return null;
+  if (!effectiveIsOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">

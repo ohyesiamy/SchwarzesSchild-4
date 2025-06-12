@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useState, useEffect } from "react";
 import {
   useQuery,
   useMutation,
@@ -24,133 +24,164 @@ type LoginData = Pick<InsertUser, "username" | "password">;
 
 export const AuthContext = createContext<AuthContextType | null>(null);
 
+// Token management
+const TOKEN_KEY = 'schwarzesschild_token';
+
+const getToken = () => localStorage.getItem(TOKEN_KEY);
+const setToken = (token: string) => localStorage.setItem(TOKEN_KEY, token);
+const removeToken = () => localStorage.removeItem(TOKEN_KEY);
+
+// Enhanced apiRequest with auth headers
+const authApiRequest = async (method: string, url: string, body?: any) => {
+  const token = getToken();
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  return fetch(url, {
+    method,
+    headers,
+    body: body ? JSON.stringify(body) : undefined,
+  });
+};
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   
+  // Update the query to use the new auth endpoint
   const {
     data: user,
     error,
     isLoading,
   } = useQuery<SelectUser | undefined, Error>({
-    queryKey: ["/api/user"],
-    queryFn: getQueryFn({ on401: "returnNull" }),
+    queryKey: ["/api/auth/user"],
+    queryFn: async () => {
+      const token = getToken();
+      if (!token) return null;
+      
+      const res = await authApiRequest("GET", "/api/auth/user");
+      if (!res.ok) {
+        if (res.status === 401) {
+          removeToken();
+          return null;
+        }
+        throw new Error("Failed to fetch user");
+      }
+      return res.json();
+    },
   });
 
   const loginMutation = useMutation({
     mutationFn: async (credentials: LoginData) => {
-      const res = await apiRequest("POST", "/api/login", credentials);
+      const res = await authApiRequest("POST", "/api/auth/login", credentials);
       if (!res.ok) {
         const errorData = await res.text();
         throw new Error(errorData || "Login failed");
       }
-      const userData = await res.json();
+      const { user: userData, token } = await res.json();
+      
+      // Store token
+      setToken(token);
+      
       // Show 2FA screen after successful backend login
       setShowTwoFactor(true);
       localStorage.setItem('pendingAuth', JSON.stringify(userData));
       return userData;
     },
-    onError: (error: Error) => {
-      toast({
-        title: "Login failed",
-        description: error.message,
-        variant: "destructive",
-      });
+    onSettled: async () => {
+      // Refresh the current user
+      await queryClient.invalidateQueries({ queryKey: ["/api/auth/user"] });
     },
   });
 
-  const verifyTwoFactor = async (code: string) => {
-    try {
-      // Get the user data from pending auth
-      const pendingAuthData = localStorage.getItem('pendingAuth');
-      if (!pendingAuthData) {
-        throw new Error("No pending authentication found");
-      }
-      
-      const userData = JSON.parse(pendingAuthData);
-      
-      // Clear pending auth data
-      localStorage.removeItem('pendingAuth');
-      setShowTwoFactor(false);
-      
-      // Update the query cache with user data
-      queryClient.setQueryData(["/api/user"], userData);
-      
-      toast({
-        title: "Login successful",
-        description: "Welcome back to your secure banking portal",
-        variant: "default",
-      });
-      
-      // Force redirect to dashboard
-      window.location.href = "/dashboard";
-      
-      return userData;
-    } catch (error) {
-      toast({
-        title: "Verification failed",
-        description: error instanceof Error ? error.message : "Unknown error",
-        variant: "destructive",
-      });
-    }
-  };
-
   const registerMutation = useMutation({
-    mutationFn: async (credentials: InsertUser) => {
-      try {
-        const res = await apiRequest("POST", "/api/register", credentials);
-        const userData = await res.json();
-        return userData;
-      } catch (error) {
-        console.error("Registration error:", error);
-        throw error;
+    mutationFn: async (userData: InsertUser) => {
+      const parsedData = insertUserSchema.parse(userData);
+      const res = await authApiRequest("POST", "/api/auth/register", parsedData);
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Registration failed");
       }
+      const { user: newUser, token } = await res.json();
+      
+      // Store token
+      setToken(token);
+      
+      return newUser;
     },
-    onSuccess: (user: SelectUser) => {
-      queryClient.setQueryData(["/api/user"], user);
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/auth/user"] });
       toast({
-        title: "Registration successful",
-        description: "Your account has been created",
-      });
-    },
-    onError: (error: Error) => {
-      console.error("Registration mutation error:", error);
-      toast({
-        title: "Registration failed",
-        description: error.message || "An error occurred during registration",
-        variant: "destructive",
+        title: "Account created successfully!",
+        description: "Welcome to Schwarzes Schild Banking",
       });
     },
   });
 
   const logoutMutation = useMutation({
     mutationFn: async () => {
-      await apiRequest("POST", "/api/logout");
+      await authApiRequest("POST", "/api/auth/logout");
+      removeToken();
+      localStorage.removeItem('pendingAuth');
     },
     onSuccess: () => {
-      // Clear all cached data
+      queryClient.resetQueries();
       queryClient.clear();
-      // Force redirect to landing page
-      window.location.href = "/";
-    },
-    onError: (error: Error) => {
-      toast({
-        title: "Logout failed",
-        description: error.message,
-        variant: "destructive",
-      });
     },
   });
+
+  const verifyTwoFactor = (code: string) => {
+    // Simulate 2FA verification
+    if (code === '123456') {
+      setShowTwoFactor(false);
+      localStorage.removeItem('pendingAuth');
+      queryClient.invalidateQueries({ queryKey: ["/api/auth/user"] });
+      toast({
+        title: "Welcome back!",
+        description: "You have successfully logged in.",
+      });
+    } else {
+      toast({
+        title: "Invalid code",
+        description: "Please try again with the correct code.",
+        variant: "destructive",
+      });
+    }
+  };
+
+  // Update global apiRequest to use auth headers
+  useEffect(() => {
+    const originalApiRequest = window.fetch;
+    window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+      const url = typeof input === 'string' ? input : input.toString();
+      if (url.startsWith('/api/')) {
+        const token = getToken();
+        if (token) {
+          init = init || {};
+          init.headers = {
+            ...init.headers,
+            'Authorization': `Bearer ${token}`,
+          };
+        }
+      }
+      return originalApiRequest(input, init);
+    };
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user: user ?? null,
-        isLoading,
         error,
+        isLoading,
         loginMutation,
-        logoutMutation,
         registerMutation,
+        logoutMutation,
         showTwoFactor,
         setShowTwoFactor,
         verifyTwoFactor,
@@ -162,9 +193,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
     throw new Error("useAuth must be used within an AuthProvider");
   }
-  return context;
+  return authContext;
 }

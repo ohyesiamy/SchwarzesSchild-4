@@ -2,934 +2,181 @@ import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Navigation } from "@/components/layout/navigation";
 import { MobileNavigation } from "@/components/layout/mobile-navigation";
+import { Footer } from "@/components/layout/footer";
 import { VirtualCard } from "@/components/account/virtual-card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { 
-  Dialog, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogTrigger,
-  DialogClose,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { 
-  Tabs, 
-  TabsContent, 
-  TabsList, 
-  TabsTrigger 
-} from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { Badge } from "@/components/ui/badge";
-import { 
-  AlertTriangle, 
-  CheckCircle, 
-  CreditCard, 
-  Clock, 
-  Shield, 
-  Lock, 
-  Eye, 
-  EyeOff,
-  RefreshCw,
-  PlusCircle,
-  List,
-  Settings,
-  Lock as LockIcon,
-  MapPin,
-  Info,
-  ChevronRight,
-  Plus,
-  AlignLeft,
-  ChevronsDown,
-  History,
-  Filter
-} from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Plus, /* Settings, */ AlertCircle, Shield, Activity, CreditCard } from "lucide-react";
+import { /* formatCurrency, */ formatDate } from "@/lib/utils";
+import { CardManagementModal } from "@/components/modals/card-management-modal";
 import { useToast } from "@/hooks/use-toast";
-
-interface CardData {
-  id: string;
-  cardNumber: string;
-  expiryDate: string;
-  cardType: "VISA" | "MASTERCARD";
-  cardName: string;
-  isFrozen: boolean;
-  isBlocked: boolean;
-  lastUsed?: string;
-  spendingLimits: {
-    daily: number;
-    monthly: number;
-    online: number;
-  };
-  currency: string;
-}
+import { useCards, useFreezeCard } from "@/lib/api-hooks";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CardsPage() {
+  const [isCardModalOpen, setIsCardModalOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<any>(null);
   const { toast } = useToast();
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [showPin, setShowPin] = useState(false);
-  const [showNewCardModal, setShowNewCardModal] = useState(false);
-  const [newCardName, setNewCardName] = useState("");
-  const [newCardCurrency, setNewCardCurrency] = useState("EUR - Euro");
-  const [newCardType, setNewCardType] = useState("debit");
-  const [newCardDelivery, setNewCardDelivery] = useState("virtual");
-  const [showConfirmLockModal, setShowConfirmLockModal] = useState(false);
-  const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<CardData | null>(null);
-  const [currentCardLimitTab, setCurrentCardLimitTab] = useState("daily");
-  const [spendingLimits, setSpendingLimits] = useState({
-    daily: "1000",
-    monthly: "5000",
-    online: "500"
-  });
   
-  // Sample card data
-  const [cards, setCards] = useState<CardData[]>([
-    {
-      id: "card-1",
-      cardNumber: "**** **** **** 4256",
-      expiryDate: "12/25",
-      cardType: "VISA",
-      cardName: "Personal Debit Card",
-      isFrozen: false,
-      isBlocked: false,
-      lastUsed: "Zürich, Switzerland • 2 hours ago",
-      spendingLimits: {
-        daily: 1000,
-        monthly: 5000,
-        online: 500
-      },
-      currency: "EUR"
-    },
-    {
-      id: "card-2",
-      cardNumber: "**** **** **** 7891",
-      expiryDate: "09/26",
-      cardType: "MASTERCARD",
-      cardName: "Business Travel",
-      isFrozen: false,
-      isBlocked: false,
-      lastUsed: "Geneva, Switzerland • Yesterday",
-      spendingLimits: {
-        daily: 2000,
-        monthly: 10000,
-        online: 1000
-      },
-      currency: "USD"
+  const { data: cards = [], isLoading, refetch } = useCards();
+  const freezeCardMutation = useFreezeCard();
+
+  const handleCardClick = (card: any) => {
+    setSelectedCard(card);
+    setIsCardModalOpen(true);
+  };
+
+  const handleToggleFreeze = async (e: React.MouseEvent, cardId: number, currentStatus: boolean) => {
+    e.stopPropagation();
+    
+    try {
+      await freezeCardMutation.mutateAsync({
+        id: cardId,
+        isFrozen: !currentStatus
+      });
+      
+      toast({
+        title: !currentStatus ? "Card frozen" : "Card unfrozen",
+        description: !currentStatus 
+          ? "Your card has been temporarily frozen. You can unfreeze it anytime."
+          : "Your card is now active and ready to use.",
+      });
+    } catch (error) {
+      toast({
+        title: "Action failed",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
     }
-  ]);
-  
-  // Recent security activities
-  const securityActivities = [
-    { action: "Card viewed", timestamp: "Today, 14:32", location: "Zürich, Switzerland" },
-    { action: "PIN requested", timestamp: "May 21, 2025", location: "Zürich, Switzerland" },
-    { action: "Spending limit changed", timestamp: "May 19, 2025", location: "Zürich, Switzerland" }
-  ];
-  
-  const handleToggleFreeze = (cardId: string) => {
-    setIsProcessing(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setCards(cards.map(card => 
-        card.id === cardId ? {...card, isFrozen: !card.isFrozen} : card
-      ));
-      setIsProcessing(false);
-      
-      const targetCard = cards.find(card => card.id === cardId);
-      toast({
-        title: targetCard?.isFrozen ? "Card Unfrozen" : "Card Frozen",
-        description: targetCard?.isFrozen 
-          ? "Your card has been successfully unfrozen and is now active." 
-          : "Your card has been frozen. All transactions will be declined.",
-      });
-    }, 1000);
   };
-  
-  const handleLockCard = (cardId: string) => {
-    setIsProcessing(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setCards(cards.map(card => 
-        card.id === cardId ? {...card, isBlocked: true} : card
-      ));
-      setIsProcessing(false);
-      setShowConfirmLockModal(false);
-      
-      toast({
-        title: "Card Permanently Locked",
-        description: "Your card has been permanently locked. Please contact support for a replacement.",
-        variant: "destructive"
-      });
-    }, 1500);
-  };
-  
-  const handleCreateNewCard = () => {
-    setIsProcessing(true);
-    
-    // Simulate API call  
-    setTimeout(() => {
-      const newCard: CardData = {
-        id: `card-${cards.length + 1}`,
-        cardNumber: `**** **** **** ${Math.floor(1000 + Math.random() * 9000)}`,
-        expiryDate: "05/28",
-        cardType: Math.random() > 0.5 ? "VISA" : "MASTERCARD",
-        cardName: newCardName || `${newCardType === "debit" ? "Debit" : "Credit"} Card`,
-        isFrozen: false,
-        isBlocked: false,
-        lastUsed: undefined,
-        spendingLimits: {
-          daily: 1000,
-          monthly: 5000,
-          online: 500
-        },
-        currency: newCardCurrency.split(" - ")[0]
-      };
-      
-      setCards([...cards, newCard]);
-      setIsProcessing(false);
-      setShowNewCardModal(false);
-      setNewCardName("");
-      
-      toast({
-        title: "New Card Created",
-        description: `Your new ${newCardDelivery === "virtual" ? "virtual" : "physical"} card has been generated successfully.`,
-      });
-    }, 2000);
-  };
-  
-  const handleUpdateLimit = (cardId: string, limitType: string) => {
-    setIsProcessing(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setCards(cards.map(card => {
-        if (card.id === cardId) {
-          const updatedLimits = {...card.spendingLimits};
-          if (limitType === "daily") updatedLimits.daily = parseFloat(spendingLimits.daily);
-          if (limitType === "monthly") updatedLimits.monthly = parseFloat(spendingLimits.monthly);
-          if (limitType === "online") updatedLimits.online = parseFloat(spendingLimits.online);
-          
-          return {...card, spendingLimits: updatedLimits};
-        }
-        return card;
-      }));
-      
-      setIsProcessing(false);
-      
-      toast({
-        title: "Spending Limit Updated",
-        description: `Your ${limitType} spending limit has been updated successfully.`,
-      });
-    }, 1000);
-  };
-  
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <Navigation active="cards" />
       <MobileNavigation active="cards" />
       
-      <main className="py-5 px-4 container mx-auto flex-grow mb-20 md:mb-0 max-w-[1440px]">
-        {/* Mobile optimized header - visible on mobile only */}
-        <div className="flex flex-col mb-4 md:hidden">
-          <h1 className="text-sm uppercase tracking-wide font-medium mb-1">Card Management</h1>
-          <div className="w-6 h-0.5 bg-black"></div>
-          <p className="text-[10px] uppercase tracking-wide text-gray-600 mt-2">Manage payment methods</p>
-        </div>
-
-        {/* Desktop header - hidden on mobile */}
-        <div className="hidden md:block mb-6">
-          <h1 className="text-base uppercase tracking-wide font-medium mb-1">Card Management</h1>
-          <div className="w-8 h-0.5 bg-black mb-2"></div>
-          <p className="text-xs text-gray-600">Manage and control your virtual payment cards with precision</p>
-        </div>
-        
-        <div className="mb-5 flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center">
-            <CreditCard className="h-3.5 w-3.5 mr-2 text-gray-500" />
-            <p className="text-[10px] text-gray-600 uppercase tracking-wide">Virtual payment solutions</p>
-          </div>
-          <Button 
-            onClick={() => setShowNewCardModal(true)}
-            className="bg-black text-white hover:bg-gray-800 transition-colors duration-150 w-full sm:w-auto rounded-none h-8"
-            size="sm"
-          >
-            <Plus className="h-3 w-3 mr-1.5" />
-            <span className="text-[10px] uppercase tracking-wide">Add New Card</span>
+      <main className="py-8 px-4 container mx-auto flex-grow mb-20 md:mb-0">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-2xl font-playfair">Your Cards</h1>
+          <Button size="sm" onClick={() => {
+            setSelectedCard(null);
+            setIsCardModalOpen(true);
+          }}>
+            <Plus className="w-4 h-4 mr-2" />
+            Add Card
           </Button>
         </div>
-        
-        <Separator className="mb-5" />
-        
-        {/* Active Cards Section */}
-        <section className="mb-6">
-          <div className="flex justify-between items-center mb-3 md:mb-4">
-            <div className="flex items-center">
-              <h2 className="text-xs uppercase tracking-wide font-medium">Active Cards</h2>
-              <ChevronRight className="h-3.5 w-3.5 ml-2 text-gray-500" />
-            </div>
-            <button className="text-[10px] uppercase tracking-wide font-medium text-black flex items-center">
-              <Filter className="h-3 w-3 mr-1.5" />
-              <span>Sort</span>
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            {cards.map(card => (
-              <div key={card.id} className="border border-gray-200 p-0">
-                {/* Card Header */}
-                <div className="flex items-center justify-between p-2.5 border-b border-gray-200">
-                  <div className="flex items-center">
-                    <div className="bg-black text-white p-1 mr-2">
-                      <CreditCard className="h-3 w-3" />
-                    </div>
-                    <div>
-                      <h3 className="text-xs uppercase tracking-wide font-medium">{card.cardName}</h3>
-                      <p className="text-[9px] text-gray-500 uppercase tracking-wide mt-0.5">{card.cardType} • {card.currency}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Badge variant={card.isFrozen ? "outline" : "default"} 
-                      className={`text-[9px] px-1.5 py-0.5 rounded-none uppercase tracking-wide font-medium ${
-                        card.isFrozen 
-                          ? "border-black text-black bg-transparent" 
-                          : "bg-black hover:bg-black/90 border-0"
-                      }`}>
-                      {card.isFrozen ? "Frozen" : "Active"}
-                    </Badge>
-                    {card.isBlocked && (
-                      <Badge variant="outline" className="text-[9px] px-1.5 py-0.5 rounded-none border-black text-black uppercase tracking-wide font-medium">
-                        Blocked
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Card Content */}
-                <div className="p-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {/* Card Display */}
-                  <div>
-                    <VirtualCard 
-                      cardNumber={card.cardNumber}
-                      expiryDate={card.expiryDate}
-                      cardType={card.cardType}
-                      cardName={card.cardName}
-                      isFrozen={card.isFrozen}
-                      isBlocked={card.isBlocked}
-                      className="w-full"
-                    />
-                    
-                    {/* Card Actions - Mobile Only */}
-                    <div className="md:hidden flex gap-2 mt-3">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1 h-7 text-[10px] uppercase tracking-wide font-medium rounded-none border-black"
-                        onClick={() => {
-                          setSelectedCard(card);
-                          setShowDetailsModal(true);
-                        }}
-                      >
-                        <Eye className="h-3 w-3 mr-1" />
-                        Details
-                      </Button>
-                      
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className={`flex-1 h-7 text-[10px] uppercase tracking-wide font-medium rounded-none ${card.isFrozen ? "border-black text-black" : "border-black text-black"}`}
-                        onClick={() => handleToggleFreeze(card.id)}
-                      >
-                        {card.isFrozen ? (
-                          <>
-                            <RefreshCw className="h-3 w-3 mr-1" />
-                            Unfreeze
-                          </>
-                        ) : (
-                          <>
-                            <Lock className="h-3 w-3 mr-1" />
-                            Freeze
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                    
-                    {/* Last Activity */}
-                    {card.lastUsed && !card.isBlocked && (
-                      <div className="flex items-center text-[9px] uppercase tracking-wide text-gray-600 mt-2">
-                        <MapPin className="h-2.5 w-2.5 mr-1" />
-                        <span>Last used: {card.lastUsed}</span>
-                      </div>
-                    )}
-                  </div>
-                  
-                  {/* Card Details & Actions */}
-                  <div className="space-y-4">
-                    <div>
-                      <h4 className="text-[10px] uppercase tracking-wide font-medium text-black mb-2 border-b border-gray-200 pb-1">Card Information</h4>
-                      <div className="space-y-1.5">
-                        <div className="flex justify-between">
-                          <span className="text-[10px] uppercase tracking-wide text-gray-500">Card Number:</span>
-                          <span className="text-[10px] uppercase tracking-wide font-medium">{card.cardNumber}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[10px] uppercase tracking-wide text-gray-500">Expiry Date:</span>
-                          <span className="text-[10px] uppercase tracking-wide font-medium">{card.expiryDate}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[10px] uppercase tracking-wide text-gray-500">Card Network:</span>
-                          <span className="text-[10px] uppercase tracking-wide font-medium">{card.cardType}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[10px] uppercase tracking-wide text-gray-500">Currency:</span>
-                          <span className="text-[10px] uppercase tracking-wide font-medium">{card.currency}</span>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h4 className="text-[10px] uppercase tracking-wide font-medium text-black mb-2 border-b border-gray-200 pb-1">Pin Code</h4>
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button 
-                            variant="outline" 
-                            className="w-full flex items-center justify-center border-black hover:bg-gray-50 transition-colors duration-150 ease-in-out h-7 rounded-none"
-                            disabled={card.isBlocked}
-                          >
-                            {showPin ? (
-                              <EyeOff className="h-3 w-3 mr-1.5" />
-                            ) : (
-                              <Eye className="h-3 w-3 mr-1.5" />
-                            )}
-                            <span className="text-[10px] uppercase tracking-wide font-medium">Reveal PIN</span>
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle className="flex items-center">
-                              <Shield className="h-5 w-5 mr-2" />
-                              Security Verification
-                            </DialogTitle>
-                          </DialogHeader>
-                          <div className="py-4">
-                            <p className="mb-4">For your security, we need to verify your identity before revealing your PIN.</p>
-                            <div className="bg-gray-50 p-4 mb-4 border border-gray-200">
-                              <p className="text-sm text-gray-600">A verification code has been sent to your registered mobile number. Please enter it below.</p>
-                            </div>
-                            <Input 
-                              type="text" 
-                              placeholder="Enter 6-digit code"
-                              className="text-center tracking-widest"
-                            />
-                          </div>
-                          <DialogFooter>
-                            <Button className="w-full bg-black text-white hover:bg-gray-800">
-                              Verify Identity
-                            </Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  </div>
-                  
-                  {/* Card Controls */}
-                  <div className="space-y-4">
-                    <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Card Controls</h4>
-                    
-                    <div className="grid grid-cols-1 gap-3">
-                      <Button 
-                        variant="outline"
-                        className={`border-black flex items-center transition-colors duration-150 ease-in-out ${card.isFrozen ? 'bg-gray-50' : 'bg-white'}`}
-                        onClick={() => handleToggleFreeze(card.id)}
-                        disabled={card.isBlocked || isProcessing}
-                      >
-                        {isProcessing ? (
-                          <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                        ) : (
-                          <LockIcon className="h-4 w-4 mr-2" />
-                        )}
-                        {card.isFrozen ? 'Unfreeze Card' : 'Freeze Card'}
-                      </Button>
-                      
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button 
-                            variant="outline"
-                            className="border-black flex items-center bg-white hover:bg-gray-50 transition-colors duration-150 ease-in-out"
-                            disabled={card.isBlocked}
-                          >
-                            <Settings className="h-4 w-4 mr-2" />
-                            Spending Limits
-                          </Button>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-md">
-                          <DialogHeader>
-                            <DialogTitle>Set Spending Limits</DialogTitle>
-                          </DialogHeader>
-                          <Tabs defaultValue="daily" onValueChange={setCurrentCardLimitTab}>
-                            <TabsList className="grid grid-cols-3 mb-4">
-                              <TabsTrigger value="daily">Daily</TabsTrigger>
-                              <TabsTrigger value="monthly">Monthly</TabsTrigger>
-                              <TabsTrigger value="online">Online</TabsTrigger>
-                            </TabsList>
-                            <TabsContent value="daily" className="space-y-4">
-                              <p className="text-sm text-gray-600">Set the maximum amount that can be spent in a single day.</p>
-                              <div className="relative">
-                                <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                  <span className="text-gray-500">{card.currency}</span>
-                                </div>
-                                <Input
-                                  type="text"
-                                  className="pl-10"
-                                  placeholder="Daily limit"
-                                  value={spendingLimits.daily}
-                                  onChange={(e) => setSpendingLimits({...spendingLimits, daily: e.target.value})}
-                                />
-                              </div>
-                              <p className="text-xs text-gray-500">Current limit: {card.currency} {card.spendingLimits.daily.toLocaleString()}</p>
-                            </TabsContent>
-                            <TabsContent value="monthly" className="space-y-4">
-                              <p className="text-sm text-gray-600">Set the maximum amount that can be spent in a month.</p>
-                              <div className="relative">
-                                <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                  <span className="text-gray-500">{card.currency}</span>
-                                </div>
-                                <Input
-                                  type="text"
-                                  className="pl-10"
-                                  placeholder="Monthly limit"
-                                  value={spendingLimits.monthly}
-                                  onChange={(e) => setSpendingLimits({...spendingLimits, monthly: e.target.value})}
-                                />
-                              </div>
-                              <p className="text-xs text-gray-500">Current limit: {card.currency} {card.spendingLimits.monthly.toLocaleString()}</p>
-                            </TabsContent>
-                            <TabsContent value="online" className="space-y-4">
-                              <p className="text-sm text-gray-600">Set the maximum amount that can be spent online.</p>
-                              <div className="relative">
-                                <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                                  <span className="text-gray-500">{card.currency}</span>
-                                </div>
-                                <Input
-                                  type="text"
-                                  className="pl-10"
-                                  placeholder="Online limit"
-                                  value={spendingLimits.online}
-                                  onChange={(e) => setSpendingLimits({...spendingLimits, online: e.target.value})}
-                                />
-                              </div>
-                              <p className="text-xs text-gray-500">Current limit: {card.currency} {card.spendingLimits.online.toLocaleString()}</p>
-                            </TabsContent>
-                          </Tabs>
-                          <DialogFooter>
-                            <Button 
-                              variant="outline" 
-                              className="border-black"
-                              onClick={() => {
-                                // Reset to current values
-                                setSpendingLimits({
-                                  daily: card.spendingLimits.daily.toString(),
-                                  monthly: card.spendingLimits.monthly.toString(),
-                                  online: card.spendingLimits.online.toString()
-                                });
-                              }}
-                            >
-                              Cancel
-                            </Button>
-                            <Button 
-                              className="bg-black text-white hover:bg-gray-800"
-                              onClick={() => handleUpdateLimit(card.id, currentCardLimitTab)}
-                              disabled={isProcessing}
-                            >
-                              {isProcessing ? (
-                                <>
-                                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                                  Updating...
-                                </>
-                              ) : (
-                                'Save Changes'
-                              )}
-                            </Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
-                      
-                      <Button 
-                        variant="outline"
-                        className="border-black flex items-center bg-white hover:bg-gray-50 transition-colors duration-150 ease-in-out"
-                        disabled={card.isBlocked}
-                      >
-                        <List className="h-4 w-4 mr-2" />
-                        View Transactions
-                      </Button>
-                      
-                      <Button 
-                        variant="outline"
-                        className="border-black flex items-center bg-white hover:bg-gray-50 transition-colors duration-150 ease-in-out"
-                        disabled={card.isBlocked}
-                      >
-                        <RefreshCw className="h-4 w-4 mr-2" />
-                        Request Replacement
-                      </Button>
-                      
-                      <Button 
-                        variant="outline"
-                        className="border-black flex items-center text-red-600 hover:bg-red-50 transition-colors duration-150 ease-in-out"
-                        onClick={() => setShowConfirmLockModal(true)}
-                        disabled={card.isBlocked}
-                      >
-                        <Lock className="h-4 w-4 mr-2" />
-                        Lock Card Permanently
-                      </Button>
-                      
-                      {/* Confirm Lock Card Modal */}
-                      <Dialog open={showConfirmLockModal} onOpenChange={setShowConfirmLockModal}>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle className="text-red-600 flex items-center">
-                              <AlertTriangle className="h-5 w-5 mr-2" />
-                              Permanently Lock Card
-                            </DialogTitle>
-                          </DialogHeader>
-                          <div className="py-4">
-                            <div className="bg-red-50 p-4 border border-red-100 mb-4">
-                              <p className="text-sm text-red-800">
-                                Warning: This action cannot be undone. Permanently locking your card will require you to request a new card.
-                              </p>
-                            </div>
-                            <p>Are you sure you want to permanently lock this card?</p>
-                          </div>
-                          <DialogFooter className="flex justify-end space-x-2">
-                            <Button 
-                              variant="outline" 
-                              className="border-black"
-                              onClick={() => setShowConfirmLockModal(false)}
-                            >
-                              Cancel
-                            </Button>
-                            <Button 
-                              variant="destructive"
-                              onClick={() => handleLockCard(card.id)}
-                              disabled={isProcessing}
-                            >
-                              {isProcessing ? (
-                                <>
-                                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                                  Processing...
-                                </>
-                              ) : (
-                                'Permanently Lock Card'
-                              )}
-                            </Button>
-                          </DialogFooter>
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-        
-        {/* Security Section */}
-        <section className="mb-6">
-          <div className="flex justify-between items-center mb-3 md:mb-4">
-            <div className="flex items-center">
-              <h2 className="text-xs uppercase tracking-wide font-medium">Card Security</h2>
-              <Shield className="h-3.5 w-3.5 ml-2 text-gray-500" />
-            </div>
-            <Button 
-              variant="link" 
-              size="sm" 
-              className="text-[10px] uppercase tracking-wide font-medium text-black h-auto p-0"
-            >
-              Learn More
-            </Button>
-          </div>
-          
-          <div className="border border-gray-200">
-            <div className="p-2.5 border-b border-gray-200">
-              <h3 className="text-xs uppercase tracking-wide font-medium">Security Guidelines</h3>
-            </div>
-            <div className="p-3">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-wide font-medium text-black mb-2 border-b border-gray-200 pb-1">Best Practices</h4>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
-                      <span className="text-[11px]">Never share your PIN or card details over phone, email, or SMS.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
-                      <span className="text-[11px]">Monitor your transactions regularly and report any suspicious activity immediately.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
-                      <span className="text-[11px]">Freeze your card immediately if lost or stolen.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
-                      <span className="text-[11px]">Use biometric authentication for added security when available.</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="h-4 w-4 bg-black text-white flex items-center justify-center text-[9px] mr-2 flex-shrink-0 mt-0.5">✓</div>
-                      <span className="text-[11px]">Set up transaction alerts to be notified of any purchase.</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-wide font-medium text-black mb-2 border-b border-gray-200 pb-1">Recent Activities</h4>
-                  <div className="space-y-2">
-                    {securityActivities.map((activity, index) => (
-                      <div key={index} className="flex items-start pb-2 border-b border-gray-100 last:border-0">
-                        <div className="h-4 w-4 border border-black flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">
-                          <History className="h-2 w-2" />
-                        </div>
-                        <div>
-                          <div className="flex flex-col md:flex-row md:items-center mb-0.5">
-                            <span className="text-[11px] uppercase tracking-wide font-medium">{activity.action}</span>
-                            <span className="md:ml-2 text-[9px] text-gray-500 uppercase tracking-wide">{activity.timestamp}</span>
-                          </div>
-                          <span className="text-[9px] text-gray-600 flex items-center uppercase tracking-wide">
-                            <MapPin className="h-2 w-2 mr-1" />
-                            {activity.location}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        {/* New Card Modal */}
-        <Dialog open={showNewCardModal} onOpenChange={setShowNewCardModal}>
-          <DialogContent className="max-w-md">
-            <DialogHeader>
-              <DialogTitle className="flex items-center">
-                <PlusCircle className="h-5 w-5 mr-2" />
-                Issue New Card
-              </DialogTitle>
-            </DialogHeader>
-            
-            <div className="py-4 space-y-4">
-              <div>
-                <label className="block text-sm mb-1">Card Name (Optional)</label>
-                <Input
-                  type="text"
-                  placeholder="e.g. Travel Card, Shopping Card"
-                  value={newCardName}
-                  onChange={(e) => setNewCardName(e.target.value)}
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          {isLoading ? (
+            <>
+              <Skeleton className="h-[200px]" />
+              <Skeleton className="h-[200px]" />
+              <Skeleton className="h-[200px]" />
+            </>
+          ) : cards.length > 0 ? (
+            cards.map((card) => (
+              <div key={card.id} className="cursor-pointer" onClick={() => handleCardClick(card)}>
+                <VirtualCard
+                  cardNumber={card.cardNumber}
+                  cardholderName={card.name || undefined}
+                  expiryDate={card.expiryDate}
+                  balance={card.spendingLimit || 0}
+                  currency="EUR"
+                  isFrozen={card.isFrozen ?? false}
                 />
-              </div>
-              
-              <div>
-                <label className="block text-sm mb-1">Card Type</label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="mt-3 flex justify-between items-center">
+                  <span className="text-sm text-gray-600">
+                    {card.isFrozen ? 'Frozen' : 'Active'}
+                  </span>
                   <Button
-                    type="button"
-                    variant={newCardType === "debit" ? "default" : "outline"}
-                    className={`${newCardType === "debit" ? "bg-black text-white" : "border-black"}`}
-                    onClick={() => setNewCardType("debit")}
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => handleToggleFreeze(e, card.id, card.isFrozen ?? false)}
+                    disabled={freezeCardMutation.isPending}
                   >
-                    Debit Card
-                  </Button>
-                  <Button
-                    type="button"
-                    variant={newCardType === "credit" ? "default" : "outline"}
-                    className={`${newCardType === "credit" ? "bg-black text-white" : "border-black"}`}
-                    onClick={() => setNewCardType("credit")}
-                  >
-                    Credit Card
+                    {card.isFrozen ? 'Unfreeze' : 'Freeze'}
                   </Button>
                 </div>
               </div>
-              
-              <div>
-                <label className="block text-sm mb-1">Currency</label>
-                <Select 
-                  value={newCardCurrency} 
-                  onValueChange={setNewCardCurrency}
-                >
-                  <SelectTrigger className="w-full border-black">
-                    <SelectValue placeholder="Select currency" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="EUR - Euro">EUR - Euro</SelectItem>
-                    <SelectItem value="USD - US Dollar">USD - US Dollar</SelectItem>
-                    <SelectItem value="GBP - British Pound">GBP - British Pound</SelectItem>
-                    <SelectItem value="CHF - Swiss Franc">CHF - Swiss Franc</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div>
-                <label className="block text-sm mb-1">Delivery Type</label>
-                <div className="grid grid-cols-2 gap-2">
-                  <Button
-                    type="button"
-                    variant={newCardDelivery === "virtual" ? "default" : "outline"}
-                    className={`${newCardDelivery === "virtual" ? "bg-black text-white" : "border-black"}`}
-                    onClick={() => setNewCardDelivery("virtual")}
-                  >
-                    Virtual
-                  </Button>
-                  <Button
-                    type="button"
-                    variant={newCardDelivery === "physical" ? "default" : "outline"}
-                    className={`${newCardDelivery === "physical" ? "bg-black text-white" : "border-black"}`}
-                    onClick={() => setNewCardDelivery("physical")}
-                  >
-                    Physical
-                  </Button>
-                </div>
-                {newCardDelivery === "physical" && (
-                  <p className="text-xs text-gray-500 mt-1">
-                    Physical cards will be delivered within 3-5 business days to your registered address.
-                  </p>
-                )}
-              </div>
-              
-              <div className="bg-blue-50 p-3 border border-blue-100">
-                <div className="flex items-start">
-                  <Info className="h-4 w-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
-                  <p className="text-xs text-blue-700">
-                    {newCardDelivery === "virtual" 
-                      ? "Virtual cards can be used immediately for online purchases and digital wallets." 
-                      : "There is a CHF 10 fee for physical card issuance which will be charged to your account."}
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            <DialogFooter>
-              <Button 
-                variant="outline" 
-                className="border-black"
-                onClick={() => setShowNewCardModal(false)}
-              >
-                Cancel
-              </Button>
-              <Button 
-                className="bg-black text-white hover:bg-gray-800"
-                onClick={handleCreateNewCard}
-                disabled={isProcessing}
-              >
-                {isProcessing ? (
-                  <>
-                    <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                    Processing...
-                  </>
-                ) : (
-                  'Issue Card'
-                )}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
-      </main>
-      
-      {/* Card Details Modal for Mobile */}
-      <Dialog open={showDetailsModal} onOpenChange={setShowDetailsModal}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="text-xl">Card Details</DialogTitle>
-          </DialogHeader>
-          
-          {selectedCard && (
-            <div className="space-y-4">
-              <VirtualCard
-                cardNumber={selectedCard.cardNumber}
-                expiryDate={selectedCard.expiryDate}
-                cardType={selectedCard.cardType}
-                cardName={selectedCard.cardName}
-                isFrozen={selectedCard.isFrozen}
-                isBlocked={selectedCard.isBlocked}
-                className="w-full mb-4"
-              />
-              
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Card Information</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Card Number:</span>
-                      <span className="font-medium">{selectedCard.cardNumber}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Expiry Date:</span>
-                      <span className="font-medium">{selectedCard.expiryDate}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Card Network:</span>
-                      <span className="font-medium">{selectedCard.cardType}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Status:</span>
-                      <span className="font-medium">
-                        {selectedCard.isBlocked ? 'Blocked' : selectedCard.isFrozen ? 'Frozen' : 'Active'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-2">Spending Limits</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Daily Limit:</span>
-                      <span className="font-medium">{selectedCard.spendingLimits.daily} {selectedCard.currency}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Monthly Limit:</span>
-                      <span className="font-medium">{selectedCard.spendingLimits.monthly} {selectedCard.currency}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Online Limit:</span>
-                      <span className="font-medium">{selectedCard.spendingLimits.online} {selectedCard.currency}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <DialogFooter className="flex flex-col space-y-2 sm:space-y-0">
-                <Button 
-                  variant="outline" 
-                  onClick={() => handleToggleFreeze(selectedCard.id)}
-                  className="w-full border-black hover:bg-gray-50"
-                >
-                  {selectedCard.isFrozen ? (
-                    <>
-                      <RefreshCw className="h-4 w-4 mr-2" />
-                      Unfreeze Card
-                    </>
-                  ) : (
-                    <>
-                      <Lock className="h-4 w-4 mr-2" />
-                      Freeze Card
-                    </>
-                  )}
-                </Button>
-                <Button 
-                  variant="outline"
-                  className="w-full border-black hover:bg-gray-50"
-                  onClick={() => setShowDetailsModal(false)}
-                >
-                  Close
-                </Button>
-              </DialogFooter>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <CreditCard className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+              <p className="text-gray-500">No cards yet. Add your first card to get started.</p>
             </div>
           )}
-        </DialogContent>
-      </Dialog>
+        </div>
+
+        {/* Card Security Section */}
+        <Card className="p-6 mb-8">
+          <div className="flex items-start gap-4">
+            <Shield className="w-6 h-6 text-primary flex-shrink-0" />
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Card Security</h3>
+              <p className="text-gray-600 mb-4">
+                Your cards are protected with advanced security features including real-time fraud monitoring,
+                instant freeze/unfreeze capabilities, and transaction notifications.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <div className="text-sm font-medium mb-1">3D Secure</div>
+                  <div className="text-sm text-gray-600">Enabled for all online transactions</div>
+                </div>
+                <div>
+                  <div className="text-sm font-medium mb-1">Transaction Alerts</div>
+                  <div className="text-sm text-gray-600">Real-time notifications</div>
+                </div>
+                <div>
+                  <div className="text-sm font-medium mb-1">Spending Controls</div>
+                  <div className="text-sm text-gray-600">Set custom limits</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Recent Activity */}
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold flex items-center gap-2">
+              <Activity className="w-5 h-5" />
+              Recent Security Activity
+            </h3>
+          </div>
+          <div className="space-y-3">
+            <div className="flex items-center justify-between py-3 border-b">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-green-600" />
+                <div>
+                  <div className="font-medium">Card successfully verified</div>
+                  <div className="text-sm text-gray-600">{formatDate(new Date())}</div>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-between py-3">
+              <div className="flex items-center gap-3">
+                <Shield className="w-5 h-5 text-blue-600" />
+                <div>
+                  <div className="font-medium">Security settings updated</div>
+                  <div className="text-sm text-gray-600">{formatDate(new Date(Date.now() - 86400000))}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </main>
+
+      <Footer className="hidden md:block" />
+      
+      <CardManagementModal
+        open={isCardModalOpen}
+        onOpenChange={setIsCardModalOpen}
+        card={selectedCard}
+        onSuccess={() => refetch()}
+      />
     </div>
   );
 }

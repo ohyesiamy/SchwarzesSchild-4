@@ -26,7 +26,11 @@ const availableCurrencies = [
   { value: "CHF", label: "Swiss Franc (CHF)" }
 ];
 
-export function StatementGenerator() {
+interface StatementGeneratorProps {
+  onOpen?: () => void;
+}
+
+export function StatementGenerator({ onOpen }: StatementGeneratorProps) {
   const { toast } = useToast();
   const [selectedMonth, setSelectedMonth] = useState("2025-04");
   const [selectedCurrency, setSelectedCurrency] = useState("EUR");

@@ -5,8 +5,12 @@ import { X, CreditCard, Lock, AlertCircle, ShieldCheck, Eye, EyeOff } from "luci
 import { Switch } from "@/components/ui/switch";
 
 interface CardManagementModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  card?: any;
+  onSuccess?: () => void;
 }
 
 interface Card {
@@ -23,7 +27,9 @@ interface Card {
   };
 }
 
-export function CardManagementModal({ isOpen, onClose }: CardManagementModalProps) {
+export function CardManagementModal({ isOpen, onClose, open, onOpenChange, card, onSuccess }: CardManagementModalProps) {
+  const effectiveIsOpen = open !== undefined ? open : isOpen || false;
+  const effectiveOnClose = onOpenChange ? () => onOpenChange(false) : onClose || (() => {});
   const { toast } = useToast();
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const [showCardNumber, setShowCardNumber] = useState(false);
@@ -99,7 +105,7 @@ export function CardManagementModal({ isOpen, onClose }: CardManagementModalProp
     return number;
   };
 
-  if (!isOpen) return null;
+  if (!effectiveIsOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
@@ -108,7 +114,7 @@ export function CardManagementModal({ isOpen, onClose }: CardManagementModalProp
         <div className="flex justify-between items-center p-6 border-b border-gray-200">
           <h2 className="text-xl font-semibold">Card Management</h2>
           <button 
-            onClick={onClose}
+            onClick={effectiveOnClose}
             className="text-gray-500 hover:text-black transition-colors"
           >
             <X className="h-5 w-5" />

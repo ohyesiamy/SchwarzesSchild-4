@@ -7,30 +7,30 @@
 @tailwind utilities;
 
 :root {
-  /* Core colors */
+  /* Core colors - Blue theme */
   --background: 0 0% 100%; /* #FFFFFF */
-  --foreground: 0 0% 20%; /* #333333 for body text */
-  --heading: 0 0% 0%; /* #000000 for headings */
+  --foreground: 216 19% 20%; /* #293442 - dark blue-gray for body text */
+  --heading: 216 40% 15%; /* #172435 - darker blue for headings */
   
-  /* UI Elements */
+  /* UI Elements - Blue palette */
   --card: 0 0% 100%; /* #FFFFFF */
-  --card-foreground: 0 0% 20%; /* #333333 */
+  --card-foreground: 216 19% 20%; /* #293442 */
   --popover: 0 0% 100%; /* #FFFFFF */
-  --popover-foreground: 0 0% 0%; /* #000000 */
-  --primary: 0 0% 0%; /* #000000 */
+  --popover-foreground: 216 40% 15%; /* #172435 */
+  --primary: 217 91% 60%; /* #4F8EF7 - bright blue */
   --primary-foreground: 0 0% 100%; /* #FFFFFF */
-  --secondary: 0 0% 96%; /* #F5F5F5 - very subtle gray for secondary elements */
-  --secondary-foreground: 0 0% 0%; /* #000000 */
-  --muted: 0 0% 96%; /* #F5F5F5 */
-  --muted-foreground: 0 0% 40%; /* #666666 */
-  --accent: 0 0% 0%; /* #000000 */
+  --secondary: 214 95% 93%; /* #E1EFFF - very light blue */
+  --secondary-foreground: 216 40% 15%; /* #172435 */
+  --muted: 214 32% 91%; /* #E8EEF5 - light blue-gray */
+  --muted-foreground: 215 16% 47%; /* #647788 - muted blue-gray */
+  --accent: 217 100% 57%; /* #3D7EF5 - vibrant blue */
   --accent-foreground: 0 0% 100%; /* #FFFFFF */
-  --destructive: 0 0% 0%; /* #000000 */
+  --destructive: 0 84% 60%; /* #F54444 - red for errors */
   --destructive-foreground: 0 0% 100%; /* #FFFFFF */
-  --border: 0 0% 0%; /* #000000 */
-  --input: 0 0% 0%; /* #000000 */
-  --ring: 0 0% 0%; /* #000000 */
-  --radius: 0px; /* Sharp edges for a corporate banking look */
+  --border: 214 32% 91%; /* #E8EEF5 - light blue-gray border */
+  --input: 214 32% 91%; /* #E8EEF5 - light blue-gray input */
+  --ring: 217 91% 60%; /* #4F8EF7 - bright blue */
+  --radius: 8px; /* Softer, modern rounded corners */
   
   /* Spacing variables */
   --section-spacing: 24px;
@@ -39,25 +39,25 @@
 }
 
 .dark {
-  --background: 0 0% 0%; /* #000000 */
-  --foreground: 0 0% 100%; /* #FFFFFF */
+  --background: 216 40% 8%; /* #0F1720 - very dark blue */
+  --foreground: 0 0% 95%; /* #F2F2F2 */
   --heading: 0 0% 100%; /* #FFFFFF */
-  --card: 0 0% 6%; /* #0F0F0F - very dark gray for cards */
-  --card-foreground: 0 0% 100%; /* #FFFFFF */
-  --popover: 0 0% 0%; /* #000000 */
-  --popover-foreground: 0 0% 100%; /* #FFFFFF */
-  --primary: 0 0% 100%; /* #FFFFFF */
-  --primary-foreground: 0 0% 0%; /* #000000 */
-  --secondary: 0 0% 10%; /* #1A1A1A - dark gray for secondary elements */
-  --secondary-foreground: 0 0% 100%; /* #FFFFFF */
-  --muted: 0 0% 10%; /* #1A1A1A */
-  --muted-foreground: 0 0% 70%; /* #B3B3B3 */
-  --accent: 0 0% 100%; /* #FFFFFF */
-  --accent-foreground: 0 0% 0%; /* #000000 */
-  --destructive: 0 0% 100%; /* #FFFFFF */
-  --destructive-foreground: 0 0% 0%; /* #000000 */
-  --border: 0 0% 100%; /* #FFFFFF */
-  --input: 0 0% 100%; /* #FFFFFF */
+  --card: 216 35% 12%; /* #1A2333 - dark blue-gray for cards */
+  --card-foreground: 0 0% 95%; /* #F2F2F2 */
+  --popover: 216 35% 12%; /* #1A2333 */
+  --popover-foreground: 0 0% 95%; /* #F2F2F2 */
+  --primary: 217 91% 60%; /* #4F8EF7 - bright blue */
+  --primary-foreground: 0 0% 100%; /* #FFFFFF */
+  --secondary: 216 30% 20%; /* #243447 - dark blue for secondary */
+  --secondary-foreground: 0 0% 95%; /* #F2F2F2 */
+  --muted: 216 30% 20%; /* #243447 */
+  --muted-foreground: 215 14% 65%; /* #9CA6B3 - light blue-gray */
+  --accent: 217 100% 57%; /* #3D7EF5 - vibrant blue */
+  --accent-foreground: 0 0% 100%; /* #FFFFFF */
+  --destructive: 0 84% 60%; /* #F54444 - red */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF */
+  --border: 216 28% 25%; /* #2E3D52 - blue-gray border */
+  --input: 216 28% 25%; /* #2E3D52 - blue-gray input */
   --ring: 0 0% 100%; /* #FFFFFF */
 }
 

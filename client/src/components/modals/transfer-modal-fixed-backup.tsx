@@ -5,28 +5,17 @@ import { X, ArrowRight } from "lucide-react";
 import { TransferConfirmationModal } from "./transfer-confirmation-modal";
 
 interface TransferModalProps {
-  isOpen?: boolean;
-  onClose?: () => void;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
+  isOpen: boolean;
+  onClose: () => void;
   fromAccount?: {
     id: number;
     name: string;
     currency: string;
     balance: number;
   };
-  accounts?: {
-    id: number;
-    name: string;
-    userId: number;
-    currency: string;
-    balance: number;
-  }[];
 }
 
-export function TransferModal({ isOpen, onClose, open, onOpenChange, fromAccount, accounts }: TransferModalProps) {
-  const effectiveIsOpen = open !== undefined ? open : isOpen || false;
-  const effectiveOnClose = onOpenChange ? () => onOpenChange(false) : onClose || (() => {});
+export function TransferModal({ isOpen, onClose, fromAccount }: TransferModalProps) {
   const { toast } = useToast();
   const [amount, setAmount] = useState("");
   const [recipient, setRecipient] = useState("");
@@ -57,7 +46,7 @@ export function TransferModal({ isOpen, onClose, open, onOpenChange, fromAccount
     setRecipient("");
     setReference("");
     setShowConfirmation(false);
-    effectiveOnClose();
+    onClose();
   };
 
   const getTransferData = () => {
@@ -75,7 +64,7 @@ export function TransferModal({ isOpen, onClose, open, onOpenChange, fromAccount
     };
   };
 
-  if (!effectiveIsOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <>
@@ -85,7 +74,7 @@ export function TransferModal({ isOpen, onClose, open, onOpenChange, fromAccount
           <div className="flex justify-between items-center p-6 border-b border-gray-200">
             <h2 className="text-xl font-semibold">Transfer Funds</h2>
             <button 
-              onClick={effectiveOnClose}
+              onClick={onClose}
               className="text-gray-500 hover:text-black transition-colors"
             >
               <X className="h-5 w-5" />
