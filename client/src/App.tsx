@@ -16,15 +16,18 @@ import AdminDashboard from "@/pages/admin/admin-dashboard";
 import LandingPage from "@/pages/landing-page";
 import AboutPage from "@/pages/about-page";
 import { ProtectedRoute } from "./lib/protected-route";
+import { ErrorBoundary } from "@/components/error-boundary";
 
 function App() {
   return (
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <AppRouter />
-      </TooltipProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <AppRouter />
+        </TooltipProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

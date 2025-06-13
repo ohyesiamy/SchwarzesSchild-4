@@ -32,7 +32,7 @@ export default function LandingPage() {
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle contact form submission
-    console.log("Contact form submitted:", contactForm);
+    // Contact form submitted
     // Reset form
     setContactForm({ name: "", email: "", company: "", message: "" });
   };

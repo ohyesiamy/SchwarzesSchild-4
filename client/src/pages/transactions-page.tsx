@@ -361,8 +361,7 @@ export default function TransactionsPage() {
       description: `Your ${formData.type.toLowerCase()} is being processed. You will receive a confirmation shortly.`,
     });
     
-    // Show confirmation details (in a real app, this would be a modal)
-    console.log("Transfer details:", formData);
+    // Transfer details processed
   };
   
   // Get status badge based on transaction status

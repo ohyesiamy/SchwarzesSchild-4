@@ -203,7 +203,8 @@ export default function ExchangePage() {
   const fetchExchangeRate = async (from: string, to: string) => {
     setIsLoadingRates(true);
     try {
-      const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
+      const apiUrl = import.meta.env.VITE_EXCHANGE_RATE_API_URL || 'https://api.exchangerate-api.com/v4/latest';
+      const response = await fetch(`${apiUrl}/${from}`);
       if (!response.ok) {
         throw new Error('Failed to fetch exchange rates');
       }
