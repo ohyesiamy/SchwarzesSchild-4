@@ -242,6 +242,7 @@ export default function AuthPage() {
                             {...field}
                             type="text"
                             placeholder="Enter your email or username"
+                            autoComplete="username"
                             className="h-12 rounded-lg border-gray-300 focus:border-black focus:ring-black"
                           />
                         </FormControl>
@@ -262,6 +263,7 @@ export default function AuthPage() {
                               {...field}
                               type={showPassword ? "text" : "password"}
                               placeholder="Enter your password"
+                              autoComplete="current-password"
                               className="h-12 rounded-lg border-gray-300 focus:border-black focus:ring-black pr-12"
                             />
                             <button
@@ -350,6 +352,7 @@ export default function AuthPage() {
                           <Input
                             {...field}
                             placeholder="Choose a unique username"
+                            autoComplete="username"
                             className="h-12 rounded-lg border-gray-300 focus:border-black focus:ring-black"
                           />
                         </FormControl>
@@ -370,6 +373,7 @@ export default function AuthPage() {
                               {...field}
                               type={showPassword ? "text" : "password"}
                               placeholder="Create a strong password"
+                              autoComplete="new-password"
                               className="h-12 rounded-lg border-gray-300 focus:border-black focus:ring-black pr-12"
                             />
                             <button
@@ -398,6 +402,7 @@ export default function AuthPage() {
                               {...field}
                               type={showConfirmPassword ? "text" : "password"}
                               placeholder="Confirm your password"
+                              autoComplete="new-password"
                               className="h-12 rounded-lg border-gray-300 focus:border-black focus:ring-black pr-12"
                             />
                             <button
